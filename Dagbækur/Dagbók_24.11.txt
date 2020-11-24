@@ -1,0 +1,8 @@
+Morgun fundur hófst kl 9, við fórum aðeins betur yfir verkefnalýsingu
+og gerðum notendahópagreiningu í sameiningu. Notuðumst við template 
+frá GHOH áfanganum í Tölvunarfræði sem spyr WHO, WHY, WHAT, WHERE og WHEN.
+Markmiðið í dag er að klára notendahópagreiningu, kröfulistan og 
+notkunartilvikin. Allt sem næst að klárast eftir það er plús. 
+
+Svo er planið að skipta okkur í tvo hópa þar sem tveir og tveir vinna að 
+hvoru ritinu fyrir sig. 
