@@ -1,0 +1,64 @@
+------------ Main Menu ------------
+
+            Select User 
+-----------------------------------
+        1. Username
+        2. Username
+        3. Username
+        4. Username
+        5. Admin
+
+        ....
+                        <Close Program>
+-----------------------------------
+
+----------- Admin Menu ------------ 
+
+(Væri til í að hafa felli glugga fyrir hvert)
+
+1. Employee Management 
+2. Vehicle Management
+3. Contract Management
+4. Location Management
+5. Financial Management
+
+                        <Back to Main Menu>
+------------------------------------
+
+------ Financial Management --------
+
+1. Unpaid contracts
+2. Closed contracts
+3. Financial reports
+
+                        <Back to Admin Menu>
+
+
+-------------------------------------
+
+---------- Unpaid Contract -----------
+
+Total amount : [$$]
+Amount paid  : [$$]      
+
+Amount due   : [$$]     <---- (amount paid - total amount)
+
+<Print Invoice>         <Settle Invoice> 
+
+                        <Back to Modify contract>
+-------------------------------------
+
+---------- Close Contract -----------
+
+Total amount : [$$]
+Amount paid  : [$$]      
+
+Amount due   : NONE    <---- (amount paid - total amount)
+
+<Print Invoice>         <Settle Invoice> 
+
+                        <Back to Modify contract>
+-------------------------------------
+
+
+                        
