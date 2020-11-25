@@ -9,7 +9,7 @@
         5. Admin
 
         ....
-
+                        <Close Program>
 -----------------------------------
 
 ----------- Admin Menu ------------ 
@@ -22,6 +22,7 @@
 4. Location Management
 5. Financial Management
 
+                        <Back to Main Menu>
 ------------------------------------
 
 ------- Employee Management --------
@@ -30,6 +31,7 @@
 2. Modify Employee account
 3. View Employee account
 
+                        <Back to Admin Menu>
 ------------------------------------
 
 -------- Create New Employee ------- 
@@ -44,7 +46,8 @@
 
         Job title                [  ]
         System Access            [  ]
-
+        
+                        <Back to Admin Menu>
 -------------------------------------
 
 ------ Modify Employee Account ------
@@ -62,7 +65,7 @@ What Base (Country)      [ Reykjavík, Iceland ]
 Job title                [ Customer Service ]
 System Access            [ Minimum ]
 
-<Modify Clock - in>  (Nýr gluggi opnast)
+<Modify Clock - in>     <Back to Admin Menu>
 -------------------------------------
 
 -------- Modify Clock - in ----------
@@ -74,7 +77,7 @@ Date                    in    |   out
 01.11.20               06:57  |  17:34
 01.11.20               06:58  |  17:29
 ...
-
+                        <Back to Modify Employee Account>
 ---------------------------------------
 
 ------- View Employee Account ---------
@@ -92,6 +95,7 @@ System Access               Email Address
 < View Contracts Made >   <---- Skoða contracts sem þessi starfsmaður hefur gert 
 < View Time Sheet >       <---- Færist á Modify Clock - in 
 
+                         <Back to Admin Menu>
 ----------------------------------------
 
 
