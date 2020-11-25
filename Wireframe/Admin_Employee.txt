@@ -1,0 +1,99 @@
+------------ Main Menu ------------
+
+            Select User 
+-----------------------------------
+        1. Username
+        2. Username
+        3. Username
+        4. Username
+        5. Admin
+
+        ....
+
+-----------------------------------
+
+----------- Admin Menu ------------ 
+
+(Væri til í að hafa felli glugga fyrir hvert)
+
+1. Employee Management 
+2. Vehicle Management
+3. Contract Management
+4. Location Management
+5. Financial Management
+
+------------------------------------
+
+------- Employee Management --------
+
+1. Create new Employee
+2. Modify Employee account
+3. View Employee account
+
+------------------------------------
+
+-------- Create New Employee ------- 
+
+        Name                     [  ]
+        Social Security number   [  ]
+        Address                  [  ]
+        Phone number             [  ]
+        Home phone (optional)    [  ]
+        Email Address            [  ]
+        What Base (Country)      [  ]
+
+        Job title                [  ]
+        System Access            [  ]
+
+-------------------------------------
+
+------ Modify Employee Account ------
+
+Employee Name : [ SEARCH ]
+
+Name                     [ XXXX XXXXX ]
+Social Security number    XXXXXX - XXXX 
+Address                  [ XXXXX XX ]
+Phone number             [ XXX - XXXX ]
+Home phone (optional)    [ XXX - XXXX ]
+Email Address            [ XXXXX@ru.is ]
+
+What Base (Country)      [ Reykjavík, Iceland ]
+Job title                [ Customer Service ]
+System Access            [ Minimum ]
+
+<Modify Clock - in>  (Nýr gluggi opnast)
+-------------------------------------
+
+-------- Modify Clock - in ----------
+
+Date                    in    |   out
+
+01.11.20               07:00  |  17:30
+02.11.20               07:01  |  17:30
+01.11.20               06:57  |  17:34
+01.11.20               06:58  |  17:29
+...
+
+---------------------------------------
+
+------- View Employee Account ---------
+ ______
+|      | 
+|      |   <--- Photo
+|______|    
+
+Name                        Social Security number    
+Social Security number      Adress 
+Job Title                   Phone Numbers
+System Access               Email Address
+
+
+< View Contracts Made >   <---- Skoða contracts sem þessi starfsmaður hefur gert 
+< View Time Sheet >       <---- Færist á Modify Clock - in 
+
+----------------------------------------
+
+
+
+

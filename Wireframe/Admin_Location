@@ -1,0 +1,33 @@
+------------ Main Menu ------------
+
+            Select User 
+-----------------------------------
+        1. Username
+        2. Username
+        3. Username
+        4. Username
+        5. Admin
+
+        ....
+
+-----------------------------------
+
+----------- Admin Menu ------------ 
+
+(Væri til í að hafa felli glugga fyrir hvert)
+
+1. Employee Management 
+2. Vehicle Management
+3. Contract Management
+4. Location Management
+5. Financial Management
+
+------------------------------------
+
+------- Location Management --------
+
+1. Modify Location information 
+2. View Location information
+3. View opening hour overview
+
+-------------------------------------
