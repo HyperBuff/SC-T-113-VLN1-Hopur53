@@ -1,0 +1,67 @@
+------------- Contracts -------------
+1. New contract
+2. Modify contract
+3. View contract
+
+-------------------------------------
+
+----------- New contract ------------
+
+Personal information
+
+Name                       [ xxxx xx xxxxxx ] 
+Id number                  [ xxxxxx - xxxx ]
+Phone number               [ xxx - xxxx ]
+Email                      [ xxxxx@xxxxx ]
+Address                    [ xxxxxx xx ]
+
+Vehicle
+
+Vehicle type               [ xxxxxx ]
+Rental period              [ xx.xx.xxxx - xx.xx.xxxx ]
+Country                    [ xxxxxxx ]
+Date of contract           [ xx.xx.xxxx ]
+
+-------------------------------------
+
+---------- Modify Contract ----------
+
+Contract [SEARCH]
+
+Personal information
+
+Name                       [ xxxx xx xxxxxx ] 
+Id number                  [ xxxxxx - xxxx ]
+Phone number               [ xxx - xxxx ]
+Email                      [ xxxxx@xxxxx ]
+Address                    [ xxxxxx xx ]
+
+Vehicle
+
+Vehicle type               [ xxxxxx ]
+Rental period              [ xx.xx.xxxx - xx.xx.xxxx ]
+Country                    [ xxxxxxx ]
+Date of contract           [ xx.xx.xxxx ]
+
+-------------------------------------
+
+---------- View Contract ------------
+
+Contract [SEARCH]
+
+Personal information
+
+Name                         xxxx xx xxxxxx  
+Id number                    xxxxxx - xxxx 
+Phone number                 xxx - xxxx 
+Email                        xxxxx@xxxxx 
+Address                      xxxxxx xx 
+
+Vehicle
+
+Vehicle type                 xxxxxx 
+Rental period                xx.xx.xxxx - xx.xx.xxxx 
+Country                      xxxxxxx 
+Date of contract             xx.xx.xxxx 
+
+-------------------------------------
