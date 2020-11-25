@@ -1,11 +1,15 @@
 ------- Employees in Reykjavík Menu ------
 1. Contract management
 2. Rental rates management
+
+                              <Back to Main Menu>
 ------------------------------------------
 
 ---------- Contract management -----------
 1. Register new rental contract
 2. Change a rental contract
+
+                              <Back to Employees in Reykjavík Menu>
 ------------------------------------------
 
 
@@ -13,6 +17,8 @@
 1. Register rental rate
 2. Modify rental rate
 3. View rental rate
+
+                              <Back to Contract management>
 ------------------------------------------
 
 ---------- Register rental rate ----------
@@ -23,6 +29,8 @@ Vehicle 1                       [ xxxx ]
 Vehicle 2                       [ xxxx ]
 Vehicle 3                       [ xxxx ]
 ...
+
+                              <Back to Rental rate management>
 ------------------------------------------
 
 
@@ -33,6 +41,7 @@ Vehicle: [SEARCH]
 Vehicle Type                    Rate per day
 Vehicle 1                       [ xxxx ]
 
+                              <Back to Rental rate management>
 ------------------------------------------
 
 ------------ View rental rate ------------
@@ -43,6 +52,7 @@ Vehicle 1                        xxxx
 Vehicle 2                        xxxx 
 Vehicle 3                        xxxx 
 
+                              <Back to Rental rate management>
 ------------------------------------------
 
 
