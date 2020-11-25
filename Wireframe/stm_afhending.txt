@@ -72,9 +72,9 @@ Renting rate                      xxx
 ------------------------------------------
 
 
--------------- Destinations --------------
+---------------- Location ----------------
 
-Destination: [SEARCH]
+Location: [SEARCH]
 
 Country                         xxxxxxxx
 Airport                         xxxxxxxxxxx
