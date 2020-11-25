@@ -22,6 +22,7 @@ Rental period              [ xx.xx.xxxx - xx.xx.xxxx ]
 Country                    [ xxxxxxx ]
 Date of contract           [ xx.xx.xxxx ]
 
+                           <print out contract>
 -------------------------------------
 
 ---------- Modify Contract ----------
@@ -43,6 +44,41 @@ Rental period              [ xx.xx.xxxx - xx.xx.xxxx ]
 Country                    [ xxxxxxx ]
 Date of contract           [ xx.xx.xxxx ]
 
+              Amount Due: [$$]
+              
+<Cancel Contract>          <Close Contract>
+                           
+-------------------------------------
+
+---------- Close Contract -----------
+
+Total amount : [$$]
+Amount paid  : [$$]      
+
+Amount due   : [$$]     <---- (amount paid - total amount)
+
+<Print Invoice>         <Settle Invoice> 
+
+-------------------------------------
+
+------------- Invoice ---------------
+
+Contract number :             Date of rental : xx.xx.xx - xx.xx.xx
+
+Name : 
+Social Security number : 
+Email Adress :
+Adress :
+
+Total amount  $$
+Amount paid   $$
+
+
+Amount due    $$
+                            
+                              __________________________
+                                 Customer signature
+                                 
 -------------------------------------
 
 ---------- View Contract ------------
@@ -64,4 +100,5 @@ Rental period                xx.xx.xxxx - xx.xx.xxxx
 Country                      xxxxxxx 
 Date of contract             xx.xx.xxxx 
 
+                             <print out contract>
 -------------------------------------
