@@ -1,0 +1,80 @@
+------------ Main Menu ------------
+
+            Select User 
+-----------------------------------
+        1. Username
+        2. Username
+        3. Username
+        4. Username
+        5. Admin
+
+        ....
+
+-----------------------------------
+
+----------- Admin Menu ------------ 
+
+(Væri til í að hafa felli glugga fyrir hvert)
+
+1. Employee Management 
+2. Vehicle Management
+3. Contract Management
+4. Location Management
+5. Financial Management
+
+------------------------------------
+
+------- Vehicle Management ---------
+
+1. Register new vehicle
+2. Modify vehicle information
+3. View vehicle status
+4. View/Modify vehicle service manual
+
+-------------------------------------
+
+---- Modify Vehicle Information -----
+
+[ Available/Unavailable ]
+
+Vehicle Type : [ ]
+Manufactor : [ ]
+Model : [ ]
+Color : [ ]
+What driving privileges needed : [ ]  <---- For driving this vehicle 
+
+Vehicle daily rate : [$$]
+
+--------------------------------------
+
+--------- View Vehicle Status --------
+<Available>   |   <Unavailable>      <----- Sorterar ef ýtt er á 
+
+
+Vehicle list 
+
+- Vehicle 1        ~Available
+- Vehicle 2        ~Unavailable     
+
+---------------------------------------
+
+--------- Modify Vehicle Status --------
+Vehicle nr : [SEARCH]     
+
+
+Vehicle         Availability
+
+Vehicle1        [Available/Unavailable]
+
+---------------------------------------
+
+----- View/Modify Vehicle Service Manual -----
+
+ Date of service |    What service     | Name of Mechanic | Date of next service
+______________________________________________________________________________
+|                |                     |                  |                  |            
+|________________|_____________________|__________________|__________________|  
+|                |                     |                  |                  |   
+|________________|_____________________|__________________|__________________|   
+|                |                     |                  |                  |   
+|________________|_____________________|__________________|__________________|   
