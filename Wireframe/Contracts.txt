@@ -2,7 +2,7 @@
 1. New contract
 2. Modify contract
 3. View contract
-
+                           <Close program>
 -------------------------------------
 
 ----------- New contract ------------
@@ -23,6 +23,7 @@ Country                    [ xxxxxxx ]
 Date of contract           [ xx.xx.xxxx ]
 
                            <print out contract>
+                           <Back to contracts>
 -------------------------------------
 
 ---------- Modify Contract ----------
@@ -47,7 +48,8 @@ Date of contract           [ xx.xx.xxxx ]
               Amount Due: [$$]
               
 <Cancel Contract>          <Close Contract>
-                           
+            
+                           <Back to New Contract>               
 -------------------------------------
 
 ---------- Close Contract -----------
@@ -59,6 +61,7 @@ Amount due   : [$$]     <---- (amount paid - total amount)
 
 <Print Invoice>         <Settle Invoice> 
 
+                        <Back to Modify contract>
 -------------------------------------
 
 ------------- Invoice ---------------
@@ -79,6 +82,7 @@ Amount due    $$
                               __________________________
                                  Customer signature
                                  
+                       <Back to Close Contract>
 -------------------------------------
 
 ---------- View Contract ------------
@@ -101,4 +105,6 @@ Country                      xxxxxxx
 Date of contract             xx.xx.xxxx 
 
                              <print out contract>
+                             
+                             <Back to invoice>
 -------------------------------------
