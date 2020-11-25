@@ -47,7 +47,7 @@
         Job title                [  ]
         System Access            [  ]
         
-                        <Back to Admin Menu>
+                        <Back to Employee Management>
 -------------------------------------
 
 ------ Modify Employee Account ------
@@ -65,7 +65,7 @@ What Base (Country)      [ Reykjavík, Iceland ]
 Job title                [ Customer Service ]
 System Access            [ Minimum ]
 
-<Modify Clock - in>     <Back to Admin Menu>
+<Modify Clock - in>     <Back to Employee Management>
 -------------------------------------
 
 -------- Modify Clock - in ----------
@@ -95,7 +95,7 @@ System Access               Email Address
 < View Contracts Made >   <---- Skoða contracts sem þessi starfsmaður hefur gert 
 < View Time Sheet >       <---- Færist á Modify Clock - in 
 
-                         <Back to Admin Menu>
+                         <Back to Employee Management>
 ----------------------------------------
 
 
