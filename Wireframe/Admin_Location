@@ -9,6 +9,8 @@
         5. Admin
 
         ....
+        
+                        <Close Program>
 ------------------------------------
 
 ------- Location Management --------
@@ -17,6 +19,7 @@
 2. View Location information
 3. View opening hour overview
 
+                        <Back to Main Menu>
 -----------------------------------------
 
 ------- Modify Location information ------
@@ -35,6 +38,7 @@ Airport: [ ]
 Phone number: [ ]
 Opening hours: open[00:00] ~ close[00:00]
 
+                        <Back to Location Management>
 ------------------------------------------
 
 ------- View Location information --------
@@ -46,6 +50,7 @@ Airport                         xxxxxxxxxxx
 Phone number                    xxx-xxxx
 Opening hours                   xx:xx - xx:xx
 
+                        <Back to Location Management>
 ------------------------------------------
 
 ----------- Opening Hour Overview ---------
@@ -55,4 +60,5 @@ Opening hours                   xx:xx - xx:xx
     Location 3              xx:xx - xx:xx
     ...
 
+                        <Back to Location Management>
 ---------------------------------------------
