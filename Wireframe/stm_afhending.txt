@@ -1,7 +1,7 @@
 ----- Check in - check out employees -----
 1. Contracts
 2. Vehicles
-3. Destinations
+3. Locations
                               <Back to Main Menu>
 ------------------------------------------
 
@@ -34,7 +34,7 @@ Check out
 Date                            In
 [ xx.xx.xxxx ]                  [ 00:00 ]
 
-                              <Back to check in - check out emploees>
+                              <Back to check in - check out employees>
 ------------------------------------------
 
 
@@ -45,7 +45,7 @@ Date                            In
 4. View vehicle status
 5. Modify vehicle status
 
-                              <Back to Contract>
+                              <Back to Check in - check out employees>
 ------------------------------------------
 
 
@@ -71,7 +71,7 @@ Color                             xxxx
 Driving license required          xxxxx 
 Renting rate                      xxx 
 
-                            <Back to Register Vehicle>
+                            <Back to Vehicle>
 ------------------------------------------
 
 
@@ -84,4 +84,5 @@ Airport                         xxxxxxxxxxx
 Phone number                    xxx-xxxx
 Opening hours                   xx:xx - xx:xx
 
+                          <Back to Check in - check out employees>
 ------------------------------------------
