@@ -49,7 +49,7 @@ Date of contract           [ xx.xx.xxxx ]
               
 <Cancel Contract>          <Close Contract>
             
-                           <Back to New Contract>               
+                           <Back to Contracts>               
 -------------------------------------
 
 ---------- Close Contract -----------
@@ -106,5 +106,5 @@ Date of contract             xx.xx.xxxx
 
                              <print out contract>
                              
-                             <Back to invoice>
+                             <Back to Contracts>
 -------------------------------------
