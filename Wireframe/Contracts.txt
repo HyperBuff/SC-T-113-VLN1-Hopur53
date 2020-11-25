@@ -2,7 +2,7 @@
 1. New contract
 2. Modify contract
 3. View contract
-                           <Close program>
+                           <Back to main menu>
 -------------------------------------
 
 ----------- New contract ------------
@@ -23,7 +23,7 @@ Country                    [ xxxxxxx ]
 Date of contract           [ xx.xx.xxxx ]
 
                            <print out contract>
-                           <Back to contracts>
+                           <Back to Contracts>
 -------------------------------------
 
 ---------- Modify Contract ----------
