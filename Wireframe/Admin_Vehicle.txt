@@ -10,6 +10,7 @@
 
         ....
 
+                        <Close Program>
 -----------------------------------
 
 ----------- Admin Menu ------------ 
@@ -22,6 +23,7 @@
 4. Location Management
 5. Financial Management
 
+                        <Back to Main Menu>
 ------------------------------------
 
 ------- Vehicle Management ---------
@@ -31,6 +33,7 @@
 3. View vehicle status
 4. View/Modify vehicle service manual
 
+                        <Back to Admin Menu>
 -------------------------------------
 
 ---- Modify Vehicle Information -----
@@ -45,6 +48,7 @@ What driving privileges needed : [ ]  <---- For driving this vehicle
 
 Vehicle daily rate : [$$]
 
+                        <Back to Vehicle Management>
 --------------------------------------
 
 --------- View Vehicle Status --------
@@ -56,6 +60,7 @@ Vehicle list
 - Vehicle 1        ~Available
 - Vehicle 2        ~Unavailable     
 
+                        <Back to Vehicle Management>
 ---------------------------------------
 
 --------- Modify Vehicle Status --------
@@ -66,6 +71,7 @@ Vehicle         Availability
 
 Vehicle1        [Available/Unavailable]
 
+                        <Back to Vehicle Management>
 ---------------------------------------
 
 ----- View/Modify Vehicle Service Manual -----
@@ -78,3 +84,7 @@ ______________________________________________________________________________
 |________________|_____________________|__________________|__________________|   
 |                |                     |                  |                  |   
 |________________|_____________________|__________________|__________________|   
+
+                        <Back to Vehicle Management>
+
+---------------------------------------
