@@ -2,7 +2,7 @@
 1. Contracts
 2. Vehicles
 3. Destinations
-
+                              <Back to Main Menu>
 ------------------------------------------
 
 --------------- Contract -----------------
@@ -34,6 +34,7 @@ Check out
 Date                            In
 [ xx.xx.xxxx ]                  [ 00:00 ]
 
+                              <Back to check in - check out emploees>
 ------------------------------------------
 
 
@@ -44,6 +45,7 @@ Date                            In
 4. View vehicle status
 5. Modify vehicle status
 
+                              <Back to Contract>
 ------------------------------------------
 
 
@@ -56,7 +58,7 @@ Color                           [ xxxx ]
 Driving license required        [ xxxxx ]
 Renting rate                    [ $$ ]
 
-
+                             <Back to Vehicles>
 ------------------------------------------
 
 
@@ -69,6 +71,7 @@ Color                             xxxx
 Driving license required          xxxxx 
 Renting rate                      xxx 
 
+                            <Back to Register Vehicle>
 ------------------------------------------
 
 
