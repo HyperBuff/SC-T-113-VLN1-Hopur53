@@ -1,0 +1,84 @@
+----- Check in - check out employees -----
+1. Contracts
+2. Vehicles
+3. Destinations
+
+------------------------------------------
+
+--------------- Contract -----------------
+
+Name: [SEARCH]                  <Print Contract>
+
+Name                            xxxxx xxxx
+Phone number                    xxx-xxxx
+Address                         xxxxxxxx xx
+Email                           xxxxxxxxxxx
+Date                            xx.xx.xxxx - xx.xx.xxxx
+Country                         xxxxxxxx
+
+Vehicle type                    xxxxxxxx
+Condition                       xxxx
+
+Employee                        xxxxxx xxx
+Date                            xx.xx.xxxx
+Time                            xx.xx
+
+
+Check in
+
+Date                            In
+[ xx.xx.xxxx ]                  [ 00:00 ]
+
+Check out
+
+Date                            In
+[ xx.xx.xxxx ]                  [ 00:00 ]
+
+------------------------------------------
+
+
+---------------- Vehicles ----------------
+1. Register vehicle
+2. View vehicle
+3. Modify vehicle
+4. View vehicle status
+5. Modify vehicle status
+
+------------------------------------------
+
+
+------------ Register vehicle ------------
+
+Vehicle type                    [ xxxxxx ]
+Manufacturer                    [ xxxxxxxx ] 
+Age                             [ xx ]
+Color                           [ xxxx ]
+Driving license required        [ xxxxx ]
+Renting rate                    [ $$ ]
+
+
+------------------------------------------
+
+
+------------- View vehicle ---------------
+
+Vehicle type                      xxxxxx 
+Manufacturer                      xxxxxxxx 
+Age                               xx 
+Color                             xxxx 
+Driving license required          xxxxx 
+Renting rate                      xxx 
+
+------------------------------------------
+
+
+-------------- Destinations --------------
+
+Destination: [SEARCH]
+
+Country                         xxxxxxxx
+Airport                         xxxxxxxxxxx
+Phone number                    xxx-xxxx
+Opening hours                   xx:xx - xx:xx
+
+------------------------------------------
