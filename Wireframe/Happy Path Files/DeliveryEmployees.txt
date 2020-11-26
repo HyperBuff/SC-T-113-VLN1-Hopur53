@@ -17,7 +17,6 @@
 ------------------------------------------
 
 
-
 -----------  Search Contract -------------
 
 1. Search By ID
@@ -27,7 +26,6 @@
 
 Name Search: [Robert R. Sharp ]
 ------------------------------------------
-
 
 
 --------------- Contract -----------------            
@@ -64,7 +62,6 @@ Date                            In
 ------------------------------------------
 
 
-
 ----------- Vehicle Management ------------
 1. Register vehicle
 2. View vehicle
@@ -76,9 +73,7 @@ Date                            In
 ------------------------------------------
 
 
-
-
----------- Save Vehicle ------------
+------------- Save Vehicle ---------------
 
 Are you sure you want to save vehicle ? (y/n)
 > 
@@ -87,7 +82,7 @@ Successfully Saved!
 
 9. Back to Vehicle Management
 >  
--------------------------------------
+-------------------------------------------
 
 
 
@@ -107,7 +102,6 @@ Renting rate                    [ $$ ]
 ------------------------------------------
 
 
-
 ------------- View vehicle ---------------
 
 SEARCH 
@@ -121,8 +115,7 @@ Renting rate                      xxx
 
 9. Back to Vehicle Management
 > 
-------------------------------------------
-
+-----------------------------------------
 
 
 -----------  Search Vehicle -------------
@@ -136,8 +129,7 @@ Name Search: Robert R. Sharp
 ------------------------------------------
 
 
-
----- Modify Vehicle Information -----
+------ Modify Vehicle Information --------
 
 [ Available/Unavailable ]
 
@@ -178,7 +170,7 @@ Vehicle list
 > 
 
 Type Search: Airplanes 
-------------------------------------------
+-------------------------------------
 
 
 
@@ -196,7 +188,7 @@ Successfully Saved!
 
 
 
---------- Modify Vehicle Status --------
+------ Modify Vehicle Status --------
 Vehicle nr : [SEARCH]     
 
 
@@ -207,11 +199,11 @@ Vehicle1        [Available/Unavailable]
 1. Save Vehicle Status
 9. Back to Vehicle Management
 > 
----------------------------------------
+--------------------------------------
 
 
 
----------------- Location ----------------
+------------ Location ----------------
 
 Location: [SEARCH]
 
@@ -222,7 +214,7 @@ Opening hours                   xx:xx - xx:xx
 
 9. Back to Vehicle Management
 > 
-------------------------------------------
+--------------------------------------
 
 
 
