@@ -22,9 +22,7 @@ NOT STARTED!
 > 
 -----------------------------------
 
-
-
-
+          Select Catagory
 ----------- Admin Menu ------------ 
 
 1. Employee Management 
@@ -36,9 +34,7 @@ NOT STARTED!
 > 
 ------------------------------------
 
-
-
-
+          Select Action
 ------ Financial Management --------
 
 1. Unpaid contracts
@@ -46,10 +42,7 @@ NOT STARTED!
 3. Financial reports
 9. Back to Financial Employee 
 > 
-
 -------------------------------------
-
-
 
 
 ---------- Unpaid Contract -----------
@@ -63,8 +56,6 @@ Amount due   : [$$]     <---- (amount paid - total amount)
 2. Settle Invoice
 9. Back to Financial Management
 -------------------------------------
-
-
 
 
 ---------- Close Contract -----------
@@ -81,6 +72,16 @@ Amount due   : NONE    <---- (amount paid - total amount)
 -------------------------------------
 
 
+--------- Settle Invoice ------------
+
+Total amount : [$$]
+Amount paid  : [$$]      
+
+Amount due   : [$$]    <---- (amount paid - total amount)
+
+1. Change Amount due
+9. Back to 
+--------------------------------------
 
 
 --------- Date Check Report ----------
@@ -91,8 +92,6 @@ End Date   : [DD/MM/YYYY]
 1. Search
 9. Back to Financial Management
 -------------------------------------
-
-
 
 
 --------- Financial Report ----------
@@ -106,8 +105,6 @@ End Date   : [DD/MM/YYYY]
 -------------------------------------
 
 
-
-
 ---------- Branch Report -----------
 
 Branch 1                 Branch 2                   Branch 3
@@ -119,8 +116,6 @@ VehicleTypes : [NN]         VehicleTypes : [NN]           VehicleTypes : [NN]
 9. Back to Financial Management
 > 
 -------------------------------------
-
-
 
 
 ------- Utilization Report --------
@@ -145,7 +140,6 @@ Vehicle 4
 9. Back to Financial Management
 > 
 -------------------------------------
-
 
 
 --------- Invoice Overview ----------
