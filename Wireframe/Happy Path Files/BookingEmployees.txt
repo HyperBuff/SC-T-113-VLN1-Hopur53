@@ -18,7 +18,6 @@
 ------------------------------------------
 
 
-
 ---------- Contract Management -----------
 
 1. New contract
@@ -27,7 +26,6 @@
 9. Back to Booking Employees
 > 
 ------------------------------------------
-
 
 
 -----------  Search Contract -------------
@@ -41,7 +39,7 @@ Name Search: [ Robert R. Sharp ]
 ------------------------------------------
 
 
----------- Save Contract ------------
+------------ Save Contract ---------------
 
 Are you sure you want to save contract ? (y/n)
 > 
@@ -50,11 +48,10 @@ Successfully Saved!
 
 9. Back to Contract Management
 >  
--------------------------------------
+-----------------------------------------
 
 
-
------------ New contract ------------
+------------- New contract --------------
 
 Personal information
 
@@ -128,7 +125,6 @@ Contract [SEARCH]
 -------------------------------------
 
 
-
 ---------- Close Contract -----------
 
 Total amount : [$$]
@@ -141,7 +137,7 @@ Amount due   : [$$]     <---- (amount paid - total amount)
 9. Back to Modify contract
 > 
 
--------------------------------------
+--------------------------------------
 
 
 ---------- Settle Invoice ------------
@@ -154,7 +150,6 @@ Successfully Saved!
 9. Back to Modify contract
 >  
 -------------------------------------
-
 
 
 ------------- Invoice ---------------
@@ -180,7 +175,6 @@ Amount due    $$
 -------------------------------------
 
 
-
 ---------- View Contract ------------
 
 Contract [SEARCH]
@@ -203,7 +197,8 @@ Date of contract             xx.xx.xxxx
 1. Print Out Contract
 9. Back to Contract Management
 >
--------------------------------------
+--------------------------------------
+
 
 ---------- Print Contract ------------
 
@@ -225,7 +220,7 @@ Date of contract             xx.xx.xxxx
 
 9. Back to Contract Management
 > 1
--------------------------------------
+-----------------------------------------
 
 
 --------- Rental Rate Management --------
@@ -237,8 +232,7 @@ Date of contract             xx.xx.xxxx
 ------------------------------------------
 
 
-
--------- Save Rental Rate  ----------
+----------- Save Rental Rate  ------------
 
 Are you sure you want to save Rental Rate ? (y/n)
 > 
@@ -247,8 +241,7 @@ Successfully Saved!
 
 9. Back to Rental rate management
 >  
--------------------------------------
-
+------------------------------------------
 
 
 ---------- Register rental rate ----------
@@ -269,7 +262,7 @@ Vehicle 3                       [ xxxx ]
 ------------------------------------------
 
 
----------- Modify rental rate ----------
+------------ Modify rental rate ----------
 
 Vehicle: [SEARCH]     
 
@@ -283,6 +276,7 @@ Vehicle 1                       [ xxxx ]
 1. Save Rental Rate
 > 1
 ------------------------------------------
+
 
 ------------ View rental rate ------------
 
