@@ -10,7 +10,7 @@
 ------------------------------------------
 
 
-------- Vehicle Management ---------
+------- Vehicle Management ---------------
 
 1. Register  Vehicle
 2. Modify Vehicle 
@@ -20,11 +20,10 @@
 6. View/Modify Vehicle Service Manual
 9. Back to Mechanics Menu
 > 
------------------------------------
+------------------------------------------
 
 
-
----------- Save Vehicle ------------
+---------- Save Vehicle ------------------
 
 Are you sure you want to save vehicle ? (y/n)
 > 
@@ -33,8 +32,7 @@ Successfully Saved!
 
 9. Back to Vehicle Management
 >  
--------------------------------------
-
+----------------------------------------------
 
 
 ------------ Register New Vehicle ------------
@@ -47,12 +45,10 @@ Driving license required        [ xxxxx ]
 Renting rate                    [ $$ ]
 
 9. Back to Vehicle Management
-------------------------------------------
+---------------------------------------------
 
 
-
-
------------  Search Vehicle -------------
+-----------  Search Vehicle -----------------
 
 1. Search By ID
 2. Search By Type
@@ -61,7 +57,6 @@ Renting rate                    [ $$ ]
 
 Name Search: Robert R. Sharp 
 ------------------------------------------
-
 
 
 ---- Modify Vehicle Information -----
@@ -78,24 +73,22 @@ Vehicle daily rate : [$$]
 
 1. Save Vehicle Information
 9. Back to Vehicle Management
---------------------------------------
+>
+-------------------------------------------
 
 
-
-
---------- View Vehicle Status --------
-<Available>   |   <Unavailable>      <----- Sorterar ef ýtt er á 
-
+--------- View Vehicle Status -------------
 
 Vehicle list 
 
 - Vehicle 1        ~Available
 - Vehicle 2        ~Unavailable     
 
+1. See only Available
+2. See only Unavailable 
 9. Back to Vehicle Management
----------------------------------------
-
-
+>
+-----------------------------------------
 
 
 -------- Search Vehicle Status ----------
@@ -105,13 +98,11 @@ Vehicle list
 9. Back to Vehicle Management
 > 
 
-Type Search: Airplanes 
+Example type Search: Airplanes 
 ------------------------------------------
 
 
-
-
-------- Save Vehicle Status ---------
+------- Save Vehicle Status --------------
 
 Are you sure you want to save vehicle status? (y/n)
 > 
@@ -120,12 +111,10 @@ Successfully Saved!
 
 9. Back to Vehicle Management
 >  
--------------------------------------
+-------------------------------------------
 
 
-
-
---------- Modify Vehicle Status --------
+--------- Modify Vehicle Status -----------
 Vehicle nr : [SEARCH]     
 
 
@@ -136,23 +125,4 @@ Vehicle1        [Available/Unavailable]
 1. Save Vehicle Status
 9. Back to Vehicle Management
 > 
----------------------------------------
-
-
-
-
------ View/Modify Vehicle Service Manual -----
-
- Date of service |    What service     | Name of Mechanic | Date of next service
-______________________________________________________________________________
-|                |                     |                  |                  |            
-|________________|_____________________|__________________|__________________|  
-|                |                     |                  |                  |   
-|________________|_____________________|__________________|__________________|   
-|                |                     |                  |                  |   
-|________________|_____________________|__________________|__________________|   
-
-1. Save Vehicle Service Manual
-9. Back to Vehicle Management
-
----------------------------------------
+---------------------------------------------
