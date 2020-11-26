@@ -65,7 +65,38 @@ ID Search: [ 1234 ]
 > 2
 ------------------------------------------
 
+----------- New contract -----------------
 
+Personal information
+
+ID                         [ 1234 ]
+Name                       [ xxxx xx xxxxxx ] 
+Phone number               [ xxx - xxxx ]
+Email Adress               [ xxxxx@xxxxx ]
+Address                    [ xxxxxx xx ]
+
+Vehicle
+
+Vehicle type               [ xxxxxx ]
+Rental period              [ xx.xx.xxxx - xx.xx.xxxx ]
+Country                    [ xxxxxxx ]
+Date of contract           [ xx.xx.xxxx ]
+
+Modify Employee Information
+1. ID
+2. Name
+3. Phone Number
+4. Email Address
+5. Address
+6. Vehicle Type
+7. Rental Period 
+8. Country 
+10. Date of contract
+9. Back to Contract Management
+> 
+1. Save Employee
+> 1
+---------------------------------------------
 
 ---------- Save Contract ------------
 
@@ -79,31 +110,6 @@ Successfully Saved!
 -------------------------------------
 
 
-
------------ New contract ------------
-
-Personal information
-
-ID                         [ 1234 ]
-Name                       [ xxxx xx xxxxxx ] 
-Phone number               [ xxx - xxxx ]
-Email                      [ xxxxx@xxxxx ]
-Address                    [ xxxxxx xx ]
-
-Vehicle
-
-Vehicle type               [ xxxxxx ]
-Rental period              [ xx.xx.xxxx - xx.xx.xxxx ]
-Country                    [ xxxxxxx ]
-Date of contract           [ xx.xx.xxxx ]
-
-1. Save Contract
-2. Print Out Contract
-9. Back to Contract Management
-> 
--------------------------------------
-
-
 ---------- Modify Contract ----------
 
 Contract [SEARCH]
@@ -113,24 +119,43 @@ Personal information
 ID                         [ 1234 ]
 Name                       [ xxxx xx xxxxxx ] 
 Phone number               [ xxx - xxxx ]
-Email                      [ xxxxx@xxxxx ]
+Email Address              [ xxxxx@xxxxx ]
 Address                    [ xxxxxx xx ]
 
-Vehicle
+Vehicle                    [ xxxx ]         
 
-Vehicle type               [ xxxxxx ]
+Vehicle type                 xxxxx
 Rental period              [ xx.xx.xxxx - xx.xx.xxxx ]
 Country                    [ xxxxxxx ]
 Date of contract           [ xx.xx.xxxx ]
 
               Amount Due: [$$]
 
+Modify Contract Information
+1. ID
+2. Name
+3. Phone Number
+4. Email Address
+5. Home Phone
+6. Vehicle
+7. Rental period
+8. Country 
+9. Back to Contract Management
+> 
 1. Save Contract
-2. Close Contract
-3. Back to Contract Management
-> 2
+> 1
 -------------------------------------
 
+---------- Save Contract ------------
+
+Are you sure you want to save contract ? (y/n)
+> 
+
+Successfully Saved! 
+
+9. Back to Contract Management
+>  
+-------------------------------------
 
 
 ---------- Close Contract -----------
@@ -153,7 +178,7 @@ Amount due   : [$$]     <---- (amount paid - total amount)
 Are you sure you want to close contract ? (y/n)
 > y
 
-Successfully Saved! 
+Successfully Closed! 
 
 9. Back to Modify contract
 >  9
@@ -191,8 +216,8 @@ Contract [SEARCH]
 
 Personal information
 
-ID                           1234
 Name                         xxxx xx xxxxxx  
+Id number                    xxxxxx - xxxx 
 Phone number                 xxx - xxxx 
 Email                        xxxxx@xxxxx 
 Address                      xxxxxx xx 
@@ -206,31 +231,9 @@ Date of contract             xx.xx.xxxx
 
 1. Print Out Contract
 9. Back to Contract Management
-> 1
+>
 -------------------------------------
 
-
----------- Print Contract ------------
-
-Personal information
-
-ID                           1234
-Name                         xxxx xx xxxxxx  
-Phone number                 xxx - xxxx 
-Email                        xxxxx@xxxxx 
-Address                      xxxxxx xx 
-
-Vehicle
-
-Vehicle type                 xxxxxx 
-Rental period                xx.xx.xxxx - xx.xx.xxxx 
-Country                      xxxxxxx 
-Date of contract             xx.xx.xxxx 
-
-
-9. Back to Contract Management
-> 1
--------------------------------------
 
 
 --------- Rental Rate Management --------
@@ -241,9 +244,23 @@ Date of contract             xx.xx.xxxx
 > 
 ------------------------------------------
 
+---------- Register rental rate ----------
+
+Vehicle Type                    Rate per day
+
+[Vehicle]                       [$$]
 
 
--------- Save Rental Rate  ----------
+1. Add Vehicle Type
+2. Add Vehicle Rate
+9. Back to Rental Rate Management
+>
+1. Save Rental Rate
+>
+9. Back to Rental Rate Management
+------------------------------------------
+
+-------- Save Rental Rate  ---------------
 
 Are you sure you want to save Rental Rate ? (y/n)
 > 
@@ -252,33 +269,23 @@ Successfully Saved!
 
 9. Back to Rental rate management
 >  
--------------------------------------
+-----------------------------------------
 
-
-
----------- Register rental rate ----------
-
-Vehicle Type                    Rate per day
-
-Vehicle 1                       [ xxxx ]
-Vehicle 2                       [ xxxx ]
-Vehicle 3                       [ xxxx ]
-...
-
-1. Save Rental Rate 
-9. Back to Rental Rate Management
-------------------------------------------
-
-
----------- Modify rental rate ----------
+---------- Modify rental rate -----------
 
 Vehicle: [SEARCH]     
 
 Vehicle Type                    Rate per day
 Vehicle 1                       [ xxxx ]
 
+1. Modify Vehicle
+2. Modify Rate
 9. Back to Rental rate management
 >  
+1. Save Rental Rate
+> 
+9. Back to rental rate management
+>
 ------------------------------------------
 
 ------------ View rental rate ------------
