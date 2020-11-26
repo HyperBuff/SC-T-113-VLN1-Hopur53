@@ -18,10 +18,10 @@
 3. Financial reports
 9. Back to Financial Employee 
 > 
-
 -------------------------------------
 
----------- Unpaid Contract -----------
+
+---------- Unpaid Contract ----------
 
 Total amount : [$$]
 Amount paid  : [$$]      
@@ -32,6 +32,7 @@ Amount due   : [$$]     <---- (amount paid - total amount)
 2. Settle Invoice
 9. Back to Financial Management
 -------------------------------------
+
 
 ---------- Close Contract -----------
 
@@ -45,7 +46,6 @@ Amount due   : NONE    <---- (amount paid - total amount)
 2. Settle Invoice
 9. Back to Financial Management
 -------------------------------------
-
 
 
 --------- Date Check Report ----------
@@ -79,7 +79,7 @@ VehicleTypes : [NN]         VehicleTypes : [NN]           VehicleTypes : [NN]
 1. Print Branch Report
 9. Back to Financial Management
 > 
--------------------------------------
+-----------------------------------
 
 
 ------- Utilization Report --------
@@ -104,6 +104,7 @@ Vehicle 4
 9. Back to Financial Management
 > 
 -------------------------------------
+
 
 --------- Invoice Overview ----------
 
