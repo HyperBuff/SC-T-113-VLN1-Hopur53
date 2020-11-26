@@ -2,20 +2,46 @@
 
 
 ////////////////////////////////Changes\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-1. Bætti við Search Contract
-2. Bætti við save screens fyrir contracts og rental rate
-2. Breytti Contract Management menu
-3. Breytti í númerað input system fyrir að fara til baka
 
 
 
------------ Booking Employees -----------
+CHECK
+
+------------ Main Menu ------------
+
+            Select User 
+-----------------------------------
+
+        1. Booking Employee
+        2. Delivery Employee
+        3. Mechanic Employee
+        4. Financial Employee
+        5. Admin
+        9. Quit
+> 
+-----------------------------------
+
+----------- Admin Menu ------------ 
+
+1. Employee Management 
+2. Vehicle Management
+3. Contract Management
+4. Location Management
+5. Financial Management
+9. Back to Main Menu
+> 1
+------------------------------------
+
+
+
+------------- Admin Booking -------------
 
 1. Contract management
 2. Rental rates management
 9. Back to Main Menu
 > 
 ------------------------------------------
+
 
 
 -----------  Search Contract -------------
@@ -244,6 +270,3 @@ Vehicle 3                        xxxx
 9. Back to Rental rate management
 > 
 ------------------------------------------
-
-
-

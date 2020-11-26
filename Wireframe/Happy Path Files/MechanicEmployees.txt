@@ -31,13 +31,13 @@ Are you sure you want to save vehicle ? (y/n)
 
 Successfully Saved! 
 
-9. Back to Rental rate management
+9. Back to Vehicle Management
 >  
 -------------------------------------
 
 
 
------------- Register vehicle ------------
+------------ Register New Vehicle ------------
 
 Vehicle type                    [ xxxxxx ]
 Manufacturer                    [ xxxxxxxx ] 
@@ -46,25 +46,9 @@ Color                           [ xxxx ]
 Driving license required        [ xxxxx ]
 Renting rate                    [ $$ ]
 
-1. Save Vehicle
 9. Back to Vehicle Management
-> 
 ------------------------------------------
 
-
-
-------------- View vehicle ---------------
-
-Vehicle type                      xxxxxx 
-Manufacturer                      xxxxxxxx 
-Age                               xx 
-Color                             xxxx 
-Driving license required          xxxxx 
-Renting rate                      xxx 
-
-9. Back to Vehicle Management
-> 
-------------------------------------------
 
 
 
@@ -92,10 +76,10 @@ What driving privileges needed : [ ]  <---- For driving this vehicle
 
 Vehicle daily rate : [$$]
 
-1. Save Vehicle
+1. Save Vehicle Information
 9. Back to Vehicle Management
-> 
 --------------------------------------
+
 
 
 
@@ -109,8 +93,21 @@ Vehicle list
 - Vehicle 2        ~Unavailable     
 
 9. Back to Vehicle Management
-> 
 ---------------------------------------
+
+
+
+
+-------- Search Vehicle Status ----------
+
+1. Search By ID
+2. Search By Type
+9. Back to Vehicle Management
+> 
+
+Type Search: Airplanes 
+------------------------------------------
+
 
 
 
@@ -121,9 +118,10 @@ Are you sure you want to save vehicle status? (y/n)
 
 Successfully Saved! 
 
-9. Back to Rental rate management
+9. Back to Vehicle Management
 >  
 -------------------------------------
+
 
 
 

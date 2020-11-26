@@ -110,6 +110,8 @@ Renting rate                    [ $$ ]
 
 ------------- View vehicle ---------------
 
+SEARCH 
+
 Vehicle type                      xxxxxx 
 Manufacturer                      xxxxxxxx 
 Age                               xx 
