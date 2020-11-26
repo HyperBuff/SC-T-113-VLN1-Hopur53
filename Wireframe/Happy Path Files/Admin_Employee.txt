@@ -63,9 +63,18 @@ DONE!!!
         Job title                [ Delivery Employee ]
         System Access            [ Minimum ]
 
-1. Save Employee
-9. Back to Employee Management
-> 
+1. Name
+2. Social Security number
+3. Address
+4. Phone number
+5. Home phone 
+6. Email address
+7. Country
+8. Job title
+9. System Access
+10. Back to Employee Management
+> 1. Save Employee
+> 1
 -------------------------------------
 
 
