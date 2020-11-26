@@ -71,10 +71,20 @@ Rental period              [ xx.xx.xxxx - xx.xx.xxxx ]
 Country                    [ xxxxxxx ]
 Date of contract           [ xx.xx.xxxx ]
 
-1. Save Contract
-2. Print Out Contract
+1. Name
+2. Id number
+3. Phone number
+4. Email
+5. Address
+6. Vehicle type
+7. Rental period
+8. Country 
+10. Date of contract
+11. Print Out Contract
 9. Back to Contract Management
 > 
+1. Save Contract
+> 1
 -------------------------------------
 
 
@@ -99,10 +109,22 @@ Date of contract           [ xx.xx.xxxx ]
 
               Amount Due: [$$]
 
-1. Save Contract
-2. Close Contract
-3. Back to Contract Management
+Contract [SEARCH]
+
+1. Name
+2. Id number
+3. Phone number
+4. Email address
+5. Address
+6. Vehicle type
+7. Rental period
+8. Country
+10. Date of contract
+11. Close Contract
+9. Back to Contract Management
 > 
+1. Save Contract
+> 1
 -------------------------------------
 
 
@@ -238,8 +260,12 @@ Vehicle 2                       [ xxxx ]
 Vehicle 3                       [ xxxx ]
 ...
 
-1. Save Rental Rate 
+1. Vehicle type
+2. Rate per day
 9. Back to Rental Rate Management
+>
+1. Save Rental Rate 
+> 1
 ------------------------------------------
 
 
@@ -250,8 +276,12 @@ Vehicle: [SEARCH]
 Vehicle Type                    Rate per day
 Vehicle 1                       [ xxxx ]
 
+1. Vehicle type
+2. Rate per day
 9. Back to Rental rate management
 >  
+1. Save Rental Rate
+> 1
 ------------------------------------------
 
 ------------ View rental rate ------------
