@@ -1,0 +1,3 @@
+Morgun fundur byrjaði kl 09:00, öll grunnvinna er búinn svo við ákváðum að byrja á að fara yfir alla skýrsluna hver fyrir sig. 
+Fundum nokkrar villur og sáum ýmislegt sem mátti gera betur í wireframe og notendatilvikum. Dagurinn fór því í að laga, bæta og breyta. 
+Loka útkomann er svo mikið sem kominn og planið fyrir morgundaginn því aðalega að renna aðeins yfir.
