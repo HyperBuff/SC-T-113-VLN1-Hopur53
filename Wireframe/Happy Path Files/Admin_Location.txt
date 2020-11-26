@@ -38,9 +38,10 @@ NOT STARTED!
 
 ------- Location Management --------
 
-1. Modify Location information 
-2. View Location information
-3. View opening hour overview
+1. Modify Location information
+2. Create new location
+3. View Location information
+4. View opening hour overview
 9. Back to Admin Menu
 > 
 -----------------------------------------
@@ -53,17 +54,37 @@ Country                         [xxxxxxxx]
 Airport                         [xxxxxxxxxxx]
 Phone number                    [xxx-xxxx]
 Opening hours                   [xx:xx - xx:xx]
-~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
-Create new Location 
+
+
+Location: [SEARCH]
+
+1. Country
+2. Airport
+3. Phone number
+4. Opening hours
+9. Back to Back to Location Management
+> 
+1. Save Location Information
+> 1
+------------------------------------------
+
+----------- Create New Location ----------
+
 
 Country: [ ]
 Airport: [ ]
 Phone number: [ ]
 Opening hours: open[00:00] ~ close[00:00]
 
-1. Save Location Information
+
+1. Country
+2. Airport
+3. Phone number
+4. Opening hours
 9. Back to Back to Location Management
 > 
+1. Save Location Information
+> 1
 ------------------------------------------
 
 ------- View Location information --------
