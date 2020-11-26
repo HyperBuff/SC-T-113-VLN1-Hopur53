@@ -85,7 +85,7 @@ Are you sure you want to save vehicle ? (y/n)
 
 Successfully Saved! 
 
-9. Back to Rental rate management
+9. Back to Vehicle Management
 >  
 -------------------------------------
 
@@ -168,6 +168,31 @@ Vehicle list
 ---------------------------------------
 
 
+-------- Search Vehicle Status----------
+
+1. Search By ID
+2. Search By Type
+9. Back to Vehicle Management
+> 
+
+Type Search: Airplanes 
+------------------------------------------
+
+
+
+------- Save Vehicle Status ---------
+
+Are you sure you want to save vehicle status? (y/n)
+> 
+
+Successfully Saved! 
+
+9. Back to Vehicle Management
+>  
+-------------------------------------
+
+
+
 
 --------- Modify Vehicle Status --------
 Vehicle nr : [SEARCH]     
@@ -177,6 +202,7 @@ Vehicle         Availability
 
 Vehicle1        [Available/Unavailable]
 
+1. Save Vehicle Status
 9. Back to Vehicle Management
 > 
 ---------------------------------------

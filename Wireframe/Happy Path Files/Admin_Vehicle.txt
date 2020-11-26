@@ -32,6 +32,9 @@ CHECK
 > 1
 ------------------------------------
 
+
+
+
 ------- Vehicle Management ---------
 
 1. Register New Vehicle
@@ -42,6 +45,21 @@ CHECK
 9. Back to Admin Menu
 > 1
 -------------------------------------
+
+
+
+---------- Save Vehicle ------------
+
+Are you sure you want to save vehicle ? (y/n)
+> 
+
+Successfully Saved! 
+
+9. Back to Vehicle Management
+>  
+-------------------------------------
+
+
 
 ------------ Register New Vehicle ------------
 
@@ -54,6 +72,20 @@ Renting rate                    [ $$ ]
 
 9. Back to Vehicle Management
 ------------------------------------------
+
+
+
+
+-----------  Search Vehicle -------------
+
+1. Search By ID
+2. Search By Type
+9. Back to Vehicle Management
+> 
+
+Name Search: Robert R. Sharp 
+------------------------------------------
+
 
 
 ---- Modify Vehicle Information -----
@@ -72,6 +104,9 @@ Vehicle daily rate : [$$]
 9. Back to Vehicle Management
 --------------------------------------
 
+
+
+
 --------- View Vehicle Status --------
 <Available>   |   <Unavailable>      <----- Sorterar ef ýtt er á 
 
@@ -84,6 +119,36 @@ Vehicle list
 9. Back to Vehicle Management
 ---------------------------------------
 
+
+
+
+-------- Search Vehicle Status ----------
+
+1. Search By ID
+2. Search By Type
+9. Back to Vehicle Management
+> 
+
+Type Search: Airplanes 
+------------------------------------------
+
+
+
+
+------- Save Vehicle Status ---------
+
+Are you sure you want to save vehicle status? (y/n)
+> 
+
+Successfully Saved! 
+
+9. Back to Vehicle Management
+>  
+-------------------------------------
+
+
+
+
 --------- Modify Vehicle Status --------
 Vehicle nr : [SEARCH]     
 
@@ -92,8 +157,13 @@ Vehicle         Availability
 
 Vehicle1        [Available/Unavailable]
 
+1. Save Vehicle Status
 9. Back to Vehicle Management
+> 
 ---------------------------------------
+
+
+
 
 ----- View/Modify Vehicle Service Manual -----
 
