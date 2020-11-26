@@ -70,8 +70,16 @@ Color                           [ White ]
 Driving license required        [ Pilots License ]
 Renting rate                    [ 70.000$ ]
 
-1. Save Vehicle
+1. Vehicle type
+2. Manufacturer
+3. Age
+4. Color
+5. Driving license required
+6. Renting rate
 9. Back to Vehicle Management
+>
+1. Save Vehicle
+> 1
 ------------------------------------------
 
 
@@ -119,8 +127,17 @@ What driving privileges needed : [ ]  <---- For driving this vehicle
 
 Vehicle daily rate : [$$]
 
-1. Save Vehicle Information
+1. Available/Unavailable
+2. Vehicle Type
+3. Manufactor
+4. Model
+5. Color
+6. Driving privileges needed
+7. Vehicle daily rate
 9. Back to Vehicle Management
+>
+1. Save Vehicle Information
+> 1
 --------------------------------------
 
 
@@ -176,9 +193,14 @@ Vehicle         Availability
 
 Vehicle1        [Available/Unavailable]
 
-1. Save Vehicle Status
+Vehicle nr: [SEARCH]
+
+1. Vehicle nr
+2. Vehicle Availability
 9. Back to Vehicle Management
 > 
+1. Save Vehicle Status
+> 1
 ---------------------------------------
 
 
