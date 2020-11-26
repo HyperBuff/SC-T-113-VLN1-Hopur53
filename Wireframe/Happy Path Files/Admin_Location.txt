@@ -1,0 +1,91 @@
+////////////////////////////////Comments\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+1. Fjarlæga "Vehicle Service Manual" ef það er ekki partur af kröfum (gæti verið erfitt að implementa það í kóða)
+
+////////////////////////////////Changes\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+1. Breytti í númerað input system fyrir að fara til baka
+
+
+NOT STARTED!
+
+------------ Main Menu ------------
+
+            Select User 
+-----------------------------------
+
+        1. Booking Employee
+        2. Delivery Employee
+        3. Mechanic Employee
+        4. Financial Employee
+        5. Admin
+        9. Quit
+> 
+-----------------------------------
+
+
+
+----------- Admin Menu ------------ 
+
+1. Employee Management 
+2. Vehicle Management
+3. Contract Management
+4. Location Management
+5. Financial Management
+9. Back to Main Menu
+> 
+------------------------------------
+
+
+
+------- Location Management --------
+
+1. Modify Location information 
+2. View Location information
+3. View opening hour overview
+9. Back to Admin Menu
+> 
+-----------------------------------------
+
+------- Modify Location Information ------
+
+Location: [SEARCH]
+
+Country                         [xxxxxxxx]
+Airport                         [xxxxxxxxxxx]
+Phone number                    [xxx-xxxx]
+Opening hours                   [xx:xx - xx:xx]
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
+Create new Location 
+
+Country: [ ]
+Airport: [ ]
+Phone number: [ ]
+Opening hours: open[00:00] ~ close[00:00]
+
+1. Save Location Information
+9. Back to Back to Location Management
+> 
+------------------------------------------
+
+------- View Location information --------
+
+Location: [SEARCH]
+
+Country                         xxxxxxxx
+Airport                         xxxxxxxxxxx
+Phone number                    xxx-xxxx
+Opening hours                   xx:xx - xx:xx
+
+9. Back to Back to Location Management
+> 
+------------------------------------------
+
+----------- Opening Hour Overview ---------
+
+    Location 1              xx:xx - xx:xx
+    Location 2              xx:xx - xx:xx
+    Location 3              xx:xx - xx:xx
+    ...
+
+9. Back to Back to Location Management
+> 
+---------------------------------------------

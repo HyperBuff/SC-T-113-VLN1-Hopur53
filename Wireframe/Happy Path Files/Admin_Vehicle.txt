@@ -1,0 +1,114 @@
+////////////////////////////////Comments\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+1. Fjarlæga "Vehicle Service Manual" ef það er ekki partur af kröfum (gæti verið erfitt að implementa það í kóða)
+
+////////////////////////////////Changes\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+1. Breytti í númerað input system fyrir að fara til baka
+
+
+CHECK
+
+------------ Main Menu ------------
+
+            Select User 
+-----------------------------------
+
+        1. Booking Employee
+        2. Delivery Employee
+        3. Mechanic Employee
+        4. Financial Employee
+        5. Admin
+        9. Quit
+> 5
+-----------------------------------
+
+----------- Admin Menu ------------ 
+
+1. Employee Management 
+2. Vehicle Management
+3. Contract Management
+4. Location Management
+5. Financial Management
+9. Back to Main Menu
+> 1
+------------------------------------
+
+------- Vehicle Management ---------
+
+1. Register New Vehicle
+2. Modify Vehicle Information
+3. View Vehicle Information
+4. View Vehicle Status
+5. View/Modify Vehicle Service Manual
+9. Back to Admin Menu
+> 1
+-------------------------------------
+
+------------ Register New Vehicle ------------
+
+Vehicle type                    [ xxxxxx ]
+Manufacturer                    [ xxxxxxxx ] 
+Age                             [ xx ]
+Color                           [ xxxx ]
+Driving license required        [ xxxxx ]
+Renting rate                    [ $$ ]
+
+9. Back to Vehicle Management
+------------------------------------------
+
+
+---- Modify Vehicle Information -----
+
+[ Available/Unavailable ]
+
+Vehicle Type : [ ]
+Manufactor : [ ]
+Model : [ ]
+Color : [ ]
+What driving privileges needed : [ ]  <---- For driving this vehicle 
+
+Vehicle daily rate : [$$]
+
+1. Save Vehicle Information
+9. Back to Vehicle Management
+--------------------------------------
+
+--------- View Vehicle Status --------
+<Available>   |   <Unavailable>      <----- Sorterar ef ýtt er á 
+
+
+Vehicle list 
+
+- Vehicle 1        ~Available
+- Vehicle 2        ~Unavailable     
+
+9. Back to Vehicle Management
+---------------------------------------
+
+--------- Modify Vehicle Status --------
+Vehicle nr : [SEARCH]     
+
+
+Vehicle         Availability
+
+Vehicle1        [Available/Unavailable]
+
+9. Back to Vehicle Management
+---------------------------------------
+
+----- View/Modify Vehicle Service Manual -----
+
+ Date of service |    What service     | Name of Mechanic | Date of next service
+______________________________________________________________________________
+|                |                     |                  |                  |            
+|________________|_____________________|__________________|__________________|  
+|                |                     |                  |                  |   
+|________________|_____________________|__________________|__________________|   
+|                |                     |                  |                  |   
+|________________|_____________________|__________________|__________________|   
+
+1. Save Vehicle Service Manual
+9. Back to Vehicle Management
+
+---------------------------------------
+
+

@@ -1,0 +1,55 @@
+////////////////////////////////Comments\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+1. Hvernig ég er að hugsa menus er þannig að sumir hafa bara ákveðinn réttindi, þannig það þarf að vera öðruvísi menu fyrir hverja týpu af Employee.
+   aðalega þannig að sumir Employees hafa bara ákveðinn shortcuts frá admin menu (PROBLEMS: Það verður erfitt að gera Permission system, þannig að gera nýjan role fyrir nýja týpu af Employee
+   verður ákveðinn hausverkur)
+
+////////////////////////////////Changes\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+
+----------- Admin Menu ------------ 
+
+1. Employee Management 
+2. Vehicle Management
+3. Contract Management
+4. Location Management
+5. Financial Management
+9. Back to Main Menu
+> 
+
+------------------------------------
+
+
+
+---------- Delivery Employees -----------
+1. Contracts
+2. Vehicles
+3. Locations
+9. Back to Main Menu   
+>                    
+------------------------------------------
+
+
+----------- Booking Employees -----------
+
+1. Contract management
+2. Rental rates management
+9. Back to Main Menu
+> 
+------------------------------------------
+
+
+--------- Mechanic Menu -----------
+
+1. Vehicle Information
+9. Back to Main Menu
+> 
+------------------------------------
+
+
+----- Financial Employee Menu ------
+
+1. Financial Management
+9. Back to Main Menu
+> 
+------------------------------------

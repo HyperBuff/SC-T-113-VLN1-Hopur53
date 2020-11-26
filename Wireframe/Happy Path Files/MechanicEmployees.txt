@@ -1,0 +1,160 @@
+////////////////////////////////Comments\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+////////////////////////////////Changes\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+------------ Mechanics Menu ------------
+1. Vehicles Management
+9. Back to Main Menu
+------------------------------------------
+
+
+------- Vehicle Management ---------
+
+1. Register  Vehicle
+2. Modify Vehicle 
+3. View Vehicle 
+4. View Vehicle Status
+5. Modify vehicle status
+6. View/Modify Vehicle Service Manual
+9. Back to Mechanics Menu
+> 
+-----------------------------------
+
+
+
+---------- Save Vehicle ------------
+
+Are you sure you want to save vehicle ? (y/n)
+> 
+
+Successfully Saved! 
+
+9. Back to Rental rate management
+>  
+-------------------------------------
+
+
+
+------------ Register vehicle ------------
+
+Vehicle type                    [ xxxxxx ]
+Manufacturer                    [ xxxxxxxx ] 
+Age                             [ xx ]
+Color                           [ xxxx ]
+Driving license required        [ xxxxx ]
+Renting rate                    [ $$ ]
+
+1. Save Vehicle
+9. Back to Vehicle Management
+> 
+------------------------------------------
+
+
+
+------------- View vehicle ---------------
+
+Vehicle type                      xxxxxx 
+Manufacturer                      xxxxxxxx 
+Age                               xx 
+Color                             xxxx 
+Driving license required          xxxxx 
+Renting rate                      xxx 
+
+9. Back to Vehicle Management
+> 
+------------------------------------------
+
+
+
+-----------  Search Vehicle -------------
+
+1. Search By ID
+2. Search By Type
+9. Back to Vehicle Management
+> 
+
+Name Search: Robert R. Sharp 
+------------------------------------------
+
+
+
+---- Modify Vehicle Information -----
+
+[ Available/Unavailable ]
+
+Vehicle Type : [ ]
+Manufactor : [ ]
+Model : [ ]
+Color : [ ]
+What driving privileges needed : [ ]  <---- For driving this vehicle 
+
+Vehicle daily rate : [$$]
+
+1. Save Vehicle
+9. Back to Vehicle Management
+> 
+--------------------------------------
+
+
+
+--------- View Vehicle Status --------
+<Available>   |   <Unavailable>      <----- Sorterar ef ýtt er á 
+
+
+Vehicle list 
+
+- Vehicle 1        ~Available
+- Vehicle 2        ~Unavailable     
+
+9. Back to Vehicle Management
+> 
+---------------------------------------
+
+
+
+------- Save Vehicle Status ---------
+
+Are you sure you want to save vehicle status? (y/n)
+> 
+
+Successfully Saved! 
+
+9. Back to Rental rate management
+>  
+-------------------------------------
+
+
+
+--------- Modify Vehicle Status --------
+Vehicle nr : [SEARCH]     
+
+
+Vehicle         Availability
+
+Vehicle1        [Available/Unavailable]
+
+1. Save Vehicle Status
+9. Back to Vehicle Management
+> 
+---------------------------------------
+
+
+
+
+----- View/Modify Vehicle Service Manual -----
+
+ Date of service |    What service     | Name of Mechanic | Date of next service
+______________________________________________________________________________
+|                |                     |                  |                  |            
+|________________|_____________________|__________________|__________________|  
+|                |                     |                  |                  |   
+|________________|_____________________|__________________|__________________|   
+|                |                     |                  |                  |   
+|________________|_____________________|__________________|__________________|   
+
+1. Save Vehicle Service Manual
+9. Back to Vehicle Management
+
+---------------------------------------

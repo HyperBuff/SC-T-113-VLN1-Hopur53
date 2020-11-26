@@ -1,0 +1,236 @@
+////////////////////////////////Comments\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+////////////////////////////////Changes\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+1. Bætti við Search Contract
+2. Bætti við save screens fyrir contracts og rental rate
+2. Breytti Contract Management menu
+3. Breytti í númerað input system fyrir að fara til baka
+
+
+
+----------- Booking Employees -----------
+
+1. Contract management
+2. Rental rates management
+9. Back to Main Menu
+> 
+------------------------------------------
+
+
+-----------  Search Contract -------------
+
+1. Search By ID
+2. Search By Name
+9. Back to Contract Management
+> 
+
+Name Search: [ Robert R. Sharp ]
+------------------------------------------
+
+
+
+---------- Contract Management -----------
+
+1. New contract
+2. Modify contract
+3. View contract
+9. Back to Booking Employees
+> 
+------------------------------------------
+
+
+
+---------- Save Contract ------------
+
+Are you sure you want to save contract ? (y/n)
+> 
+
+Successfully Saved! 
+
+9. Back to Rental rate management
+>  
+-------------------------------------
+
+
+
+----------- New contract ------------
+
+Personal information
+
+Name                       [ xxxx xx xxxxxx ] 
+Id number                  [ xxxxxx - xxxx ]
+Phone number               [ xxx - xxxx ]
+Email                      [ xxxxx@xxxxx ]
+Address                    [ xxxxxx xx ]
+
+Vehicle
+
+Vehicle type               [ xxxxxx ]
+Rental period              [ xx.xx.xxxx - xx.xx.xxxx ]
+Country                    [ xxxxxxx ]
+Date of contract           [ xx.xx.xxxx ]
+
+1. Save Contract
+2. Print Out Contract
+9. Back to Contract Management
+> 
+-------------------------------------
+
+
+---------- Modify Contract ----------
+
+Contract [SEARCH]
+
+Personal information
+
+Name                       [ xxxx xx xxxxxx ] 
+Id number                  [ xxxxxx - xxxx ]
+Phone number               [ xxx - xxxx ]
+Email                      [ xxxxx@xxxxx ]
+Address                    [ xxxxxx xx ]
+
+Vehicle
+
+Vehicle type               [ xxxxxx ]
+Rental period              [ xx.xx.xxxx - xx.xx.xxxx ]
+Country                    [ xxxxxxx ]
+Date of contract           [ xx.xx.xxxx ]
+
+              Amount Due: [$$]
+
+1. Save Contract
+2. Close Contract
+3. Back to Contract Management
+              
+-------------------------------------
+
+
+
+---------- Close Contract -----------
+
+Total amount : [$$]
+Amount paid  : [$$]      
+
+Amount due   : [$$]     <---- (amount paid - total amount)
+
+1. Print Invoice
+2. Settle Invoice
+9 Back to Modify contract
+
+-------------------------------------
+
+
+
+------------- Invoice ---------------
+
+Contract number :             Date of rental : xx.xx.xx - xx.xx.xx
+
+Name : 
+Social Security number : 
+Email Adress :
+Adress :
+
+Total amount  $$
+Amount paid   $$
+
+
+Amount due    $$
+                            
+                              __________________________
+                                 Customer signature
+                                
+9. Back to Close Contract
+>
+-------------------------------------
+
+
+
+---------- View Contract ------------
+
+Contract [SEARCH]
+
+Personal information
+
+Name                         xxxx xx xxxxxx  
+Id number                    xxxxxx - xxxx 
+Phone number                 xxx - xxxx 
+Email                        xxxxx@xxxxx 
+Address                      xxxxxx xx 
+
+Vehicle
+
+Vehicle type                 xxxxxx 
+Rental period                xx.xx.xxxx - xx.xx.xxxx 
+Country                      xxxxxxx 
+Date of contract             xx.xx.xxxx 
+
+1. Print Out Contract
+9. Back to Contract Management
+>
+-------------------------------------
+
+
+
+--------- Rental Rate Management --------
+1. Register rental rate
+2. Modify rental rate
+3. View rental rate
+9. Back to Contract Management
+> 
+------------------------------------------
+
+
+
+-------- Save Rental Rate  ----------
+
+Are you sure you want to save Rental Rate ? (y/n)
+> 
+
+Successfully Saved! 
+
+9. Back to Rental rate management
+>  
+-------------------------------------
+
+
+
+---------- Register rental rate ----------
+
+Vehicle Type                    Rate per day
+
+Vehicle 1                       [ xxxx ]
+Vehicle 2                       [ xxxx ]
+Vehicle 3                       [ xxxx ]
+...
+
+1. Save Rental Rate 
+9. Back to Rental Rate Management
+------------------------------------------
+
+
+---------- Modify rental rate ----------
+
+Vehicle: [SEARCH]     
+
+Vehicle Type                    Rate per day
+Vehicle 1                       [ xxxx ]
+
+9. Back to Rental rate management
+>  
+------------------------------------------
+
+------------ View rental rate ------------
+
+Vehicle Type                    Rate per day
+
+Vehicle 1                        xxxx 
+Vehicle 2                        xxxx 
+Vehicle 3                        xxxx 
+
+9. Back to Rental rate management
+> 
+------------------------------------------
+
+
+

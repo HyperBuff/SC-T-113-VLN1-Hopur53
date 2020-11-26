@@ -1,0 +1,201 @@
+////////////////////////////////Comments\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+////////////////////////////////Changes\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+1. Bætti við Search Contract
+2. Bætti við Search Vehicle
+3. Bætti inn það sem á við þessa
+4. Breytti í númerað input system fyrir að fara til baka
+5. Bætti við save function fyrir "Register Vehicle" og "Modify Vehicle"
+
+
+---------- Delivery Employees -----------
+1. Contracts
+2. Vehicles
+3. Locations
+9. Back to Main Menu                      
+------------------------------------------
+
+
+
+-----------  Search Contract -------------
+
+1. Search By ID
+2. Search By Name
+9. Back to Delivery Employees
+> 
+
+Name Search: [Robert R. Sharp ]
+------------------------------------------
+
+
+
+--------------- Contract -----------------            
+
+ID                              xxxx
+Name                            xxxxx xxxx
+Phone number                    xxx-xxxx
+Address                         xxxxxxxx xx
+Email                           xxxxxxxxxxx
+Date                            xx.xx.xxxx - xx.xx.xxxx
+Country                         xxxxxxxx
+
+Vehicle type                    xxxxxxxx
+Condition                       xxxx
+
+Employee                        xxxxxx xxx
+Date                            xx.xx.xxxx
+Time                            xx.xx
+
+
+Check in
+
+Date                            In
+[ xx.xx.xxxx ]                  [ 00:00 ]
+
+Check out
+
+Date                            In
+[ xx.xx.xxxx ]                  [ 00:00 ]
+
+1. Print Contract
+9. Back to Delivery Employees
+> 
+------------------------------------------
+
+
+
+----------- Vehicle Management ------------
+1. Register vehicle
+2. View vehicle
+3. Modify vehicle
+4. View vehicle status
+5. Modify vehicle status
+9. Back to Delivery Employees
+> 
+------------------------------------------
+
+
+
+
+---------- Save Vehicle ------------
+
+Are you sure you want to save vehicle ? (y/n)
+> 
+
+Successfully Saved! 
+
+9. Back to Rental rate management
+>  
+-------------------------------------
+
+
+
+
+------------ Register vehicle ------------
+
+Vehicle type                    [ xxxxxx ]
+Manufacturer                    [ xxxxxxxx ] 
+Age                             [ xx ]
+Color                           [ xxxx ]
+Driving license required        [ xxxxx ]
+Renting rate                    [ $$ ]
+
+1. Save Vehicle
+9. Back to Vehicle Management
+> 
+------------------------------------------
+
+
+
+------------- View vehicle ---------------
+
+Vehicle type                      xxxxxx 
+Manufacturer                      xxxxxxxx 
+Age                               xx 
+Color                             xxxx 
+Driving license required          xxxxx 
+Renting rate                      xxx 
+
+9. Back to Vehicle Management
+> 
+------------------------------------------
+
+
+
+-----------  Search Vehicle -------------
+
+1. Search By ID
+2. Search By Type
+9. Back to Vehicle Management
+> 
+
+Name Search: Robert R. Sharp 
+------------------------------------------
+
+
+
+---- Modify Vehicle Information -----
+
+[ Available/Unavailable ]
+
+Vehicle Type : [ ]
+Manufactor : [ ]
+Model : [ ]
+Color : [ ]
+What driving privileges needed : [ ]  <---- For driving this vehicle 
+
+Vehicle daily rate : [$$]
+
+1. Save Vehicle
+9. Back to Vehicle Management
+> 
+--------------------------------------
+
+
+
+--------- View Vehicle Status --------
+<Available>   |   <Unavailable>      <----- Sorterar ef ýtt er á 
+
+
+Vehicle list 
+
+- Vehicle 1        ~Available
+- Vehicle 2        ~Unavailable     
+
+9. Back to Vehicle Management
+> 
+---------------------------------------
+
+
+
+--------- Modify Vehicle Status --------
+Vehicle nr : [SEARCH]     
+
+
+Vehicle         Availability
+
+Vehicle1        [Available/Unavailable]
+
+9. Back to Vehicle Management
+> 
+---------------------------------------
+
+
+
+---------------- Location ----------------
+
+Location: [SEARCH]
+
+Country                         xxxxxxxx
+Airport                         xxxxxxxxxxx
+Phone number                    xxx-xxxx
+Opening hours                   xx:xx - xx:xx
+
+9. Back to Vehicle Management
+> 
+------------------------------------------
+
+
+
+

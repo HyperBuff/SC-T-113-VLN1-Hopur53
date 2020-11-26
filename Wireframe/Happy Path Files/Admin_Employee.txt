@@ -1,0 +1,151 @@
+////////////////////////////////Comments\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+1. Mætti remove-a clock in (Afhverju? Því ég hugsa sem mér að það yrði nú þegar sér kerfi sem myndi sjá um timesheets fyrir starfsmenn)
+2. Mætti bæta við "Delete Employee" í Modify Employees (Afhverju? til dæmis ef starfsmaður hættir þá er ekki þörf á upplýsingum hans/hennar lengur, gott að hafa allavega option til að deleta users
+3. Gætum bætt við option fyrir "Modify Employee" í "View Employee"
+4. Skil ekki alveg "View Contracts Made" í "View Employee"
+5. Í forritunu sjálfu er sniðugt að hafa dökk grá
+6. Gæti vel verið að við þurfum að breyta "modify employee" (semsagt admin getur þá breytt einungis sér einum breytum í einu, eins og t.d Name, Address, o.s.f)
+
+////////////////////////////////Changes\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+1. Bætti við "Search Employee" (Þegar þú ýtir á "View Employee" eða "Modify Employee", þá geturðu leitað af sérstökum Employee)[gæti bætt við inní það "List All Employees"]
+2. Breytti í númerað input system fyrir að fara til baka
+3. Bætti við save Employee (spyr forrtið hvort allt sé í góðu ef ekki þá kemur error)
+4. Remove-aði photo í View Employee Acccount :(((
+
+
+DONE!!!
+
+
+------------ Main Menu ------------
+
+            Select User 
+-----------------------------------
+
+        1. Booking Employee
+        2. Delivery Employee
+        3. Mechanic Employee
+        4. Financial Employee
+        5. Admin
+        9. Quit
+> 
+-----------------------------------
+
+----------- Admin Menu ------------ 
+
+1. Employee Management 
+2. Vehicle Management
+3. Contract Management
+4. Location Management
+5. Financial Management
+9. Back to Main Menu
+> 
+------------------------------------
+
+------- Employee Management --------
+
+1. Create new Employee
+2. Modify Employee account
+3. View Employee account
+9. Back to Admin Menu
+> 
+------------------------------------
+
+
+-------- Create New Employee ------- 
+        Name                     [ Robert R. Sharp ]
+        Social Security number   [ 030389-5626 ]
+        Address                  [ Grenigata 165 ]
+        Phone number             [ 529-8152 ]
+        Home phone (optional)    [ 449-2512 ]
+        Email Address            [ RobertRSharp@armyspy.com ]
+        What Base (Country)      [ Reykjavík, Iceland ]
+
+        Job title                [ Delivery Employee ]
+        System Access            [ Minimum ]
+
+1. Save Employee
+9. Back to Employee Management
+> 
+-------------------------------------
+
+
+
+----------- Save Employee ---------- 
+
+Are you sure you want to save employee? (y/n)
+> 
+
+Successfully Saved! 
+
+9. Back to Employee Management
+>  
+-------------------------------------
+
+
+
+
+------- Employee Search --------
+
+1. Search By ID
+2. Search By Name
+9. Back to Employee Management
+> 
+
+Name Search: [Robert R. Sharp ]
+
+------------------------------------
+
+
+------- View Employee Account ---------
+
+ID: 22                         Location: Reykjavík, Iceland
+Name: Robert R. Sharp          Address: Grenigata 165   
+SSN: 030389-5626               Phone Number: 529-8152
+Job Title: Delivery Employee   Home Phone: 449-2512
+System Access: Minimum         Email Address: RobertRSharp@armyspy.com
+
+
+1. View Contracts Made                                                                 <---- Skoða contracts sem þessi starfsmaður hefur gert 
+2. View Time Sheet                                                                     <---- Færist á Modify Clock - in 
+9. Back to Employee Management
+> 9 
+----------------------------------------
+
+
+------ Modify Employee Account ------
+
+Name                     [ Robert R. Sharp ]
+Social Security number   [ 030389-5626 ]
+Address                  [ Grenigata 165 ]
+Phone number             [ 529-8152 ]
+Home phone (optional)    [ 449-2512 ]
+Email Address            [ RobertRSharp@armyspy.com ]
+
+What Base (Country)      [ Reykjavík, Iceland ]
+Job title                [ Delivery Employee ]
+System Access            [ Minimum ]
+
+1. Save Employee
+3. Modify Time Sheet
+9. Back to Employee Management
+> 1
+-------------------------------------
+
+
+
+
+
+-------- Modify Clock - in ----------
+
+Date                    in    |   out
+
+01.11.20               07:00  |  17:30
+02.11.20               07:01  |  17:30
+01.11.20               06:57  |  17:34
+01.11.20               06:58  |  17:29
+...
+
+---------------------------------------
+
+
+

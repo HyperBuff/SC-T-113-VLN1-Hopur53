@@ -1,0 +1,120 @@
+////////////////////////////////Comments\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+1. Vantar Financial Report
+
+////////////////////////////////Changes\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+------- Financial Employee --------
+
+1. Financial Management
+9. Back to Main Menu
+> 
+------------------------------------
+
+
+------ Financial Management --------
+
+1. Unpaid contracts
+2. Closed contracts
+3. Financial reports
+9. Back to Financial Employee 
+> 
+
+-------------------------------------
+
+---------- Unpaid Contract -----------
+
+Total amount : [$$]
+Amount paid  : [$$]      
+
+Amount due   : [$$]     <---- (amount paid - total amount)
+
+1. Print Invoice
+2. Settle Invoice
+9. Back to Financial Management
+-------------------------------------
+
+---------- Close Contract -----------
+
+Total amount : [$$]
+Amount paid  : [$$]      
+
+Amount due   : NONE    <---- (amount paid - total amount)
+
+
+1. Print Invoice
+2. Settle Invoice
+9. Back to Financial Management
+-------------------------------------
+
+
+
+--------- Date Check Report ----------
+
+Start Date : [DD/MM/YYYY]
+End Date   : [DD/MM/YYYY]
+
+1. Search
+9. Back to Financial Management
+-------------------------------------
+
+
+--------- Financial Report ----------
+
+1. Branches Report
+2. Utilization Report
+3. Invoice Overview 
+
+9. Back to Financial Management
+> 
+-------------------------------------
+
+
+---------- Branch Report -----------
+
+Branch 1                 Branch 2                   Branch 3
+
+Earnings     : [$$]         Earnings     : [$$]           Earnings     : [$$]
+VehicleTypes : [NN]         VehicleTypes : [NN]           VehicleTypes : [NN]
+
+1. Print Branch Report
+9. Back to Financial Management
+> 
+-------------------------------------
+
+
+------- Utilization Report --------
+
+Country 1 Most Utilized Vehicles:
+Vehicle 1
+Vehicle 2
+Vehicle 3
+Vehicle 4
+Country 2 Most Utilized Vehicles:
+Vehicle 1
+Vehicle 2
+Vehicle 3
+Vehicle 4
+Country 3 Most Utilized Vehicles:
+Vehicle 1
+Vehicle 2
+Vehicle 3
+Vehicle 4
+
+1. Print Utilization Report
+9. Back to Financial Management
+> 
+-------------------------------------
+
+--------- Invoice Overview ----------
+
+Costomer 1 | Billed : No
+Costomer 2 | Billed : Yes
+Costomer 3 | Billed : No
+Costomer 4 | Billed : Yes
+Costomer 5 | Billed : Yes
+Costomer 6 | Billed : Yes
+
+1. Print Invoice Overview
+9. Back to Financial Management
+> 
+-------------------------------------
