@@ -22,7 +22,6 @@ NOT STARTED!
 -----------------------------------
 
 
-
 ----------- Admin Menu ------------ 
 
 1. Employee Management 
@@ -35,7 +34,6 @@ NOT STARTED!
 ------------------------------------
 
 
-
 ------- Location Management --------
 
 1. Modify Location information
@@ -45,6 +43,7 @@ NOT STARTED!
 9. Back to Admin Menu
 > 
 -----------------------------------------
+
 
 ------- Modify Location Information ------
 
@@ -68,6 +67,7 @@ Location: [SEARCH]
 > 1
 ------------------------------------------
 
+
 ----------- Create New Location ----------
 
 
@@ -87,6 +87,7 @@ Opening hours: open[00:00] ~ close[00:00]
 > 1
 ------------------------------------------
 
+
 ------- View Location information --------
 
 Location: [SEARCH]
@@ -98,7 +99,8 @@ Opening hours                   xx:xx - xx:xx
 
 9. Back to Back to Location Management
 > 
-------------------------------------------
+-------------------------------------------
+
 
 ----------- Opening Hour Overview ---------
 
