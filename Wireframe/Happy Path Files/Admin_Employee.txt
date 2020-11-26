@@ -73,7 +73,8 @@ DONE!!!
 8. Job title
 9. System Access
 10. Back to Employee Management
-> 1. Save Employee
+>
+1. Save Employee
 > 1
 -------------------------------------
 
