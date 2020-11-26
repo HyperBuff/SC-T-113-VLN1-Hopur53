@@ -30,6 +30,7 @@ DONE!!!
 > 
 -----------------------------------
 
+         Select Catagory
 ----------- Admin Menu ------------ 
 
 1. Employee Management 
@@ -41,6 +42,7 @@ DONE!!!
 > 
 ------------------------------------
 
+           Select Acton
 ------- Employee Management --------
 
 1. Create new Employee
@@ -49,8 +51,7 @@ DONE!!!
 9. Back to Admin Menu
 > 
 ------------------------------------
-
-
+            
 -------- Create New Employee ------- 
         Name                     [ Robert R. Sharp ]
         Social Security number   [ 030389-5626 ]
@@ -63,23 +64,31 @@ DONE!!!
         Job title                [ Delivery Employee ]
         System Access            [ Minimum ]
 
-1. Name
-2. Social Security number
-3. Address
-4. Phone number
-5. Home phone 
-6. Email address
-7. Country
-8. Job title
-9. System Access
-10. Back to Employee Management
+~To quit action press 9~ 
+
+Name
+>
+Social Security number
+>
+Address
+>
+Phone number
+>
+Home phone
+>
+Email address
+>
+Country
+>
+Job title
+>
+System Access
 >
 1. Save Employee
 > 1
 -------------------------------------
 
-
-
+            Choose Action
 ----------- Save Employee ---------- 
 
 Are you sure you want to save employee? (y/n)
@@ -90,11 +99,8 @@ Successfully Saved!
 9. Back to Employee Management
 >  9
 -------------------------------------
-
-
-
-
-------- Employee Search --------
+    
+--------- Employee Search -----------
 
 1. Search By ID
 2. Search By Name
@@ -103,7 +109,7 @@ Successfully Saved!
 
 Name Search: [Robert R. Sharp ]
 
-------------------------------------
+---------------------------------------
 
 
 ------- View Employee Account ---------
@@ -114,15 +120,13 @@ SSN: 030389-5626               Phone Number: 529-8152
 Job Title: Delivery Employee   Home Phone: 449-2512
 System Access: Minimum         Email Address: RobertRSharp@armyspy.com
 
-
-1. View Contracts Made                                                                 <---- Skoða contracts sem þessi starfsmaður hefur gert 
-2. View Time Sheet                                                                     <---- Færist á Modify Clock - in 
+1. Modify Employee Account                                                     
 9. Back to Employee Management
-> 9 
-----------------------------------------
+> 
+------------------------------------------
 
 
------- Modify Employee Account ------
+-------- Modify Employee Account ---------
 
 Name                     [ Robert R. Sharp ]
 Address                  [ Grenigata 165 ]
@@ -149,6 +153,16 @@ Modify Employee Information
 > 1
 -------------------------------------
 
+----------- Save Employee ---------- 
+
+Are you sure you want to save employee? (y/n)
+> y
+
+Successfully Saved! 
+
+9. Back to Employee Management
+>  9
+-------------------------------------
 
 ---- Change Employee Information ----
 
@@ -159,6 +173,16 @@ Name : Harold
 > 
 -------------------------------------
 
+----------- Save Employee ---------- 
+
+Are you sure you want to save changes? (y/n)
+> y
+
+Successfully Saved! 
+
+9. Back to Employee Management
+>  9
+-------------------------------------
 
 
 
