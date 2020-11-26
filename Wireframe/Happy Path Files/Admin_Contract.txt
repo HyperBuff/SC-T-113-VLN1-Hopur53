@@ -191,8 +191,8 @@ Contract [SEARCH]
 
 Personal information
 
+ID                           1234
 Name                         xxxx xx xxxxxx  
-Id number                    xxxxxx - xxxx 
 Phone number                 xxx - xxxx 
 Email                        xxxxx@xxxxx 
 Address                      xxxxxx xx 
@@ -206,9 +206,31 @@ Date of contract             xx.xx.xxxx
 
 1. Print Out Contract
 9. Back to Contract Management
->
+> 1
 -------------------------------------
 
+
+---------- Print Contract ------------
+
+Personal information
+
+ID                           1234
+Name                         xxxx xx xxxxxx  
+Phone number                 xxx - xxxx 
+Email                        xxxxx@xxxxx 
+Address                      xxxxxx xx 
+
+Vehicle
+
+Vehicle type                 xxxxxx 
+Rental period                xx.xx.xxxx - xx.xx.xxxx 
+Country                      xxxxxxx 
+Date of contract             xx.xx.xxxx 
+
+
+9. Back to Contract Management
+> 1
+-------------------------------------
 
 
 --------- Rental Rate Management --------
