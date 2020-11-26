@@ -39,7 +39,7 @@ CHECK
 1. Contract management
 2. Rental rates management
 9. Back to Main Menu
-> 
+> 1
 ------------------------------------------
 
 
@@ -49,9 +49,9 @@ CHECK
 1. Search By ID
 2. Search By Name
 9. Back to Contract Management
-> 
+> 1
 
-Name Search: [ Robert R. Sharp ]
+ID Search: [ 1234 ]
 ------------------------------------------
 
 
@@ -62,7 +62,7 @@ Name Search: [ Robert R. Sharp ]
 2. Modify contract
 3. View contract
 9. Back to Booking Employees
-> 
+> 2
 ------------------------------------------
 
 
@@ -84,8 +84,8 @@ Successfully Saved!
 
 Personal information
 
+ID                         [ 1234 ]
 Name                       [ xxxx xx xxxxxx ] 
-Id number                  [ xxxxxx - xxxx ]
 Phone number               [ xxx - xxxx ]
 Email                      [ xxxxx@xxxxx ]
 Address                    [ xxxxxx xx ]
@@ -110,8 +110,8 @@ Contract [SEARCH]
 
 Personal information
 
+ID                         [ 1234 ]
 Name                       [ xxxx xx xxxxxx ] 
-Id number                  [ xxxxxx - xxxx ]
 Phone number               [ xxx - xxxx ]
 Email                      [ xxxxx@xxxxx ]
 Address                    [ xxxxxx xx ]
@@ -128,7 +128,7 @@ Date of contract           [ xx.xx.xxxx ]
 1. Save Contract
 2. Close Contract
 3. Back to Contract Management
-> 
+> 2
 -------------------------------------
 
 
@@ -141,22 +141,22 @@ Amount paid  : [$$]
 Amount due   : [$$]     <---- (amount paid - total amount)
 
 1. Print Invoice
-2. Settle Invoice
+2. Close Contract
 9. Back to Modify contract
-> 
+> 2
 
 -------------------------------------
 
 
----------- Settle Invoice ------------
+---------- Close Contract ------------
 
 Are you sure you want to close contract ? (y/n)
-> 
+> y
 
 Successfully Saved! 
 
 9. Back to Modify contract
->  
+>  9
 -------------------------------------
 
 
