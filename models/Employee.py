@@ -10,5 +10,8 @@ class Employee:
         self.email = email
         self.id = id
     
-    def set_id(self, id):
-        self.id = id
+    def __repr__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name

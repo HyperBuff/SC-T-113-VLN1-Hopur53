@@ -1,5 +1,3 @@
-import uuid
-
 from repositories.Repository import Repository
 from models.Employee import Employee
 
@@ -11,9 +9,7 @@ class EmployeeRepository:
         self.fieldnames = ['name', 'address', 'postal', 'ssn', 'phone', 'homephone', 'email', 'id']
 
     def create(self, employee: Employee):
-        employee.set_id(self.generate_id())
         row = dict((key, getattr(employee, key)) for key in self.fieldnames)
-        print(row)
         Repository()._create(self.filename, self.fieldnames, row)
         return employee
 
@@ -27,6 +23,3 @@ class EmployeeRepository:
 
     def delete(self, id) -> None:
         return Repository()._delete(self.filename, self.fieldnames, id)
-
-    def generate_id(self):
-        return str(uuid.uuid4())

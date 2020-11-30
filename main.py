@@ -5,10 +5,14 @@ from repositories.EmployeeRepository import EmployeeRepository
 
 
 
+ui = MainUI()
+
+
+"""
 if __name__ == "__main__":
     e = EmployeeRepository()
 
+    em = Employee("aðalsteinn", "D", "500", "444", "96", "333", "add@f.d")
 
-    employee1 = Employee("Aðalsteinn", "Duggufjara", "600", "0907982949", "6494444", "4611561", "aleifsm@gmail.com")
-
-    e.create(employee1)
+    e.create(em)
+"""
