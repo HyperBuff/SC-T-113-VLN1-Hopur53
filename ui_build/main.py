@@ -74,7 +74,7 @@ def admin_menu_options():
     if user_input == 5 :
         return display_financial_management(), financial_management_options()
     if user_input == 9 : 
-        return display_admin_menu(), admin_menu_options()
+        return display_main_menu(), main_menu_options()
     else : 
         print ("Wrong Entry")
 
@@ -98,7 +98,7 @@ def employee_options():
     if user_input == 2 : 
         return display_delivery_employee_menu(), delivery_employee_options()
     if user_input == 9 :
-        display_admin_menu(), admin_menu_options()
+        display_main_menu(), main_menu_options()
     else :
         print ("Wrong Entry")
 
@@ -146,36 +146,20 @@ def rental_rate_option():
     if user_input == 3 :
         return display_rental_rate()
     if user_input == 9 :
-        return display_admin_menu(), admin_menu_options()
+        return display_contract_management(), contract_options()
 
+''' Function til þess að skrá rental rate + type '''
 def register_rental_rate():
-    REGISTERED_RENTAL_RATE = ('''1. Vehicle type
-2. Rate per day
-9. Back to Rental Rate Management
-''')
-#Vantar Save dæmið
-    print (REGISTERED_RENTAL_RATE)
-
-def registered_rental_rate():
-    user_input = get_input()
-    if user_input == 1 :
-       # return input_vehicle_type()
-    if user_input == 2 :
-        #return input_rental_rate() 
-    if user_input == 9 :
-        #return rental_rate_options()
-    else :
-        print ("Wrong Entry")
-
-def vehicle_rate_info_dict():
+    # Setja upplýsingar inn í dictionary
     typ = input("Please input a type: ") 
     rate = input("Plesse input a rate: ") 
     class_list = {typ : rate}
 
     return class_list
 
+''' Functio til þess að savea ný rental rate + type '''   
 def vehicle_rate_info_dict_save():
-    '''Setja vehicle_rate_dict inn í txt file'''
+    # Setja vehicle_rate_dict inn í txt file'''
     pass
 
 def modify_rental_rate():
@@ -206,7 +190,7 @@ def delivery_employee_options():
     if user_input == 3 :
         return locations
     if user_input == 9 : 
-        return display_admin_menu
+        return display_main_menu(), main_menu_options()
     else : 
         print ("Wrong Entry")
 
