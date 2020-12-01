@@ -34,10 +34,16 @@ def main_menu_options():
         return quit 
 
 def mechanic_employee_menu():
-    pass
+    return display_vehicle_management
 
 def mechanic_employee_options():
-    pass
+    return vehicle_management_options
+
+def display_financial_employee_menu():
+    return display_financial_management()
+
+def financial_employee_options():
+    return financial_employee_options()
 
 def display_admin_menu():
 
@@ -60,7 +66,7 @@ def admin_menu_options():
     if user_input == 1 :
         return display_employee_menu(), employee_options()
     if user_input == 2 : 
-        return display_vehicle_management(), vehicle_options()
+        return display_vehicle_management(), vehicle_management_options()
     if user_input == 3 : 
         return display_contract_management(), contract_management_options()
     if user_input == 4 :
@@ -115,7 +121,7 @@ def booking_employee_options():
     if user_input == 2 :
         return rental_rates_management(), rental_rate_option()
     if user_input == 9 :
-        return display_admin_menu, admin_menu_options()
+        return display_main_menu(), main_menu_options()
     else :
         print ("Wrong Entry")
 
@@ -153,26 +159,24 @@ def register_rental_rate():
 def registered_rental_rate():
     user_input = get_input()
     if user_input == 1 :
-        return input_vehicle_type()
+       # return input_vehicle_type()
     if user_input == 2 :
-        return input_rental_rate() 
+        #return input_rental_rate() 
     if user_input == 9 :
-        return rental_rate_options()
+        #return rental_rate_options()
     else :
         print ("Wrong Entry")
 
-def input_vehicle_type():
-    rental_rate_dict = {"Vehicle Type": [], "Rental Rate": []}
-    user_input = input("Input vehicle type: ")
-    rental_rate_dict["Vehicle Type"].append[user_input]
-    return rental_rate_dict
+def vehicle_rate_info_dict():
+    typ = input("Please input a type: ") 
+    rate = input("Plesse input a rate: ") 
+    class_list = {typ : rate}
 
-def input_rental_rate(input_vehicle_type):
-    rental_rate_dict()
-    user_input = input("Input Rental Rate: ")
-    rental_rate_dict["Rental Rate"].append[user_input]
-    print(rental_rate_dict)
+    return class_list
 
+def vehicle_rate_info_dict_save():
+    '''Setja vehicle_rate_dict inn í txt file'''
+    pass
 
 def modify_rental_rate():
     pass
@@ -231,7 +235,7 @@ def display_vehicle_management():
 
     print (VEHICLE)
 
-def vehicle_options():
+def vehicle_management_options():
     user_input = get_input()
 
     if user_input == 1 :
@@ -257,12 +261,6 @@ def display_vehicle_info():
     pass
 
 def display_vehicle_status():
-    pass
-
-def display_admin_menu():
-    pass
-
-def admin_menu_options():
     pass
 
 def display_contract_management():
