@@ -1,0 +1,7 @@
+
+*.pyc
+models/__pycache__/Employee.cpython-38.pyc
+repositories/__pycache__/Repository.cpython-38.pyc
+ui/__pycache__/MainUI.cpython-38.pyc
+repositories/__pycache__/EmployeeRepository.cpython-38.pyc
+.vscode/settings.json
