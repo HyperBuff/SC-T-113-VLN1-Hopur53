@@ -5,11 +5,43 @@ def get_input():
     return user_input
 
 def display_main_menu():
+    MAIN_MENU = (''' 
+------------ Main Menu ------------
+
+        1. Booking Employee
+        2. Delivery Employee
+        3. Mechanic Employee
+        4. Financial Employee
+        5. Admin
+        9. Quit
+''')
+    print (MAIN_MENU)
+
+def main_menu_options():
+    user_input = get_input()
+
+    if user_input == 1 :
+        return display_booking_employee_menu(), booking_employee_options()
+    if user_input == 2 : 
+        return display_delivery_employee_menu(), delivery_employee_options()
+    if user_input == 3 :
+        return mechanic_employee_menu(), mechanic_employee_options()
+    if user_input == 4 :
+        return display_financial_management(), financial_management_options()
+    if user_input == 5 : 
+        return display_admin_menu(), admin_menu_options()
+    if user_input == 9 :
+        return quit 
+
+def mechanic_employee_menu():
+    pass
+
+def mechanic_employee_options():
     pass
 
 def display_admin_menu():
 
-    MENU = ('''
+    ADMIN_MENU = ('''
 ----------- Admin Menu ------------ 
 
 1. Employee Management 
@@ -20,7 +52,7 @@ def display_admin_menu():
 9. Back to Main Menu 
 ''')
 
-    print (MENU)    
+    print (ADMIN_MENU)    
 
 def admin_menu_options():
     user_input = get_input()
@@ -331,14 +363,76 @@ def financial_management_options():
         return display_admin_menu(), admin_menu_options()
 
 def unpaid_contracts():
+    total_amount = int(input("Please enter the total amount"))
+    amount_paid = int(input("Please input amount paid"))
+    amount_due = total_amount-amount_paid
+    
+    UNPAID = ('''
+---------- Unpaid Contract ----------
+
+Total amount : {}
+Amount paid  : {}     
+
+Amount due   : {}''').format(total_amount, amount_paid, amount_due)    
+
+    OPTIONS = ('''
+1. Print Invoice
+2. Settle Invoice
+9. Back to Financial Management
+''')
+
+    print (UNPAID,OPTIONS)
+    user_input = get_input()
+
+    if user_input == 1 :
+        return display_invoice
+    if user_input == 2 : 
+        return modify_invoice
+    if user_input == 9 :
+        return display_financial_management, financial_management_options
+ 
+def display_invoice():
     pass
+
+def modify_invoice():
+    pass 
 
 def closed_contracts():
     pass
 
 def financial_reports():
+    REPORTS = ('''
+-------- Financial Report ---------
+
+1. Branches Report
+2. Utilization Report
+3. Invoice Overview 
+
+9. Back to Financial Management
+''')
+
+    print (REPORTS)
+
+def financial_report_options():
+    user_input = get_input()
+
+    if user_input == 1 :
+        return branches_report()
+    if user_input == 2 :
+        return utilization_report()
+    if user_input == 3 :
+        return invoice_overview()
+    if user_input == 9 :
+        return display_financial_management(),financial_management_options()
+
+def branches_report():
     pass
 
+def utilization_report():
+    pass
+
+def invoice_overview():
+    pass
 
 
 
