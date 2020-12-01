@@ -211,7 +211,15 @@ def delivery_employee_options():
         print ("Wrong Entry")
 
 def contracts():
-    pass
+    SEARCH_CONTRACT = ('''
+-----------  Search Contract -------------
+
+1. Search By ID
+2. Search By Name
+9. Back to Delivery Employees
+''')
+
+    print (SEARCH_CONTRACT)
 
 def contract_options():
     pass 
