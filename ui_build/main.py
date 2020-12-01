@@ -111,7 +111,36 @@ def rental_rate_option():
         return display_admin_menu(), admin_menu_options()
 
 def register_rental_rate():
-    pass
+    REGISTERED_RENTAL_RATE = ('''1. Vehicle type
+2. Rate per day
+9. Back to Rental Rate Management
+''')
+#Vantar Save dæmið
+    print (REGISTERED_RENTAL_RATE)
+
+def registered_rental_rate():
+    user_input = get_input()
+    if user_input == 1 :
+        return input_vehicle_type()
+    if user_input == 2 :
+        return input_rental_rate() 
+    if user_input == 9 :
+        return rental_rate_options()
+    else :
+        print ("Wrong Entry")
+
+def input_vehicle_type():
+    rental_rate_dict = {"Vehicle Type": [], "Rental Rate": []}
+    user_input = input("Input vehicle type: ")
+    rental_rate_dict["Vehicle Type"].append[user_input]
+    return rental_rate_dict
+
+def input_rental_rate(input_vehicle_type):
+    rental_rate_dict()
+    user_input = input("Input Rental Rate: ")
+    rental_rate_dict["Rental Rate"].append[user_input]
+    print(rental_rate_dict)
+
 
 def modify_rental_rate():
     pass
