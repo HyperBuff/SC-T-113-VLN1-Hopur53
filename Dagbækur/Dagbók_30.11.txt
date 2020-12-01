@@ -1,3 +1,6 @@
 Horfðum á fyrirlestur kl 9:00, hittumst um 10:00 og skiptum niður verkefnum. 
 
 Strákarnir byrjuðu á að gera grunninn fyrir kóðann á meðan Hrefna og Þórdís fara yfir feedback á skýrslunni og laga það. 
+
+Við kláruðum það sem við ætluðum að gera fyrir 16:00, ákváðum samt að hittast aftur um kvöldið og vinna aðeins meira. 
+Hrefna og Þórdís t.d. komust langt á leið með að búa til alla menu's fyrir UI'ið
