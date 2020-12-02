@@ -18,7 +18,4 @@ class Contract:
         self.return_date = return_date
 
         self.total = total
-
-
-    def set_id(self, id):
         self.id = id

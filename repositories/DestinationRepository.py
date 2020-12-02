@@ -10,6 +10,7 @@ class DestinationRepository:
 
     def create(self, destination: Destination):
         row = dict((key, getattr(destination, key)) for key in self.fieldnames)
+        print(row)
         Repository()._create(self.filename, self.fieldnames, row)
         return destination
 
