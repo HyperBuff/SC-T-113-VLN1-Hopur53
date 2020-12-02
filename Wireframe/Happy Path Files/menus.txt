@@ -20,9 +20,9 @@
 -----------------------------------------
 
 ---------- Delivery Employees -----------
-1. Contracts
-2. Vehicles
-3. Locations
+1. Contract Management
+2. Vehicle Management
+3. Location Management
 9. Back to Main Menu   
 >                    
 ------------------------------------------
@@ -31,7 +31,7 @@
 ----------- Booking Employees -----------
 
 1. Contract management
-2. Rental rates management
+2. Vehicle Management
 9. Back to Main Menu
 > 
 ------------------------------------------
@@ -39,7 +39,7 @@
 
 ------------- Mechanic Menu --------------
 
-1. Vehicle Information
+1. Vehicle Management
 9. Back to Main Menu
 > 
 ------------------------------------
