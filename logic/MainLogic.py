@@ -15,3 +15,9 @@ class MainLogic:
 
     def create_employee(self, employee):
         return self.employee.create(employee)
+
+    def update_employee(self, id, updates):
+        return self.employee.update(id, updates)
+
+    def delete_employee(self, id):
+        return self.employee.delete(id)
