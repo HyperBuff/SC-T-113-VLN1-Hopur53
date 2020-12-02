@@ -9,20 +9,20 @@
 
 ----------- Admin Menu ------------ 
 
-1. Employee Management 
-2. Vehicle Management
-3. Contract Management
-4. Location Management
-5. Financial Management
+1. Employees 
+2. Vehicles
+3. Contracts
+4. Locations
+5. Financials
 9. Back to Main Menu
 > 
 
 -----------------------------------------
 
 ---------- Delivery Employees -----------
-1. Contract Management
-2. Vehicle Management
-3. Location Management
+1. Contracts
+2. Vehicles
+3. Locations
 9. Back to Main Menu   
 >                    
 ------------------------------------------
@@ -30,8 +30,8 @@
 
 ----------- Booking Employees -----------
 
-1. Contract management
-2. Vehicle Management
+1. Contracts
+2. Vehicles
 9. Back to Main Menu
 > 
 ------------------------------------------
@@ -39,7 +39,7 @@
 
 ------------- Mechanic Menu --------------
 
-1. Vehicle Management
+1. Vehicles
 9. Back to Main Menu
 > 
 ------------------------------------
