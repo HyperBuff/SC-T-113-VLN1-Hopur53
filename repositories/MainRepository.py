@@ -5,6 +5,6 @@ from models.Employee import Employee
 
 class MainRepository:
     
-    def get_all_employee(self):
+    def get_all_employees(self):
         return EmployeeRepository().read()
 

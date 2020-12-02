@@ -1,8 +1,3 @@
 name,address,postal,ssn,phone,homephone,email,id
 Aðalsteinn,Duggufjara,600,0907982949,6494444,4611561,aleifsm@gmail.com,ac4e2c4a-c562-4a77-a44b-c8970400a9af
-<<<<<<< HEAD
 aðalsteinn,D,500,444,96,333,add@f.d,3ee37cc4-a534-4499-a5ef-de66be7d67b2
-=======
-Aðalsteinn,Duggufjara,600,0907982949,6494444,4611561,aleifsm@gmail.com,db1a988e-7f2d-4d5e-8642-a29fdfbae344
-Aðalsteinn,Duggufjara,600,0907982949,6494444,4611561,aleifsm@gmail.com,8a0987a7-b3b0-40dc-87d8-42fd8cc83b9b
->>>>>>> e79e9dfef13e8030015b703c2c1884fba78eadbf

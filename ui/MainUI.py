@@ -1,22 +1,24 @@
+from ui.EmployeeUI import EmployeeUI
+
 from logic.MainLogic import MainLogic
 
+
 class MainUI:
-    def __init__(self):
-        self.user_id = None
+    def __init__(self, user_id = None):
+        self.logic = MainLogic()
 
-        if self.user_id == None:
-            self.select_user()
-        else:
-            print(self.user_id)
-            
+        self.employee = EmployeeUI()
 
-    def select_user(self):
+        self.user_id = user_id
+        self.name = None
+        self.role = None
 
-        users = MainLogic().get_em()
-        users_output = ""
+        self.ui_loop()
 
-        for i in range(len(users)):
-            users_output += f"{i+1}. {users[i]}\n"
+    def ui_loop(self):
 
-        print(f"------------ Main Menu ------------\n\n\t\tSelect User\n\n-----------------------------------\n\n" + users_output + "\n\n-----------------------------------")
-        input("User to select: ")
+        while True:
+            if self.user_id:
+                print(self.user_id)    
+            else:
+                self.user_id = self.employee.login()

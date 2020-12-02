@@ -6,15 +6,14 @@ def get_input():
 
 def display_main_menu():
     MAIN_MENU = (''' 
------------- Main Menu ------------
-
-        1. Booking Employee
-        2. Delivery Employee
-        3. Mechanic Employee
-        4. Financial Employee
-        5. Admin
-        9. Quit
-''')
+        ------------ Main Menu ------------
+                1. Booking Employee
+                2. Delivery Employee
+                3. Mechanic Employee
+                4. Financial Employee
+                5. Admin
+                9. Quit
+        ''')
     print (MAIN_MENU)
 
 def main_menu_options():
