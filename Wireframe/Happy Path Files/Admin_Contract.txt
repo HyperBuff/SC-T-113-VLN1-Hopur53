@@ -7,18 +7,9 @@
 
 CHECK
 
------------- Main Menu ------------
-
-            Select User 
+            Login
 -----------------------------------
-
-        1. Booking Employee
-        2. Delivery Employee
-        3. Mechanic Employee
-        4. Financial Employee
-        5. Admin
-        9. Quit
-> 
+Email:
 -----------------------------------
 
 ----------- Admin Menu ------------ 
@@ -39,7 +30,7 @@ CHECK
 1. Contract management
 2. Rental rates management
 9. Back to Main Menu
-> 1
+> 
 ------------------------------------------
 
 
@@ -47,9 +38,9 @@ CHECK
 -----------  Search Contract -------------
 
 1. Search By ID
-2. Search By Name
-9. Back to Contract Management
-> 1
+2. Search By Email
+q. Back to Contract Management
+> 
 
 ID Search: [ 1234 ]
 ------------------------------------------
@@ -61,8 +52,8 @@ ID Search: [ 1234 ]
 1. New contract
 2. Modify contract
 3. View contract
-9. Back to Booking Employees
-> 2
+q. Back to Booking Employees
+> 
 ------------------------------------------
 
 ----------- New contract -----------------
@@ -92,7 +83,7 @@ Modify Employee Information
 7. Rental Period 
 8. Country 
 10. Date of contract
-9. Back to Contract Management
+q. Back to Contract Management
 > 
 1. Save Employee
 > 1
@@ -105,7 +96,7 @@ Are you sure you want to save contract ? (y/n)
 
 Successfully Saved! 
 
-9. Back to Contract Management
+q. Back to Contract Management
 >  
 -------------------------------------
 
@@ -140,7 +131,7 @@ Modify Contract Information
 6. Vehicle
 7. Rental period
 8. Country 
-9. Back to Contract Management
+q. Back to Contract Management
 > 
 1. Save Contract
 > 1
@@ -153,7 +144,7 @@ Are you sure you want to save contract ? (y/n)
 
 Successfully Saved! 
 
-9. Back to Contract Management
+q. Back to Contract Management
 >  
 -------------------------------------
 
@@ -167,7 +158,7 @@ Amount due   : [$$]     <---- (amount paid - total amount)
 
 1. Print Invoice
 2. Close Contract
-9. Back to Modify contract
+q. Back to Modify contract
 > 2
 
 -------------------------------------
@@ -180,7 +171,7 @@ Are you sure you want to close contract ? (y/n)
 
 Successfully Closed! 
 
-9. Back to Modify contract
+q. Back to Modify contract
 >  9
 -------------------------------------
 
@@ -204,7 +195,7 @@ Amount due    $$
                               __________________________
                                  Customer signature
                                 
-9. Back to Close Contract
+q. Back to Close Contract
 >
 -------------------------------------
 
@@ -230,7 +221,7 @@ Country                      xxxxxxx
 Date of contract             xx.xx.xxxx 
 
 1. Print Out Contract
-9. Back to Contract Management
+q. Back to Contract Management
 >
 -------------------------------------
 
@@ -240,7 +231,7 @@ Date of contract             xx.xx.xxxx
 1. Register rental rate
 2. Modify rental rate
 3. View rental rate
-9. Back to Contract Management
+q. Back to Contract Management
 > 
 ------------------------------------------
 
@@ -257,7 +248,7 @@ Vehicle Type                    Rate per day
 >
 1. Save Rental Rate
 >
-9. Back to Rental Rate Management
+q. Back to Rental Rate Management
 ------------------------------------------
 
 -------- Save Rental Rate  ---------------
@@ -267,7 +258,7 @@ Are you sure you want to save Rental Rate ? (y/n)
 
 Successfully Saved! 
 
-9. Back to Rental rate management
+q. Back to Rental rate management
 >  
 -----------------------------------------
 
@@ -284,7 +275,7 @@ Vehicle 1                       [ xxxx ]
 >  
 1. Save Rental Rate
 > 
-9. Back to rental rate management
+q. Back to rental rate management
 >
 ------------------------------------------
 
