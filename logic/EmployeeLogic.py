@@ -15,3 +15,6 @@ class EmployeeLogic:
             if employee.email == email:
                 return employee.id
         return None
+
+    def get_user(self, user_id):
+        pass

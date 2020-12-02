@@ -10,12 +10,12 @@ class MainUI:
         self.employee = EmployeeUI()
 
         self.user_id = user_id
-        self.name = None
-        self.role = None
 
-        self.ui_loop()
+        self.display()
 
-    def ui_loop(self):
+    def display(self):
+
+        self.menu()
 
         while True:
             if self.user_id:
