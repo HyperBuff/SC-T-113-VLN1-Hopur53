@@ -4,8 +4,6 @@ from models.Employee import Employee
 class EmployeeUI:
 
     def __init__(self):
-        self.user_id = None
-
         self.logic = MainLogic()
 
     def menu(self):
