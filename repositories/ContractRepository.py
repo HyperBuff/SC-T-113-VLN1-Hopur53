@@ -11,7 +11,6 @@ class ContractRepository:
         self.fieldnames = ['name', 'phone', 'email', 'address', 'vehicle_id', 'vehicle_status', 'employee_id', 'location', 'date_from', 'date_from', 'date_to', 'loan_date', 'loan_status', 'return_date', 'total', 'id']
 
     def create(self, contract: Contract):
-        contract.set_id(self.generate_id())
         row = dict((key, getattr(contract, key)) for key in self.fieldnames)
         print(row)
         Repository()._create(self.filename, self.fieldnames, row)

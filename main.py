@@ -2,10 +2,10 @@ from models.Vehicle import Vehicle
 from repositories.VehicleRepository import VehicleRepository
 from models.Contract import Contract
 from repositories.ContractRepository import ContractRepository
-
 from models.Destination import Destination
 from repositories.DestinationRepository import DestinationRepository
-
+from models.VehicleType import VehicleType
+from repositories.VehicleTypeRepository import VehicleTypeRepository
 #ui = MainUI()
 
 if __name__ == "__main__":
@@ -20,3 +20,7 @@ if __name__ == "__main__":
     d = DestinationRepository()
     destination1 = Destination("Iceland", "Keflavíkurflugvöllur", "4214412", "6:00-23:00")
     d.create(destination1)
+    vt = VehicleTypeRepository()
+    vechicletype1 = VehicleType("timemachine", "keflavík", "500")
+    vt.create(vechicletype1
+    )
