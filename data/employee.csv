@@ -1,6 +1,6 @@
 role,name,address,postal,ssn,phone,homephone,email,id
 Admin,Aðalsteinn Leifs Maríuson,Duggufjara,600,0907982949,6494444,4611561,aleifsm@gmail.com,1
-Booking Employee,elmar,teststreet 23,230,232323232,fake phone,fake home phone,elmar@mail.com,3
+Admin,elmar,teststreet 23,230,232323232,fake phone,fake home phone,elmar@mail.com,3
 admin,Sigg,dd,400,8554331122,9704432,2331122,raggi@gm.com,4
 efef,dasd,dawdwd,dwww,ttt,t55,555,aleifsmqq@gma.com,5
 admin,ad,w,w,w,w,w,w,7
@@ -35,3 +35,4 @@ admin,ad,w,w,w,w,w,w,7
 q,q,q,q,q,q,q,q,9
 ,f'ðaef,af,re,re,r,r,r,10
 wd,fda,dw,dw,dw,dw,dw,d,11
+Booking,e,e,e,e,e,e,e,12

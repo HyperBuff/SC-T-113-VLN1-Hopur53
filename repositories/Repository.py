@@ -1,7 +1,7 @@
 import csv
 
 class Repository:
-
+    
     def __init__(self):
         self.encoding = 'utf-8'
 

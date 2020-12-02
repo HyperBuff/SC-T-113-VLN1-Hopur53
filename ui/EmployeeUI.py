@@ -32,7 +32,7 @@ class EmployeeUI:
         phone = input("\tEnter mobile phone: ")
         homephone = input("\tEnter homephone: ")
         email = input("\tEnter email: ")
-        role = input("\tRole")
+        role = rolechoose()
 
         new_employee = Employee(role, name, address, postal, ssn, phone, homephone, email)
         self.logic.create_employee(new_employee)          
@@ -78,3 +78,20 @@ class EmployeeUI:
         print("|{:^48}|".format(title))
         print("-" * 50)
         print()
+
+
+def rolechoose():
+    print("1. Admin, 2. Delivery, 3. Booking, 4. Mechanic, 5. Financial")
+    userinput = input("Choose Role: ")
+    if userinput == "1":
+        return "Admin"  
+    elif userinput == "2":
+        return "Delivery"
+    elif userinput == "3":
+        return "Booking"
+    elif userinput == "4":
+        return "Mechanic"
+    elif userinput == "5":
+        return "Financial"
+    else:
+        print("Choose a number to choose a role")
