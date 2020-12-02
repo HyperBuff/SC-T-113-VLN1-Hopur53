@@ -14,7 +14,7 @@
 3. Contracts
 4. Locations
 5. Financials
-9. Back to Main Menu
+q. Logout
 > 
 
 -----------------------------------------
@@ -23,7 +23,7 @@
 1. Contracts
 2. Vehicles
 3. Locations
-9. Back to Main Menu   
+q. Logout   
 >                    
 ------------------------------------------
 
@@ -32,7 +32,7 @@
 
 1. Contracts
 2. Vehicles
-9. Back to Main Menu
+q. Logout
 > 
 ------------------------------------------
 
@@ -40,7 +40,7 @@
 ------------- Mechanic Menu --------------
 
 1. Vehicles
-9. Back to Main Menu
+q. Logout
 > 
 ------------------------------------
 
@@ -48,6 +48,6 @@
 ----- Financial Employee Menu ------
 
 1. Financial Management
-9. Back to Main Menu
+q. Logout
 > 
 ------------------------------------
