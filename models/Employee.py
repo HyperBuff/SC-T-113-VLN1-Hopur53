@@ -1,6 +1,7 @@
 
 class Employee:
-    def __init__(self, name, address, postal, ssn, phone, homephone, email, id = None) -> None:
+    def __init__(self, role, name, address, postal, ssn, phone, homephone, email, id = None) -> None:
+        self.role = role
         self.name = name
         self.address = address
         self.postal = postal
