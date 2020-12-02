@@ -1,4 +1,5 @@
 from logic.MainLogic import MainLogic
+from models.Employee import Employee
 
 class EmployeeUI:
 
@@ -33,26 +34,11 @@ class EmployeeUI:
         phone = input("\tEnter mobile phone: ")
         homephone = input("\tEnter homephone: ")
         email = input("\tEnter email: ")
-        print("1. Admin")
-        role = input("\tSel")
+        role = input("\tRole")
 
-        role = "admin"
+        new_employee = Employee(role, name, address, postal, ssn, phone, homephone, email)
+        self.logic.create_employee(new_employee)          
 
-        9595959594
-
-        6000-120000
-
-        550500505-5
-
-
-    	
-        admin
-        delivery
-        booking 
-        mechanic 
-        financial
-
-#role,name,address,postal,ssn,phone,homephone,email
 
     def read(self):
         pass

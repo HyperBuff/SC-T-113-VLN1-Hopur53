@@ -3,11 +3,14 @@ from repositories.MainRepository import MainRepository
 class EmployeeLogic:
 
     def __init__(self):
-        pass
+        self.rep = MainRepository()
     
-    def get_all_employees(self):
-        return MainRepository().get_all_employees()
+    def create(self, employee):
+        self.rep.create_employee(employee)
 
+    def get_all_employees(self):
+        return self.rep.get_all_employees()
+ 
     def get_user_id_from_email(self, email):
         employees = self.get_all_employees()
 

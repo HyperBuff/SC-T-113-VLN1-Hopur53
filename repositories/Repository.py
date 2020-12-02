@@ -1,5 +1,4 @@
 import csv
-import uuid
 
 class Repository:
 
@@ -8,7 +7,7 @@ class Repository:
 
     # Creates new row in given csv file
     def _create(self, filename, fieldnames, row) -> dict:
-        row['id'] = self.__generate_id()
+        row['id'] = self.generate_id(filename)
         with open(filename, 'a', encoding=self.encoding, newline='') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames)
             writer.writerow(row)
@@ -47,5 +46,19 @@ class Repository:
             writer.writeheader()
             writer.writerows(rows)
 
-    def __generate_id(self):
-        return str(uuid.uuid4())
+    def generate_id(self, filename):
+
+        ids = 'data/ids.csv'
+        fieldnames = ['file', 'count']
+
+        rows = self._read(ids)
+        for i in range(len(rows)):
+            if rows[i]['file'] == filename:
+                count = int(rows[i]['count']) + 1
+                rows[i]['count'] = str(count)
+                self.__write(ids, ['file', 'count'], rows)
+                return count
+        with open(ids, 'a', encoding=self.encoding, newline='') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames)
+            writer.writerow({'file': filename, 'count': 1})
+        return 1

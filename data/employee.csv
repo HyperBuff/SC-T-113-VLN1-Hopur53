@@ -1,3 +1,5 @@
 role,name,address,postal,ssn,phone,homephone,email,id
-Admin,Aðalsteinn,Duggufjara,600,0907982949,6494444,4611561,aleifsm@gmail.com,ac4e2c4a-c562-4a77-a44b-c8970400a9af
-Booking Employee,elmar,teststreet 23,230,232323232,fake phone,fake home phone,elmar@mail.com,68e08afe-d031-49bf-a270-fd2c652ba084
+Admin,Aðalsteinn,Duggufjara,600,0907982949,6494444,4611561,aleifsm@gmail.com,1
+Booking Employee,elmar,teststreet 23,230,232323232,fake phone,fake home phone,elmar@mail.com,3
+admin,Sigg,dd,400,8554331122,9704432,2331122,raggi@gm.com,4
+efef,dasd,dawdwd,dwww,ttt,t55,555,aleifsmqq@gma.com,5
