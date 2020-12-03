@@ -181,15 +181,15 @@ class EmployeeUI:
         action = input("\nChoose an option: ")
         if action == 'q':
             return 'q'
-        elif action == "1":
+        elif action == str(1):
             return "Admin"  
-        elif action == "2":
+        elif action == str(2):
             return "Delivery"
-        elif action == "3":
+        elif action == str(3):
             return "Booking"
-        elif action == "4":
+        elif action == str(4):
             return "Mechanic"
-        elif action == "5":
+        elif action == str(5):
             return "Financial"
         else:
             print("\n\33[;31mRole wasn't fount, please try again.\33[;0m\n")
