@@ -10,7 +10,6 @@ class EmployeeRepository:
 
     def create(self, employee: Employee):
         row = dict((key, getattr(employee, key)) for key in self.fieldnames)
-        print(row)
         Repository()._create(self.filename, self.fieldnames, row)
         return employee
 

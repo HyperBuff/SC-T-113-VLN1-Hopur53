@@ -70,6 +70,8 @@ class EmployeeUI:
         
         while True:
 
+            self.header("View employee")
+
             employee = self.logic.get_employee_by_id(id)
 
             if employee is None:
@@ -96,7 +98,7 @@ class EmployeeUI:
 
 
     def create(self):
-        self.header("Add employee")
+        self.header("Create employee")
         role = None
         print("\33[;31mPress q to go back\33[;0m\n")
 
@@ -146,19 +148,19 @@ class EmployeeUI:
 
             new_value = input("Change to: ")
 
-            if action == "1":
+            if action == str(1):
                 updates["name"] = new_value
-            elif action == "2":
+            elif action == str(2):
                 updates["address"] = new_value
-            elif action == "3":
+            elif action == str(3):
                 updates["postal"] = new_value
-            elif action == "4":
+            elif action == str(4):
                 updates["phone"] = new_value
-            elif action == "5":
+            elif action == str(5):
                 updates["homephone"] = new_value
-            elif action == "6":
+            elif action == str(6):
                 updates["email"] = new_value
-            elif action == "7":
+            elif action == str(7):
                 updates["role"] = new_value
             self.logic.update_employee(id, updates)
 
