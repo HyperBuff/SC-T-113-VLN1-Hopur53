@@ -68,6 +68,7 @@ class EmployeeUI:
 
             action = input("Next page / Previous page (N/P): \nPress q to go back").lower()
 
+            
             if action == "n":
                 if last_page > page:
                     page += 1
@@ -110,6 +111,7 @@ class EmployeeUI:
             elif choice == "7":
                 role = input("Enter role: ")
                 updates["role"] = role
+            
 
         #tekur inn id fyrir employee
         #tekur inn dict af uppfærslum
