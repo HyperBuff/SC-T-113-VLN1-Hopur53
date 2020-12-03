@@ -1,3 +1,5 @@
+import math
+
 from logic.MainLogic import MainLogic
 from models.Employee import Employee
 
@@ -39,28 +41,45 @@ class EmployeeUI:
 
 
     def read(self):
+        self.header("All employees")
 
-        # employees er listi af Employee modelum
         employees = self.logic.get_all_employees()
 
-        self.print_employees(employees, 4)
-
-    def print_employees(self, employees, page = 1):
-
+        page = 1
         start = 0 
-        if page > 0:
-            start = 10 * (page-1)
-        if len(employees) < (start + 10):
-            end = len(employees)
-        else:   
-            end = start + 10
-        print("\n|{:^10}|{:^30}|{:^20}|{:^20}|{:^30}|{:^20}|{:^20}|{:^30}|{:^20}|".format("ID", "Name", "Address", "Postal code", "Social security number", "Mobilephone", "Homephone", "E-mail", "Role"))
-        print('-' * 210)
-        for i in range(start, end):
-            print("|{:^10}|{:<30}|{:<20}|{:<20}|{:<30}|{:<20}|{:<20}|{:<30}|{:<20}|".format(employees[i].id, employees[i].name, employees[i].address, employees[i].postal, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].email, employees[i].role))
+
+        while True:
+
+            last_page = math.ceil(len(employees) / 10)
+
+            print(f"{page}")
+
+            if page > 1:
+                start = 10 * (page-1)
+            if len(employees) < (start + 10):
+                end = len(employees)
+            else:   
+                end = start + 10
+
+            print("\n|{:^10}|{:^30}|{:^20}|{:^20}|{:^30}|{:^20}|{:^20}|{:^30}|{:^20}|".format("ID", "Name", "Address", "Postal code", "Social security number", "Mobilephone", "Homephone", "E-mail", "Role"))
+            print('-' * 210)
+            for i in range(start, end):
+                print("|{:^10}|{:<30}|{:<20}|{:<20}|{:<30}|{:<20}|{:<20}|{:<30}|{:<20}|".format(employees[i].id, employees[i].name, employees[i].address, employees[i].postal, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].email, employees[i].role))
+
+            action = input("Next page / Previous page (N/P): \nPress q to go back").lower()
+
+            if action == "n":
+                if last_page > page:
+                    page += 1
+            elif action == "p":
+                if page > 1:
+                    page -= 1
+            elif action == "q":
+                break
 
 
     def update(self):
+        self.header("Edit employees")
         self.read()
         id = input("\tEnter id: ")
 
