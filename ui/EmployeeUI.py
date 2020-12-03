@@ -9,7 +9,7 @@ class EmployeeUI:
     def menu(self):
         action = ''
         while not action == 'q':
-            print("\n\n1. Add an employee\n2. List all employess\n3. Edit employee\n4. Remove employee\n\nPress q to go back")
+            print("\n\n1. Add an employee\n2. List all employess\n3. Edit employee\n4. Remove employee\n\n\33[;31mPress q to go back\33[;0m\n")
             action = input("\nChoose an option: ").lower()
 
             if action == str(1):
@@ -61,11 +61,40 @@ class EmployeeUI:
 
 
     def update(self):
+        self.read()
         id = input("\tEnter id: ")
+
+        choice = ""
+        updates = {}
+        while choice != "q":
+            print("\n1. Edit name\n2. Edit address\n3. Edit postal\n4. Edit phone\n5. Edit homephone\n"
+                                      "6. Edit email\n7. Edit role\n\n\33[;31mPress q to save\33[;0m\n")
+            choice = input("Enter your choice: ").lower()
+            if choice == "1":
+                name = input("Enter name: ")
+                updates["name"] = name
+            elif choice == "2":
+                address = input("Enter address: ")
+                updates["address"] = address
+            elif choice == "3":
+                postal = input("Enter postal code")
+                updates["postal"] = postal
+            elif choice == "4":
+                phone = input("Enter phone: ")
+                updates["phone"] = phone
+            elif choice == "5":
+                homephone = input("Enter homephone: ")
+                updates["homephone"] = homephone
+            elif choice == "6":
+                email = input("Enter email: ")
+                updates["email"] = email
+            elif choice == "7":
+                role = input("Enter role: ")
+                updates["role"] = role
 
         #tekur inn id fyrir employee
         #tekur inn dict af uppfærslum
-        return self.logic.update_employee(id, {'name': 'Siggi'})
+        self.logic.update_employee(id, updates)
 
     def delete(self):  
         #tekur inn id fyrir employee

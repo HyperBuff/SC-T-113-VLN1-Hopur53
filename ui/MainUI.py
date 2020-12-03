@@ -16,9 +16,6 @@ class MainUI:
         self.display()
 
     def display(self):
-
-
-
         action = ""
         while not action == 'q':
 
@@ -32,7 +29,7 @@ class MainUI:
             else:
                 self.header("NaN Air - Rentals")
 
-                print("Press q to quit the program")
+                print("\n\33[;31mPress q to quit the program\33[;0m\n")
                 action = input("\nEnter email to login: ").lower()
 
                 if not action == 'q':
@@ -42,9 +39,10 @@ class MainUI:
 
     def menu(self):
 
+        
         self.header("NaN Air - Rentals")
-        print(f"You are logged in as {self.name}")
-        print(f"{self.role}")
+        print(f"User: {self.name}")
+        print(f"Role: {self.role}")
 
         if self.role == "admin":
             self.admin()
@@ -58,7 +56,7 @@ class MainUI:
         '''
 
     def admin(self):
-        print("\n\n1. Contracts\n2. Vehicles\n3. Employees\n4. Locations\n5. Financials\n\nPress q to logout")
+        print("\n1. Contracts\n2. Vehicles\n3. Employees\n4. Locations\n5. Financials\n\n\33[;31mPress q to logout\33[;0m\n")
         action = input("\nChoose an option: ").lower()
         
         if action == str(1):
