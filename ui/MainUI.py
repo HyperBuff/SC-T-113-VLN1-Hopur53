@@ -1,4 +1,5 @@
 from ui.EmployeeUI import EmployeeUI
+from ui.VehicleUI import VehicleUI
 
 from logic.MainLogic import MainLogic
 
@@ -41,8 +42,8 @@ class MainUI:
 
         
         self.header("NaN Air - Rentals")
-        print(f"User: {self.name}")
-        print(f"Role: {self.role}")
+        print(f"{self.name}")
+        print(f"{self.role}")
 
         if self.role == "admin":
             self.admin()
@@ -78,7 +79,9 @@ class MainUI:
         pass
 
     def vehicles(self):
-        pass
+        vehicle = VehicleUI()
+        vehicle.menu()
+
 
     def employees(self):
         employee = EmployeeUI()
