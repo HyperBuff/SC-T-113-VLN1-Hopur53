@@ -116,10 +116,19 @@ class EmployeeUI:
         self.logic.update_employee(id, updates)
 
     def delete(self):  
+
+        self.read()
+        
         #tekur inn id fyrir employee
         id = input("\tEnter id: ")
-        return self.logic.delete_employee(id)
-
+        if id.isdigit():
+            try:
+                are_you_sure = input("Are you sure you want to delete this employee? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
+                if are_you_sure == "y":
+    
+                    self.logic.delete_employee(id)
+            except:
+                pass
     
     def header(self, title):
         print("-" * 50)
