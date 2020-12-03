@@ -6,129 +6,166 @@ from models.Employee import Employee
 class EmployeeUI:
 
     def __init__(self):
+        self.items_per_page = 10
         self.logic = MainLogic()
 
+
+    # Employee Menu
+
     def menu(self):
-        action = ''
-        while not action == 'q':
-            print("\n\n1. Add an employee\n2. List all employess\n3. Edit employee\n4. Remove employee\n\n\33[;31mPress q to go back\33[;0m\n")
-            action = input("\nChoose an option: ").lower()
+
+        while True:
+            self.header("Employees Menu")
+            print("\n\n1. Create an employee\n2. View employees\n\n\33[;31mPress q to go back\33[;0m\n")
+            action = input("Choose an option: ").lower()
 
             if action == str(1):
                 self.create()
             elif action == str(2):
-                self.read()
-            elif action == str(3):
-                self.update()
-            elif action == str(4):
-                self.delete()
+                self.view()
+            elif action == 'q':
+                break
+
+    # View Employees
+    
+    def view(self, current_page = 1):
+
+        while True:   
+            self.header("View employees")
+
+            employees = self.logic.get_all_employees()
+            employees_count = len(employees)
+
+            last_page = math.ceil(employees_count / self.items_per_page)
+
+            start = (current_page - 1) * self.items_per_page
+            end = start + 10 if not current_page == last_page else employees_count
+
+
+            self.print_employees(employees, start, end)
+
+            action = input("\n(N)ext page / (P)revious page / (S)elect employee / (Q)uit (N/P/S/Q): ").lower()
+
+            if action == 'q':
+                break
+            elif action == 'n':
+                if current_page >= last_page:
+                    current_page = last_page
+                    print("You are currenly on the last page")
+                else:
+                    current_page += 1
+            elif action == 'p':
+                if current_page > 1:
+                    current_page -= 1
+                else:
+                    current_page = 1
+                    print("You are currenly on the first page")
+            elif action == 's':
+                employee_id = input("Select employee by id: ")
+                self.select_employee(employee_id)
+
+
+
+    def select_employee(self, id):
+        
+        while True:
+
+            employee = self.logic.get_employee_by_id(id)
+
+            if employee is None:
+                print("Employee with id: {} wasn't found".format(id))
+                return
+
+            print("ID:\t\t\t\t{}\nName:\t\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nE-mail:\t\t\t\t{}\nRole:\t\t\t\t{}\n".format(id, employee.name, employee.address, employee.postal, employee.ssn, employee.phone, employee.homephone, employee.email, employee.role))
+
+            action = input("\n(E)dit / (D)elete / (Q)uit (E/D/Q): ").lower()
+
+            if action == 'q':
+                break
+            elif action == 'e':
+                self.edit(id)
+            elif action == 'd':
+                self.delete(id)
+                break
+
+    def print_employees(self, employees, start, end):
+        print("\n|{:^10}|{:^30}|{:^25}|{:^20}|{:^30}|{:^20}|{:^20}|{:^30}|{:^20}|".format("ID", "Name", "Address", "Postal code", "Social security number", "Mobile phone", "Home phone", "E-mail", "Role"))
+        print('-' * 210)
+        for i in range(start, end):
+            print("|{:^10}|{:<30}|{:<25}|{:<20}|{:<30}|{:<20}|{:<20}|{:<30}|{:<20}|".format(employees[i].id, employees[i].name, employees[i].address, employees[i].postal, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].email, employees[i].role))
+
 
     def create(self):
         self.header("Add employee")
-        print("Enter employee details:")
-        
+        role = None
+        print("\33[;31mPress q to go back\33[;0m\n")
+
+        while role == None:
+            role = self.select_role()
+            if role == 'q':
+                return
+
+        print("\nEnter employee details:")
         name = input("\tEnter name: ")
-        address = input("\tEnter address: ")
-        postal = input("\tEnter postal: ")
-        ssn = input("\tEnter ssn: ")
-        phone = input("\tEnter mobile phone: ")
-        homephone = input("\tEnter homephone: ")
+        if name == 'q':
+            return
         email = input("\tEnter email: ")
-        role = rolechoose()
+        if name == 'q':
+            return
+        address = input("\tEnter address: ")
+        if name == 'q':
+            return
+        postal = input("\tEnter postal: ")
+        if name == 'q':
+            return
+        ssn = input("\tEnter ssn: ")
+        if name == 'q':
+            return
+        phone = input("\tEnter mobile phone: ")
+        if name == 'q':
+            return
+        homephone = input("\tEnter homephone: ")
+        if name == 'q':
+            return
 
         new_employee = Employee(role, name, address, postal, ssn, phone, homephone, email)
         return self.logic.create_employee(new_employee)          
 
 
-    def read(self):
-        self.header("All employees")
+  
+    def edit(self, id):
+        self.header("Edit employee")
 
-        employees = self.logic.get_all_employees()
-
-        page = 100
-
+        updates = {}
         while True:
+            print("1. Edit name\n2. Edit address\n3. Edit postal\n4. Edit phone\n5. Edit homephone\n6. Edit email\n7. Edit role\n\n\33[;31mPress q to go back\33[;0m\n")
+            action = input("Choose an option: ").lower()
 
-            last_page = math.ceil(len(employees) / 10)
-
-
-            if page == 1:
-                start = 0
-            else:
-                start = 10 * (page-1)
-            if len(employees) < (start + 10):
-                end = len(employees)
-            else:   
-                end = start + 10
-
-            print("\n|{:^10}|{:^30}|{:^20}|{:^20}|{:^30}|{:^20}|{:^20}|{:^30}|{:^20}|".format("ID", "Name", "Address", "Postal code", "Social security number", "Mobilephone", "Homephone", "E-mail", "Role"))
-            print('-' * 210)
-            for i in range(start, end):
-                print("|{:^10}|{:<30}|{:<20}|{:<20}|{:<30}|{:<20}|{:<20}|{:<30}|{:<20}|".format(employees[i].id, employees[i].name, employees[i].address, employees[i].postal, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].email, employees[i].role))
-
-            action = input("Next page / Previous page (N/P): \nPress q to go back").lower()
-
-            if action == "n":
-                if last_page > page:
-                    page += 1
-            elif action == "p":
-                if page > 1:
-                    page -= 1
-            elif action == "q":
+            if action == 'q':
                 break
 
+            new_value = input("Change to: ")
 
-    def update(self):
-        self.header("Edit employees")
-        self.read()
-        id = input("\tEnter id: ")
+            if action == "1":
+                updates["name"] = new_value
+            elif action == "2":
+                updates["address"] = new_value
+            elif action == "3":
+                updates["postal"] = new_value
+            elif action == "4":
+                updates["phone"] = new_value
+            elif action == "5":
+                updates["homephone"] = new_value
+            elif action == "6":
+                updates["email"] = new_value
+            elif action == "7":
+                updates["role"] = new_value
+            self.logic.update_employee(id, updates)
 
-        choice = ""
-        updates = {}
-        while choice != "q":
-            print("\n1. Edit name\n2. Edit address\n3. Edit postal\n4. Edit phone\n5. Edit homephone\n"
-                                      "6. Edit email\n7. Edit role\n\n\33[;31mPress q to save\33[;0m\n")
-            choice = input("Enter your choice: ").lower()
-            if choice == "1":
-                name = input("Enter name: ")
-                updates["name"] = name
-            elif choice == "2":
-                address = input("Enter address: ")
-                updates["address"] = address
-            elif choice == "3":
-                postal = input("Enter postal code")
-                updates["postal"] = postal
-            elif choice == "4":
-                phone = input("Enter phone: ")
-                updates["phone"] = phone
-            elif choice == "5":
-                homephone = input("Enter homephone: ")
-                updates["homephone"] = homephone
-            elif choice == "6":
-                email = input("Enter email: ")
-                updates["email"] = email
-            elif choice == "7":
-                role = input("Enter role: ")
-                updates["role"] = role
-
-        #tekur inn id fyrir employee
-        #tekur inn dict af uppfærslum
-        self.logic.update_employee(id, updates)
-
-    def delete(self):  
-
-        self.read()
-        
-        #tekur inn id fyrir employee
-        id = input("\tEnter id: ")
-        if id.isdigit():
-            try:
-                are_you_sure = input("Are you sure you want to delete this employee? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
-                if are_you_sure == "y":
-    
-                    self.logic.delete_employee(id)
-            except:
-                pass
+    def delete(self, id):  
+        confirmation = input("Are you sure you want to delete this employee? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
+        if confirmation == 'y':
+            self.logic.delete_employee(id)
     
     def header(self, title):
         print("-" * 50)
@@ -137,23 +174,30 @@ class EmployeeUI:
         print()
 
 
-def rolechoose():
-    print("1. Admin, 2. Delivery, 3. Booking, 4. Mechanic, 5. Financial")
-    userinput = input("Choose Role: ")
-    if userinput == "1":
-        return "Admin"  
-    elif userinput == "2":
-        return "Delivery"
-    elif userinput == "3":
-        return "Booking"
-    elif userinput == "4":
-        return "Mechanic"
-    elif userinput == "5":
-        return "Financial"
-    else:
-        return None
+    def select_role(self):
+        print("Select role for employee:\n\t1. Admin\n\t2. Delivery\n\t3. Booking\n\t4. Mechanic\n\t5. Financial")
+        action = input("\nChoose an option: ")
+        if action == 'q':
+            return 'q'
+        elif action == "1":
+            return "Admin"  
+        elif action == "2":
+            return "Delivery"
+        elif action == "3":
+            return "Booking"
+        elif action == "4":
+            return "Mechanic"
+        elif action == "5":
+            return "Financial"
+        else:
+            print("\n\33[;31mRole wasn't fount, please try again.\33[;0m\n")
+            return None
 
-def checkemail(email):
+
+# Input Validation 
+
+"""
+def checkemail(id, email):
     email_list = email.split("@")
     if len(email_list) == 2:
         new_list = email_list[1].split(".")
@@ -182,3 +226,4 @@ def checkssn(ssn):
         return True
     else: 
         return None
+"""

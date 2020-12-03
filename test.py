@@ -4,4 +4,4 @@ from ui.EmployeeUI import EmployeeUI
 
 r = EmployeeUI()
 
-r.read()
+r.create()

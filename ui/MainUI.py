@@ -100,3 +100,6 @@ class MainUI:
         print("|{:^48}|".format(title))
         print("-" * 50)
         print()
+
+
+

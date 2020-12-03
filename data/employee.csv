@@ -1,5 +1,5 @@
 role,name,address,postal,ssn,phone,homephone,email,id
-Admin,Aðalsteinn Leifs Maríuson,Duggufjara,600,0907982949,6494444,4611561,aleifsm@gmail.com,1
+Admin,Aðalsteinn Leifsson,Fálkahlíð 6,600,0907982949,6494444,4611561,aleifsm@gmail.com,1
 Cookley,Leela,9519 Logan Center,2400-772,1416289283,885-660-2439,582-829-6002,lmcguiney1@ucla.edu,2
 Bytecard,Kellie,5103 Mariners Cove Center,,3839425441,731-393-8349,654-366-7949,kmuxworthy2@theglobeandmail.com,3
 Zaam-Dox,Boyd,4 Anhalt Trail,184 70,0750239352,515-815-5679,984-351-2510,bhayhurst3@princeton.edu,4
@@ -999,3 +999,6 @@ Treeflex,Perle,2474 Drewry Hill,,6557316052,487-549-5626,450-753-0353,pakedrp@ar
 Trippledex,Ned,426 Twin Pines Plaza,,2417794993,693-178-3472,813-357-4058,ngiraldorq@about.com,999
 Bitchip,Pernell,9 Butterfield Street,34-142,8364813935,322-716-8440,314-704-6339,pswinerr@pagesperso-orange.fr,1000
 Y-Solowarm,Cornelle,2157 Northport Place,,5781280103,794-298-6726,303-372-5398,cmenchentonoa@bandcamp.com,1001
+Bytecard,Zed,29956 Melvin Street,20110,2808035446,289-223-4121,848-163-5309,zoylettrg@newyorker.com,1002
+Hatity,Hiram,5058 Rieder Lane,521 22,5769997265,486-105-6815,663-752-6390,hmckiddinrh@comsenz.com,1003
+Admin,Test,test@test.com,600,903,33,33,a,1005
