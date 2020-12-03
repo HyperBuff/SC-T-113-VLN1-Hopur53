@@ -1,4 +1,5 @@
 from ui.EmployeeUI import EmployeeUI
+from ui.VehicleUI import VehicleUI
 
 from logic.MainLogic import MainLogic
 
@@ -78,7 +79,8 @@ class MainUI:
         pass
 
     def vehicles(self):
-        pass
+        vehicle = VehicleUI()
+        vehicle.menu()
 
     def employees(self):
         employee = EmployeeUI()
