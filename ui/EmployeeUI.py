@@ -45,16 +45,16 @@ class EmployeeUI:
 
         employees = self.logic.get_all_employees()
 
-        page = 1
-        start = 0 
+        page = 100
 
         while True:
 
             last_page = math.ceil(len(employees) / 10)
 
-            print(f"{page}")
 
-            if page > 1:
+            if page == 1:
+                start = 0
+            else:
                 start = 10 * (page-1)
             if len(employees) < (start + 10):
                 end = len(employees)
