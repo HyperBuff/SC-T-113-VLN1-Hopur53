@@ -35,7 +35,7 @@ class EmployeeUI:
         role = rolechoose()
 
         new_employee = Employee(role, name, address, postal, ssn, phone, homephone, email)
-        self.logic.create_employee(new_employee)          
+        return self.logic.create_employee(new_employee)          
 
 
     def read(self):
@@ -65,12 +65,12 @@ class EmployeeUI:
 
         #tekur inn id fyrir employee
         #tekur inn dict af uppfærslum
-        self.logic.update_employee(id, {'name': 'Siggi'})
+        return self.logic.update_employee(id, {'name': 'Siggi'})
 
     def delete(self):  
         #tekur inn id fyrir employee
         id = input("\tEnter id: ")
-        self.logic.delete_employee(id)
+        return self.logic.delete_employee(id)
 
     
     def header(self, title):
