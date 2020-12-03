@@ -53,5 +53,3 @@ def print_contract():
         pass
 
         
-
-create()
