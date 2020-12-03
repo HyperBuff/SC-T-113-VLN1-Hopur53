@@ -143,36 +143,7 @@ class EmployeeUI:
             print("1. Edit name\n2. Edit address\n3. Edit postal\n4. Edit phone\n5. Edit homephone\n6. Edit email\n7. Edit role\n\n\33[;31mPress q to go back\33[;0m\n")
             action = input("Choose an option: ").lower()
 
-<<<<<<< HEAD
-            last_page = math.ceil(len(employees) / 10)
-
-
-            if page == 1:
-                start = 0
-            else:
-                start = 10 * (page-1)
-            if len(employees) < (start + 10):
-                end = len(employees)
-            else:   
-                end = start + 10
-
-            print("\n|{:^10}|{:^30}|{:^20}|{:^20}|{:^30}|{:^20}|{:^20}|{:^30}|{:^20}|".format("ID", "Name", "Address", "Postal code", "Social security number", "Mobilephone", "Homephone", "E-mail", "Role"))
-            print('-' * 210)
-            for i in range(start, end):
-                print("|{:^10}|{:<30}|{:<20}|{:<20}|{:<30}|{:<20}|{:<20}|{:<30}|{:<20}|".format(employees[i].id, employees[i].name, employees[i].address, employees[i].postal, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].email, employees[i].role))
-
-            action = input("Next page / Previous page (N/P): \n\n\33[;31mPress q to go back\33[;0m\n").lower()
-
-            if action == "n":
-                if last_page > page:
-                    page += 1
-            elif action == "p":
-                if page > 1:
-                    page -= 1
-            elif action == "q":
-=======
             if action == 'q':
->>>>>>> a0ce65b667c148d2463867a5ac17a05a68d82668
                 break
 
             new_value = input("Change to: ")
