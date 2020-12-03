@@ -66,7 +66,7 @@ class EmployeeUI:
             for i in range(start, end):
                 print("|{:^10}|{:<30}|{:<20}|{:<20}|{:<30}|{:<20}|{:<20}|{:<30}|{:<20}|".format(employees[i].id, employees[i].name, employees[i].address, employees[i].postal, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].email, employees[i].role))
 
-            action = input("Next page / Previous page (N/P): \nPress q to go back").lower()
+            action = input("Next page / Previous page (N/P): \n\n\33[;31mPress q to go back\33[;0m\n").lower()
 
             if action == "n":
                 if last_page > page:
