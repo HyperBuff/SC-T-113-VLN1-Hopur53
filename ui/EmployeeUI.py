@@ -151,4 +151,34 @@ def rolechoose():
     elif userinput == "5":
         return "Financial"
     else:
-        print("Choose a number to choose a role")
+        return None
+
+def checkemail(email):
+    email_list = email.split("@")
+    if len(email_list) == 2:
+        new_list = email_list[1].split(".")
+        final_list = []
+        final_list.append(email_list[0])
+        final_list.append(new_list[0])
+        final_list.append(new_list[1])
+        if len(final_list[0]) >= 1 and len(final_list[1]) >= 1 and len(final_list[2]) >= 2:
+            return True
+        else:
+            return None 
+    else:
+        return None
+
+
+def checkssn(ssn):
+    int_list = []
+    for number in ssn:
+        try:
+            if number != "-":
+                int_ssn = int(number)
+                int_list.append(int_ssn) 
+        except ValueError:
+            return None
+    if len(int_list) == 10:
+        return True
+    else: 
+        return None
