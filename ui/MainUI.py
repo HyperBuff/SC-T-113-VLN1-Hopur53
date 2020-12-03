@@ -29,8 +29,8 @@ class MainUI:
             else:
                 self.header("NaN Air - Rentals")
 
-                print("\n\33[;31mPress q to quit the program\33[;0m\n")
-                action = input("\nEnter email to login: ").lower()
+                print("\33[;31mPress q to quit the program\33[;0m\n")
+                action = input("Enter email to login: ").lower()
 
                 if not action == 'q':
 

@@ -16,7 +16,7 @@ class EmployeeUI:
 
         while True:
             self.header("Employees Menu")
-            print("\n\n1. Create an employee\n2. View employees\n\n\33[;31mPress q to go back\33[;0m\n")
+            print("1. Create an employee\n2. View employees\n\n\33[;31mPress q to go back\33[;0m\n")
             action = input("Choose an option: ").lower()
 
             if action == str(1):
