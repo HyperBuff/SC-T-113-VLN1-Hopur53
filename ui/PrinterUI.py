@@ -2,9 +2,9 @@ class PrinterUI:
     def __init__(self):
         self.GREEN = '\033[92m'
         self.WARNING = '\033[93m'
-        self.FAIL = '\33[;31m'
+        self.FAIL = '\033[91m'
 
-        self.END = '\33[;0m'
+        self.END = '\033[0m'
 
     def print_success(self, msg):
         print(self.GREEN + msg + self.END)
