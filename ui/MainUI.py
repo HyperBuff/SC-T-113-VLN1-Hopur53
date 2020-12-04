@@ -63,7 +63,6 @@ class MainUI:
             self.printer.print_options(['Contracts', 'Vehicles', 'Employees', 'Locations', 'Financials'])
             self.printer.new_line(2)
             self.printer.print_fail('Press q to logout')
-            self.printer.new_line()
             self.printer.print_warning(warning_msg)
             action = input("Choose an option: ").lower()
             

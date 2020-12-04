@@ -1,24 +1,13 @@
 role,name,address,postal,ssn,phone,homephone,email,id
-Admin,Aðalsteinn Leifs Maríuson,Duggufjara,600,0907982949,6494444,4611561,aleifsm@gmail.com,1
-Delivery,Leela,9519 Logan Center,2400-772,1416289283,885-660-2439,582-829-6002,al,2
-Bytecard,Kellie,5103 Mariners Cove Center,,3839425441,731-393-8349,5812345,kmuxworthy2@theglobeandmail.com,3
-Zaam-Dox,l,4 Anhalt Trail,184 70,0750239352,515-815-5679,984-351-2510,bhayhurst3@princeton.edu,4
+Admin,Aðalsteinn Leifs Maríuson,Duggufjara,600,0907982949,6494444,4611561,test@test.is,1
 Cardguard,Griswold,6 Butternut Circle,,1815714085,560-422-9218,458-726-6026,gbeauchamp5@homestead.com,6
-Bitchip,Betsey,9839 Colorado Court,,8368188946,215-168-7101,572-185-1979,bdemanche6@xing.com,7
-Holdlamis,Katy,3940 Carey Center,94110,2977137564,562-650-7668,399-207-9627,kabsolem7@hp.com,8
-Zoolab,Kain,383 Reindahl Pass,,9278131733,779-736-4229,403-121-5335,kmanns8@ameblo.jp,9
-Rank,Betty,75445 Ludington Park,,4555864204,374-238-4473,161-327-0519,baguirre9@opensource.org,10
 Subin,Georgy,89575 Swallow Pass,,8740225208,396-224-0139,995-762-3389,gmuggletona@tinypic.com,11
-Veribet,Rancell,483 Northfield Park,5100,2744538019,196-228-2164,250-952-2093,rbiddellb@furl.net,12
 Lotstring,Berte,61490 Oakridge Park,394 68,8263805791,390-846-0778,120-219-0583,bwhiteleyc@unicef.org,13
-Treeflex,Kristofor,21 Monica Park,,6972117305,327-829-9916,807-157-6184,kdyterd@sphinn.com,14
-Span,Nicolina,97137 Maryland Parkway,238590,4038790266,547-954-9219,707-406-4498,nthomae@angelfire.com,15
+,Kristofor,21 Monica Park,,6972117305,327-829-9916,807-157-6184,kdyterd@sphinn.com,14
+Admin,Nicolina,97137 Maryland Parkway,238590,4038790266,547-954-9219,707-406-4498,nthomae@angelfire.com,15
 Otcom,Torin,6860 Melvin Pass,,2072046092,433-438-7826,511-926-1126,tcumminsf@nature.com,16
-Bitwolf,Ara,88 Laurel Parkway,,0153658479,992-886-1797,384-175-2311,araynorg@hugedomains.com,17
-Veribet,Tiffi,0 2nd Junction,,7539949929,474-278-3102,159-390-4735,tsantelloh@lulu.com,18
-Kanlam,Damaris,6320 Hallows Street,,3474023209,538-981-4310,593-616-9040,dgrinini@purevolume.com,19
 Pannier,Andriana,92 Vermont Crossing,453430,3649846004,215-597-6374,548-325-1381,agooderhamj@thetimes.co.uk,20
-Redhold,Hedi,69147 Old Shore Hill,377-0816,5464889981,663-957-4951,694-463-8491,hfoffanok@123-reg.co.uk,21
+Admin,Hedi,69147 Old Shore Hill,377-0816,5464889981,45fds f,694-463-8491,d@d.com,21
 Toughjoyfax,Paten,7 Elmside Drive,,2468263472,312-555-5083,126-115-6767,parrol@hexun.com,22
 Tampflex,Mohandis,9796 Clove Center,,6614803530,846-859-0420,352-762-3736,mdwerryhousem@epa.gov,23
 Asoka,Alfie,7 Randy Place,,0343122456,491-659-4590,137-239-6606,awiltshearn@bloglovin.com,24
@@ -47,7 +36,7 @@ Matsoft,Curr,68240 Petterle Trail,,1994295961,790-501-3921,943-608-9443,cruecast
 Keylex,Kipp,01066 Nancy Pass,,4081728348,613-252-7888,692-502-4811,kschild1b@reuters.com,48
 Andalax,Nerita,54 Briar Crest Park,446729,7940493809,889-832-1399,130-376-2818,nheinrici1c@cnn.com,49
 Zathin,Codee,884 Clove Drive,,0433689668,180-835-0479,730-176-6786,cfogarty1e@goodreads.com,51
-Subin,Martino,165 Steensland Trail,,3037719494,937-718-4205,920-149-4653,mdabernott1f@ibm.com,52
+Admin,Martino,165 Steensland Trail,,3037719494,937-718-4205,920-149-4653,mdabernott1f@ibm.com,52
 Flowdesk,Gunilla,36903 Holmberg Point,155381,2458795285,181-512-6941,742-915-2105,gmonkley1g@discovery.com,53
 Regrant,Blake,1743 Paget Center,K45,7628326544,939-737-6075,336-108-7994,bbaroche1h@jimdo.com,54
 Latlux,Major,47052 Buhler Point,,3199196187,614-360-6332,895-808-5013,mhuxstep1i@umn.edu,55
@@ -131,7 +120,6 @@ Konklux,Marsh,7 Kensington Park,,1170950477,247-637-2194,573-798-3578,mmarusic3n
 Transcof,Ardelia,415 Ludington Point,,4663823793,106-794-2466,601-431-9205,acosely3o@list-manage.com,133
 Y-find,Lewiss,70655 Jana Street,,7579545519,854-766-6482,864-521-1639,lblasetti3p@biglobe.ne.jp,134
 Trippledex,Cecilio,4 Beilfuss Road,94475,5177661202,556-391-1188,429-905-2175,cpitsall3q@pinterest.com,135
-Pannier,Joell,246 Fieldstone Drive,633-0245,4685602277,264-987-5198,683-449-4303,jmcbay3r@artisteer.com,136
 Keylex,Alessandro,8419 Hoard Road,106 32,9385390775,793-583-7246,952-627-4843,ascally3s@stumbleupon.com,137
 Bamity,Nanete,23 Almo Parkway,,2329181205,502-122-8571,890-460-8447,nalldis3t@is.gd,138
 Bytecard,Harriett,658 Killdeer Lane,,0150417799,269-888-1249,412-156-7452,hboswood3u@goo.ne.jp,139
@@ -1001,3 +989,4 @@ Admin,,,,,,,,1002
 Admin,a,a,a,a,354 4000 4000,1,a@g.com,1003
 Admin,test,test,100,101010-1010,400 4004 0000,400 4000 4004,test@test.test,1004
 Admin,23,5,6,34,234,4,42,1005
+Admin,ada,w,w,1010101010,w,w,dadgf@g.dom,1006

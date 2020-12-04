@@ -4,4 +4,6 @@ from ui.EmployeeUI import EmployeeUI
 
 r = EmployeeUI()
 
-r.view()
+test = {'role': 'Admin'}
+
+print(list(test.keys()))

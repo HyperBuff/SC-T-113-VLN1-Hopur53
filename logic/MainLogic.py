@@ -21,3 +21,12 @@ class MainLogic:
 
     def delete_employee(self, id):
         return self.employee.delete(id)
+
+    def is_email_valid(self, email):
+        return self.employee.is_email_valid(email)
+
+    def is_ssn_valid(self, ssn):
+        return self.employee.is_ssn_valid(ssn)
+
+    def is_phone_number_valid(self, phone):
+        return self.employee.is_phone_number_valid(phone)
