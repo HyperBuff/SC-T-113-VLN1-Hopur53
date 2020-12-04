@@ -90,9 +90,8 @@ class EmployeeUI:
             elif action == 'e' or action == 'edit':
                 self.edit(employee_id)
             elif action == 'd' or action == 'delete':
-                self.delete(employee_id)
-                self.success_msg = "Employee has been deleted"
-                break
+                if self.delete(employee_id):
+                    self.success_msg = "Employee has been deleted"
             else:
                 self.warning_msg = "Please select available option"
             
