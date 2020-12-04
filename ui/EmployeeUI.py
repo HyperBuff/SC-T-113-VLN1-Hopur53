@@ -1,7 +1,11 @@
 import math
 
+
+
 from logic.MainLogic import MainLogic
 from models.Employee import Employee
+
+from ui.PrinterUI import PrinterUI
 
 class EmployeeUI:
 
@@ -9,32 +13,46 @@ class EmployeeUI:
         self.items_per_page = 10
         self.logic = MainLogic()
 
+        self.printer = PrinterUI()
+
 
     # Employee Menu
 
     def menu(self):
 
+        warning_msg = ""
+
         while True:
-            self.header("Employees Menu")
-            print("1. Create an employee\n2. View employees\n\n\33[;31mPress q to go back\33[;0m\n")
+            self.printer.header("Employees Menu")
+            self.printer.print_options(['Create an employee', 'View employees'])
+            self.printer.new_line(2)
+            self.printer.print_fail("Press q to go back")
+            self.printer.new_line()
+            self.printer.print_warning(warning_msg)
+
             action = input("Choose an option: ").lower()
 
-            if action == str(1):
+            if action == '1':
                 self.create()
-            elif action == str(2):
+            elif action == '2':
                 self.view()
             elif action == 'q':
                 break
+            else:
+                warning_msg = "Please select available option"
 
     # View Employees
-    
-    def view(self, current_page = 1):
+
+    def view(self, current_page = 1, warning_msg = ""):
+
+        success_msg = ""
 
         while True:   
-            self.header("View employees")
+            self.printer.header("View employees")
 
             employees = self.logic.get_all_employees()
             employees_count = len(employees)
+
 
             last_page = math.ceil(employees_count / self.items_per_page)
 
@@ -42,16 +60,23 @@ class EmployeeUI:
             end = start + 10 if not current_page == last_page else employees_count
 
 
-            self.print_employees(employees, start, end)
+            self.print_employees(employees, start, end, current_page, last_page)
 
-            action = input("\n(N)ext page / (P)revious page / (S)elect employee / (Q)uit (N/P/S/Q): ").lower()
+            self.printer.new_line()
+            self.printer.print_fail("Press q to go back")
+            if not success_msg == "":
+                self.printer.print_success(success_msg)
+            else:
+                self.printer.print_warning(warning_msg)
+
+            action = input("(N)ext page / (P)revious page / (S)elect employee: ").lower()
 
             if action == 'q':
                 break
             elif action == 'n':
                 if current_page >= last_page:
                     current_page = last_page
-                    print("You are currenly on the last page")
+                    warning_msg = "You are currenly on the last page"
                 else:
                     current_page += 1
             elif action == 'p':
@@ -59,75 +84,92 @@ class EmployeeUI:
                     current_page -= 1
                 else:
                     current_page = 1
-                    print("You are currenly on the first page")
+                    warning_msg = "You are currenly on the first page"
             elif action == 's':
-                employee_id = input("Select employee by id: ")
-                self.select_employee(employee_id)
+                employee_id = input("Select employee by ID: ")
+                employee = self.logic.get_employee_by_id(employee_id)
+                if employee is None:
+                    warning_msg = "Employee not found"
+                else:
+                    success_msg = self.select_employee(employee_id)
 
 
 
-    def select_employee(self, id):
+    def select_employee(self, employee_id):
         
+        warning_msg = ""
+        success_msg = ""
+
         while True:
 
-            self.header("View employee")
+            employee = self.logic.get_employee_by_id(employee_id)
 
-            employee = self.logic.get_employee_by_id(id)
+            self.printer.header("View employee")
 
-            if employee is None:
-                print("Employee with id: {} wasn't found".format(id))
-                return
+            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\n".format(employee_id, employee.role, employee.name, employee.email, employee.ssn, employee.phone, employee.homephone, employee.address, employee.postal))
 
-            print("ID:\t\t\t\t{}\nName:\t\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nE-mail:\t\t\t\t{}\nRole:\t\t\t\t{}\n".format(id, employee.name, employee.address, employee.postal, employee.ssn, employee.phone, employee.homephone, employee.email, employee.role))
+            self.printer.new_line()
+            self.printer.print_fail("Press q to go back")
+            if not warning_msg == "":
+                self.printer.print_warning(warning_msg)
+            else:
+                self.printer.print_success(success_msg)
 
-            action = input("\n(E)dit / (D)elete / (Q)uit (E/D/Q): ").lower()
+            action = input("(E)dit / (D)elete: ").lower()
 
             if action == 'q':
                 break
             elif action == 'e':
-                self.edit(id)
+                success_msg = self.edit(employee_id)
             elif action == 'd':
-                self.delete(id)
-                break
-
-    def print_employees(self, employees, start, end):
-        print("\n|{:^10}|{:^30}|{:^25}|{:^20}|{:^30}|{:^20}|{:^20}|{:^30}|{:^20}|".format("ID", "Name", "Address", "Postal code", "Social security number", "Mobile phone", "Home phone", "E-mail", "Role"))
-        print('-' * 210)
+                if self.delete(employee_id):
+                    return "Employee has been deleted"
+        return ""
+        
+            
+    def print_employees(self, employees, start, end, current_page, last_page):
+        print("|{:^6}|{:^15}|{:^30}|{:^40}|{:^30}|{:^20}|{:^20}|{:^30}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code"))
+        print('-' * 216)
         for i in range(start, end):
-            print("|{:^10}|{:<30}|{:<25}|{:<20}|{:<30}|{:<20}|{:<20}|{:<30}|{:<20}|".format(employees[i].id, employees[i].name, employees[i].address, employees[i].postal, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].email, employees[i].role))
-
+            print("|{:^6}|{:<15}|{:<30}|{:<40}|{:<30}|{:<20}|{:<20}|{:<30}|{:<15}|".format(employees[i].id, employees[i].role, employees[i].name, employees[i].email, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].address, employees[i].postal))
+        print("{:^216}".format("Page {} of {}".format(current_page, last_page)))
+        self.printer.new_line()
 
     def create(self):
-        self.header("Add employee")
+        
+        self.printer.header("Add employee")
         role = None
-        print("\33[;31mPress q to go back\33[;0m\n")
+
+        self.printer.print_fail("Press q to go back")
 
         while role == None:
             role = self.select_role()
             if role == 'q':
-                return
+                return    
 
-        print("\nEnter employee details:")
+        self.printer.new_line()
+
+        print("Enter employee details:")
         name = input("\tEnter name: ")
         if name == 'q':
             return
         email = input("\tEnter email: ")
-        if name == 'q':
-            return
-        address = input("\tEnter address: ")
-        if name == 'q':
-            return
-        postal = input("\tEnter postal: ")
-        if name == 'q':
+        if email == 'q':
             return
         ssn = input("\tEnter ssn: ")
-        if name == 'q':
+        if ssn == 'q':
             return
         phone = input("\tEnter mobile phone: ")
-        if name == 'q':
+        if phone == 'q':
             return
         homephone = input("\tEnter homephone: ")
-        if name == 'q':
+        if homephone == 'q':
+            return
+        address = input("\tEnter address: ")
+        if address == 'q':
+            return
+        postal = input("\tEnter postal: ")
+        if postal == 'q':
             return
 
         new_employee = Employee(role, name, address, postal, ssn, phone, homephone, email)
@@ -136,46 +178,46 @@ class EmployeeUI:
 
   
     def edit(self, id):
-        self.header("Edit employee")
 
-        updates = {}
         while True:
-            print("1. Edit name\n2. Edit address\n3. Edit postal\n4. Edit phone\n5. Edit homephone\n6. Edit email\n7. Edit role\n\n\33[;31mPress q to go back\33[;0m\n")
+
+            updates = {}
+            self.printer.header("Edit employee")
+            self.printer.print_options(['Change role', 'Change email', 'Change mobile phone', 'Change home phone', 'Edit address', 'Edit postal code'])
+            self.printer.new_line(2)
+            self.printer.print_fail("Press q to go back")
+            self.printer.new_line()
+
             action = input("Choose an option: ").lower()
 
             if action == 'q':
                 break
+            elif action != '1':
+                new_value = input("Change to: ")
 
-            new_value = input("Change to: ")
-
-            if action == str(1):
-                updates["name"] = new_value
-            elif action == str(2):
-                updates["address"] = new_value
-            elif action == str(3):
-                updates["postal"] = new_value
-            elif action == str(4):
-                updates["phone"] = new_value
-            elif action == str(5):
-                updates["homephone"] = new_value
-            elif action == str(6):
+            if action == '1':
+                updates["role"] = self.select_role()
+            elif action == '2':
                 updates["email"] = new_value
-            elif action == str(7):
-                updates["role"] = new_value
+            elif action == '3':
+                updates["phone"] = new_value
+            elif action == '4':
+                updates["homephone"] = new_value
+            elif action == '5':
+                updates["address"] = new_value
+            elif action == '6':
+                updates["postal"] = new_value
+
             self.logic.update_employee(id, updates)
+        return "Employee has been modified successfully"
 
     def delete(self, id):  
         confirmation = input("Are you sure you want to delete this employee? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
         if confirmation == 'y':
             self.logic.delete_employee(id)
+            return True
+        return False
     
-    def header(self, title):
-        print("-" * 50)
-        print("|{:^48}|".format(title))
-        print("-" * 50)
-        print()
-
-
     def select_role(self):
         print("Select role for employee:\n\t1. Admin\n\t2. Delivery\n\t3. Booking\n\t4. Mechanic\n\t5. Financial")
         action = input("\nChoose an option: ")
@@ -192,7 +234,6 @@ class EmployeeUI:
         elif action == str(5):
             return "Financial"
         else:
-            print("\n\33[;31mRole wasn't fount, please try again.\33[;0m\n")
             return None
 
 

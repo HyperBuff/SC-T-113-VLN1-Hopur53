@@ -1,77 +1,88 @@
 from ui.EmployeeUI import EmployeeUI
 
+from ui.PrinterUI import PrinterUI
+
 from logic.MainLogic import MainLogic
 
 
 class MainUI:
-    def __init__(self, user_id = None):
+    def __init__(self, employee_id = None):
         self.logic = MainLogic()
 
-
-        self.user_id = user_id
+        self.employee_id = employee_id
         self.name = None
         self.role = None
-        
+
+        self.printer = PrinterUI()        
 
         self.display()
 
-    def display(self):
-        action = ""
-        while not action == 'q':
-
-            if self.user_id:
-                user = self.logic.employee.get_employee_by_id(self.user_id)
+    def display(self, warning_msg = ""):
+        while True:
+            if self.employee_id:
+                user = self.logic.employee.get_employee_by_id(self.employee_id)
 
                 self.name = user.name
-                self.role = user.role.lower()
+                self.role = user.role
 
                 self.menu()
             else:
-                self.header("NaN Air - Rentals")
 
-                print("\33[;31mPress q to quit the program\33[;0m\n")
+                self.printer.header("NaN Air - Rentals")
+                self.printer.new_line()
+                self.printer.print_fail("Press q to quit")
+                self.printer.print_warning(warning_msg)
                 action = input("Enter email to login: ").lower()
 
                 if not action == 'q':
-
-                    self.user_id = self.logic.login(action)
+                    login = self.logic.login(action)
+                    if login is None:
+                        warning_msg = "Account not found"
+                    else:
+                        self.employee_id = login
+                else:
+                    break
 
 
     def menu(self):
+        self.printer.header("NaN Air - Rentals")
 
-        
-        self.header("NaN Air - Rentals")
-        print(f"User: {self.name}")
-        print(f"Role: {self.role}")
+        print(f"Logged in as: {self.name} ({self.role})")
 
-        if self.role == "admin":
+        if self.role.lower() == "admin":
             self.admin()
+        else:
+            self.printer.print_warning("No role assigned to user")
+    
 
+    def admin(self, warning_msg = ""):
 
-        '''
-        elif self.role == "delivery":
-            self.delivery()
-        elif self.role == "booking":
-            self.booking()
-        '''
-
-    def admin(self):
-        print("\n1. Contracts\n2. Vehicles\n3. Employees\n4. Locations\n5. Financials\n\n\33[;31mPress q to logout\33[;0m\n")
-        action = input("\nChoose an option: ").lower()
+        while True:
+            self.printer.new_line()
+            self.printer.print_options(['Contracts', 'Vehicles', 'Employees', 'Locations', 'Financials'])
+            self.printer.new_line(2)
+            self.printer.print_fail('Press q to logout')
+            self.printer.new_line()
+            self.printer.print_warning(warning_msg)
+            action = input("Choose an option: ").lower()
+            
+            if action == '1':
+                self.contracts()
+            elif action == '2':
+                self.vehicles()
+            elif action == '3':
+                self.employees()
+            elif action == '4':
+                self.locations()
+            elif action == '5':
+                self.financials()
+            elif action == 'q':
+                self.logout()
+                break
+            else:
+                warning_msg = "Please select available option"
         
-        if action == str(1):
-            self.contracts()
-        elif action == str(2):
-            self.vehicles()
-        elif action == str(3):
-            self.employees()
-        elif action == str(4):
-            self.locations()
-        elif action == str(5):
-            self.financials()
-        elif action == 'q':
-            self.logout()
-        
+
 
 
     def contracts(self):
@@ -91,15 +102,9 @@ class MainUI:
         pass
 
     def logout(self):
-        self.user_id = None
+        self.employee_id = None
         self.name = None
         self.role = None
-
-    def header(self, title):
-        print("-" * 50)
-        print("|{:^48}|".format(title))
-        print("-" * 50)
-        print()
 
 
 
