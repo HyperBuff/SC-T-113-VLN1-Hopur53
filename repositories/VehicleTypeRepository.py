@@ -1,5 +1,3 @@
-import uuid
-
 from repositories.Repository import Repository
 from models.VehicleType import VehicleType
 
@@ -25,6 +23,3 @@ class VehicleTypeRepository:
 
     def delete(self, id) -> None:
         return Repository()._delete(self.filename, self.fieldnames, id)
-
-    def generate_id(self):
-        return str(uuid.uuid4())

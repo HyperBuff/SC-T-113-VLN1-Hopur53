@@ -1,5 +1,6 @@
 from ui.EmployeeUI import EmployeeUI
 from ui.VehicleUI import VehicleUI
+from ui.LocationUI import LocationUI
 
 from ui.PrinterUI import PrinterUI
 
@@ -14,31 +15,32 @@ class MainUI:
         self.name = None
         self.role = None
 
-        self.printer = PrinterUI()        
+        self.printer = PrinterUI()
+        
+        self.success_msg = ""
+        self.warning_msg = ""
 
         self.display()
 
-    def display(self, warning_msg = ""):
+    def display(self):
         while True:
             if self.employee_id:
                 user = self.logic.employee.get_employee_by_id(self.employee_id)
 
                 self.name = user.name
                 self.role = user.role
-
                 self.menu()
             else:
-
                 self.printer.header("NaN Air - Rentals")
                 self.printer.new_line()
                 self.printer.print_fail("Press q to quit")
-                self.printer.print_warning(warning_msg)
+                self.print_msg()
                 action = input("Enter email to login: ").lower()
 
                 if not action == 'q':
                     login = self.logic.login(action)
                     if login is None:
-                        warning_msg = "Account not found"
+                        self.warning_msg = "Account not found"
                     else:
                         self.employee_id = login
                 else:
@@ -46,26 +48,22 @@ class MainUI:
 
 
     def menu(self):
-        self.printer.header("NaN Air - Rentals")
-
-        print(f"Logged in as: {self.name} ({self.role})")
-
         if self.role.lower() == "admin":
             self.admin()
         else:
-            self.printer.print_warning("No role assigned to user")
-    
+            self.logout()
+            self.warning_msg = "No role assigned to user"
 
-    def admin(self, warning_msg = ""):
-
+    def admin(self):
         while True:
+            self.printer.header("NaN Air - Rentals")
+            print(f"Logged in as: {self.name} ({self.role})")
             self.printer.new_line()
             self.printer.print_options(['Contracts', 'Vehicles', 'Employees', 'Locations', 'Financials'])
             self.printer.new_line(2)
             self.printer.print_fail('Press q to logout')
-            self.printer.print_warning(warning_msg)
+            self.print_msg()
             action = input("Choose an option: ").lower()
-            
             if action == '1':
                 self.contracts()
             elif action == '2':
@@ -80,12 +78,11 @@ class MainUI:
                 self.logout()
                 break
             else:
-                warning_msg = "Please select available option"
-        
-
-
+                self.warning_msg = "Please select available option"
 
     def contracts(self):
+        #contract = ContractUI()
+        #contract.menu()
         pass
 
     def vehicles(self):
@@ -97,6 +94,8 @@ class MainUI:
         employee.menu()
 
     def locations(self):
+        location = LocationUI()
+        location.menu()
         pass
 
     def financials(self):
@@ -107,5 +106,13 @@ class MainUI:
         self.name = None
         self.role = None
 
-
-
+    # Outputs warnings and success messages
+    def print_msg(self):
+        if not self.warning_msg == "":
+            self.printer.print_warning(self.warning_msg)
+            self.warning_msg = ""
+        elif not self.success_msg == "":
+            self.printer.print_success(self.success_msg)
+            self.success_msg = ""
+        else:
+            self.printer.new_line()

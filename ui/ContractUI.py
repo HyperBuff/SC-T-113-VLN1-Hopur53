@@ -13,6 +13,7 @@ class EmployeeUI:
                 self.success_msg = ""
                 self.warning_msg = ""
 
+<<<<<<< HEAD
     # Prints out employee's menu
         def menu(self):
                 while True:
@@ -318,6 +319,32 @@ class EmployeeUI:
                                                         updates["country_origin"] = country_origin
                                                         break
                 self.logic.update_employee(id, updates)
+=======
+        name = input("\tFull name: ")
+        ssn = input("\tEnter ssn: ")
+        email = input("\tEnter email: ")
+        phone = input("\tEnter mobile phone: ")
+        address = input("\tEnter adress: ")
+        postal = input("\tEnter postal code: ")
+        country_origin = input("\tEnter country of recidence: \n")
+        
+        print ("Vehicle information\n")
+        vehicle_id = input("\tVehicle chosen: ") 
+        vehicle_type = input("\tEnter vehicle type")
+
+        print ("\nRental information\n")
+        print ('''\33[;34mPlease enter pick-up and drop-off time, use the format dd.mm.yyyy 
+        and seperate date and time with a comma\33[;0m
+        ''')
+        
+        date_from = input("\tEnter pick-up date: ")
+        date_to = input("\tEnter drop-off date: ")
+        # rental_period = start_date + " - " + end_date
+        
+        #print ("\t\t\33[;36mRental period: \33[;0m", rental_period) 
+        contract_made = input ("\tDate of booking: ")
+        country = input("\tCountry of rental: ")
+>>>>>>> 740112713ca5ca12bd06adc2adafc33235548c7e
 
                 keys = list(updates.keys())
 

@@ -1,5 +1,3 @@
-import uuid
-
 from repositories.Repository import Repository
 from models.Vehicle import Vehicle
 
@@ -11,7 +9,6 @@ class VehicleRepository:
         self.fieldnames = ['manufacturer', 'model', 'vehicle_type', 'status', 'man_year', 'color', 'licence_type', 'location', 'id']
 
     def create(self, vehicle: Vehicle):
-        vehicle.set_id(self.generate_id())
         row = dict((key, getattr(vehicle, key)) for key in self.fieldnames)
         Repository()._create(self.filename, self.fieldnames, row)
         return vehicle
@@ -26,6 +23,3 @@ class VehicleRepository:
 
     def delete(self, id) -> None:
         return Repository()._delete(self.filename, self.fieldnames, id)
-
-    def generate_id(self):
-        return str(uuid.uuid4())
