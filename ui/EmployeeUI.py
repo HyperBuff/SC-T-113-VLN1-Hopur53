@@ -322,3 +322,34 @@ class EmployeeUI:
             return True
         else: 
             return None
+
+
+    def is_phone_valid(self, phone):
+        """Checks if phone number input is valid."""
+        whole_list = []
+        digit_list = []
+        for every in phone:
+            whole_list.append(every)
+        if whole_list[3] == "-" and whole_list[7] == "-":
+            for number in whole_list:
+                try:
+                    if number != "-":
+                        int_number = int(number)
+                        digit_list.append(int_number)
+                except ValueError:
+                    return False
+            if len(digit_list) == 10:
+                return True
+            else:
+                return False
+        else:
+            for number in phone:
+                try:
+                    int_number = int(number)
+                    digit_list.append(int_number)
+                except ValueError:
+                    return False
+            if len(digit_list) == 7:
+                return True
+            else:
+                return False
