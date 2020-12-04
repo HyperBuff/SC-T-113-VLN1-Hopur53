@@ -33,7 +33,8 @@ class EmployeeUI:
             action = input("Choose an option: ").lower()
 
             if action == '1':
-                self.create()
+                if self.create():
+                    self.view(success_msg = "New employee has been created")
             elif action == '2':
                 self.view()
             elif action == 'q':
@@ -43,9 +44,7 @@ class EmployeeUI:
 
     # View Employees
 
-    def view(self, current_page = 1, warning_msg = ""):
-
-        success_msg = ""
+    def view(self, current_page = 1, warning_msg = "", success_msg = ""):
 
         while True:   
             self.printer.header("View employees")
@@ -140,7 +139,9 @@ class EmployeeUI:
         self.printer.header("Add employee")
         role = None
 
+        self.printer.new_line()
         self.printer.print_fail("Press q to go back")
+        self.printer.new_line()
 
         while role == None:
             role = self.select_role()
@@ -150,30 +151,77 @@ class EmployeeUI:
         self.printer.new_line()
 
         print("Enter employee details:")
-        name = input("\tEnter name: ")
-        if name == 'q':
-            return
-        email = input("\tEnter email: ")
-        if email == 'q':
-            return
-        ssn = input("\tEnter ssn: ")
-        if ssn == 'q':
-            return
-        phone = input("\tEnter mobile phone: ")
-        if phone == 'q':
-            return
-        homephone = input("\tEnter homephone: ")
-        if homephone == 'q':
-            return
-        address = input("\tEnter address: ")
-        if address == 'q':
-            return
-        postal = input("\tEnter postal: ")
-        if postal == 'q':
-            return
+
+        while True:
+            name = input("\tEnter name: ")
+            if name == 'q':
+                return
+            if len(name) < 1:
+                self.printer.print_warning("Name must been at least 1 character")
+            else:
+                break
+
+        while True:
+            email = input("\tEnter email: ")
+            if email == 'q':
+                return
+            if len(email) < 1:
+                self.printer.print_warning("Email must been at least 1 character")
+            elif not self.is_email_valid(email):
+                self.printer.print_warning("Email is not valid")
+            else:
+                break
+
+        while True:
+            ssn = input("\tEnter social security number: ")
+            if ssn == 'q':
+                return
+            elif len(ssn) < 1:
+                self.printer.print_warning("Social security number must been at least 1 character")
+            elif not self.is_ssn_valid(ssn):
+                self.printer.print_warning("Social security number is not valid, please try again")
+            else:
+                break
+
+        while True:
+            phone = input("\tEnter mobile phone: ")
+            if phone == 'q':
+                return
+            if len(phone) < 1:
+                self.printer.print_warning("Mobile phone must been at least 1 character")
+            else:
+                break
+
+        while True:
+            homephone = input("\tEnter home phone: ")
+            if homephone == 'q':
+                return
+            if len(homephone) < 1:
+                self.printer.print_warning("Home phone must been at least 1 character")
+            else:
+                break
+
+        while True:
+            address = input("\tEnter address: ")
+            if address == 'q':
+                return
+            if len(address) < 1:
+                self.printer.print_warning("Address must been at least 1 character")
+            else:
+                break
+
+        while True:
+            postal = input("\tEnter postal: ")
+            if postal == 'q':
+                return
+            if len(postal) < 1:
+                self.printer.print_warning("Postal must been at least 1 character")
+            else:
+                break
 
         new_employee = Employee(role, name, address, postal, ssn, phone, homephone, email)
-        return self.logic.create_employee(new_employee)          
+        self.logic.create_employee(new_employee) 
+        return True         
 
 
   
@@ -194,6 +242,13 @@ class EmployeeUI:
                 break
             elif action != '1':
                 new_value = input("Change to: ")
+            
+            if new_value == 'q':
+                break
+            
+            if len(new_value) < 1:
+                print("")
+                break
 
             if action == '1':
                 updates["role"] = self.select_role()
@@ -217,6 +272,7 @@ class EmployeeUI:
             self.logic.delete_employee(id)
             return True
         return False
+
     
     def select_role(self):
         print("Select role for employee:\n\t1. Admin\n\t2. Delivery\n\t3. Booking\n\t4. Mechanic\n\t5. Financial")
@@ -234,37 +290,35 @@ class EmployeeUI:
         elif action == str(5):
             return "Financial"
         else:
+            self.printer.print_warning("Please select available option")
+            self.printer.new_line()
             return None
 
-
-# Input Validation 
-
-"""
-def checkemail(id, email):
-    email_list = email.split("@")
-    if len(email_list) == 2:
-        new_list = email_list[1].split(".")
-        final_list = []
-        final_list.append(email_list[0])
-        final_list.append(new_list[0])
-        final_list.append(new_list[1])
-        if len(final_list[0]) >= 1 and len(final_list[1]) >= 1 and len(final_list[2]) >= 2:
-            return True
+    def is_email_valid(self, email):
+        email_list = email.split("@")
+        if len(email_list) == 2:
+            new_list = email_list[1].split(".")
+            final_list = []
+            final_list.append(email_list[0])
+            final_list.append(new_list[0])
+            final_list.append(new_list[1])
+            if len(final_list[0]) >= 1 and len(final_list[1]) >= 1 and len(final_list[2]) >= 2:
+                return True
+            else:
+                return None 
         else:
-            return None 
-    else:
-        return None
-def checkssn(ssn):
-    int_list = []
-    for number in ssn:
-        try:
-            if number != "-":
-                int_ssn = int(number)
-                int_list.append(int_ssn) 
-        except ValueError:
             return None
-    if len(int_list) == 10:
-        return True
-    else: 
-        return None
-"""
+
+    def is_ssn_valid(self, ssn):
+        int_list = []
+        for number in ssn:
+            try:
+                if number != "-":
+                    int_ssn = int(number)
+                    int_list.append(int_ssn) 
+            except ValueError:
+                return None
+        if len(int_list) == 10:
+            return True
+        else: 
+            return None
