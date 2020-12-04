@@ -1,1 +1,9 @@
 Hittumst klukkan 9:00 og ættlum hvert að byrja á okkar verkefnum. 
+
+
+Við erum öll kominn langleiðina að klára einn UI kóða hver. Hættum um 4 og ætlum að vinna þetta eitthvað um helgina. 
+Best væri ef við næðum að klára UI kóðana okkar þannig þeir runni um helgina svo við getum farið í villuprófanir og fín
+pússun á mánudag. 
+
+Allar A-Kröfur komnar
+Flestar B-Kröfur og ef við höldum okkar striki ættum við að geta dundað okkur með C kröfur og uppfæra skýrsluna :) 
