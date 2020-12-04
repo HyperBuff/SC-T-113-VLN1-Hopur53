@@ -139,13 +139,8 @@ class EmployeeUI:
             if ssn == 'q':
                 return
             if len(ssn) < 1:
-<<<<<<< HEAD
                 self.printer.print_warning("Social security number must be at least 1 character")
             elif not self.logic.is_ssn_valid(ssn):
-=======
-                self.printer.print_warning("Social security number must been at least 1 character")
-            elif self.logic.is_ssn_valid(ssn) == False:
->>>>>>> 740112713ca5ca12bd06adc2adafc33235548c7e
                 self.printer.print_warning("Social security number is not valid")
             else:
                 ssn = self.logic.is_ssn_valid(ssn)
@@ -155,13 +150,8 @@ class EmployeeUI:
             if phone == 'q':
                 return
             if len(phone) < 1:
-<<<<<<< HEAD
                 self.printer.print_warning("Mobile phone must be at least 1 character")
             elif not self.logic.is_phone_number_valid(phone):
-=======
-                self.printer.print_warning("Mobile phone must been at least 1 character")
-            elif self.logic.is_phone_number_valid(phone) == False:
->>>>>>> 740112713ca5ca12bd06adc2adafc33235548c7e
                 self.printer.print_warning("Phone number is not valid")
             else:
                 phone = self.logic.is_phone_number_valid(phone)
@@ -171,13 +161,8 @@ class EmployeeUI:
             if homephone == 'q':
                 return
             if len(homephone) < 1:
-<<<<<<< HEAD
                 self.printer.print_warning("Home phone must be at least 1 character")
             elif not self.logic.is_phone_number_valid(phone):
-=======
-                self.printer.print_warning("Home phone must been at least 1 character")
-            elif self.logic.is_phone_number_valid(homephone) == False:
->>>>>>> 740112713ca5ca12bd06adc2adafc33235548c7e
                 self.printer.print_warning("Phone number is not valid")
             else:
                 homephone = self.logic.is_phone_number_valid(homephone)
@@ -239,13 +224,8 @@ class EmployeeUI:
                     if phone == 'q':
                         break
                     if len(phone) < 1:
-<<<<<<< HEAD
-                        self.printer.print_warning("Mobile phone must be at least 1 character")
-                    elif not self.logic.is_phone_number_valid(phone):
-=======
                         self.printer.print_warning("Mobile phone must been at least 1 character")
                     elif self.logic.is_phone_number_valid(phone) == False:
->>>>>>> 740112713ca5ca12bd06adc2adafc33235548c7e
                         self.printer.print_warning("Phone number is not valid")
                     else:
                         updates["phone"] = phone
@@ -255,15 +235,9 @@ class EmployeeUI:
                     homephone = input("\tEnter home phone: ")
                     if homephone == 'q':
                         break
-<<<<<<< HEAD
-                    if len(phone) < 1:
-                        self.printer.print_warning("Mobile phone must be at least 1 character")
-                    elif not self.logic.is_phone_number_valid(phone):
-=======
                     if len(homephone) < 1:
                         self.printer.print_warning("Home phone must been at least 1 character")
                     elif self.logic.is_phone_number_valid(homephone) == False:
->>>>>>> 740112713ca5ca12bd06adc2adafc33235548c7e
                         self.printer.print_warning("Phone number is not valid")
                     else:
                         updates["homephone"] = self.logic.is_phone_number_valid(homephone)
