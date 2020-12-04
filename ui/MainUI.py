@@ -1,6 +1,6 @@
 from ui.EmployeeUI import EmployeeUI
 from ui.VehicleUI import VehicleUI
-
+from ui.LocationUI import LocationUI
 
 from ui.PrinterUI import PrinterUI
 
@@ -96,8 +96,8 @@ class MainUI:
         employee.menu()
 
     def locations(self):
-        #location = LocationUI()
-        #location.menu()
+        location = LocationUI()
+        location.menu()
         pass
 
     def financials(self):
