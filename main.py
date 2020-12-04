@@ -1,5 +1,4 @@
 import ctypes
-
 from ui.MainUI import MainUI
 
 kernel32 = ctypes.windll.kernel32
