@@ -1,6 +1,6 @@
 from repositories.MainRepository import MainRepository
 
-class Contract_Logic:
+class ContractLogic:
 
     def __init__(self):
         self.rep = MainRepository()
