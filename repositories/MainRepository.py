@@ -14,6 +14,9 @@ from models.Vehicle import Vehicle
 #Import VehicleTypes
 from repositories.VehicleTypeRepository import VehicleTypeRepository
 from models.VehicleType import VehicleType
+#Import Customer
+from repositories.CustomerRepository import CustomerRepository
+from models.Customer import Customer
 
 class MainRepository:
     #initalize
@@ -23,6 +26,7 @@ class MainRepository:
         self.destination = DestinationRepository()
         self.vehicle = VehicleRepository()
         self.vehicletype = VehicleTypeRepository()
+        self.customer = CustomerRepository()
 
     #Employees 
     def get_all_employees(self):
@@ -88,3 +92,16 @@ class MainRepository:
 
     def delete_vehicletype(self, id):
         return self.vehicletype.delete(id)
+    
+    #Customers
+    def get_all_customers(self):
+        return self.customer.read()
+
+    def create_customer(self, customer):
+        return self.customer.create(customer)
+
+    def update_customer(self, id, updates):
+        return self.customer.update(id, updates)
+
+    def delete_customer(self, id):
+        return self.customer.delete(id)

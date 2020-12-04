@@ -12,7 +12,6 @@ class ContractRepository:
 
     def create(self, contract: Contract):
         row = dict((key, getattr(contract, key)) for key in self.fieldnames)
-        print(row)
         Repository()._create(self.filename, self.fieldnames, row)
         return contract
 

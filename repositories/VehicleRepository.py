@@ -13,7 +13,6 @@ class VehicleRepository:
     def create(self, vehicle: Vehicle):
         vehicle.set_id(self.generate_id())
         row = dict((key, getattr(vehicle, key)) for key in self.fieldnames)
-        print(row)
         Repository()._create(self.filename, self.fieldnames, row)
         return vehicle
 

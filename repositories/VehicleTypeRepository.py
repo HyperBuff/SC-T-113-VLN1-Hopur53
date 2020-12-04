@@ -12,7 +12,6 @@ class VehicleTypeRepository:
 
     def create(self, vehicletype: VehicleType):
         row = dict((key, getattr(vehicletype, key)) for key in self.fieldnames)
-        print(row)
         Repository()._create(self.filename, self.fieldnames, row)
         return vehicletype
 
