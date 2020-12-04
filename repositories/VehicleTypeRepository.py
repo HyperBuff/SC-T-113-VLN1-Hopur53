@@ -25,6 +25,3 @@ class VehicleTypeRepository:
 
     def delete(self, id) -> None:
         return Repository()._delete(self.filename, self.fieldnames, id)
-
-    def generate_id(self):
-        return str(uuid.uuid4())
