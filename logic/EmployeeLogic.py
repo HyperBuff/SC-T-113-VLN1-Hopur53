@@ -12,10 +12,10 @@ class EmployeeLogic:
         return self.rep.get_all_employees()
 
     def update(self, id, updates):
-        return self.rep.update_contract(id, updates)
+        return self.rep.update_employee(id, updates)
 
     def delete(self, id):
-        return self.rep.delete_contract(id)
+        return self.rep.delete_employee(id)
  
     def get_user_id_from_email(self, email):
         employees = self.get_all_employees()
