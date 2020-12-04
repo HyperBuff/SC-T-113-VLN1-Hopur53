@@ -1,7 +1,5 @@
 import math
 
-
-
 from logic.MainLogic import MainLogic
 from models.Employee import Employee
 

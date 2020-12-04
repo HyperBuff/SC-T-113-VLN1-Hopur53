@@ -29,10 +29,8 @@ class MainUI:
 
                 self.name = user.name
                 self.role = user.role
-
                 self.menu()
             else:
-
                 self.printer.header("NaN Air - Rentals")
                 self.printer.new_line()
                 self.printer.print_fail("Press q to quit")
