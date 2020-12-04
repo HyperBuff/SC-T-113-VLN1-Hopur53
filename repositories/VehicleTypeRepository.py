@@ -1,5 +1,3 @@
-import uuid
-
 from repositories.Repository import Repository
 from models.VehicleType import VehicleType
 
