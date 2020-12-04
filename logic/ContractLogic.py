@@ -5,11 +5,11 @@ class Contract_Logic:
     def __init__(self):
         self.rep = MainRepository()
     
-    def create(self, employee):
-        self.rep.create_employee(employee)
+    def create(self, contract):
+        self.rep.create_employee(contract)
 
     def get_all_contracts(self):
-        return self.rep.get_all_employees()
+        return self.rep.get_all_contracts()
 
     def update(self, id, updates):
         return self.rep.update_contract(id, updates)
@@ -25,5 +25,5 @@ class Contract_Logic:
                 return contract
         return None
 
-    def amount_due():
+    def amount_due(self):
         pass
