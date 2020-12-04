@@ -90,18 +90,21 @@ class VehicleUI:
             elif action == 'd' or action == 'delete':
                 if self.delete(vehicle_id):
                     self.success_msg = "Vehicle has been deleted"
-                break
+                    break
             else:
                 self.warning_msg = "Please select available option"
 
     # Prints out table of vehicle
     def print_vehicles(self, vehicles, start, end, current_page, last_page):
-        print("|{:^6}|{:^20}|{:^15}|{:^25}|{:^10}|{:^25}|{:^20}|{:<20}|{:<20}|".format("ID", "Manufacturer", "Model", "Vehicle type", "Status", "Manufacturing year", "Color", "Licence type", "Location"))
-        print('-' * 171)
-        for i in range(start, end):
-            print("|{:^6}|{:<20}|{:<15}|{:<25}|{:<10}|{:<25}|{:<20}|{:<20}|{:<20}|".format(vehicles[i].id, vehicles[i].manufacturer, vehicles[i].model, vehicles[i].vehicle_type, vehicles[i].status, vehicles[i].man_year, vehicles[i].color, vehicles[i].licence_type, vehicles[i].location))
-        print("{:^171}".format("Page {} of {}".format(current_page, last_page)))
-        self.printer.new_line()
+        if len(vehicles) > 0:
+            print("|{:^6}|{:^20}|{:^15}|{:^25}|{:^10}|{:^25}|{:^20}|{:<20}|{:<20}|".format("ID", "Manufacturer", "Model", "Vehicle type", "Status", "Manufacturing year", "Color", "Licence type", "Location"))
+            print('-' * 171)
+            for i in range(start, end):
+                print("|{:^6}|{:<20}|{:<15}|{:<25}|{:<10}|{:<25}|{:<20}|{:<20}|{:<20}|".format(vehicles[i].id, vehicles[i].manufacturer, vehicles[i].model, vehicles[i].vehicle_type, vehicles[i].status, vehicles[i].man_year, vehicles[i].color, vehicles[i].licence_type, vehicles[i].location))
+            print("{:^171}".format("Page {} of {}".format(current_page, last_page)))
+            self.printer.new_line()
+        else:
+            self.warning_msg = "No vehicles found"
 
     # Create vehicle
     def create(self):
