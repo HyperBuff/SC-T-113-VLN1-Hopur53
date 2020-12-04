@@ -32,7 +32,8 @@ def create():
         date_from = input("\tEnter pick-up date: ")
         date_to = input("\tEnter drop-off date: ")
         # rental_period = start_date + " - " + end_date
-        print ("\t\t\33[;36mRental period: \33[;0m", rental_period) 
+        
+        #print ("\t\t\33[;36mRental period: \33[;0m", rental_period) 
         contract_made = input ("\tDate of booking: ")
         country = input("\tCountry of rental: ")
 

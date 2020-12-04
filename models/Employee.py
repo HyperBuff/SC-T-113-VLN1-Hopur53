@@ -10,9 +10,3 @@ class Employee:
         self.homephone = homephone
         self.email = email
         self.id = id
-    
-    def __repr__(self):
-        return self.name
-
-    def __str__(self):
-        return self.name
