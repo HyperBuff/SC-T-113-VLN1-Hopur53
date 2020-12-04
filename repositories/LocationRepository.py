@@ -1,22 +1,22 @@
 from repositories.Repository import Repository
-from models.Destination import Destination
+from models.Location import Location
 
 
-class DestinationRepository:
+class LocationRepository:
 
     def __init__(self):
-        self.filename = 'data/destination.csv'
+        self.filename = 'data/location.csv'
         self.fieldnames = ['country', 'airport', 'phone', 'hours', 'id']
 
-    def create(self, destination: Destination):
-        row = dict((key, getattr(destination, key)) for key in self.fieldnames)
+    def create(self, location: Location):
+        row = dict((key, getattr(location, key)) for key in self.fieldnames)
         Repository()._create(self.filename, self.fieldnames, row)
-        return destination
+        return location
 
     def read(self):
         rows = Repository()._read(self.filename)
-        destinations = [Destination(row['country'], row['airport'], row['phone'], row['hours'], row['id']) for row in rows]
-        return destinations
+        locations = [Location(row['country'], row['airport'], row['phone'], row['hours'], row['id']) for row in rows]
+        return locations
     
     def update(self, id, updates: dict):
         return Repository()._update(self.filename, self.fieldnames, id, updates)

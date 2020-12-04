@@ -6,8 +6,8 @@ from models.Employee import Employee
 from repositories.ContractRepository import ContractRepository
 from models.Contract import Contract
 #Import Destinations
-from repositories.DestinationRepository import DestinationRepository
-from models.Destination import Destination
+from repositories.LocationRepository import LocationRepository
+from models.Location import Location
 #Import Vehicles
 from repositories.VehicleRepository import VehicleRepository
 from models.Vehicle import Vehicle
@@ -23,7 +23,7 @@ class MainRepository:
     def __init__(self):
         self.employee = EmployeeRepository()
         self.contract = ContractRepository()
-        self.destination = DestinationRepository()
+        self.location = LocationRepository()
         self.vehicle = VehicleRepository()
         self.vehicletype = VehicleTypeRepository()
         self.customer = CustomerRepository()
@@ -55,17 +55,17 @@ class MainRepository:
         return self.contract.delete(id)
 
     #Destinations
-    def get_all_destinations(self):
-        return self.destination.read()
+    def get_all_locations(self):
+        return self.location.read()
 
-    def create_destination(self, destination):
-        return self.destination.create(destination)
+    def create_location(self, destination):
+        return self.location.create(destination)
 
-    def update_destination(self, id, updates):
-        return self.destination.update(id, updates)
+    def update_location(self, id, updates):
+        return self.location.update(id, updates)
 
-    def delete_destination(self, id):
-        return self.destination.delete(id)
+    def delete_location(self, id):
+        return self.location.delete(id)
 
     #Vehicles
     def get_all_vehicles(self):
