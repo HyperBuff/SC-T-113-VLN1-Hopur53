@@ -65,7 +65,7 @@ class VehicleUI:
                     self.warning_msg = "You are currenly on the first page"
             elif action == 's' or action == "select":
                 vehicle_id = input("Select vehicle by ID: ")
-                vehicle = self.logic.get_employee_by_id(vehicle_id)
+                vehicle = self.logic.get_vehicle_by_id(vehicle_id)
                 if vehicle is None:
                     self.warning_msg = "Vehicle not found"
                 else:
@@ -88,8 +88,8 @@ class VehicleUI:
             elif action == 'e' or action == 'edit':
                 self.edit(vehicle_id)
             elif action == 'd' or action == 'delete':
-                self.delete(vehicle_id)
-                self.success_msg = "Vehicle has been deleted"
+                if self.delete(vehicle_id):
+                    self.success_msg = "Vehicle has been deleted"
                 break
             else:
                 self.warning_msg = "Please select available option"
@@ -280,7 +280,7 @@ class VehicleUI:
                     else:
                         updates["location"] = location
                         break
-            self.logic.update_employee(id, updates)
+            self.logic.update_vehicle(id, updates)
 
             keys = list(updates.keys())
 
