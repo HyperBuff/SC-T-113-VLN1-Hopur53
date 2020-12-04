@@ -36,3 +36,4 @@ class EmployeeLogic:
 
 
     
+get_all_contracts()
