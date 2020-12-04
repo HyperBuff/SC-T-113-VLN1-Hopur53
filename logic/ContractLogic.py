@@ -6,7 +6,7 @@ class Contract_Logic:
         self.rep = MainRepository()
     
     def create(self, contract):
-        self.rep.create_employee(contract)
+        self.rep.create_contract(contract)
 
     def get_all_contracts(self):
         return self.rep.get_all_contracts()

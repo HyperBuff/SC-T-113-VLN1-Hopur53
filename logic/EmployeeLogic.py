@@ -5,11 +5,11 @@ class EmployeeLogic:
     def __init__(self):
         self.rep = MainRepository()
     
-    def create(self, contrac):
-        self.rep.create_contract(contract)
+    def create(self, employee):
+        self.rep.create_employee(employee)
 
     def get_all_employees(self):
-        return self.rep.get_all_contract()
+        return self.rep.get_all_employees()
 
     def update(self, id, updates):
         return self.rep.update_contract(id, updates)
@@ -32,8 +32,3 @@ class EmployeeLogic:
             if employee.id == user_id:
                 return employee
         return None
-    
-
-
-    
-get_all_contracts()
