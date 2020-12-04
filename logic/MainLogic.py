@@ -4,12 +4,15 @@ from logic.EmployeeLogic import EmployeeLogic
 from logic.ContractLogic import ContractLogic
 #Vehicle Logic
 from logic.VehicleLogic import VehicleLogic
+#Location Logic
+from logic.LocationLogic import LocationLogic
 
 class MainLogic:
     def __init__(self):
         self.employee = EmployeeLogic()
         self.contract = ContractLogic()
         self.vehicle = VehicleLogic()
+        self.location = LocationLogic()
 
     #Emplyee Logic
     def login(self, email):
@@ -70,3 +73,19 @@ class MainLogic:
 
     def delete_vehicle(self, id):
         return self.vehicle.delete(id)
+
+    #Vehicle Logic
+    def get_all_locations(self):
+        return self.location.get_all_locations()
+
+    def get_location_by_id(self, location_id):
+        return self.location.get_location_by_id(location_id)
+
+    def create_location(self, vehicle):
+        return self.location.create(vehicle)
+
+    def update_location(self, id, updates):
+        return self.location.update(id, updates)
+
+    def delete_location(self, id):
+        return self.location.delete(id)
