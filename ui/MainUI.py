@@ -22,7 +22,7 @@ class MainUI:
 
         self.display()
 
-    def display(self, warning_msg = ""):
+    def display(self):
         while True:
             if self.employee_id:
                 user = self.logic.employee.get_employee_by_id(self.employee_id)
@@ -54,7 +54,7 @@ class MainUI:
             self.logout()
             self.warning_msg = "No role assigned to user"
 
-    def admin(self, warning_msg = ""):
+    def admin(self):
         while True:
             self.printer.header("NaN Air - Rentals")
             print(f"Logged in as: {self.name} ({self.role})")
@@ -62,7 +62,7 @@ class MainUI:
             self.printer.print_options(['Contracts', 'Vehicles', 'Employees', 'Locations', 'Financials'])
             self.printer.new_line(2)
             self.printer.print_fail('Press q to logout')
-            self.printer.print_warning(warning_msg)
+            self.print_msg()
             action = input("Choose an option: ").lower()
             if action == '1':
                 self.contracts()
