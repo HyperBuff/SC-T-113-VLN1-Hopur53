@@ -90,6 +90,7 @@ class EmployeeUI:
             elif action == 'd' or action == 'delete':
                 if self.delete(employee_id):
                     self.success_msg = "Employee has been deleted"
+                    break
             else:
                 self.warning_msg = "Please select available option"
             

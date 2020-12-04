@@ -90,7 +90,7 @@ class VehicleUI:
             elif action == 'd' or action == 'delete':
                 if self.delete(vehicle_id):
                     self.success_msg = "Vehicle has been deleted"
-                break
+                    break
             else:
                 self.warning_msg = "Please select available option"
 
