@@ -5,17 +5,17 @@ class EmployeeLogic:
     def __init__(self):
         self.rep = MainRepository()
     
-    def create(self, employee):
-        self.rep.create_employee(employee)
+    def create(self, contrac):
+        self.rep.create_contract(contract)
 
     def get_all_employees(self):
-        return self.rep.get_all_employees()
+        return self.rep.get_all_contract()
 
     def update(self, id, updates):
-        return self.rep.update_employee(id, updates)
+        return self.rep.update_contract(id, updates)
 
     def delete(self, id):
-        return self.rep.delete_employee(id)
+        return self.rep.delete_contract(id)
  
     def get_user_id_from_email(self, email):
         employees = self.get_all_employees()
@@ -32,5 +32,7 @@ class EmployeeLogic:
             if employee.id == user_id:
                 return employee
         return None
+    
+
 
     
