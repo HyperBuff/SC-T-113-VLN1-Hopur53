@@ -4,6 +4,7 @@ from models.Vehicle import Vehicle
 
 from ui.PrinterUI import PrinterUI
 from ui.InputUI import InputUI
+from ui.LocationUI import LocationUI
 
 class VehicleUI:
 
@@ -92,7 +93,7 @@ class VehicleUI:
             else:
                 self.warning_msg = "Please select available option"
 
-    def view_by_type(self, created = False, return_id = False):
+    def view_by_type(self, created = False):
         current_page = 1
         while True:   
             vehicle_types = self.logic.get_all_vehicletypes()
@@ -105,7 +106,6 @@ class VehicleUI:
                 created = False
             start = (current_page - 1) * self.items_per_page
             end = start + 10 if not current_page == last_page else vehicles_count
-
             self.printer.header("View vehicle types")
             self.print_vehicle_types(vehicle_types, start, end, current_page, last_page)
             self.printer.new_line()
@@ -134,10 +134,7 @@ class VehicleUI:
                 if vehicle is None:
                     self.warning_msg = "Vehicle not found"
                 else:
-                    if return_id:
-                        return vehicletype_id
-                    else:
-                        self.select_vehicle_by_type(vehicletype_id)
+                    self.select_vehicle_by_type(vehicletype_id)
             else:
                 self.warning_msg = "Please select available option"
 
@@ -215,7 +212,7 @@ class VehicleUI:
         try:
             manufacturer = self.input.get_input("manufacturer")
             model = self.input.get_input("model")
-            vehicle_type = self.view_by_type(return_id=True)
+            vehicle_type = self.input.get_input("vehicle type")
             status = self.input.get_input("status")
             man_year = self.input.get_input("manufacturing year", ["year"])
             color = self.input.get_input("color")
@@ -234,7 +231,7 @@ class VehicleUI:
         self.printer.new_line()
         try:
             name = self.input.get_input("name")
-            regions = self.input.get_input("regions")
+            regions = self.input.get_input("name")
             rate = self.input.get_input("rate")
             vehicle = VehicleType(name, regions, rate)
             self.logic.create_vehicletype(vehicle)
