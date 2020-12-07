@@ -194,8 +194,50 @@ class ContractUI:
                     break
             elif action == '6':
                 try:
-                    date_from = self.input.get_input("date to")
-                    updates["date_from"] = date_from
+                    date_to = self.input.get_input("date to")
+                    updates["date_to"] = date_to
+                except ValueError:
+                    break
+            elif action == "7":
+                try:
+                    vehicle_id = self.input.get_input("vehicle id")
+                    updates["vehicle_id"] = vehicle_id
+                except ValueError:
+                    break
+            elif action == "8":
+                try:
+                    location = self.input.get_input("location")
+                    updates["location"] = location
+                except ValueError:
+                    break
+            elif action == "9":
+                try:
+                    vehicle_status = self.input.get_input("vehicle status")
+                    updates["vehicle_status"] = vehicle_status
+                except ValueError:
+                    break
+            elif action == "10":
+                try:
+                    loan_date = self.input.get_input("loan date")
+                    updates["loan_date"] = loan_date
+                except ValueError:
+                    break
+            elif action == "11":
+                try:
+                    return_date = self.input.get_input("return date")
+                    updates["return_date"] = return_date
+                except ValueError:
+                    break
+            elif action == "12":
+                try:
+                    total = self.input.get_input("total")
+                    updates["total"] = total
+                except ValueError:
+                    break
+            elif action == "13":
+                try:
+                    loan_status = self.input.get_input("loan status")
+                    updates["loan_status"] = loan_status
                 except ValueError:
                     break
             else:
