@@ -1,3 +1,24 @@
 manufacturer,model,vehicle_type,status,man_year,color,licence_type,location,id
-Volvo,1990,2,OK,1990,red,ol,Iceland,5
-2,2,2,2,1990,2,2,2,6
+TAILG,Free Fly II,Medium road,OK,2018,White,Drivers licence,Kulusuk,1
+TAILG,Free Fly II,Medium road,OK,2018,Orange,Drivers licence,Kulusuk,2
+Kayman Kayaks,Crazy,Light water,OK,2020,Yellow,None,Longyearbyen,3
+Kayman Kayaks,Crazy,Light water,OK,2020,Yellow,None,Thorshavn,4
+Kayman Kayaks,Crazy HV,Light water,OK,2020,Yellow,None,Nuuk,5
+Cani-Fit,Fat Max,Light off-road,OK,2019,Black,None,Nuuk,6
+Cani-Fit,Fat Max,Light off-road,OK,2017,Black,None,Thorshavn,7
+Cani-Fit,Fat Max,Light off-road,OK,2017,Black,None,Thorshavn,8
+Cani-Fit,Fat Max,Light off-road,OK,2020,Black,None,Tingwall,9
+Yedoo,Trexx,Light road,OK,2020,Orange,None,Kulusuk,10
+Yedoo,Trexx,Light road,OK,2020,Orange,None,Thorshavn,11
+Yedoo,Trexx,Light road,OK,2020,Orange,None,Tingwall,12
+Yedoo,Trexx,Light road,OK,2020,Orange,None,Longyearbyen,13
+Yedoo,Trexx,Light road,OK,2020,Orange,None,Nuuk,14
+Yedoo,Trexx,Light road,OK,2020,Orange,None,Nuuk,15
+WildChild,Fatboy Mini BMX,Light road,OK,2020,Red,None,Tingwall,16
+WildChild,Fatboy Mini BMX,Light road,OK,2020,Red,None,Longyearbyen,17
+WildChild,Fatboy Mini BMX,Light road,OK,2020,Red,None,Kulusuk,18
+Forward,FWD-ZK125H,Medium road,OK,2019,Blue,Drivers licence,Longyearbyen,19 
+Colorado,Pontoon Boat,Light water,OK,2019,Green,None,Thorshavn,20
+A2extreem,Powerboard,Light winter,OK,2018,Black,None,Nuuk,21
+Torpedo,3500,Light water,OK,2019,White,Diving licence,Thorshavn,22
+DMC,DeLorean,2,ok,1982,silver,Drivers Licence,Reykjavik,23
