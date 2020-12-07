@@ -20,7 +20,7 @@ class VehicleUI:
     def menu(self):
         while True:
             self.printer.header("Vehicles Menu")
-            self.printer.print_options(['Create an vehicle', 'View vehicles'])
+            self.printer.print_options(['Create a vehicle', 'View vehicles', 'Create a vehicle type', 'View vehicle types'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.print_msg()
@@ -33,6 +33,12 @@ class VehicleUI:
                     self.view(True)
             elif action == '2':
                 self.view()
+            elif action == '3':
+                if self.create_type():
+                    self.success_msg = "New vehicle type has been created"
+                    self.view_type(True)
+            elif action == '4':
+                self.view_type()
             elif action == 'q':
                 break
             else:
@@ -84,6 +90,54 @@ class VehicleUI:
                     self.select_vehicle(vehicle_id)
             else:
                 self.warning_msg = "Please select available option"
+
+    # Prints out all vehicle
+    def view(self, created = False):
+        current_page = 1
+        while True:   
+            vehicle_types = self.logic.get_all_vehicles()
+            vehicles_count = len(vehicles)
+            last_page = int(vehicles_count / self.items_per_page) + (vehicles_count % self.items_per_page > 0)
+            if current_page > last_page:
+                current_page = last_page
+            if created == True:
+                current_page = last_page
+                created = False
+            start = (current_page - 1) * self.items_per_page
+            end = start + 10 if not current_page == last_page else vehicles_count
+
+            self.printer.header("View vehicles")
+            self.print_vehicles(vehicles, start, end, current_page, last_page)
+            self.printer.new_line()
+            self.printer.print_fail("Press q to go back")
+            self.print_msg()
+
+            action = input("(N)ext page / (P)revious page / (S)elect vehicle: ").lower()
+
+            if action == 'q':
+                break
+            elif action == 'n' or action == "next":
+                if current_page >= last_page:
+                    current_page = last_page
+                    self.warning_msg = "You are currenly on the last page"
+                else:
+                    current_page += 1
+            elif action == 'p' or action == "previous":
+                if current_page > 1:
+                    current_page -= 1
+                else:
+                    current_page = 1
+                    self.warning_msg = "You are currenly on the first page"
+            elif action == 's' or action == "select":
+                vehicle_id = input("Select vehicle by ID: ")
+                vehicle = self.logic.get_vehicle_by_id(vehicle_id)
+                if vehicle is None:
+                    self.warning_msg = "Vehicle not found"
+                else:
+                    self.select_vehicle(vehicle_id)
+            else:
+                self.warning_msg = "Please select available option"
+
 
     # Prints out single vehicle
     def select_vehicle(self, vehicle_id):

@@ -4,6 +4,8 @@ from logic.EmployeeLogic import EmployeeLogic
 from logic.ContractLogic import ContractLogic
 #Vehicle Logic
 from logic.VehicleLogic import VehicleLogic
+#Vehicle Logic
+from logic.VehicleTypeLogic import VehicleTypeLogic
 #Location Logic
 from logic.LocationLogic import LocationLogic
 
@@ -12,6 +14,7 @@ class MainLogic:
         self.employee = EmployeeLogic()
         self.contract = ContractLogic()
         self.vehicle = VehicleLogic()
+        self.vehicletype = VehicleTypeLogic()
         self.location = LocationLogic()
 
     #Emplyee Logic
@@ -74,7 +77,23 @@ class MainLogic:
     def delete_vehicle(self, id):
         return self.vehicle.delete(id)
 
-    #Vehicle Logic
+    #Vehicle type Logic
+    def get_all_vehicletypes(self):
+        return self.vehicletype.get_all_vehicletypes()
+
+    def get_vehicletype_by_id(self, vehicle_id):
+        return self.vehicletype.get_vehicletype_by_id(vehicle_id)
+
+    def create_vehicletype(self, vehicle):
+        return self.vehicletype.create(vehicle)
+
+    def update_vehicletype(self, id, updates):
+        return self.vehicletype.update(id, updates)
+
+    def delete_vehicletype(self, id):
+        return self.vehicletype.delete(id)
+
+    #Location Logic
     def get_all_locations(self):
         return self.location.get_all_locations()
 
