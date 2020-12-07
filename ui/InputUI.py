@@ -79,7 +79,53 @@ class InputUI:
                 return False 
         else:
             return False
-
+    
+    def is_phone_number_valid(self, phone):
+        str_list = []
+        for letter in phone:
+            try:
+                if letter.isdigit() == True:
+                    str_list.append(letter)
+            except ValueError:
+                return False
+        if len(str_list) == 10:
+            extra = '+'
+            list_to_str = ''.join(str(e) for e in str_list)
+            new_phone = extra + list_to_str
+            return new_phone
+        elif len(str_list) == 7:
+            areacode = '+354'
+            list_to_str = ''.join(str(e) for e in str_list)
+            new_phone = areacode + list_to_str
+            return new_phone
+        elif len(str_list) == 9:
+            extra = '+'
+            list_to_str = ''.join(str(e) for e in str_list)
+            new_phone = extra + list_to_str
+            return new_phone
+        elif len(str_list) == 12:
+            extra = '+'
+            list_to_str = ''.join(str(e) for e in str_list)
+            new_phone = extra + list_to_str
+            return new_phone
+        else:
+            return False
+    
+    def is_year_valid(self, year):
+        int_list = []
+        for number in year:
+            try:
+                int_year = int(number)
+                int_list.append(int_year)
+            except ValueError:
+                return False
+        if len(year) == 4:
+            list_to_str = ''.join(str(e) for e in int_list)
+            return list_to_str
+        else:
+            return False
+    
+    
     def is_ssn_valid(self, ssn):
         int_list = []
         for number in ssn:
@@ -90,42 +136,10 @@ class InputUI:
             except ValueError:
                 return False
         if len(int_list) == 10:
-            return True
+            list_to_str = ''.join(str(e) for e in int_list)
+            return list_to_str
         else: 
             return False
-
-    def is_phone_valid(self, phone):
-        """Checks if phone number input is valid."""
-        whole_list = []
-        digit_list = []
-        for every in phone:
-            whole_list.append(every)
-        if whole_list[3] == "-" and whole_list[7] == "-":
-            for number in whole_list:
-                try:
-                    if number != "-":
-                        int_number = int(number)
-                        digit_list.append(int_number)
-                except ValueError:
-                    return False
-            if len(digit_list) == 10:
-                return True
-            else:
-                return False
-        else:
-            for number in phone:
-                try:
-                    int_number = int(number)
-                    digit_list.append(int_number)
-                except ValueError:
-                    return False
-            if len(digit_list) == 7:
-                return True
-            else:
-                return False
-
-    def is_year_valid(self, year):
-        return True
-
+    
     def is_date_valid(self, date):
-        return True
+            return True
