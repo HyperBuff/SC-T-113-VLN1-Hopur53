@@ -1,3 +1,2 @@
-role,name,address,postal,ssn,phone,homephone,email,id,location
-Admin,Aðalsteinn Leifs Maríuson,Duggufjara,600,0907982949,6494444,4611561,test@test.is,1,rvk
-admin,sdf,wefds,324,2222222222,+3542222222,+3542222222,sdf@fgd.sd,1011,
+role,name,address,postal,ssn,phone,homephone,email,location_id,id
+Admin,Aðalsteinn Leifs Maríuson,Duggufjara,600,0907982949,6494444,4611561,test@test.is,rvk,1

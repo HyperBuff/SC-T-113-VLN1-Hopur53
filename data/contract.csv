@@ -1,4 +1,4 @@
-name,phone,email,address,vehicle_id,vehicle_status,employee_id,location,date_from,date_to,loan_date,loan_status,return_date,total,id
+name,phone,email,address,vehicle_id,vehicle_status,employee_id,location_id,date_from,date_to,loan_date,loan_status,return_date,total,id
 elmar,2323232,elmar@mail.com,ralphstreet 21,24,23,24,Keflavík,21,Avalible,32,today,43,Avalible,1
 jón,5812345,steini@gmail.com,Duggu,1,ok,1,iceland,19/90/1000,33,10,ok,10,1000,2
 Johann,4828635,bla@bla.is,cell block 1,1,ok,1,iceland,07.12.2020,22.12.2020,10,late,10,1000,4
