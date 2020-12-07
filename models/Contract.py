@@ -1,6 +1,6 @@
 
 class Contract:
-    def __init__(self, name, phone, email, address, vehicle_id, vehicle_status, employee_id, location_id, date_from, date_to, loan_date, loan_status, return_date, total, contract_id = None):
+    def __init__(self, name, phone, email, address, vehicle_id, vehicle_status, employee_id, location_id, date_from, date_to, loan_date, loan_status, return_date, total, id = None):
         self.name = name
         self.phone = phone
         self.email = email
@@ -18,4 +18,4 @@ class Contract:
         self.return_date = return_date
 
         self.total = total
-        self.contract_id = contract_id
+        self.id = id

@@ -1,7 +1,7 @@
 class Location:
-    def __init__(self, country, airport, phone, hours, location_id = None):
+    def __init__(self, country, airport, phone, hours, id = None):
         self.country = country
         self.airport = airport
         self.phone = phone
         self.hours = hours
-        self.location_id = location_id
+        self.id = id

@@ -1,6 +1,6 @@
 
 class Employee:
-    def __init__(self, role, name, address, postal, ssn, phone, homephone, email, location_id, employee_id = None):
+    def __init__(self, role, name, address, postal, ssn, phone, homephone, email, location_id, id = None):
         self.role = role
         self.name = name
         self.address = address
@@ -10,4 +10,4 @@ class Employee:
         self.homephone = homephone
         self.email = email
         self.location_id = location_id
-        self.employee_id = employee_id
+        self.id = id
