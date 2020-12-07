@@ -1,3 +1,4 @@
+from models.VehicleType import VehicleType
 from logic.MainLogic import MainLogic
 from models.Vehicle import Vehicle
 
@@ -34,13 +35,11 @@ class VehicleUI:
             elif action == '2':
                 self.view()
             elif action == '3':
-                pass
-                #if self.create_type():
-                    #self.success_msg = "New vehicle type has been created"
-                    #self.view_type(True)
+                if self.create_type():
+                    self.success_msg = "New vehicle type has been created"
+                    self.view_by_type(True)
             elif action == '4':
-                pass
-                #self.view_type()
+                self.view_by_type()
             elif action == 'q':
                 break
             else:
@@ -93,7 +92,52 @@ class VehicleUI:
             else:
                 self.warning_msg = "Please select available option"
 
-   
+    def view_by_type(self, created = False):
+        current_page = 1
+        while True:   
+            vehicle_types = self.logic.get_all_vehicletypes()
+            vehicles_count = len(vehicle_types)
+            last_page = int(vehicles_count / self.items_per_page) + (vehicles_count % self.items_per_page > 0)
+            if current_page > last_page:
+                current_page = last_page
+            if created == True:
+                current_page = last_page
+                created = False
+            start = (current_page - 1) * self.items_per_page
+            end = start + 10 if not current_page == last_page else vehicles_count
+
+            self.printer.header("View vehicle types")
+            self.print_vehicle_types(vehicle_types, start, end, current_page, last_page)
+            self.printer.new_line()
+            self.printer.print_fail("Press q to go back")
+            self.print_msg()
+
+            action = input("(N)ext page / (P)revious page / (S)elect vehicle: ").lower()
+
+            if action == 'q':
+                break
+            elif action == 'n' or action == "next":
+                if current_page >= last_page:
+                    current_page = last_page
+                    self.warning_msg = "You are currenly on the last page"
+                else:
+                    current_page += 1
+            elif action == 'p' or action == "previous":
+                if current_page > 1:
+                    current_page -= 1
+                else:
+                    current_page = 1
+                    self.warning_msg = "You are currenly on the first page"
+            elif action == 's' or action == "select":
+                vehicletype_id = input("Select vehicle by ID: ")
+                vehicle = self.logic.get_vehicletype_by_id(vehicletype_id)
+                if vehicle is None:
+                    self.warning_msg = "Vehicle not found"
+                else:
+                    self.select_vehicle_by_type(vehicletype_id)
+            else:
+                self.warning_msg = "Please select available option"
+
     # Prints out single vehicle
     def select_vehicle(self, vehicle_id):
         while True:
@@ -114,6 +158,27 @@ class VehicleUI:
                         break
             else:
                 self.warning_msg = "Please select available option"
+    
+    def select_vehicle_by_type(self, vehicletype_id):
+        while True:
+            vehicle_type = self.logic.get_vehicletype_by_id(vehicletype_id)
+            self.printer.header("View vehicle type")
+            print("ID:\t\t\t{}\nName:\t\t\t{}\nRegions:\t\t{}\nRate:\t\t\t{}\n".format(vehicle_type.id, vehicle_type.name, vehicle_type.regions, vehicle_type.rate))
+            self.printer.new_line()
+            self.printer.print_fail("Press q to go back")
+            self.print_msg()
+            action = input("(E)dit / (D)elete: ").lower()
+            if action == 'q':
+                break
+            elif action == 'e' or action == 'edit':
+                self.edit_type(vehicletype_id)
+            elif action == 'd' or action == 'delete':
+                if self.delete_type(vehicletype_id):
+                        self.success_msg = "Vehicle has been deleted"
+                        break
+            else:
+                self.warning_msg = "Please select available option"
+
             
     # Prints out table of vehicle
     def print_vehicles(self, vehicles, start, end, current_page, last_page):
@@ -126,6 +191,17 @@ class VehicleUI:
             self.printer.new_line()
         else:
             self.warning_msg = "No vehicles found"
+
+    def print_vehicle_types(self, vehicle_type, start, end, current_page, last_page):
+        if len(vehicle_type) > 0:
+            print("|{:^6}|{:^20}|{:^15}|{:^25}|".format("ID", "Name", "Regions", "Rate"))
+            print('-' * 71)
+            for i in range(start, end):
+                print("|{:^6}|{:<20}|{:<15}|{:<25}|".format(vehicle_type[i].id, vehicle_type[i].name, vehicle_type[i].regions, vehicle_type[i].rate))
+            print("{:^171}".format("Page {} of {}".format(current_page, last_page)))
+            self.printer.new_line()
+        else:
+            self.warning_msg = "No vehicle types found"
 
     # Create vehicle
     def create(self):
@@ -147,7 +223,22 @@ class VehicleUI:
             return True
         except ValueError:
             return False
-       
+    
+    def create_type(self):
+        self.printer.header("Add vehicle type")
+        self.printer.new_line()
+        self.printer.print_fail("Press q to go back")
+        self.printer.new_line()
+        try:
+            name = self.input.get_input("name")
+            regions = self.input.get_input("regions")
+            rate = self.input.get_input("rate")
+            vehicle = VehicleType(name, regions, rate)
+            self.logic.create_vehicletype(vehicle)
+            return True
+        except ValueError:
+            return False
+
     # Edit vehicle
     def edit(self, id):
         while True:
@@ -215,11 +306,54 @@ class VehicleUI:
                 self.logic.update_vehicle(id, updates)
                 self.success_msg = "{} has been modified".format(list(updates.keys())[0].capitalize())
 
+    def edit_type(self, id):
+        while True:
+            updates = {}
+            self.printer.header("Edit vehicle type")
+            self.printer.print_options(['Change name', 'Change regions', 'Change vehicle rate'])
+            self.printer.new_line(2)
+            self.printer.print_fail("Press q to go back")
+            self.print_msg()
+            action = input("Choose an option: ").lower()
+            if action == 'q':
+                break
+            elif action == '1':
+                try:
+                    name = self.input.get_input("name")
+                    updates["name"] = name
+                except ValueError:
+                    break
+            elif action == '2':
+                try:
+                    regions = self.input.get_input("regions")
+                    updates["regions"] = regions
+                except ValueError:
+                    break
+            elif action == '3':
+                try:
+                    rate = self.input.get_input("rate")
+                    updates["rate"] = rate
+                except ValueError:
+                    break
+            else:
+                self.warning_msg = "Please select available option"
+
+            if(len(updates) > 0):
+                self.logic.update_vehicletype(id, updates)
+                self.success_msg = "{} has been modified".format(list(updates.keys())[0].capitalize())
+
     # Delete vehicle
     def delete(self, id):  
         confirmation = input("Are you sure you want to delete this vehicle? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
         if confirmation == 'y':
             self.logic.delete_vehicle(id)
+            return True
+        return False
+
+    def delete_type(self, id):  
+        confirmation = input("Are you sure you want to delete this vehicle? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
+        if confirmation == 'y':
+            self.logic.delete_vehicletype(id)
             return True
         return False
 

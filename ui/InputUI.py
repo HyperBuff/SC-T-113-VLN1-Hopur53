@@ -74,7 +74,7 @@ class InputUI:
             final_list.append(new_list[0])
             final_list.append(new_list[1])
             if len(final_list[0]) >= 1 and len(final_list[1]) >= 1 and len(final_list[2]) >= 2:
-                return True
+                return email
             else:
                 return False 
         else:
@@ -139,6 +139,6 @@ class InputUI:
             return list_to_str
         else: 
             return False
-    
+
     def is_date_valid(self, date):
             return True
