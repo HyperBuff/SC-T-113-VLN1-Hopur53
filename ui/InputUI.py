@@ -73,16 +73,19 @@ class InputUI:
 
     def is_email_valid(self, email):
         email_list = email.split("@")
-        if len(email_list) == 2:
-            new_list = email_list[1].split(".")
-            final_list = []
-            final_list.append(email_list[0])
-            final_list.append(new_list[0])
-            final_list.append(new_list[1])
-            if len(final_list[0]) >= 1 and len(final_list[1]) >= 1 and len(final_list[2]) >= 2:
-                return email
-            else:
-                return False 
+        try:
+            if len(email_list) == 2:
+                new_list = email_list[1].split(".")
+                final_list = []
+                final_list.append(email_list[0])
+                final_list.append(new_list[0])
+                final_list.append(new_list[1])
+                if len(final_list[0]) >= 1 and len(final_list[1]) >= 1 and len(final_list[2]) >= 2:
+                    return email
+                else:
+                    return False 
+        except IndexError:
+            return False
         else:
             return False
     
