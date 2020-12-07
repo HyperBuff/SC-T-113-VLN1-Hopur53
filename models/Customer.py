@@ -1,6 +1,6 @@
 
 class Customer:
-    def __init__(self, name, address, postal, ssn, phone, email, country, id=None) -> None:
+    def __init__(self, name, address, postal, ssn, phone, email, country, customer_id = None):
         self.name = name
         self.address = address
         self.postal = postal
@@ -8,6 +8,6 @@ class Customer:
         self.phone = phone
         self.email = email
         self.country = country
-        self.id = id
+        self.id = customer_id
 
     
