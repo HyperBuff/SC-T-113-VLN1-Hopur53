@@ -6,7 +6,7 @@ class EmployeeRepository:
 
     def __init__(self):
         self.filename = 'data/employee.csv'
-        self.fieldnames = ['role', 'name', 'address', 'postal', 'ssn', 'phone', 'homephone', 'email', 'id', 'location']
+        self.fieldnames = ['role', 'name', 'address', 'postal', 'ssn', 'phone', 'homephone', 'email', 'location_id', 'id']
 
     def create(self, employee: Employee):
         row = dict((key, getattr(employee, key)) for key in self.fieldnames)
@@ -15,7 +15,7 @@ class EmployeeRepository:
 
     def read(self):
         rows = Repository()._read(self.filename)
-        users = [Employee(row['role'], row['name'], row['address'], row['postal'], row['ssn'], row['phone'], row['homephone'], row['email'], row['id'], row['location']) for row in rows]
+        users = [Employee(row['role'], row['name'], row['address'], row['postal'], row['ssn'], row['phone'], row['homephone'], row['email'], row['location_id'], row['id']) for row in rows]
         return users
     
     def update(self, id, updates: dict):
