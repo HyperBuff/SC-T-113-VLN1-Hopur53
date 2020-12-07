@@ -19,22 +19,32 @@ class InputUI:
                         if not self.is_phone_valid(user_input):
                             self.printer.print_warning("\t{} is not valid".format(title.capitalize()))
                             passed = False
+                        else:
+                            user_input = self.is_phone_valid(user_input)
                     if validation == "ssn":
                         if not self.is_ssn_valid(user_input):
                             self.printer.print_warning("\t{} is not valid".format(title.capitalize()))
                             passed = False
+                        else:
+                            user_input = self.is_ssn_valid(user_input)
                     if validation == "email":
                         if not self.is_email_valid(user_input):
                             self.printer.print_warning("\t{} is not valid".format(title.capitalize()))
                             passed = False
+                        else:
+                            user_input = self.is_email_valid(user_input)
                     if validation == "year":
                         if not self.is_year_valid(user_input):
                             self.printer.print_warning("\t{} is not valid".format(title.capitalize()))
                             passed = False
+                        else:
+                            user_input = self.is_year_valid(user_input)
                     if validation == "date":
                         if not self.is_date_valid(user_input):
                             self.printer.print_warning("\t{} is not valid".format(title.capitalize()))
                             passed = False
+                        else:
+                            user_input = self.is_date_valid(user_input)
                 if passed:
                     break
         return user_input

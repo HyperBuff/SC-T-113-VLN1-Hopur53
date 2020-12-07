@@ -90,7 +90,7 @@ class LocationUI:
         while True:
             location = self.logic.get_location_by_id(location_id)
             self.printer.header("View location")
-            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\n".format(location_id, location.role, location.name, location.email, location.ssn, location.phone, location.homephone, location.address, location.postal))
+            print("ID:\t\t\t\t{}\nCountry:\t\t\t{}\nAirport:\t\t\t{}\nPhone number:\t\t\t{}\nOpening hours:\t\t\t{}\n".format(location_id, location.country, location.airport, location.phone, location.hours))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.print_msg()
@@ -109,11 +109,11 @@ class LocationUI:
     # Prints out table of location
     def print_locations(self, locations, start, end, current_page, last_page):
         if len(locations) > 0:
-            print("|{:^6}|{:^15}|{:^30}|{:^40}|{:^30}|{:^20}|{:^20}|{:^30}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code"))
-            print('-' * 216)
+            print("|{:^6}|{:<20}|{:<25}|{:<20}|{:<20}|".format("ID", "Country", "Airport", "Phone number", "Opening hours"))
+            print('-' * 97)
             for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<30}|{:<40}|{:<30}|{:<20}|{:<20}|{:<30}|{:<15}|".format(locations[i].id, locations[i].role, locations[i].name, locations[i].email, locations[i].ssn, locations[i].phone, locations[i].homephone, locations[i].address, locations[i].postal))
-            print("{:^216}".format("Page {} of {}".format(current_page, last_page)))
+                print("|{:^6}|{:<20}|{:<25}|{:<20}|{:<20}|".format(locations[i].id, locations[i].country, locations[i].airport, locations[i].phone, locations[i].hours))
+            print("{:^97}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
             self.warning_msg = "No locations found"
@@ -141,7 +141,7 @@ class LocationUI:
         while True:
             updates = {}
             self.printer.header("Edit location")
-            self.printer.print_options(['Change role', 'Change email', 'Change mobile phone', 'Change home phone', 'Edit address', 'Edit postal code'])
+            self.printer.print_options(['Change country', 'Change airport', 'Change phone', 'Change opening hours'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.print_msg()
