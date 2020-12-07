@@ -85,7 +85,7 @@ class MainUI:
         contract = ContractUI(employee_id)
         contract.menu()
 
-    def vehicles(self, employee_id):
+    def vehicles(self):
         vehicle = VehicleUI()
         vehicle.menu()
 
