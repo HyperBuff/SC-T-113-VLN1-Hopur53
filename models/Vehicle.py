@@ -10,3 +10,6 @@ class Vehicle:
         self.licence_type = licence_type
         self.location = location
         self.id = id
+
+
+        
