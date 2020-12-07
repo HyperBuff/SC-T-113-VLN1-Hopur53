@@ -1,8 +1,7 @@
 name,location_id,rate,id
-thing,iceland,2500,2
-RAte,ef,100,4
-Adalsteinn,asd,ad,5
-Boats,1,200,6
-Airplanes,10,+,7
-e,1,1888,8
-Airplane,1,100,9
+Light road,All,700,1
+Light off-road,All,900,2
+Light water,All,850,3
+Medium off-road,2-3,1800,4
+Medium off-road,6,1400,5
+Medium water,4,2200,6
