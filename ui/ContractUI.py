@@ -132,17 +132,17 @@ class ContractUI:
             address = self.input.get_input("address")
 
             date_from = self.input.get_input("date from", ["date"])
-            date_to = self.input.get_input("date from", ["date"])
+            date_to = self.input.get_input("date to", ["date"])
 
             vehicle_id = self.input.get_input("vehicle id")
             location = self.input.get_input("location")
             vehicle_status = self.input.get_input("vehicle status")
 
-            loan_date = self.input.get_input("date from", ["date"])
-            return_date = self.input.get_input("date from", ["date"])
+            loan_date = self.input.get_input("loan date", ["date"])
+            return_date = self.input.get_input("return date", ["date"])
 
             total = self.input.get_input("total")
-            loan_status = self.input.get_input("loan_status")
+            loan_status = self.input.get_input("loan status")
 
             new_contract = Contract(name, phone, email, address, date_from, date_to, vehicle_id, location, vehicle_status, self.employee_id, loan_date, return_date, total, loan_status)
             self.logic.create_contract(new_contract)
