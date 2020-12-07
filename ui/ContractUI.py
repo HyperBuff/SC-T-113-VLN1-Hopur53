@@ -144,7 +144,7 @@ class ContractUI:
             total = self.input.get_input("total")
             loan_status = self.input.get_input("loan status")
 
-            new_contract = Contract(name, phone, email, address, date_from, date_to, vehicle_id, location, vehicle_status, self.employee_id, loan_date, return_date, total, loan_status)
+            new_contract = Contract(name, phone, email, address, vehicle_id, vehicle_status, self.employee_id, location, date_from, date_to, loan_date, loan_status, return_date, total)
             self.logic.create_contract(new_contract)
             return True
         except ValueError:
