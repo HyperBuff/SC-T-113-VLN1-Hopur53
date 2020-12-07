@@ -80,7 +80,7 @@ class InputUI:
         else:
             return False
     
-    def is_phone_number_valid(self, phone):
+    def is_phone_valid(self, phone):
         str_list = []
         for letter in phone:
             try:
@@ -123,8 +123,7 @@ class InputUI:
             list_to_str = ''.join(str(e) for e in int_list)
             return list_to_str
         else:
-            return False
-    
+            return False  
     
     def is_ssn_valid(self, ssn):
         int_list = []
