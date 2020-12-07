@@ -1,31 +1,37 @@
-import math
- 
 from logic.MainLogic import MainLogic
 from models.Contract import Contract
- 
-from ui.PrinterUI import PrinterUI
- 
-class EmployeeUI:
- 
-    def __init__(self):
-            self.logic = MainLogic()
-            self.printer = PrinterUI()
-            self.success_msg = ""
-            self.warning_msg = ""
 
-    # Prints out employee's menu
+from ui.PrinterUI import PrinterUI
+from ui.InputUI import InputUI
+
+class ContractUI:
+
+    def __init__(self, employee_id):
+        self.items_per_page = 10
+
+        self.logic = MainLogic()
+        self.printer = PrinterUI()
+        self.input = InputUI()
+
+        self.employee_id = employee_id
+        self.success_msg = ""
+        self.warning_msg = ""
+
+    # Prints out contract's menu
     def menu(self):
         while True:
             self.printer.header("Contracts Menu")
-            self.printer.print_options(['Create an contracts', 'View contracts'])
+            self.printer.print_options(['Create an contract', 'View contracts'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.print_msg()
+
             action = input("Choose an option: ").lower()
+            
             if action == '1':
                 if self.create():
                     self.success_msg = "New contract has been created"
-                    self.view()
+                    self.view(True)
             elif action == '2':
                 self.view()
             elif action == 'q':
@@ -33,158 +39,29 @@ class EmployeeUI:
             else:
                 self.warning_msg = "Please select available option"
 
-    def create(self):
-        # self.header("Create New Contract")
-        self.printer.header("Add employee")
-        self.printer.new_line()
-        self.printer.print_fail("Press q to go back")
-        self.printer.new_line()
-
-        print("Enter employee details:")
-
-        while True :
-            name = input("\tFull name: ")
-            if name == 'q' :
-                return
-            if len(name) < 1 :
-                self.printer.print_warning("Name must be at least 1 character")
-            else:
-                break
-
-        while True :        
-            ssn = input("\tEnter social security number: ")
-            if ssn == 'q':
-                return
-            if len(ssn) < 1:
-                self.printer.print_warning("Social security number must be at least 1 character")
-            elif not self.logic.is_ssn_valid(ssn):
-                self.printer.print_warning("Social security number is not valid")
-            else:
-                break
-
-        while True:
-            email = input("\tEnter email: ")
-            if email == 'q':
-                return
-            if len(email) < 1:
-                self.printer.print_warning("Email must be at least 1 character")
-            elif not self.logic.is_email_valid(email):
-                self.printer.print_warning("Email is not valid")
-            else:
-                break
-
-        while True:
-            phone = input("\tEnter mobile phone: ")
-            if phone == 'q':
-                return
-            if len(phone) < 1:
-                self.printer.print_warning("Mobile phone must be at least 1 character")
-            elif not self.logic.is_phone_number_valid(phone):
-                self.printer.print_warning("Phone number is not valid")
-            else:
-                break
-
-        while True:
-            address = input("\tEnter address: ")
-            if address == 'q':
-                return
-            if len(address) < 1:
-                self.printer.print_warning("Address must be at least 1 character")
-            else:
-                break
-
-        while True:
-            postal = input("\tEnter postal: ")
-            if postal == 'q':
-                return
-            if len(postal) < 1:
-                self.printer.print_warning("Postal must be at least 1 character")
-            else:
-                break
-
-        while True :        
-            country_origin = input("\tEnter country of recidence: \n")
-            if country_origin ==  'q':
-                return
-            if len(country_origin) < 1:
-                self.printer.print_warning("Country of recidence must be at least 1 character")
-            else:
-                break   
-
-            print ("Vehicle information\n")
-
-        while True :
-            vehicle_id = input("\tVehicle chosen: ")
-            if vehicle_id ==  'q':
-                return
-            if len(vehicle_id) < 1:
-                self.printer.print_warning("Vehicle ID must be at least 1 character")
-            else:
-                break
-
-        while True :
-            vehicle_type = input("\tEnter vehicle type")
-            if vehicle_id ==  'q':
-                return
-            if len(vehicle_id) < 1:
-                self.printer.print_warning("Vehicle type must be at least 1 character")
-            else:
-                break
-
-        print ("\nRental information\n")
-        print ('''\33[;34mPlease enter pick-up and drop-off time, use the format dd.mm.yyyy 
-        and seperate date and time with a comma\33[;0m
-        ''')
-        #Þarf að gera rétt format villucheck
-        date_from = input("\tEnter pick-up date: ")
-        date_to = input("\tEnter drop-off date: ")
-        rental_period = date_from + " - " + date_to
-        print ("\t\t\33[;36mRental period: \33[;0m", rental_period) 
-
-        while True : 
-            #Vantar format villucheck
-            contract_made = input ("\tDate of booking: ")
-            if contract_made == 'q' :
-                return
-            if len(contract_made) > 1 :
-                self.printer.print_warning("Date of booking must be at least 1 character")
-            else:
-                break
-
-        while True : 
-            destination = input("\tCountry of rental: ")
-            if destination == 'q':
-                return
-            if len(destination) < 1:
-                self.printer.print_warning("Country of rental must be at least 1 character")
-            else :
-                break
-
-        print("\n\n1. Print contract\n2. Modify Contract\n\33[;31mPress q to go back\33[;0m\n")
-        action = input("\nChoose an option: ").lower() 
-
-        if action == "1":
-            return print_contracts()
-        if action == "2":
-            return edit(self,id)
-        if action == "q":
-            return menu()
-
-    # Prints out all employee
-    def view(self, current_page = 1):
-
+    # Prints out all contract
+    def view(self, created = False):
+        current_page = 1
         while True:   
             contracts = self.logic.get_all_contracts()
-            contract_count = len(contracts)
-            last_page = math.ceil(contract_count / self.items_per_page)
-            self.printer.header("View contracts")
+            contracts_count = len(contracts)
+            last_page = int(contracts_count / self.items_per_page) + (contracts_count % self.items_per_page > 0)
+            if current_page > last_page:
+                current_page = last_page
+            if created == True:
+                current_page = last_page
+                created = False
             start = (current_page - 1) * self.items_per_page
-            end = start + 10 if not current_page == last_page else contract_count
+            end = start + 10 if not current_page == last_page else contracts_count
+
+            self.printer.header("View contracts")
             self.print_contracts(contracts, start, end, current_page, last_page)
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.print_msg()
+
             action = input("(N)ext page / (P)revious page / (S)elect contract: ").lower()
+
             if action == 'q':
                 break
             elif action == 'n' or action == "next":
@@ -200,162 +77,135 @@ class EmployeeUI:
                     current_page = 1
                     self.warning_msg = "You are currenly on the first page"
             elif action == 's' or action == "select":
-                employee_id = input("Select contract by ID: ")
-                employee = self.logic.get_contract_by_id(contract_id)
-                if employee is None:
+                contract_id = input("Select contract by ID: ")
+                contract = self.logic.get_contract_by_id(contract_id)
+                if contract is None:
                     self.warning_msg = "Contract not found"
                 else:
                     self.select_contract(contract_id)
             else:
                 self.warning_msg = "Please select available option"
- 
-    # Prints out single employee
+
+    # Prints out single contract
     def select_contract(self, contract_id):
         while True:
             contract = self.logic.get_contract_by_id(contract_id)
             self.printer.header("View contract")
-            print("ID:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nVehicle ID:\t\t\t{}\nRental Period:\t\t\t\t{}\nCountry:\t\t\t\t{}".format(contract.id, contract.name, contract.email, vehicle.id, rental_period, contract.destination))
+            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\n".format(contract_id, contract.role, contract.name, contract.email, contract.ssn, contract.phone, contract.homephone, contract.address, contract.postal))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.print_msg()
             action = input("(E)dit / (D)elete: ").lower()
             if action == 'q':
-                    break
+                break
             elif action == 'e' or action == 'edit':
-                    self.edit(contract_id)
+                self.edit(contract_id)
             elif action == 'd' or action == 'delete':
-                    self.delete(contract_id)
-                    self.success_msg = "Contract has been deleted"
+                if self.delete(contract_id):
+                    self.success_msg = "contract has been deleted"
                     break
             else:
                 self.warning_msg = "Please select available option"
+            
+    # Prints out table of contract
+    def print_contracts(self, contracts, start, end, current_page, last_page):
+        if len(contracts) > 0:
+            print("|{:^6}|{:^15}|{:^30}|{:^40}|{:^30}|{:^20}|{:^20}|{:^30}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code"))
+            print('-' * 216)
+            for i in range(start, end):
+                print("|{:^6}|{:<15}|{:<30}|{:<40}|{:<30}|{:<20}|{:<20}|{:<30}|{:<15}|".format(contracts[i].id, contracts[i].role, contracts[i].name, contracts[i].email, contracts[i].ssn, contracts[i].phone, contracts[i].homephone, contracts[i].address, contracts[i].postal))
+            print("{:^216}".format("Page {} of {}".format(current_page, last_page)))
+            self.printer.new_line()
+        else:
+            self.warning_msg = "No contracts found"
 
+    # Create contract
+    def create(self):
+        self.printer.header("Add contract")
+        self.printer.new_line()
+        self.printer.print_fail("Press q to go back")
+        self.printer.new_line()
+        try:
+            name = self.input.get_input("name")
+            phone = self.input.get_input("phone", ["phone"])
+            email = self.input.get_input("email", ["email"])
+            address = self.input.get_input("address")
+
+            date_from = self.input.get_input("date from", ["date"])
+            date_to = self.input.get_input("date from", ["date"])
+
+            vehicle_id = self.input.get_input("vehicle id")
+            location = self.input.get_input("location")
+            vehicle_status = self.input.get_input("vehicle status")
+
+            loan_date = self.input.get_input("date from", ["date"])
+            return_date = self.input.get_input("date from", ["date"])
+
+            total = self.input.get_input("total")
+            loan_status = self.input.get_input("loan_status")
+
+            new_contract = Contract(name, phone, email, address, date_from, date_to, vehicle_id, location, vehicle_status, self.employee_id, loan_date, return_date, total, loan_status)
+            self.logic.create_contract(new_contract)
+            return True
+        except ValueError:
+            return False
+       
+    # Edit contract
     def edit(self, id):
         while True:
             updates = {}
-            self.printer.header("Edit employee")
-            self.printer.print_options(['Change role', 'Change email', 'Change mobile phone', 'Change home phone', 'Edit address', 'Edit postal code'])
+            self.printer.header("Edit contract")
+            self.printer.print_options(['Change name', 'Change phone', 'Change email', 'Change address', 'Edit date from', 'Edit date to', 'Edit vehicle id', 'Edit location', 'Edit vehicle status', 'Edit loan date', 'Edit return date', 'Edit total', 'Edit loan status'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.print_msg()
             action = input("Choose an option: ").lower()
             if action == 'q':
                 break
-            if action == '1':
-                name = input("\tEnter name: ")
-                while True:
-                    if name == 'q':
-                        break    
-                    if len(name) < 1:
-                        self.printer.print_warning("Email must be at least 1 character")
-                    elif not self.logic.is_email_valid(name):
-                        self.printer.print_warning("Email is not valid")
-                    else:
-                        updates["name"] = name
+            elif action == '1':
+                try:
+                    name = self.input.get_input("name")
+                    updates["name"] = name
+                except ValueError:
+                    break
             elif action == '2':
-                ssn = input("\tEnter social security number: ")
-                while True:
-                    if ssn == 'q':
-                        break
-                    if len(ssn) < 1:
-                        self.printer.print_warning("Social security number must be at least 1 character")
-                    elif not self.logic.is_ssn_valid(ssn):
-                        self.printer.print_warning("Social security number is not valid")
-                        updates["ssn"] = ssn
-                        break
+                try:
+                    phone = self.input.get_input("phone", ["phone"])
+                    updates["phone"] = phone
+                except ValueError:
+                    break
             elif action == '3':
-                email = input("\tEnter email: ")
-                while True:
-                    if email == 'q':
-                        break
-                    if len(email) < 1:
-                        self.printer.print_warning("Email must be at least 1 character")
-                    elif not self.logic.is_email_valid(email):
-                        self.printer.print_warning("Email is not valid")
-                    else:
-                        updates["email"] = email
-                        break
+                try:
+                    email = self.input.get_input("email", ["email"])
+                    updates["email"] = email
+                except ValueError:
+                    break
             elif action == '4':
-                phone = input("\tEnter home phone: ")
-                while True:
-                    if phone == 'q':
-                        break
-                    if len(phone) < 1:
-                        self.printer.print_warning("Mobile phone must be at least 1 character")
-                    elif not self.logic.is_phone_number_valid(phone):
-                        self.printer.print_warning("Phone number is not valid")
-                    else:
-                        updates["homephone"] = phone
-                        break
+                try:
+                    address = self.input.get_input("address")
+                    updates["address"] = address
+                except ValueError:
+                    break
             elif action == '5':
-                address = input("\tEnter address: ")
-                while True:
-                    if address == 'q':
-                        break
-                    if len(address) < 1:
-                        self.printer.print_warning("Address must be at least 1 character")
-                    else:
-                        updates["address"] = address
-                        break
+                try:
+                    date_from = self.input.get_input("date from")
+                    updates["date_from"] = date_from
+                except ValueError:
+                    break
             elif action == '6':
-                postal = input("\tEnter postal: ")
-                while True:
-                    if postal == 'q':
-                        return
-                    if len(postal) < 1:
-                        self.printer.print_warning("Postal must be at least 1 character")
-                    else:
-                        updates["postal"] = postal
-                        break
-            elif action == '7':
-                country_origin = input("\tEnter country of recidence: \n")
-                while True:
-                    if country_origin ==  'q':
-                        return
-                    if len(country_origin) < 1:
-                        self.printer.print_warning("Country of recidence must be atleast 1 character")
-                    else:
-                        updates["country_origin"] = country_origin
-                        break
-            elif action == '8':
-                vehicle_id = input("\tEnter new vehicle ID: ")
-                if vehicle_id == 'q':
-                    return
-                if len(vehicle_id) < 1:
-                    self.printer.print_warning("Vehicle type must be at least 1 character")
-                else:
+                try:
+                    date_from = self.input.get_input("date to")
+                    updates["date_from"] = date_from
+                except ValueError:
                     break
-            elif action == '9':
-                date_from = input("\tEnter pick-up date: ")
-            elif action == '10':
-                data_to = input("\tEnter drop-off date: ")
-            elif action == '11':
-                contract_made == input("\tDate of book: ")
-                if contract_made == 'q' :
-                    return
-                if len(contract_made) > 1 :
-                    self.printer.print_warning("Date of booking must be at least 1 character")
-                else:
-                    break
-            elif action == '12':
-                destination = input("\tCountry of rental: ")
-                if destination == 'q':
-                    return
-                if len(destination) < 1:
-                    self.printer.print_warning("Country of rental must be at least 1 character")
-                else :
-                    break
+            else:
+                self.warning_msg = "Please select available option"
 
-    # Prints out table of employee
-    def print_contracts(self, contract, start, end, current_page, last_page):
-            print("|{:^6}|{:^15}|{:^30}|{:^40}|{:^30}|{:^20}|{:^20}|{:^30}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code"))
-            print('-' * 216)
-            for i in range(start, end):
-                    print("|{:^6}|{:<15}|{:<30}|{:<40}|{:<30}|{:<20}|{:<20}|{:<30}|{:<15}|".format(employees[i].id, employees[i].role, employees[i].name, employees[i].email, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].address, employees[i].postal))
-            print("{:^216}".format("Page {} of {}".format(current_page, last_page)))
-            self.printer.new_line()
-    
-            # Delete employee
+            if(len(updates) > 0):
+                self.logic.update_contract(id, updates)
+                self.success_msg = "{} has been modified".format(list(updates.keys())[0].capitalize())
+
+    # Delete contract
     def delete(self, id):  
         confirmation = input("Are you sure you want to delete this contract? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
         if confirmation == 'y':

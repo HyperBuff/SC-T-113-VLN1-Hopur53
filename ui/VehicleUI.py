@@ -1,16 +1,18 @@
-import math
-
 from logic.MainLogic import MainLogic
 from models.Vehicle import Vehicle
 
 from ui.PrinterUI import PrinterUI
+from ui.InputUI import InputUI
 
 class VehicleUI:
 
     def __init__(self):
         self.items_per_page = 10
+
         self.logic = MainLogic()
         self.printer = PrinterUI()
+        self.input = InputUI()
+
         self.success_msg = ""
         self.warning_msg = ""
 
@@ -18,15 +20,17 @@ class VehicleUI:
     def menu(self):
         while True:
             self.printer.header("Vehicles Menu")
-            self.printer.print_options(['Create a vehicle', 'View vehicle'])
+            self.printer.print_options(['Create an vehicle', 'View vehicles'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.print_msg()
+
             action = input("Choose an option: ").lower()
+            
             if action == '1':
                 if self.create():
                     self.success_msg = "New vehicle has been created"
-                    self.view()
+                    self.view(True)
             elif action == '2':
                 self.view()
             elif action == 'q':
@@ -34,21 +38,29 @@ class VehicleUI:
             else:
                 self.warning_msg = "Please select available option"
 
-    # Prints out all vehicles
-    def view(self, current_page = 1):
-
+    # Prints out all vehicle
+    def view(self, created = False):
+        current_page = 1
         while True:   
             vehicles = self.logic.get_all_vehicles()
             vehicles_count = len(vehicles)
-            last_page = math.ceil(vehicles_count / self.items_per_page)
-            self.printer.header("View vehicles")
+            last_page = int(vehicles_count / self.items_per_page) + (vehicles_count % self.items_per_page > 0)
+            if current_page > last_page:
+                current_page = last_page
+            if created == True:
+                current_page = last_page
+                created = False
             start = (current_page - 1) * self.items_per_page
             end = start + 10 if not current_page == last_page else vehicles_count
+
+            self.printer.header("View vehicles")
             self.print_vehicles(vehicles, start, end, current_page, last_page)
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.print_msg()
+
             action = input("(N)ext page / (P)revious page / (S)elect vehicle: ").lower()
+
             if action == 'q':
                 break
             elif action == 'n' or action == "next":
@@ -89,11 +101,11 @@ class VehicleUI:
                 self.edit(vehicle_id)
             elif action == 'd' or action == 'delete':
                 if self.delete(vehicle_id):
-                    self.success_msg = "Vehicle has been deleted"
-                    break
+                        self.success_msg = "Vehicle has been deleted"
+                        break
             else:
                 self.warning_msg = "Please select available option"
-
+            
     # Prints out table of vehicle
     def print_vehicles(self, vehicles, start, end, current_page, last_page):
         if len(vehicles) > 0:
@@ -111,186 +123,88 @@ class VehicleUI:
         self.printer.header("Add vehicle")
         self.printer.new_line()
         self.printer.print_fail("Press q to go back")
-        self.printer.new_line()   
         self.printer.new_line()
-        print("Enter vehicle details:")
-        while True:
-            manufacturer = input("\tEnter manufacturer: ")
-            if manufacturer == 'q':
-                return
-            if len(manufacturer) < 1:
-                self.printer.print_warning("Manufacturer must been at least 1 character")
-            else:
-                break
-        while True:
-            model = input("\tEnter model: ")
-            if model == 'q':
-                return
-            if len(model) < 1:
-                self.printer.print_warning("Model must been at least 1 character")
-            #elif not self.logic.is_email_valid(email):
-             #   self.printer.print_warning("Email is not valid")
-            else:
-                break
-        while True:
-            vehicle_type = input("\tEnter vehicle type: ")
-            if vehicle_type == 'q':
-                return
-            if len(vehicle_type) < 1:
-                self.printer.print_warning("Vehicle type must been at least 1 character")
-            #elif not self.logic.is_ssn_valid(ssn):
-             #   self.printer.print_warning("Social security number is not valid")
-            else:
-                break
-
-        while True:
-            status = input("\tEnter vehicle status: ")
-            if status == 'q':
-                return
-            if len(status) < 1:
-                self.printer.print_warning("Vehicle status must been at least 1 character")
-            #elif not self.logic.is_ssn_valid(ssn):
-             #   self.printer.print_warning("Social security number is not valid")
-            else:
-                break
-        while True:
-            man_year = input("\tEnter manufacturing year: ")
-            if man_year == 'q':
-                return
-            if len(man_year) < 1:
-                self.printer.print_warning("Manufacturing year must been at least 1 character")
-            #elif not self.logic.is_phone_number_valid(phone):
-             #   self.printer.print_warning("Phone number is not valid")
-            else:
-                break
-        while True:
-            color = input("\tEnter color: ")
-            if color == 'q':
-                return
-            if len(color) < 1:
-                self.printer.print_warning("Color must been at least 1 character")
-            #elif not self.logic.is_phone_number_valid(phone):
-             #   self.printer.print_warning("Phone number is not valid")
-            else:
-                break
-        while True:
-            license_type = input("\tEnter licence type: ")
-            if license_type == 'q':
-                return
-            if len(license_type) < 1:
-                self.printer.print_warning("Licence type must been at least 1 character")
-            else:
-                break
-        while True:
-            location = input("\tEnter location: ")
-            if location == 'q':
-                return
-            if len(location) < 1:
-                self.printer.print_warning("Location must been at least 1 character")
-            else:
-                break
-        new_vehicle = Vehicle(manufacturer, model, vehicle_type, status, man_year, color, license_type, location)
-        self.logic.create_vehicle(new_vehicle)
-        return True
+        try:
+            manufacturer = self.input.get_input("manufacturer")
+            model = self.input.get_input("model")
+            vehicle_type = self.input.get_input("vehicle type")
+            status = self.input.get_input("status")
+            man_year = self.input.get_input("manufacturing year", ["year"])
+            color = self.input.get_input("color")
+            licence_type = self.input.get_input("licence type")
+            location = self.input.get_input("location")
+            new_vehicle = Vehicle(manufacturer, model, vehicle_type, status, man_year, color, licence_type, location)
+            self.logic.create_vehicle(new_vehicle)
+            return True
+        except ValueError:
+            return False
+       
     # Edit vehicle
     def edit(self, id):
         while True:
             updates = {}
             self.printer.header("Edit vehicle")
-            self.printer.print_options(['Change manufacturer', 'Change model', 'Change vehicle type', 'Change manufacturing year', 'Change color', 'Change licence type','Change location'])
+            self.printer.print_options(['Change manufacturer', 'Change model', 'Change vehicle type', 'Change status','Change manufacturing year', 'Change color', 'Change licence type','Change location'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.print_msg()
             action = input("Choose an option: ").lower()
             if action == 'q':
                 break
-
-            if action == '1':
-                while True:
-                    manufacturer = input("\tEnter manufacturer: ")
-                    if manufacturer == 'q':
-                        break
-                    if len(manufacturer) < 1:
-                        self.printer.print_warning("Manufacturer must been at least 1 character")
-                    #elif not self.logic.is_email_valid(email):
-                     #   self.printer.print_warning("Email is not valid")
-                    else:
-                        updates["manufacturer"] = manufacturer
-                        break
+            elif action == '1':
+                try:
+                    manufacturer = self.input.get_input("manufacturer")
+                    updates["manufacturer"] = manufacturer
+                except ValueError:
+                    break
             elif action == '2':
-                while True:
-                    model = input("\tEnter model: ")
-                    if model == 'q':
-                        break
-                    if len(model) < 1:
-                        self.printer.print_warning("Model must been at least 1 character")
-                    #elif not self.logic.is_phone_number_valid(phone):
-                     #   self.printer.print_warning("Phone number is not valid")
-                    else:
-                        updates["model"] = model
-                        break
+                try:
+                    model = self.input.get_input("model")
+                    updates["model"] = model
+                except ValueError:
+                    break
             elif action == '3':
-                while True:
-                    vehicle_type = input("\tEnter vehicle type: ")
-                    if vehicle_type == 'q':
-                        break
-                    if len(vehicle_type) < 1:
-                        self.printer.print_warning("Vehicle type must been at least 1 character")
-                    #elif not self.logic.is_phone_number_valid():
-                     #   self.printer.print_warning("Phone number is not valid")
-                    else:
-                        updates["vehicle type"] = vehicle_type
-                        break
-            elif action == '4':
-                while True:
-                    man_year = input("\tEnter manufacturing year: ")
-                    if man_year == 'q':
-                        break
-                    #if len(man_year) < 1:
-                     #   self.printer.print_warning("Manu must been at least 1 character")
-                    #else:
-                     #   updates["address"] = address
-                      #  break
+                try:
+                    vehicle_type = self.input.get_input("vehicle type")
+                    updates["vehicle_type"] = vehicle_type
+                except ValueError:
+                    break
             elif action == '5':
-                while True:
-                    color = input("\tEnter color: ")
-                    if color == 'q':
-                        return
-                    if len(color) < 1:
-                        self.printer.print_warning("Color must been at least 1 character")
-                    else:
-                        updates["color"] = color
-                        break
-            
+                try:
+                    status = self.input.get_input("status")
+                    updates["status"] = status
+                except ValueError:
+                    break
+            elif action == '5':
+                try:
+                    man_year = self.input.get_input("manufacturing year", ["year"])
+                    updates["man_year"] = man_year
+                except ValueError:
+                    break
             elif action == '6':
-                while True:
-                    license_type = input("\tEnter licence type: ")
-                    if color == 'q':
-                        return
-                    if len(license_type) < 1:
-                        self.printer.print_warning("Licence type must been at least 1 character")
-                    else:
-                        updates["licence type"] = license_type
-                        break
-            
+                try:
+                    color = self.input.get_input("color")
+                    updates["color"] = color
+                except ValueError:
+                    break
             elif action == '7':
-                while True:
-                    location = input("\tEnter location: ")
-                    if location == 'q':
-                        return
-                    if len(location) < 1:
-                        self.printer.print_warning("Location must been at least 1 character")
-                    else:
-                        updates["location"] = location
-                        break
-            self.logic.update_vehicle(id, updates)
+                try:
+                    licence_type = self.input.get_input("licence type")
+                    updates["licence_type"] = licence_type
+                except ValueError:
+                    break
+            elif action == '8':
+                try:
+                    location = self.input.get_input("location")
+                    updates["location"] = location
+                except ValueError:
+                    break
+            else:
+                self.warning_msg = "Please select available option"
 
-            keys = list(updates.keys())
-
-            if(len(keys) > 0):
-                col = keys[0]
-                self.success_msg = "{} has been modified".format(col.capitalize())
-
+            if(len(updates) > 0):
+                self.logic.update_vehicle(id, updates)
+                self.success_msg = "{} has been modified".format(list(updates.keys())[0].capitalize())
 
     # Delete vehicle
     def delete(self, id):  
@@ -299,8 +213,6 @@ class VehicleUI:
             self.logic.delete_vehicle(id)
             return True
         return False
-
-
 
     # Outputs warnings and success messages
     def print_msg(self):
@@ -311,6 +223,4 @@ class VehicleUI:
             self.printer.print_success(self.success_msg)
             self.success_msg = ""
         else:
-            self.printer.new_line()      
-
-   
+            self.printer.new_line()

@@ -1,16 +1,18 @@
-import math
-
 from logic.MainLogic import MainLogic
 from models.Employee import Employee
 
 from ui.PrinterUI import PrinterUI
+from ui.InputUI import InputUI
 
 class EmployeeUI:
 
     def __init__(self, employee_id):
         self.items_per_page = 10
+
         self.logic = MainLogic()
         self.printer = PrinterUI()
+        self.input = InputUI()
+
         self.employee_id = employee_id
         self.success_msg = ""
         self.warning_msg = ""
@@ -23,11 +25,13 @@ class EmployeeUI:
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.print_msg()
+
             action = input("Choose an option: ").lower()
+            
             if action == '1':
                 if self.create():
                     self.success_msg = "New employee has been created"
-                    self.view()
+                    self.view(True)
             elif action == '2':
                 self.view()
             elif action == 'q':
@@ -36,20 +40,28 @@ class EmployeeUI:
                 self.warning_msg = "Please select available option"
 
     # Prints out all employee
-    def view(self, current_page = 1):
-
+    def view(self, created = False):
+        current_page = 1
         while True:   
             employees = self.logic.get_all_employees()
             employees_count = len(employees)
-            last_page = math.ceil(employees_count / self.items_per_page)
-            self.printer.header("View employees")
+            last_page = int(employees_count / self.items_per_page) + (employees_count % self.items_per_page > 0)
+            if current_page > last_page:
+                current_page = last_page
+            if created == True:
+                current_page = last_page
+                created = False
             start = (current_page - 1) * self.items_per_page
             end = start + 10 if not current_page == last_page else employees_count
+
+            self.printer.header("View employees")
             self.print_employees(employees, start, end, current_page, last_page)
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.print_msg()
+
             action = input("(N)ext page / (P)revious page / (S)elect employee: ").lower()
+
             if action == 'q':
                 break
             elif action == 'n' or action == "next":
@@ -113,87 +125,24 @@ class EmployeeUI:
     # Create employee
     def create(self):
         self.printer.header("Add employee")
-        role = None
         self.printer.new_line()
         self.printer.print_fail("Press q to go back")
         self.printer.new_line()
-        while role == None:
-            role = self.select_role()
-            if role == 'q':
-                return    
-        self.printer.new_line()
-        print("Enter employee details:")
-        while True:
-            name = input("\tEnter name: ")
-            if name == 'q':
-                return
-            if len(name) < 1:
-                self.printer.print_warning("Name must been at least 1 character")
-            else:
-                break
-        while True:
-            email = input("\tEnter email: ")
-            if email == 'q':
-                return
-            if len(email) < 1:
-                self.printer.print_warning("Email must been at least 1 character")
-            elif not self.logic.is_email_valid(email):
-                self.printer.print_warning("Email is not valid")
-            else:
-                break
-        while True:
-            ssn = input("\tEnter social security number: ")
-            if ssn == 'q':
-                return
-            if len(ssn) < 1:
-                self.printer.print_warning("Social security number must been at least 1 character")
-            elif self.logic.is_ssn_valid(ssn) == False:
-                self.printer.print_warning("Social security number is not valid")
-            else:
-                ssn = self.logic.is_ssn_valid(ssn)
-                break
-        while True:
-            phone = input("\tEnter mobile phone: ")
-            if phone == 'q':
-                return
-            if len(phone) < 1:
-                self.printer.print_warning("Mobile phone must been at least 1 character")
-            elif self.logic.is_phone_number_valid(phone) == False:
-                self.printer.print_warning("Phone number is not valid")
-            else:
-                phone = self.logic.is_phone_number_valid(phone)
-                break
-        while True:
-            homephone = input("\tEnter home phone: ")
-            if homephone == 'q':
-                return
-            if len(homephone) < 1:
-                self.printer.print_warning("Home phone must been at least 1 character")
-            elif self.logic.is_phone_number_valid(homephone) == False:
-                self.printer.print_warning("Phone number is not valid")
-            else:
-                homephone = self.logic.is_phone_number_valid(homephone)
-                break
-        while True:
-            address = input("\tEnter address: ")
-            if address == 'q':
-                return
-            if len(address) < 1:
-                self.printer.print_warning("Address must been at least 1 character")
-            else:
-                break
-        while True:
-            postal = input("\tEnter postal: ")
-            if postal == 'q':
-                return
-            if len(postal) < 1:
-                self.printer.print_warning("Postal must been at least 1 character")
-            else:
-                break
-        new_employee = Employee(role, name, address, postal, ssn, phone, homephone, email)
-        self.logic.create_employee(new_employee) 
-        return True         
- 
+        try:
+            role = self.input.get_option("role", ["admin", "delivery", "booking", "mechanic", "financial"])
+            name = self.input.get_input("name")
+            email = self.input.get_input("email", ["email"])
+            ssn = self.input.get_input("social security number", ["ssn"])
+            phone = self.input.get_input("mobile phone", ["phone"])
+            homephone = self.input.get_input("home phone", ["phone"])
+            address = self.input.get_input("address")
+            postal = self.input.get_input("postal code")
+            new_employee = Employee(role, name, address, postal, ssn, phone, homephone, email)
+            self.logic.create_employee(new_employee)
+            return True
+        except ValueError:
+            return False
+       
     # Edit employee
     def edit(self, id):
         while True:
@@ -206,76 +155,48 @@ class EmployeeUI:
             action = input("Choose an option: ").lower()
             if action == 'q':
                 break
-            if action == '1':
-                role = None
-                while role == None:
-                    role = self.select_role()
-                if role == 'q':
-                    break    
-                updates["role"] = role
+            elif action == '1':
+                try:
+                    role = self.input.get_option("role", ["admin", "delivery", "booking", "mechanic", "financial"])
+                    updates["role"] = role
+                except ValueError:
+                    break
             elif action == '2':
-                while True:
-                    email = input("\tEnter email: ")
-                    if email == 'q':
-                        break
-                    if len(email) < 1:
-                        self.printer.print_warning("Email must been at least 1 character")
-                    elif not self.logic.is_email_valid(email):
-                        self.printer.print_warning("Email is not valid")
-                    else:
-                        updates["email"] = email
-                        break
+                try:
+                    email = self.input.get_input("email", ["email"])
+                    updates["email"] = email
+                except ValueError:
+                    break
             elif action == '3':
-                while True:
-                    phone = input("\tEnter mobile phone: ")
-                    if phone == 'q':
-                        break
-                    if len(phone) < 1:
-                        self.printer.print_warning("Mobile phone must been at least 1 character")
-                    elif self.logic.is_phone_number_valid(phone) == False:
-                        self.printer.print_warning("Phone number is not valid")
-                    else:
-                        updates["phone"] = phone
-                        break
+                try:
+                    phone = self.input.get_input("mobile phone", ["phone"])
+                    updates["phone"] = phone
+                except ValueError:
+                    break
             elif action == '4':
-                while True:
-                    homephone = input("\tEnter home phone: ")
-                    if homephone == 'q':
-                        break
-                    if len(homephone) < 1:
-                        self.printer.print_warning("Home phone must been at least 1 character")
-                    elif self.logic.is_phone_number_valid(homephone) == False:
-                        self.printer.print_warning("Phone number is not valid")
-                    else:
-                        updates["homephone"] = self.logic.is_phone_number_valid(homephone)
-                        break
+                try:
+                    homephone = self.input.get_input("home phone", ["phone"])
+                    updates["homephone"] = homephone
+                except ValueError:
+                    break
             elif action == '5':
-                while True:
-                    address = input("\tEnter address: ")
-                    if address == 'q':
-                        break
-                    if len(address) < 1:
-                        self.printer.print_warning("Address must been at least 1 character")
-                    else:
-                        updates["address"] = address
-                        break
+                try:
+                    address = self.input.get_input("address")
+                    updates["address"] = address
+                except ValueError:
+                    break
             elif action == '6':
-                while True:
-                    postal = input("\tEnter postal: ")
-                    if postal == 'q':
-                        return
-                    if len(postal) < 1:
-                        self.printer.print_warning("Postal must been at least 1 character")
-                    else:
-                        updates["postal"] = postal
-                        break
-            self.logic.update_employee(id, updates)
+                try:
+                    postal = self.input.get_input("postal")
+                    updates["postal"] = postal
+                except ValueError:
+                    break
+            else:
+                self.warning_msg = "Please select available option"
 
-            keys = list(updates.keys())
-
-            if(len(keys) > 0):
-                col = keys[0]
-                self.success_msg = "{} has been modified".format(col.capitalize())
+            if(len(updates) > 0):
+                self.logic.update_employee(id, updates)
+                self.success_msg = "{} has been modified".format(list(updates.keys())[0].capitalize())
 
     # Delete employee
     def delete(self, id):  
@@ -284,27 +205,6 @@ class EmployeeUI:
             self.logic.delete_employee(id)
             return True
         return False
-
-    # Select available roles
-    def select_role(self):
-        print("Select role for employee:\n\t1. Admin\n\t2. Delivery\n\t3. Booking\n\t4. Mechanic\n\t5. Financial")
-        action = input("\nChoose an option: ")
-        if action == 'q':
-            return 'q'
-        elif action == str(1):
-            return "Admin"  
-        elif action == str(2):
-            return "Delivery"
-        elif action == str(3):
-            return "Booking"
-        elif action == str(4):
-            return "Mechanic"
-        elif action == str(5):
-            return "Financial"
-        else:
-            self.printer.print_warning("Please select available option")
-            self.printer.new_line()
-            return None
 
     # Outputs warnings and success messages
     def print_msg(self):
