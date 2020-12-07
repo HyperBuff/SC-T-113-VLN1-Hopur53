@@ -54,7 +54,7 @@ class LocationUI:
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.print_msg()
-            action = input("(N)ext page / (P)revious page / (S)elect employee: ").lower()
+            action = input("(N)ext page / (P)revious page / (S)elect location: ").lower()
             if action == 'q':
                 break
             elif action == 'n' or action == "next":
@@ -222,10 +222,24 @@ class LocationUI:
                 self.success_msg = "{} has been modified".format(col.capitalize())
 
 
-    def opening_hours(self):   #Eftir að gera
-        pass
+    def opening_hours(self, current_page = 1):  #Eftir að gera
+        location = self.logic.get_all_locations()
+        location_count = len(location)
+        last_page = math.ceil(location_count / self.items_per_page)
+        start = (current_page - 1) * self.items_per_page
+        end = start + 10 if not current_page == last_page else location_count
+        self.printer.header("Opening hour overview")
+        self.printer.new_line()
+        self.printer.print_fail("Press q to go back")
+        self.printer.new_line()
+        for i in range(start, end):
+            print("\t{}\t\t{}".format(location[i].country, location[i].hours))
+        self.printer.new_line()
+        self.printer.print_fail("Press q to go back")
+        self.print_msg()
 
 
+    
     # Delete location
     def delete(self, id):  
         confirmation = input("Are you sure you want to delete this location? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()

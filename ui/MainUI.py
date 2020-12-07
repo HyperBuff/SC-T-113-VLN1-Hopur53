@@ -90,7 +90,7 @@ class MainUI:
         vehicle.menu()
 
     def employees(self):
-        employee = EmployeeUI()
+        employee = EmployeeUI(self.employee_id)
         employee.menu()
 
     def locations(self):

@@ -7,10 +7,11 @@ from ui.PrinterUI import PrinterUI
 
 class EmployeeUI:
 
-    def __init__(self):
+    def __init__(self, employee_id):
         self.items_per_page = 10
         self.logic = MainLogic()
         self.printer = PrinterUI()
+        self.employee_id = employee_id
         self.success_msg = ""
         self.warning_msg = ""
 
@@ -88,19 +89,26 @@ class EmployeeUI:
             elif action == 'e' or action == 'edit':
                 self.edit(employee_id)
             elif action == 'd' or action == 'delete':
-                if self.delete(employee_id):
-                    self.success_msg = "Employee has been deleted"
+                if self.employee_id != employee_id:
+                    if self.delete(employee_id):
+                        self.success_msg = "Employee has been deleted"
+                        break
+                else:
+                    self.warning_msg = "You can't delete yourself"
             else:
                 self.warning_msg = "Please select available option"
             
     # Prints out table of employee
     def print_employees(self, employees, start, end, current_page, last_page):
-        print("|{:^6}|{:^15}|{:^30}|{:^40}|{:^30}|{:^20}|{:^20}|{:^30}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code"))
-        print('-' * 216)
-        for i in range(start, end):
-            print("|{:^6}|{:<15}|{:<30}|{:<40}|{:<30}|{:<20}|{:<20}|{:<30}|{:<15}|".format(employees[i].id, employees[i].role, employees[i].name, employees[i].email, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].address, employees[i].postal))
-        print("{:^216}".format("Page {} of {}".format(current_page, last_page)))
-        self.printer.new_line()
+        if len(employees) > 0:
+            print("|{:^6}|{:^15}|{:^30}|{:^40}|{:^30}|{:^20}|{:^20}|{:^30}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code"))
+            print('-' * 216)
+            for i in range(start, end):
+                print("|{:^6}|{:<15}|{:<30}|{:<40}|{:<30}|{:<20}|{:<20}|{:<30}|{:<15}|".format(employees[i].id, employees[i].role, employees[i].name, employees[i].email, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].address, employees[i].postal))
+            print("{:^216}".format("Page {} of {}".format(current_page, last_page)))
+            self.printer.new_line()
+        else:
+            self.warning_msg = "No employees found"
 
     # Create employee
     def create(self):
