@@ -39,7 +39,7 @@ class LocationUI:
                 self.warning_msg = "Please select available option"
 
     # Prints out all location
-    def view(self, created = False):
+    def view(self, created = False, return_id = False):
         current_page = 1
         while True:   
             locations = self.logic.get_all_locations()
@@ -52,8 +52,8 @@ class LocationUI:
                 created = False
             start = (current_page - 1) * self.items_per_page
             end = start + 10 if not current_page == last_page else locations_count
-
-            self.printer.header("View locations")
+            if not return_id:
+                self.printer.header("View locations")
             self.print_locations(locations, start, end, current_page, last_page)
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
@@ -81,9 +81,32 @@ class LocationUI:
                 if location is None:
                     self.warning_msg = "location not found"
                 else:
-                    self.select_location(location_id)
+                    if return_id:
+                        return location_id
+                    else:
+                        self.select_location(location_id)
             else:
                 self.warning_msg = "Please select available option"
+
+    def choose_location(self):
+        #id,country,airport
+        locations = self.logic.get_all_locations()
+        available_ids = []
+
+        print("\tLocation id:")
+        for location in locations:
+            available_ids.append(location.id)
+            print("\t\t{}: {} {}".format(location.id, location.country, location.airport))
+
+        while True:
+            self.print_msg()
+            location_id = input("\tChoose an option: ")
+            if location_id in available_ids:
+                break
+            else:
+                self.warning_msg = "Please select available option"
+        return location_id
+        
 
     # Prints out single location
     def select_location(self, location_id):
@@ -128,7 +151,7 @@ class LocationUI:
             country = self.input.get_input("country")
             airport = self.input.get_input("airport")
             phone = self.input.get_input("phone", ["phone"])
-            hours = self.input.get_input("hours")
+            hours = self.input.get_input("hours", ["hours"])
 
             new_location = Location(country, airport, phone, hours)
             self.logic.create_location(new_location)

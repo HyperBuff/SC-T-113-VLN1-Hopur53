@@ -45,6 +45,12 @@ class InputUI:
                             passed = False
                         else:
                             user_input = self.is_date_valid(user_input)
+                    if validation == "hours":
+                        if not self.is_hours_valid(user_input):
+                            self.printer.print_warning("\t{} is not valid".format(title.capitalize()))
+                            passed = False
+                        else:
+                            user_input = self.is_hours_valid(user_input)
                 if passed:
                     break
         return user_input
@@ -142,3 +148,7 @@ class InputUI:
 
     def is_date_valid(self, date):
             return True
+
+    def is_hours_valid(self, hours):
+        #09:00 - 17:00
+        return hours
