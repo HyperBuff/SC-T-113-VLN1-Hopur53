@@ -92,7 +92,7 @@ class VehicleUI:
             else:
                 self.warning_msg = "Please select available option"
 
-    def view_by_type(self, created = False):
+    def view_by_type(self, created = False, return_id = False):
         current_page = 1
         while True:   
             vehicle_types = self.logic.get_all_vehicletypes()
@@ -134,7 +134,10 @@ class VehicleUI:
                 if vehicle is None:
                     self.warning_msg = "Vehicle not found"
                 else:
-                    self.select_vehicle_by_type(vehicletype_id)
+                    if return_id:
+                        return vehicletype_id
+                    else:
+                        self.select_vehicle_by_type(vehicletype_id)
             else:
                 self.warning_msg = "Please select available option"
 
@@ -198,7 +201,7 @@ class VehicleUI:
             print('-' * 71)
             for i in range(start, end):
                 print("|{:^6}|{:<20}|{:<15}|{:<25}|".format(vehicle_type[i].id, vehicle_type[i].name, vehicle_type[i].regions, vehicle_type[i].rate))
-            print("{:^171}".format("Page {} of {}".format(current_page, last_page)))
+            print("{:^71}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
             self.warning_msg = "No vehicle types found"
@@ -212,7 +215,7 @@ class VehicleUI:
         try:
             manufacturer = self.input.get_input("manufacturer")
             model = self.input.get_input("model")
-            vehicle_type = self.input.get_input("vehicle type")
+            vehicle_type = self.view_by_type(return_id=True)
             status = self.input.get_input("status")
             man_year = self.input.get_input("manufacturing year", ["year"])
             color = self.input.get_input("color")

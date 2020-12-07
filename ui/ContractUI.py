@@ -113,7 +113,7 @@ class ContractUI:
             print("|{:^6}|{:^15}|{:^15}|{:^24}|{:^18}|{:^13}|{:^18}|{:^11}|{:^13}|{:^10}|{:^10}|{:^10}|{:^15}|{:^15}|{:^10}|".format("ID", "Name", "Phone", "Email", "Address", "Vehicle Id", "Vehicle Status", "Employee Id", "Location", "Date from", "Date to", "Loan date", "Loan status", "Return date", "Total"))
             print('-' * 219)
             for i in range(start, end):
-                print("|{:^6}|{:^15}|{:<15}|{:<24}|{:<18}|{:<13}|{:<18}|{:<11}|{:<13}|{:<10}|{:<10}|{:<10}|{:<15}|{:<15}|{:<10}|".format(contracts[i].id, contracts[i].name, contracts[i].phone, contracts[i].email, contracts[i].address, contracts[i].vehicle_id, contracts[i].vehicle_status, contracts[i].employee_id, contracts[i].location, contracts[i].date_from, contracts[i].date_to, contracts[i].loan_date, contracts[i].loan_status, contracts[i].return_date, contracts[i].total, contracts[i].id))
+                print("|{:^6}|{:^15}|{:<15}|{:<24}|{:<18}|{:<13}|{:<18}|{:<11}|{:<13}|{:<10}|{:<10}|{:<10}|{:<15}|{:<15}|{:<10}|".format(contracts[i].id, contracts[i].name, contracts[i].phone, contracts[i].email, contracts[i].address, contracts[i].vehicle_id, contracts[i].vehicle_status, contracts[i].employee_id, contracts[i].location, contracts[i].date_from, contracts[i].date_to, contracts[i].loan_date, contracts[i].loan_status, contracts[i].return_date, contracts[i].total))
             print("{:^216}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
