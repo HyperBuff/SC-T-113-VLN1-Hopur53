@@ -48,6 +48,7 @@ class EmployeeLogic:
         else:
             return None
 
+
     def is_ssn_valid(self, ssn):
         int_list = []
         for number in ssn:
@@ -56,11 +57,13 @@ class EmployeeLogic:
                     int_ssn = int(number)
                     int_list.append(int_ssn) 
             except ValueError:
-                return None
+                return False
         if len(int_list) == 10:
-            return True
+            list_to_str = ''.join(str(e) for e in int_list)
+            return list_to_str
         else: 
-            return None
+            return False
+
 
     def is_phone_number_valid(self, phone):
         """Checks if phone number input is valid."""
