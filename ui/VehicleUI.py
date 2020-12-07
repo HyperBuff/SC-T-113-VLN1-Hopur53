@@ -105,8 +105,8 @@ class VehicleUI:
                 created = False
             start = (current_page - 1) * self.items_per_page
             end = start + 10 if not current_page == last_page else vehicles_count
-
-            self.printer.header("View vehicle types")
+            if not return_id:
+                self.printer.header("View vehicle types")
             self.print_vehicle_types(vehicle_types, start, end, current_page, last_page)
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
