@@ -29,7 +29,7 @@ class EmployeeUI:
             action = input("Choose an option: ").lower()
             
             if action == '1':
-                if self.create():
+                if self.create_employee():
                     self.success_msg = "New employee has been created"
                     self.view(True)
             elif action == '2':
@@ -128,7 +128,7 @@ class EmployeeUI:
         role_page = 1
         while True:
             self.printer.header("Create employee")
-            print("Role:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\nLocation:\t\t\t{}\n".format(role, name, email, ssn, phone, homephone, address, postal, location_id))
+            print("Role:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\nLocation ID:\t\t\t{}\n".format(role, name, email, ssn, phone, homephone, address, postal, location_id))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.print_msg()
@@ -237,7 +237,7 @@ class EmployeeUI:
             self.warning_msg = "No employees found"
 
     # Create employee
-    def create(self):
+    """def create(self):
         self.printer.header("Add employee")
         self.printer.new_line()
         self.printer.print_fail("Press q to go back")
@@ -256,7 +256,7 @@ class EmployeeUI:
             self.logic.create_employee(new_employee)
             return True
         except ValueError:
-            return False
+            return False"""
        
     # Edit employee
     def edit(self, id):

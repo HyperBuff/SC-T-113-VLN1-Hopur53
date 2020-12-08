@@ -24,8 +24,8 @@ class MainLogic:
     def get_all_employees(self):
         return self.employee.get_all_employees()
 
-    def get_employee_by_id(self, user_id):
-        return self.employee.get_employee_by_id(user_id)
+    def get_employee_by_id(self, id):
+        return self.employee.get_employee_by_id(id)
 
     def create_employee(self, employee):
         return self.employee.create(employee)
@@ -49,8 +49,8 @@ class MainLogic:
     def get_all_contracts(self):
         return self.contract.get_all_contracts()
 
-    def get_contract_by_id(self, contract_id):
-        return self.contract.get_contract_by_id(contract_id)
+    def get_contract_by_id(self, id):
+        return self.contract.get_contract_by_id(id)
 
     def create_contract(self, contract):
         return self.contract.create(contract)
@@ -65,8 +65,8 @@ class MainLogic:
     def get_all_vehicles(self):
         return self.vehicle.get_all_vehicles()
 
-    def get_vehicle_by_id(self, vehicle_id):
-        return self.vehicle.get_vehicle_by_id(vehicle_id)
+    def get_vehicle_by_id(self, id):
+        return self.vehicle.get_vehicle_by_id(id)
 
     def create_vehicle(self, vehicle):
         return self.vehicle.create(vehicle)
@@ -81,8 +81,8 @@ class MainLogic:
     def get_all_vehicletypes(self):
         return self.vehicletype.get_all_vehicletypes()
 
-    def get_vehicletype_by_id(self, vehicle_id):
-        return self.vehicletype.get_vehicletype_by_id(vehicle_id)
+    def get_vehicletype_by_id(self, id):
+        return self.vehicletype.get_vehicletype_by_id(id)
 
     def create_vehicletype(self, vehicle):
         return self.vehicletype.create(vehicle)
@@ -97,8 +97,8 @@ class MainLogic:
     def get_all_locations(self):
         return self.location.get_all_locations()
 
-    def get_location_by_id(self, location_id):
-        return self.location.get_location_by_id(location_id)
+    def get_location_by_id(self, id):
+        return self.location.get_location_by_id(id)
 
     def create_location(self, vehicle):
         return self.location.create(vehicle)

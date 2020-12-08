@@ -17,10 +17,10 @@ class VehicleTypeLogic:
     def delete(self, id):
         return self.rep.delete_vehicletype(id)
 
-    def get_vehicletype_by_id(self, vehicletype_id):
+    def get_vehicletype_by_id(self,id):
         vehicletypes = self.get_all_vehicletypes()
 
         for vehicletype in vehicletypes:
-            if vehicletype.id == vehicletype_id:
+            if vehicletype.id == id:
                 return vehicletype
         return None

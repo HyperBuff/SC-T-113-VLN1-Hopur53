@@ -6,7 +6,7 @@ class VehicleRepository:
 
     def __init__(self):
         self.filename = 'data/vehicle.csv'
-        self.fieldnames = ['manufacturer', 'model', 'vehicle_type', 'status', 'man_year', 'color', 'licence_type', 'location', 'id']
+        self.fieldnames = ['manufacturer', 'model', 'vehicle_type_id', 'status', 'man_year', 'color', 'licence_type', 'location_id', 'id']
 
     def create(self, vehicle: Vehicle):
         row = dict((key, getattr(vehicle, key)) for key in self.fieldnames)
@@ -15,7 +15,7 @@ class VehicleRepository:
 
     def read(self):
         rows = Repository()._read(self.filename)
-        vehicles = [Vehicle(row['manufacturer'], row['model'], row['vehicle_type'], row['status'], row['man_year'], row['color'], row['licence_type'], row['location'], row['id']) for row in rows]
+        vehicles = [Vehicle(row['manufacturer'], row['model'], row['vehicle_type_id'], row['status'], row['man_year'], row['color'], row['licence_type'], row['location_id'], row['id']) for row in rows]
         return vehicles
     
     def update(self, id, updates: dict):

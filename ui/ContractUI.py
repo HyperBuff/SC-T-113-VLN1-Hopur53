@@ -93,7 +93,7 @@ class ContractUI:
         while True:
             contract = self.logic.get_contract_by_id(contract_id)
             self.printer.header("View contract")
-            print("Id:\t\t\t\t{}\nName:\t\t\t\t{}\nPhone:\t\t\t\t{}\nEmail:\t\t\t\t{}\nAddress:\t\t\t{}\nVehicle Id:\t\t\t{}\nVehicle Status:\t\t\t{}\nEmployee Id:\t\t\t{}\nLocation ID:\t\t\t{}\nDate From:\t\t\t{}\nDate To:\t\t\t{}\nLoan date:\t\t\t{}\nLoan status:\t\t\t{}\nReturn date:\t\t\t{}\nTotal:\t\t\t\t{}\n".format(contract.id, contract.name, contract.phone, contract.email, contract.address, contract.vehicle_id, contract.vehicle_status, contract.employee_id, contract.location_id, contract.date_from, contract.date_to, contract.loan_date, contract.loan_status, contract.return_date, contract.total))
+            print("Id:\t\t\t\t{}\nName:\t\t\t\t{}\nSocial Security Number:\t\t{}\nPhone:\t\t\t\t{}\nEmail:\t\t\t\t{}\nAddress:\t\t\t{}\nVehicle Id:\t\t\t{}\nVehicle Status:\t\t\t{}\nEmployee Id:\t\t\t{}\nLocation ID:\t\t\t{}\nDate From:\t\t\t{}\nDate To:\t\t\t{}\nLoan date:\t\t\t{}\nLoan status:\t\t\t{}\nReturn date:\t\t\t{}\nTotal:\t\t\t\t{}\n".format(contract.id, contract.name, contract.ssn, contract.phone, contract.email, contract.address, contract.vehicle_id, contract.vehicle_status, contract.employee_id, contract.location_id, contract.date_from, contract.date_to, contract.loan_date, contract.loan_status, contract.return_date, contract.total))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.print_msg()
@@ -112,10 +112,10 @@ class ContractUI:
     # Prints out table of contract
     def print_contracts(self, contracts, start, end, current_page, last_page):
         if len(contracts) > 0:
-            print("|{:^6}|{:^15}|{:^15}|{:^24}|{:^18}|{:^13}|{:^18}|{:^11}|{:^13}|{:^10}|{:^10}|{:^10}|{:^15}|{:^15}|{:^10}|".format("ID", "Name", "Phone", "Email", "Address", "Vehicle Id", "Vehicle Status", "Employee Id", "Location ID", "Date from", "Date to", "Loan date", "Loan status", "Return date", "Total"))
+            print("|{:^6}|{:^15}|{:^15}|{:^15}|{:^24}|{:^18}|{:^13}|{:^18}|{:^11}|{:^13}|{:^10}|{:^10}|{:^10}|{:^15}|{:^15}|{:^10}|".format("ID", "Name", "Social security number", "Phone", "Email", "Address", "Vehicle Id", "Vehicle Status", "Employee Id", "Location ID", "Date from", "Date to", "Loan date", "Loan status", "Return date", "Total"))
             print('-' * 219)
             for i in range(start, end):
-                print("|{:^6}|{:^15}|{:<15}|{:<24}|{:<18}|{:<13}|{:<18}|{:<11}|{:<13}|{:<10}|{:<10}|{:<10}|{:<15}|{:<15}|{:<10}|".format(contracts[i].id, contracts[i].name, contracts[i].phone, contracts[i].email, contracts[i].address, contracts[i].vehicle_id, contracts[i].vehicle_status, contracts[i].employee_id, contracts[i].location_id, contracts[i].date_from, contracts[i].date_to, contracts[i].loan_date, contracts[i].loan_status, contracts[i].return_date, contracts[i].total))
+                print("|{:^6}|{:^15}|{:<15}|{:<15}|{:<24}|{:<18}|{:<13}|{:<18}|{:<11}|{:<13}|{:<10}|{:<10}|{:<10}|{:<15}|{:<15}|{:<10}|".format(contracts[i].id, contracts[i].name, contracts[i].ssn, contracts[i].phone, contracts[i].email, contracts[i].address, contracts[i].vehicle_id, contracts[i].vehicle_status, contracts[i].employee_id, contracts[i].location_id, contracts[i].date_from, contracts[i].date_to, contracts[i].loan_date, contracts[i].loan_status, contracts[i].return_date, contracts[i].total))
             print("{:^216}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:

@@ -1,8 +1,8 @@
 
 class VehicleType:
-    def __init__(self, name: str, regions: str, rate: str, id = None) -> None:
+    def __init__(self, name: str, location_id: str, rate: str, id = None) -> None:
         self.name = name
-        self.regions = regions
+        self.location_id = location_id
         self.rate = rate
         self.id = id
 
