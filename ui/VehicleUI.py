@@ -192,7 +192,9 @@ class VehicleUI:
                     current_page = 1
                     self.warning_msg = "You are currenly on the first page"
             elif action == 's' or action == "select":
-                vehicle_id = input("Select vehicle by ID: ")
+                vehicle_id = input("Select vehicle by ID: ").lower()
+                if vehicle_id == 'q':
+                    break
                 vehicle = self.logic.get_vehicle_by_id(vehicle_id)
                 if vehicle is None:
                     self.warning_msg = "vehicle not found"
@@ -254,7 +256,7 @@ class VehicleUI:
                 data = None
                 try:
                     if action == "q":
-                        break
+                        return
                     elif action == "1":
                         while True:
                             data = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial"], current_page = role_page, warning_msg = self.warning_msg)

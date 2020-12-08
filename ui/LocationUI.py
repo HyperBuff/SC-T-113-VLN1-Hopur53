@@ -121,7 +121,7 @@ class LocationUI:
                         self.warning_msg = location_input[1]
                         location_id_page = location_input[2]
                 elif counter > 8:
-                    new_location = location(role, name, address, postal, ssn, phone, homephone, email, location_id)
+                    new_location = Location(role, name, address, postal, ssn, phone, homephone, email, location_id)
                     confirmation = input("Are you sure you want to create this location? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
                     if confirmation == 'y':
                         self.logic.create_location(new_location)
@@ -192,7 +192,9 @@ class LocationUI:
                     current_page = 1
                     self.warning_msg = "You are currenly on the first page"
             elif action == 's' or action == "select":
-                location_id = input("Select location by ID: ")
+                location_id = input("Select location by ID: ").lower()
+                if location_id == 'q':
+                    break
                 location = self.logic.get_location_by_id(location_id)
                 if location is None:
                     self.warning_msg = "location not found"
@@ -254,7 +256,7 @@ class LocationUI:
                 data = None
                 try:
                     if action == "q":
-                        break
+                        return
                     elif action == "1":
                         while True:
                             data = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial"], current_page = role_page, warning_msg = self.warning_msg)

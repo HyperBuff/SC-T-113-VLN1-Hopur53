@@ -1,5 +1,6 @@
 from logic.MainLogic import MainLogic
 from models.Contract import Contract
+from models.Location import Location
 
 from ui.PrinterUI import PrinterUI
 from ui.InputUI import InputUI
@@ -32,18 +33,18 @@ class ContractUI:
         homephone = ""
         address = ""
         postal = ""
-        contract_id = ""
+        location_id = ""
         
-        contract_id_page = 1
+        location_id_page = 1
         role_page = 1
         while True:
 
-            contract = self.logic.get_contract_by_id(contract_id)
-            if contract is None:
-                contract = ""
+            location = self.logic.get_location_by_id(location_id)
+            if location is None:
+                location = ""
 
             self.printer.header("Create contract")
-            print(f"Role:\t\t\t\t{role}\nName:\t\t\t\t{name}\nEmail:\t\t\t\t{email}\nSocial security number:\t\t{ssn}\nMobile phone:\t\t\t{phone}\nHome phone:\t\t\t{homephone}\nAddress:\t\t\t{address}\nPostal code:\t\t\t{postal}\ncontract:\t\t\t{contract}\n")
+            print(f"Role:\t\t\t\t{role}\nName:\t\t\t\t{name}\nEmail:\t\t\t\t{email}\nSocial security number:\t\t{ssn}\nMobile phone:\t\t\t{phone}\nHome phone:\t\t\t{homephone}\nAddress:\t\t\t{address}\nPostal code:\t\t\t{postal}\nLocation:\t\t\t{location}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
@@ -111,17 +112,17 @@ class ContractUI:
                         next_input = False
                         self.warning_msg = data[1]
                 elif counter == 8:
-                    contracts = self.logic.get_all_contracts()
-                    available_contracts = [[contract.id, contract] for contract in contracts]
-                    contract_input = self.input.get_option("contract", available_contracts, current_page = contract_id_page, warning_msg = self.warning_msg)
-                    if contract_input[0] == True:
-                        contract_id = contract_input[1]
+                    locations = self.logic.get_all_locations()
+                    available_locations = [[location.id, location] for location in locations]
+                    location_input = self.input.get_option("location", available_locations, current_page = location_id_page, warning_msg = self.warning_msg)
+                    if location_input[0] == True:
+                        location_id = location_input[1]
                     else:
                         next_input = False
-                        self.warning_msg = contract_input[1]
-                        contract_id_page = contract_input[2]
+                        self.warning_msg = location_input[1]
+                        location_id_page = location_input[2]
                 elif counter > 8:
-                    new_contract = contract(role, name, address, postal, ssn, phone, homephone, email, contract_id)
+                    new_contract = Contract(role, name, address, postal, ssn, phone, homephone, email, location_id)
                     confirmation = input("Are you sure you want to create this contract? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
                     if confirmation == 'y':
                         self.logic.create_contract(new_contract)
@@ -192,7 +193,9 @@ class ContractUI:
                     current_page = 1
                     self.warning_msg = "You are currenly on the first page"
             elif action == 's' or action == "select":
-                contract_id = input("Select contract by ID: ")
+                contract_id = input("Select contract by ID: ").lower()
+                if contract_id == 'q':
+                    break
                 contract = self.logic.get_contract_by_id(contract_id)
                 if contract is None:
                     self.warning_msg = "contract not found"
@@ -206,7 +209,7 @@ class ContractUI:
         while True:
             contract = self.logic.get_contract_by_id(contract_id)
             self.printer.header("View contract")
-            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\ncontract:\t\t\t{}\n".format(contract_id, contract.role, contract.name, contract.email, contract.ssn, contract.phone, contract.homephone, contract.address, contract.postal, self.logic.get_contract_by_id(contract.contract_id)))
+            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\nLocation:\t\t\t{}\n".format(contract_id, contract.role, contract.name, contract.email, contract.ssn, contract.phone, contract.homephone, contract.address, contract.postal, self.logic.get_location_by_id(contract.location_id)))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -225,10 +228,10 @@ class ContractUI:
     # Prints out table of contract
     def print(self, contracts, start, end, current_page, last_page):
         if len(contracts) > 0:
-            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "contract"))
+            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "Location"))
             print('-' * 212)
             for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|{:<15}|{:<15}|".format(contracts[i].id, contracts[i].role, contracts[i].name, contracts[i].email, contracts[i].ssn, contracts[i].phone, contracts[i].homephone, contracts[i].address, contracts[i].postal, self.logic.get_contract_by_id(contracts[i].contract_id).__str__()))
+                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|{:<15}|{:<15}|".format(contracts[i].id, contracts[i].role, contracts[i].name, contracts[i].email, contracts[i].ssn, contracts[i].phone, contracts[i].homephone, contracts[i].address, contracts[i].postal, self.logic.get_location_by_id(contracts[i].location_id).__str__()))
             print("{:^212}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
@@ -236,17 +239,17 @@ class ContractUI:
   
 
     def edit(self, contract_id):
-        contract_id_page = 1
+        location_id_page = 1
         role_page = 1
         while True:
             contract = self.logic.get_contract_by_id(contract_id)
             update = {}
             self.printer.header("Edit contract")
-            print(f"ID:\t\t\t\t{contract_id}\nRole:\t\t\t\t{contract.role}\nName:\t\t\t\t{contract.name}\nEmail:\t\t\t\t{contract.email}\nSocial security number:\t\t{contract.ssn}\nMobile phone:\t\t\t{contract.phone}\nHome phone:\t\t\t{contract.homephone}\nAddress:\t\t\t{contract.address}\nPostal code:\t\t\t{contract.postal}\ncontract:\t\t\t{self.logic.get_contract_by_id(contract.contract_id)}\n")
+            print(f"ID:\t\t\t\t{contract_id}\nRole:\t\t\t\t{contract.role}\nName:\t\t\t\t{contract.name}\nEmail:\t\t\t\t{contract.email}\nSocial security number:\t\t{contract.ssn}\nMobile phone:\t\t\t{contract.phone}\nHome phone:\t\t\t{contract.homephone}\nAddress:\t\t\t{contract.address}\nPostal code:\t\t\t{contract.postal}\nLocation:\t\t\t{self.logic.get_location_by_id(contract.location_id)}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
-            self.printer.print_options(['Edit role', 'Edit email', 'Edit mobile phone', 'Edit home phone', 'Edit address', 'Edit postal code', 'Edit contract'])
+            self.printer.print_options(['Edit role', 'Edit email', 'Edit mobile phone', 'Edit home phone', 'Edit address', 'Edit postal code', 'Edit location'])
             self.printer.new_line()
             self.notification()
             while True:
@@ -254,7 +257,7 @@ class ContractUI:
                 data = None
                 try:
                     if action == "q":
-                        break
+                        return
                     elif action == "1":
                         while True:
                             data = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial"], current_page = role_page, warning_msg = self.warning_msg)
@@ -307,15 +310,15 @@ class ContractUI:
                                 self.printer.print_warning(data[1])
                     elif action == "7":
                         while True:
-                            contracts = self.logic.get_all_contracts()
-                            available_contracts = [[contract.id, contract] for contract in contracts]
-                            data = self.input.get_option("contract", available_contracts, current_page = contract_id_page, warning_msg = self.warning_msg)
+                            locations = self.logic.get_all_locations()
+                            available_locations = [[location.id, location] for location in locations]
+                            data = self.input.get_option("location", available_locations, current_page = location_id_page, warning_msg = self.warning_msg)
                             if data[0] == True:
-                                update["contract_id"] = data[1]
+                                update["location_id"] = data[1]
                                 break
                             else:
                                 self.printer.print_warning(data[1])
-                                contract_id_page = data[2]
+                                location_id_page = data[2]
                     if(len(update) > 0):
                         self.logic.update_contract(contract_id, update)
                         self.success_msg = "contract has been modified"

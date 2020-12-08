@@ -1,5 +1,6 @@
 from logic.MainLogic import MainLogic
 from models.Customer import Customer
+from models.Location import Location
 
 from ui.PrinterUI import PrinterUI
 from ui.InputUI import InputUI
@@ -32,18 +33,18 @@ class CustomerUI:
         homephone = ""
         address = ""
         postal = ""
-        customer_id = ""
+        location_id = ""
         
-        customer_id_page = 1
+        location_id_page = 1
         role_page = 1
         while True:
 
-            customer = self.logic.get_customer_by_id(customer_id)
-            if customer is None:
-                customer = ""
+            location = self.logic.get_location_by_id(location_id)
+            if location is None:
+                location = ""
 
             self.printer.header("Create customer")
-            print(f"Role:\t\t\t\t{role}\nName:\t\t\t\t{name}\nEmail:\t\t\t\t{email}\nSocial security number:\t\t{ssn}\nMobile phone:\t\t\t{phone}\nHome phone:\t\t\t{homephone}\nAddress:\t\t\t{address}\nPostal code:\t\t\t{postal}\ncustomer:\t\t\t{customer}\n")
+            print(f"Role:\t\t\t\t{role}\nName:\t\t\t\t{name}\nEmail:\t\t\t\t{email}\nSocial security number:\t\t{ssn}\nMobile phone:\t\t\t{phone}\nHome phone:\t\t\t{homephone}\nAddress:\t\t\t{address}\nPostal code:\t\t\t{postal}\nLocation:\t\t\t{location}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
@@ -111,17 +112,17 @@ class CustomerUI:
                         next_input = False
                         self.warning_msg = data[1]
                 elif counter == 8:
-                    customers = self.logic.get_all_customers()
-                    available_customers = [[customer.id, customer] for customer in customers]
-                    customer_input = self.input.get_option("customer", available_customers, current_page = customer_id_page, warning_msg = self.warning_msg)
-                    if customer_input[0] == True:
-                        customer_id = customer_input[1]
+                    locations = self.logic.get_all_locations()
+                    available_locations = [[location.id, location] for location in locations]
+                    location_input = self.input.get_option("location", available_locations, current_page = location_id_page, warning_msg = self.warning_msg)
+                    if location_input[0] == True:
+                        location_id = location_input[1]
                     else:
                         next_input = False
-                        self.warning_msg = customer_input[1]
-                        customer_id_page = customer_input[2]
+                        self.warning_msg = location_input[1]
+                        location_id_page = location_input[2]
                 elif counter > 8:
-                    new_customer = customer(role, name, address, postal, ssn, phone, homephone, email, customer_id)
+                    new_customer = Customer(role, name, address, postal, ssn, phone, homephone, email, location_id)
                     confirmation = input("Are you sure you want to create this customer? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
                     if confirmation == 'y':
                         self.logic.create_customer(new_customer)
@@ -192,7 +193,9 @@ class CustomerUI:
                     current_page = 1
                     self.warning_msg = "You are currenly on the first page"
             elif action == 's' or action == "select":
-                customer_id = input("Select customer by ID: ")
+                customer_id = input("Select customer by ID: ").lower()
+                if customer_id == 'q':
+                    break
                 customer = self.logic.get_customer_by_id(customer_id)
                 if customer is None:
                     self.warning_msg = "customer not found"
@@ -206,7 +209,7 @@ class CustomerUI:
         while True:
             customer = self.logic.get_customer_by_id(customer_id)
             self.printer.header("View customer")
-            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\ncustomer:\t\t\t{}\n".format(customer_id, customer.role, customer.name, customer.email, customer.ssn, customer.phone, customer.homephone, customer.address, customer.postal, self.logic.get_customer_by_id(customer.customer_id)))
+            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\nLocation:\t\t\t{}\n".format(customer_id, customer.role, customer.name, customer.email, customer.ssn, customer.phone, customer.homephone, customer.address, customer.postal, self.logic.get_location_by_id(customer.location_id)))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -225,10 +228,10 @@ class CustomerUI:
     # Prints out table of customer
     def print(self, customers, start, end, current_page, last_page):
         if len(customers) > 0:
-            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "customer"))
+            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "Location"))
             print('-' * 212)
             for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|{:<15}|{:<15}|".format(customers[i].id, customers[i].role, customers[i].name, customers[i].email, customers[i].ssn, customers[i].phone, customers[i].homephone, customers[i].address, customers[i].postal, self.logic.get_customer_by_id(customers[i].customer_id).__str__()))
+                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|{:<15}|{:<15}|".format(customers[i].id, customers[i].role, customers[i].name, customers[i].email, customers[i].ssn, customers[i].phone, customers[i].homephone, customers[i].address, customers[i].postal, self.logic.get_location_by_id(customers[i].location_id).__str__()))
             print("{:^212}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
@@ -236,17 +239,17 @@ class CustomerUI:
   
 
     def edit(self, customer_id):
-        customer_id_page = 1
+        location_id_page = 1
         role_page = 1
         while True:
             customer = self.logic.get_customer_by_id(customer_id)
             update = {}
             self.printer.header("Edit customer")
-            print(f"ID:\t\t\t\t{customer_id}\nRole:\t\t\t\t{customer.role}\nName:\t\t\t\t{customer.name}\nEmail:\t\t\t\t{customer.email}\nSocial security number:\t\t{customer.ssn}\nMobile phone:\t\t\t{customer.phone}\nHome phone:\t\t\t{customer.homephone}\nAddress:\t\t\t{customer.address}\nPostal code:\t\t\t{customer.postal}\ncustomer:\t\t\t{self.logic.get_customer_by_id(customer.customer_id)}\n")
+            print(f"ID:\t\t\t\t{customer_id}\nRole:\t\t\t\t{customer.role}\nName:\t\t\t\t{customer.name}\nEmail:\t\t\t\t{customer.email}\nSocial security number:\t\t{customer.ssn}\nMobile phone:\t\t\t{customer.phone}\nHome phone:\t\t\t{customer.homephone}\nAddress:\t\t\t{customer.address}\nPostal code:\t\t\t{customer.postal}\nLocation:\t\t\t{self.logic.get_location_by_id(customer.location_id)}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
-            self.printer.print_options(['Edit role', 'Edit email', 'Edit mobile phone', 'Edit home phone', 'Edit address', 'Edit postal code', 'Edit customer'])
+            self.printer.print_options(['Edit role', 'Edit email', 'Edit mobile phone', 'Edit home phone', 'Edit address', 'Edit postal code', 'Edit location'])
             self.printer.new_line()
             self.notification()
             while True:
@@ -254,7 +257,7 @@ class CustomerUI:
                 data = None
                 try:
                     if action == "q":
-                        break
+                        return
                     elif action == "1":
                         while True:
                             data = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial"], current_page = role_page, warning_msg = self.warning_msg)
@@ -307,15 +310,15 @@ class CustomerUI:
                                 self.printer.print_warning(data[1])
                     elif action == "7":
                         while True:
-                            customers = self.logic.get_all_customers()
-                            available_customers = [[customer.id, customer] for customer in customers]
-                            data = self.input.get_option("customer", available_customers, current_page = customer_id_page, warning_msg = self.warning_msg)
+                            locations = self.logic.get_all_locations()
+                            available_locations = [[location.id, location] for location in locations]
+                            data = self.input.get_option("location", available_locations, current_page = location_id_page, warning_msg = self.warning_msg)
                             if data[0] == True:
-                                update["customer_id"] = data[1]
+                                update["location_id"] = data[1]
                                 break
                             else:
                                 self.printer.print_warning(data[1])
-                                customer_id_page = data[2]
+                                location_id_page = data[2]
                     if(len(update) > 0):
                         self.logic.update_customer(customer_id, update)
                         self.success_msg = "customer has been modified"
