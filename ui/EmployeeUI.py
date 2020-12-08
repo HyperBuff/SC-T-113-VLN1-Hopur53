@@ -111,7 +111,7 @@ class EmployeeUI:
                 self.warning_msg = "Please select available option"
             
     # Prints out single employee
-    def employee(self, id = None):
+    def create_employee(self, id = None):
 
         employee = self.logic.get_employee_by_id(id)
 
