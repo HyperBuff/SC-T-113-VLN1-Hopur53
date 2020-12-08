@@ -1,6 +1,6 @@
 
 class Customer:
-    def __init__(self, name, address, postal, ssn, phone, email, country, id=None) -> None:
+    def __init__(self, name, address, postal, ssn, phone, email, country, id = None):
         self.name = name
         self.address = address
         self.postal = postal

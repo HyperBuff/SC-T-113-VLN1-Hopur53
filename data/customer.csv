@@ -1,2 +1,2 @@
-role,name,address,postal,ssn,phone,homephone,email,location_id,id
+name,address,postal,ssn,phone,email,country,id
 

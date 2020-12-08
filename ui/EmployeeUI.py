@@ -56,8 +56,7 @@ class EmployeeUI:
             try:
                 if counter == 0:
                     data = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial"], current_page = role_page, warning_msg = self.warning_msg)
-                    response = data[0]               
-                    if response:
+                    if data[0]:
                         role = data[1]
                     else:
                         next_input = False
@@ -65,7 +64,6 @@ class EmployeeUI:
                         role_page = data[2]
                 elif counter == 1:
                     data = self.input.get_input("name", ["required"], warning_msg = self.warning_msg)
-                    response = data[0]    
                     if data[0]:
                         name = data[1]
                     else:

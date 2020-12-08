@@ -25,26 +25,16 @@ class CustomerUI:
     def create(self):
         counter = 0
 
-        role = ""
         name = ""
         email = ""
         ssn = ""
         phone = ""
-        homephone = ""
         address = ""
         postal = ""
-        location_id = ""
         
-        location_id_page = 1
-        role_page = 1
         while True:
-
-            location = self.logic.get_location_by_id(location_id)
-            if location is None:
-                location = ""
-
             self.printer.header("Create customer")
-            print(f"Role:\t\t\t\t{role}\nName:\t\t\t\t{name}\nEmail:\t\t\t\t{email}\nSocial security number:\t\t{ssn}\nMobile phone:\t\t\t{phone}\nHome phone:\t\t\t{homephone}\nAddress:\t\t\t{address}\nPostal code:\t\t\t{postal}\nLocation:\t\t\t{location}\n")
+            print(f"Name:\t\t\t\t{name}\nEmail:\t\t\t\t{email}\nSocial security number:\t\t{ssn}\nMobile phone:\t\t\t{phone}\nAddress:\t\t\t{address}\nPostal code:\t\t\t{postal}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
@@ -53,76 +43,56 @@ class CustomerUI:
             data = None
             try:
                 if counter == 0:
-                    data = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial"], current_page = role_page, warning_msg = self.warning_msg)
-                    response = data[0]               
-                    if response:
-                        role = data[1]
-                    else:
-                        next_input = False
-                        self.warning_msg = data[1]
-                        role_page = data[2]
-                elif counter == 1:
-                    data = self.input.get_input("name", ["required"], warning_msg = self.warning_msg)
-                    response = data[0]    
+                    data = self.input.get_input("name", ["required"], warning_msg = self.warning_msg)  
                     if data[0]:
                         name = data[1]
                     else:
                         next_input = False
                         self.warning_msg = data[1]
-                elif counter == 2:
-                    data = self.input.get_input("email", ["required", "email"], warning_msg = self.warning_msg)
-                    if data[0]:
-                        email = data[1]
-                    else:
-                        next_input = False
-                        self.warning_msg = data[1]
-                elif counter == 3:
-                    data = self.input.get_input("social security number", ["required", "ssn"], warning_msg = self.warning_msg)
-                    if data[0]:
-                        ssn = data[1]
-                    else:
-                        next_input = False
-                        self.warning_msg = data[1]
-                elif counter == 4:
-                    data = self.input.get_input("mobile phone", ["required", "phone"], warning_msg = self.warning_msg)
-                    if data[0]:
-                        phone = data[1]
-                    else:
-                        next_input = False
-                        self.warning_msg = data[1]
-                elif counter == 5:
-                    data = self.input.get_input("home phone", ["required", "phone"], warning_msg = self.warning_msg)
-                    if data[0]:
-                        homephone = data[1]
-                    else:
-                        next_input = False
-                        self.warning_msg = data[1]
-                elif counter == 6:
+                elif counter == 1:
                     data = self.input.get_input("address", ["required"], warning_msg = self.warning_msg)
                     if data[0]:
                         address = data[1]
                     else:
                         next_input = False
                         self.warning_msg = data[1]
-                elif counter == 7:
+                elif counter == 2:
                     data = self.input.get_input("postal code", ["required"], warning_msg = self.warning_msg)
                     if data[0]:
                         postal = data[1]
                     else:
                         next_input = False
                         self.warning_msg = data[1]
-                elif counter == 8:
-                    locations = self.logic.get_all_locations()
-                    available_locations = [[location.id, location] for location in locations]
-                    location_input = self.input.get_option("location", available_locations, current_page = location_id_page, warning_msg = self.warning_msg)
-                    if location_input[0] == True:
-                        location_id = location_input[1]
+                elif counter == 3:
+                    data = self.input.get_input("mobile phone", ["required", "ssn"], warning_msg = self.warning_msg)
+                    if data[0]:
+                        ssn = data[1]
                     else:
                         next_input = False
-                        self.warning_msg = location_input[1]
-                        location_id_page = location_input[2]
-                elif counter > 8:
-                    new_customer = Customer(role, name, address, postal, ssn, phone, homephone, email, location_id)
+                        self.warning_msg = data[1]
+                elif counter == 4:
+                    data = self.input.get_input("phone", ["required", "phone"], warning_msg = self.warning_msg)
+                    if data[0]:
+                        phone = data[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = data[1]
+                elif counter == 5:
+                    data = self.input.get_input("email", ["required", "email"], warning_msg = self.warning_msg)
+                    if data[0]:
+                        email = data[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = data[1]
+                elif counter == 6:
+                    data = self.input.get_input("country", ["required"], warning_msg = self.warning_msg)
+                    if data[0]:
+                        country = data[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = data[1]
+                elif counter > 6:
+                    new_customer = Customer(name, address, postal, ssn, phone, email, country)
                     confirmation = input("Are you sure you want to create this customer? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
                     if confirmation == 'y':
                         self.logic.create_customer(new_customer)
@@ -136,7 +106,7 @@ class CustomerUI:
     # Prints out customer's menu
     def menu(self):
         while True:
-            self.printer.header("customers Menu")
+            self.printer.header("Customers Menu")
             self.printer.print_options(['Create an customer', 'View customers'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
@@ -228,11 +198,11 @@ class CustomerUI:
     # Prints out table of customer
     def print(self, customers, start, end, current_page, last_page):
         if len(customers) > 0:
-            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "Location"))
-            print('-' * 212)
+            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|".format("ID", "Name", "Email", "Social security number", "Phone", "Address", "Postal code", "Country"))
+            print('-' * 170)
             for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|{:<15}|{:<15}|".format(customers[i].id, customers[i].role, customers[i].name, customers[i].email, customers[i].ssn, customers[i].phone, customers[i].homephone, customers[i].address, customers[i].postal, self.logic.get_location_by_id(customers[i].location_id).__str__()))
-            print("{:^212}".format("Page {} of {}".format(current_page, last_page)))
+                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|".format(customers[i].id, customers[i].name, customers[i].email, customers[i].ssn, customers[i].phone, customers[i].address, customers[i].postal, customers[i].country))
+            print("{:^170}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
             self.warning_msg = "No customers found"
@@ -245,11 +215,11 @@ class CustomerUI:
             customer = self.logic.get_customer_by_id(customer_id)
             update = {}
             self.printer.header("Edit customer")
-            print(f"ID:\t\t\t\t{customer_id}\nRole:\t\t\t\t{customer.role}\nName:\t\t\t\t{customer.name}\nEmail:\t\t\t\t{customer.email}\nSocial security number:\t\t{customer.ssn}\nMobile phone:\t\t\t{customer.phone}\nHome phone:\t\t\t{customer.homephone}\nAddress:\t\t\t{customer.address}\nPostal code:\t\t\t{customer.postal}\nLocation:\t\t\t{self.logic.get_location_by_id(customer.location_id)}\n")
+            print(f"ID:\t\t\t\t{customer_id}\nName:\t\t\t\t{customer.name}\nEmail:\t\t\t\t{customer.email}\nSocial security number:\t\t{customer.ssn}\nPhone:\t\t\t{customer.phone}\nAddress:\t\t\t{customer.address}\nPostal code:\t\t\t{customer.postal}\nCountry:\t\t\t{customer.country}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
-            self.printer.print_options(['Edit role', 'Edit email', 'Edit mobile phone', 'Edit home phone', 'Edit address', 'Edit postal code', 'Edit location'])
+            self.printer.print_options(['Edit email', 'Edit phone', 'Edit address', 'Edit postal code', 'Edit country'])
             self.printer.new_line()
             self.notification()
             while True:
@@ -260,47 +230,29 @@ class CustomerUI:
                         return
                     elif action == "1":
                         while True:
-                            data = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial"], current_page = role_page, warning_msg = self.warning_msg)
-                            if data[0]:
-                                update["role"] = data[1]
-                                break
-                            else:
-                                self.printer.print_warning(data[1])
-                                role_page = data[2]
-                                
-                    elif action == "2":
-                        while True:
                             data = self.input.get_input("email", ["required", "email"], warning_msg = self.warning_msg)
                             if data[0]:
                                 update["email"] = data[1]
                                 break
                             else:
                                 self.printer.print_warning(data[1])
-                    elif action == "3":
+                    elif action == "2":
                         while True:
-                            data = self.input.get_input("mobile phone", ["required", "phone"], warning_msg = self.warning_msg)
+                            data = self.input.get_input("phone", ["required", "phone"], warning_msg = self.warning_msg)
                             if data[0]:
                                 update["phone"] = data[1]
                                 break
                             else:
                                 self.printer.print_warning(data[1])
-                    elif action == "4":
+                    elif action == "3":
                         while True:
-                            data = self.input.get_input("home phone", ["required", "phone"], warning_msg = self.warning_msg)
+                            data = self.input.get_input("address", ["required"], warning_msg = self.warning_msg)
                             if data[0]:
                                 update["homephone"] = data[1]
                                 break
                             else:
                                 self.printer.print_warning(data[1])
-                    elif action == "5":
-                        while True:
-                            data = self.input.get_input("address", ["required"], warning_msg = self.warning_msg)
-                            if data[0]:
-                                update["address"] = data[1]
-                                break
-                            else:
-                                self.printer.print_warning(data[1])
-                    elif action == "6":
+                    elif action == "4":
                         while True:
                             data = self.input.get_input("postal code", ["required"], warning_msg = self.warning_msg)
                             if data[0]:
@@ -308,17 +260,14 @@ class CustomerUI:
                                 break
                             else:
                                 self.printer.print_warning(data[1])
-                    elif action == "7":
+                    elif action == "5":
                         while True:
-                            locations = self.logic.get_all_locations()
-                            available_locations = [[location.id, location] for location in locations]
-                            data = self.input.get_option("location", available_locations, current_page = location_id_page, warning_msg = self.warning_msg)
-                            if data[0] == True:
-                                update["location_id"] = data[1]
+                            data = self.input.get_input("country", ["required"], warning_msg = self.warning_msg)
+                            if data[0]:
+                                update["country"] = data[1]
                                 break
                             else:
                                 self.printer.print_warning(data[1])
-                                location_id_page = data[2]
                     if(len(update) > 0):
                         self.logic.update_customer(customer_id, update)
                         self.success_msg = "customer has been modified"
