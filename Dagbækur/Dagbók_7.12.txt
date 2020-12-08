@@ -1,2 +1,4 @@
 Hittumst kl 9:00, öll layerinn eru svo mikið sem kominn.
 Hrefna og Þórdís ætla að fara yfir kröfu listann og sjá hvort allar A og B kröfur séu pottþétt komnar á meðan hinir ætla að halda áfram að fínpússa virknina í kóðanum 
+
+Flestar A og B kröfur kláruðust í dag, rest hálfkláruð :)
