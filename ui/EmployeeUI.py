@@ -260,7 +260,7 @@ class EmployeeUI:
                 data = None
                 try:
                     if action == "q":
-                        break
+                        return
                     elif action == "1":
                         while True:
                             data = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial"], current_page = role_page, warning_msg = self.warning_msg)
