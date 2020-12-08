@@ -195,7 +195,9 @@ class EmployeeUI:
                     current_page = 1
                     self.warning_msg = "You are currenly on the first page"
             elif action == 's' or action == "select":
-                employee_id = input("Select employee by ID: ")
+                employee_id = input("Select employee by ID: ").lower()
+                if employee_id == 'q':
+                    break
                 employee = self.logic.get_employee_by_id(employee_id)
                 if employee is None:
                     self.warning_msg = "Employee not found"
