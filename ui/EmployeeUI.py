@@ -137,72 +137,30 @@ class EmployeeUI:
                 if counter == 0:
                     role_input = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial","Admin","Admin", "Delivery", "Booking", "Mechanic", "Financial","Admin","Admin", "Delivery", "Booking", "Mechanic", "Financial","Admin"], current_page=role_page, warning_msg=warning_msg)                       
                     warning_msg = ""
-
-                    if role_input[0]:
+                    if role_input[0] == True:
                         role = role_input[1]
                     else:
                         next_input = False
                         warning_msg = role_input[1]
                         role_page = role_input[2]
                 elif counter == 1:
-                    name_input = self.input.get_input("name", ["required"], warning_msg=warning_msg)
-                    if name_input[0]:
-                        name = name_input[1]
-                        warning_msg = ""
-                    else:
-                        next_input = False
-                        warning_msg = name_input[1]
+                    name = self.input.get_input("name")
                 elif counter == 2:
-                    email_input = self.input.get_input("email", ["required", "email"], warning_msg=warning_msg)
-                    if email_input[0]:
-                        email = email_input[1]
-                        warning_msg = ""
-                    else:
-                        next_input = False
-                        warning_msg = email_input[1]
+                    email = self.input.get_input("email", ["email"])
                 elif counter == 3:
-                    ssn_input = self.input.get_input("social security number", ["required", "ssn"], warning_msg=warning_msg)
-                    if ssn_input[0]:
-                        ssn = ssn_input[1]
-                        warning_msg = ""
-                    else:
-                        next_input = False
-                        warning_msg = ssn_input[1]
+                    ssn = self.input.get_input("social security number", ["ssn"])
                 elif counter == 4:
-                    phone_input = self.input.get_input("mobile phone", ["required", "phone"], warning_msg=warning_msg)
-                    if phone_input[0]:
-                        phone = phone_input[1]
-                        warning_msg = ""
-                    else:
-                        next_input = False
-                        warning_msg = phone_input[1]
+                    phone = self.input.get_input("mobile phone", ["phone"])
                 elif counter == 5:
-                    homephone_input = self.input.get_input("home phone", ["required", "phone"], warning_msg=warning_msg)
-                    if homephone_input[0]:
-                        homephone = homephone_input[1]
-                        warning_msg = ""
-                    else:
-                        next_input = False
-                        warning_msg = homephone_input[1]
+                    homephone = self.input.get_input("home phone", ["phone"])
                 elif counter == 6:
-                    address_input = self.input.get_input("address", ["required"], warning_msg=warning_msg)
-                    if address_input[0]:
-                        address = address_input[1]
-                        warning_msg = ""
-                    else:
-                        next_input = False
-                        warning_msg = address_input[1]
+                    address = self.input.get_input("address")
                 elif counter == 7:
-                    postal_input = self.input.get_input("postal code", ["required"], warning_msg=warning_msg)
-                    if postal_input[0]:
-                        postal = postal_input[1]
-                        warning_msg = ""
-                    else:
-                        next_input = False
-                        warning_msg = postal_input[1]
+                    postal = self.input.get_input("postal code")
                 elif counter == 8:
+
                     locations = self.logic.get_all_locations()
-                    available_locations = [[location.id, "{}".format(location)] for location in locations]
+                    available_locations = [[location.id, "{}, {}".format(location.country, location.airport)] for location in locations]
                     location_input = self.input.get_option("location", available_locations, current_page=location_id_page, warning_msg=warning_msg)
                     warning_msg = ""
                     if location_input[0] == True:
@@ -212,17 +170,13 @@ class EmployeeUI:
                         warning_msg = location_input[1]
                         location_id_page = location_input[2]
                 elif counter > 8:
-                    new_employee = Employee(role, name, address, postal, ssn, phone, homephone, email, location_id)
-                    confirmation = input("Are you sure you want to create this employee? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
-
-                    if confirmation == 'y':
-                        self.logic.create_employee(new_employee)
-                        return True
-                    return False
+                    self.logic.create_employee(Employee(role, name, address, postal, ssn, phone, homephone, email, location_id))
+                    return True
                 if next_input:
                     counter += 1
             except ValueError:
                 break
+
     
     # Prints out table of employee
     def print_employees(self, employees, start, end, current_page, last_page):
