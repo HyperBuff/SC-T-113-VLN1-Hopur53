@@ -22,11 +22,11 @@ class LocationLogic:
     def delete(self, id):
         return self.rep.delete_location(id)
 
-    def get_location_by_id(self, location_id):
+    def get_location_by_id(self, id):
         locations = self.get_all_locations()
 
         for location in locations:
-            if location.id == location_id:
+            if location.id == id:
                 return location
         return None
 

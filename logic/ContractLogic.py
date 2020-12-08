@@ -17,13 +17,13 @@ class ContractLogic:
     def delete(self, id):
         return self.rep.delete_contract(id)
     
-    def get_contract_by_id(self, contract_id):
+    def get_contract_by_id(self, id):
         contracts = self.get_all_contracts()
 
         for contract in contracts:
-            if contract.id == contract_id:
+            if contract.id == id:
                 return contract
         return None
 
     def amount_due(self):
-        pass
+        return None

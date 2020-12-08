@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 role,name,address,postal,ssn,phone,homephone,email,location_id,id
 Admin,Chuck Norris,Svarthöfða 1,110,250645-9999,+354 5555555,+354 6890001,bigc@nan.is,1,1
 Admin,Jón Jónsson,Melagerð 99,200,300279-1289,+356 5815432,+354 6890012,jj@nan.is,2,2
 Admin,Guðrún Aradóttir,Bröttubrekku 2a,104,310484-3348,+354 5421212,+354 6890015,gurra@nan.is,1,3
 Admin,Sebastian Ventilsson,Múlalund 7,221,101009-2237,+354 5670011,+354 6890011,seven@nan.is,3,4
-,,,,,,,,,6
-,,,,,,,,"['1', 'Iceland, Reykjavik']",7
-,,,,,,,,1,8
-,,,,,,,,1,9
 Admin,Adalsteinn,ad,400,1901901110,+3541902900,+3541902902,al@gma.com,7,10
-=======
-role,name,address,postal,ssn,phone,homephone,email,id,location
-Admin,Aðalsteinn Leifs Maríuson,Duggufjara,600,0907982949,6494444,4611561,test@test.is,1,rvk
-admin,sdf,wefds,324,2222222222,+3542222222,+3542222222,sdf@fgd.sd,1011,
->>>>>>> 0067cac58836c84cc9cf4fb1e4869d0c825f5bb9
+
+Admin,johann,flydrugrandi 1,107,2812892218,+3548627718,+3545812345,jgs@ruv.is,1,13
