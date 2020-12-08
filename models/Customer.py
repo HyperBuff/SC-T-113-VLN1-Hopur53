@@ -10,4 +10,5 @@ class Customer:
         self.country = country
         self.id = id
 
-    
+    def __str__(self):
+        return self.name

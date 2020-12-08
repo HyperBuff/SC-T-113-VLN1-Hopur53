@@ -20,3 +20,6 @@ class Contract:
 
         self.total = total
         self.id = id
+
+    def __str__(self):
+        return "Contract for {}".format(self.name)

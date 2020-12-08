@@ -11,5 +11,7 @@ class Vehicle:
         self.location_id = location_id
         self.id = id
 
+    def __str__(self):
+        return "{}, {}".format(self.model, self.manufacturer)
 
         

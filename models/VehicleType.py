@@ -6,4 +6,7 @@ class VehicleType:
         self.rate = rate
         self.id = id
 
+    def __str__(self):
+        return self.name
+
     
