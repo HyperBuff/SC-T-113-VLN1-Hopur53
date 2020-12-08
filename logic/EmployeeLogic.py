@@ -25,11 +25,11 @@ class EmployeeLogic:
                 return employee.id
         return None
 
-    def get_employee_by_id(self, id):
+    def get_employee_by_id(self, user_id):
         employees = self.get_all_employees()
 
         for employee in employees:
-            if employee.id == id:
+            if employee.id == user_id:
                 return employee
         return None
 

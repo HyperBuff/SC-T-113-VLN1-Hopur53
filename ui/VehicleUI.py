@@ -4,7 +4,6 @@ from models.Vehicle import Vehicle
 
 from ui.PrinterUI import PrinterUI
 from ui.InputUI import InputUI
-from ui.LocationUI import LocationUI
 
 class VehicleUI:
 
@@ -93,7 +92,7 @@ class VehicleUI:
             else:
                 self.warning_msg = "Please select available option"
 
-    def view_by_type(self, created = False):
+    def view_by_type(self, created = False, return_id = False):
         current_page = 1
         while True:   
             vehicle_types = self.logic.get_all_vehicletypes()
@@ -106,7 +105,8 @@ class VehicleUI:
                 created = False
             start = (current_page - 1) * self.items_per_page
             end = start + 10 if not current_page == last_page else vehicles_count
-            self.printer.header("View vehicle types")
+            if not return_id:
+                self.printer.header("View vehicle types")
             self.print_vehicle_types(vehicle_types, start, end, current_page, last_page)
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
@@ -134,7 +134,10 @@ class VehicleUI:
                 if vehicle is None:
                     self.warning_msg = "Vehicle not found"
                 else:
-                    self.select_vehicle_by_type(vehicletype_id)
+                    if return_id:
+                        return vehicletype_id
+                    else:
+                        self.select_vehicle_by_type(vehicletype_id)
             else:
                 self.warning_msg = "Please select available option"
 
@@ -143,7 +146,7 @@ class VehicleUI:
         while True:
             vehicle = self.logic.get_vehicle_by_id(vehicle_id)
             self.printer.header("View vehicle")
-            print("ID:\t\t\t\t{}\nManufacturer:\t\t\t{}\nModel:\t\t\t\t{}\nVehicle type:\t\t\t{}\nManufacturing year:\t\t{}\nColor:\t\t\t\t{}\nLicence type:\t\t\t{}\nLocation ID:\t\t\t{}\n".format(vehicle_id, vehicle.manufacturer, vehicle.model, vehicle.vehicle_type, vehicle.man_year, vehicle.color, vehicle.licence_type, vehicle.location_id))
+            print("ID:\t\t\t\t{}\nManufacturer:\t\t\t{}\nModel:\t\t\t\t{}\nVehicle type:\t\t\t{}\nManufacturing year:\t\t{}\nColor:\t\t\t\t{}\nLicence type:\t\t\t{}\nLocation:\t\t\t{}\n".format(vehicle_id, vehicle.manufacturer, vehicle.model, vehicle.vehicle_type, vehicle.man_year, vehicle.color, vehicle.licence_type, vehicle.location))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.print_msg()
@@ -163,7 +166,7 @@ class VehicleUI:
         while True:
             vehicle_type = self.logic.get_vehicletype_by_id(vehicletype_id)
             self.printer.header("View vehicle type")
-            print("ID:\t\t\t{}\nName:\t\t\t{}\nLocation ID:\t\t{}\nRate:\t\t\t{}\n".format(vehicle_type.id, vehicle_type.name, vehicle_type.regions, vehicle_type.rate))
+            print("ID:\t\t\t{}\nName:\t\t\t{}\nRegions:\t\t{}\nRate:\t\t\t{}\n".format(vehicle_type.id, vehicle_type.name, vehicle_type.regions, vehicle_type.rate))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.print_msg()
@@ -183,10 +186,10 @@ class VehicleUI:
     # Prints out table of vehicle
     def print_vehicles(self, vehicles, start, end, current_page, last_page):
         if len(vehicles) > 0:
-            print("|{:^6}|{:^20}|{:^15}|{:^25}|{:^10}|{:^25}|{:^20}|{:<20}|{:<20}|".format("ID", "Manufacturer", "Model", "Vehicle type", "Status", "Manufacturing year", "Color", "Licence type", "Location ID"))
+            print("|{:^6}|{:^20}|{:^15}|{:^25}|{:^10}|{:^25}|{:^20}|{:<20}|{:<20}|".format("ID", "Manufacturer", "Model", "Vehicle type", "Status", "Manufacturing year", "Color", "Licence type", "Location"))
             print('-' * 171)
             for i in range(start, end):
-                print("|{:^6}|{:<20}|{:<15}|{:<25}|{:<10}|{:<25}|{:<20}|{:<20}|{:<20}|".format(vehicles[i].id, vehicles[i].manufacturer, vehicles[i].model, vehicles[i].vehicle_type, vehicles[i].status, vehicles[i].man_year, vehicles[i].color, vehicles[i].licence_type, vehicles[i].location_id))
+                print("|{:^6}|{:<20}|{:<15}|{:<25}|{:<10}|{:<25}|{:<20}|{:<20}|{:<20}|".format(vehicles[i].id, vehicles[i].manufacturer, vehicles[i].model, vehicles[i].vehicle_type, vehicles[i].status, vehicles[i].man_year, vehicles[i].color, vehicles[i].licence_type, vehicles[i].location))
             print("{:^171}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
@@ -194,10 +197,10 @@ class VehicleUI:
 
     def print_vehicle_types(self, vehicle_type, start, end, current_page, last_page):
         if len(vehicle_type) > 0:
-            print("|{:^6}|{:^20}|{:^15}|{:^25}|".format("ID", "Name", "Location ID", "Rate"))
+            print("|{:^6}|{:^20}|{:^15}|{:^25}|".format("ID", "Name", "Regions", "Rate"))
             print('-' * 71)
             for i in range(start, end):
-                print("|{:^6}|{:<20}|{:<15}|{:<25}|".format(vehicle_type[i].id, vehicle_type[i].name, vehicle_type[i].location_id, vehicle_type[i].rate))
+                print("|{:^6}|{:<20}|{:<15}|{:<25}|".format(vehicle_type[i].id, vehicle_type[i].name, vehicle_type[i].regions, vehicle_type[i].rate))
             print("{:^71}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
@@ -212,7 +215,7 @@ class VehicleUI:
         try:
             manufacturer = self.input.get_input("manufacturer")
             model = self.input.get_input("model")
-            vehicle_type = self.input.get_input("vehicle type")
+            vehicle_type = self.view_by_type(return_id=True)
             status = self.input.get_input("status")
             man_year = self.input.get_input("manufacturing year", ["year"])
             color = self.input.get_input("color")
@@ -231,7 +234,7 @@ class VehicleUI:
         self.printer.new_line()
         try:
             name = self.input.get_input("name")
-            regions = self.input.get_input("name")
+            regions = self.input.get_input("regions")
             rate = self.input.get_input("rate")
             vehicle = VehicleType(name, regions, rate)
             self.logic.create_vehicletype(vehicle)

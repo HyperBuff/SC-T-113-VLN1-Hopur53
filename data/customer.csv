@@ -1,1 +1,2 @@
-name,ssn,address,postal,phone,homephone,email,location_id,id
+role,name,address,postal,ssn,phone,homephone,email,id
+Admin,Aðalsteinn Leifs Maríuson,Duggufjara,600,0907982949,6494444,4611561,test@test.is,1

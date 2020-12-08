@@ -4,8 +4,6 @@ from models.Employee import Employee
 from ui.PrinterUI import PrinterUI
 from ui.InputUI import InputUI
 
-from ui.LocationUI import LocationUI
-
 class EmployeeUI:
 
     def __init__(self, employee_id):
@@ -14,7 +12,6 @@ class EmployeeUI:
         self.logic = MainLogic()
         self.printer = PrinterUI()
         self.input = InputUI()
-        self.location = LocationUI()
 
         self.employee_id = employee_id
         self.success_msg = ""
@@ -94,7 +91,7 @@ class EmployeeUI:
         while True:
             employee = self.logic.get_employee_by_id(employee_id)
             self.printer.header("View employee")
-            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\nLocation ID:\t\t\t{}\n".format(employee_id, employee.role, employee.name, employee.email, employee.ssn, employee.phone, employee.homephone, employee.address, employee.postal, employee.location_id))
+            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\nLocation:\t\t\t{}\n".format(employee_id, employee.role, employee.name, employee.email, employee.ssn, employee.phone, employee.homephone, employee.address, employee.postal, employee.location))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.print_msg()
@@ -184,11 +181,19 @@ class EmployeeUI:
     # Prints out table of employee
     def print_employees(self, employees, start, end, current_page, last_page):
         if len(employees) > 0:
+<<<<<<< HEAD
             print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "Location ID"))
             print('-' * 212)
             for i in range(start, end):
                 print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|{:<15}|{:<15}|".format(employees[i].id, employees[i].role, employees[i].name, employees[i].email, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].address, employees[i].postal, employees[i].location_id))
             print("{:^212}".format("Page {} of {}".format(current_page, last_page)))
+=======
+            print("|{:^6}|{:^15}|{:^30}|{:^40}|{:^30}|{:^20}|{:^20}|{:^30}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "Location"))
+            print('-' * 216)
+            for i in range(start, end):
+                print("|{:^6}|{:<15}|{:<30}|{:<40}|{:<30}|{:<20}|{:<20}|{:<30}|{:<15}|{:<15}|".format(employees[i].id, employees[i].role, employees[i].name, employees[i].email, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].address, employees[i].postal, employees[i].location))
+            print("{:^216}".format("Page {} of {}".format(current_page, last_page)))
+>>>>>>> 0067cac58836c84cc9cf4fb1e4869d0c825f5bb9
             self.printer.new_line()
         else:
             self.warning_msg = "No employees found"
@@ -208,7 +213,7 @@ class EmployeeUI:
             homephone = self.input.get_input("home phone", ["phone"])
             address = self.input.get_input("address")
             postal = self.input.get_input("postal code")
-            location = self.location.view(return_id=True)
+            location = self.input.get_input("location")
             new_employee = Employee(role, name, address, postal, ssn, phone, homephone, email, location)
             self.logic.create_employee(new_employee)
             return True

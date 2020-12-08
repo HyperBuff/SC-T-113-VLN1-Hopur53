@@ -46,12 +46,15 @@ class InputUI:
                             passed = False
                         else:
                             user_input = self.is_date_valid(user_input)
+<<<<<<< HEAD
                     if validation == "hours":
                         if not self.is_hours_valid(user_input):
                             self.printer.print_warning("{} is not valid".format(title.capitalize()))
                             passed = False
                         else:
                             user_input = self.is_hours_valid(user_input)
+=======
+>>>>>>> 0067cac58836c84cc9cf4fb1e4869d0c825f5bb9
                 if passed:
                     break
         return user_input
@@ -105,6 +108,7 @@ class InputUI:
             else:
                 if len(options) >= int(user_input) and int(user_input) > 0:
                     user_input = options[int(user_input)-1]
+<<<<<<< HEAD
                     warning_msg = ""
                 else:
                     warning_msg = "Please select available option"
@@ -114,22 +118,25 @@ class InputUI:
             return (True, user_input[0])
         else:
             return (True, user_input)
+=======
+                    break
+                except:
+                    pass
+        return user_input
+>>>>>>> 0067cac58836c84cc9cf4fb1e4869d0c825f5bb9
 
     def is_email_valid(self, email):
         email_list = email.split("@")
-        try:
-            if len(email_list) == 2:
-                new_list = email_list[1].split(".")
-                final_list = []
-                final_list.append(email_list[0])
-                final_list.append(new_list[0])
-                final_list.append(new_list[1])
-                if len(final_list[0]) >= 1 and len(final_list[1]) >= 1 and len(final_list[2]) >= 2:
-                    return email
-                else:
-                    return False 
-        except IndexError:
-            return False
+        if len(email_list) == 2:
+            new_list = email_list[1].split(".")
+            final_list = []
+            final_list.append(email_list[0])
+            final_list.append(new_list[0])
+            final_list.append(new_list[1])
+            if len(final_list[0]) >= 1 and len(final_list[1]) >= 1 and len(final_list[2]) >= 2:
+                return email
+            else:
+                return False 
         else:
             return False
     
@@ -195,7 +202,3 @@ class InputUI:
 
     def is_date_valid(self, date):
             return True
-
-    def is_hours_valid(self, hours):
-        #09:00 - 17:00
-        return hours

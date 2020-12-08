@@ -21,7 +21,7 @@ class ContractUI:
     def menu(self):
         while True:
             self.printer.header("Contracts Menu")
-            self.printer.print_options(['Create an contract', 'View contracts'])
+            self.printer.print_options(['Create an contract', 'View contracts', 'Print invoice'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.print_msg()
@@ -34,6 +34,8 @@ class ContractUI:
                     self.view(True)
             elif action == '2':
                 self.view()
+            elif action == '3':
+                self.print_invoice()
             elif action == 'q':
                 break
             else:
@@ -144,7 +146,7 @@ class ContractUI:
             total = self.input.get_input("total")
             loan_status = self.input.get_input("loan status")
 
-            new_contract = Contract(name, phone, email, address, vehicle_id, vehicle_status, self.employee_id, location, date_from, date_to, loan_date, loan_status, return_date, total)
+            new_contract = Contract(name, phone, email, address, vehicle_id, vehicle_status, self.employee_id, location, date_from, date_to, loan_date, loan_status) #return_date) #total)
             self.logic.create_contract(new_contract)
             return True
         except ValueError:
@@ -265,3 +267,17 @@ class ContractUI:
             self.success_msg = ""
         else:
             self.printer.new_line()
+
+    def print_invoice(self):
+
+        while True:
+            contract_id = input("Enter contract ID: ")
+            if contract_id == 'q':
+                break
+            else:
+                contract = self.logic.get_contract_by_id(contract_id)
+                self.printer.header("Invoice")
+                print("\nId:\t\t\t\t{}\n\nName:\t\t\t\t{}\n\nSocial security number:\t\t{}\n\nEmail:\t\t\t\t{}\n\nAddress:\t\t\t{}\n\n".format(contract.id, contract.name, contract.ssn, contract.email, contract.address))
+
+        
+            
