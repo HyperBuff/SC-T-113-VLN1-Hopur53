@@ -8,6 +8,8 @@ from logic.VehicleLogic import VehicleLogic
 from logic.VehicleTypeLogic import VehicleTypeLogic
 #Location Logic
 from logic.LocationLogic import LocationLogic
+#Customer Logic
+from logic.CustomerLogic import CustomerLogic
 
 class MainLogic:
     def __init__(self):
@@ -16,6 +18,7 @@ class MainLogic:
         self.vehicle = VehicleLogic()
         self.vehicletype = VehicleTypeLogic()
         self.location = LocationLogic()
+        self.customer = CustomerLogic()
 
     #Emplyee Logic
     def login(self, email):
@@ -84,8 +87,8 @@ class MainLogic:
     def get_vehicletype_by_id(self, id):
         return self.vehicletype.get_vehicletype_by_id(id)
 
-    def create_vehicletype(self, vehicle):
-        return self.vehicletype.create(vehicle)
+    def create_vehicletype(self, vehicletype):
+        return self.vehicletype.create(vehicletype)
 
     def update_vehicletype(self, id, updates):
         return self.vehicletype.update(id, updates)
@@ -100,11 +103,28 @@ class MainLogic:
     def get_location_by_id(self, id):
         return self.location.get_location_by_id(id)
 
-    def create_location(self, vehicle):
-        return self.location.create(vehicle)
+    def create_location(self, location):
+        return self.location.create(location)
 
     def update_location(self, id, updates):
         return self.location.update(id, updates)
 
     def delete_location(self, id):
         return self.location.delete(id)
+
+    #Customer Logic
+    def get_all_customers(self):
+        return self.customer.get_all_customers()
+
+    def get_customer_by_id(self, id):
+        return self.customer.get_customer_by_id(id)
+
+    def create_customer(self, customer):
+        return self.customer.create(customer)
+
+    def update_customer(self, id, updates):
+        return self.customer.update(id, updates)
+
+    def delete_customer(self, id):
+        return self.customer.delete(id)
+

@@ -5,8 +5,8 @@ class VehicleTypeLogic:
     def __init__(self):
         self.rep = MainRepository()
     
-    def create(self, vehicle):
-        self.rep.create_vehicletype(vehicle)
+    def create(self, vehicletype):
+        self.rep.create_vehicletype(vehicletype)
 
     def get_all_vehicletypes(self):
         return self.rep.get_all_vehicletypes()
