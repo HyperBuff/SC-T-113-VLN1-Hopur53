@@ -82,20 +82,15 @@ class MainUI:
                 self.warning_msg = "Please select available option"
 
     def contracts(self, employee_id):
-        contract = ContractUI(employee_id)
-        contract.menu()
+        pass
 
     def vehicles(self):
-        vehicle = VehicleUI()
-        vehicle.menu()
+        pass
 
     def employees(self):
         employee = EmployeeUI(self.employee_id)
-        employee.menu()
 
     def locations(self):
-        location = LocationUI()
-        location.menu()
         pass
 
     def financials(self):
