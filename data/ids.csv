@@ -1,14 +1,6 @@
 file,count
-<<<<<<< HEAD
-data/employee.csv,10
+data/employee.csv,5
 data/location.csv,6
 data/vehicle.csv,23
 data/vehicletype.csv,6
-=======
-data/employee.csv,1009
-data/contract.csv,8
-data/location.csv,2
-data/vehicle.csv,5
-data/vehicletype.csv,5
->>>>>>> 0067cac58836c84cc9cf4fb1e4869d0c825f5bb9
 data/customer.csv,1

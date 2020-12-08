@@ -137,16 +137,26 @@ class EmployeeUI:
                 if counter == 0:
                     role_input = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial","Admin","Admin", "Delivery", "Booking", "Mechanic", "Financial","Admin","Admin", "Delivery", "Booking", "Mechanic", "Financial","Admin"], current_page=role_page, warning_msg=warning_msg)                       
                     warning_msg = ""
-                    if role_input[0] == True:
+                    if role_input[0]:
                         role = role_input[1]
                     else:
                         next_input = False
                         warning_msg = role_input[1]
                         role_page = role_input[2]
                 elif counter == 1:
-                    name = self.input.get_input("name")
+                    name_input = self.input.get_input("name", warning_msg=warning_msg)
+                    if name_input[0]:
+                        name = name_input[1]
+                    else:
+                        next_input = False
+                        warning_msg = name_input[1]
                 elif counter == 2:
-                    email = self.input.get_input("email", ["email"])
+                    email_input = self.input.get_input("email", ["email"], warning_msg=warning_msg)
+                    if email_input[0]:
+                        email = email_input[1]
+                    else:
+                        next_input = False
+                        warning_msg = email_input[1]
                 elif counter == 3:
                     ssn = self.input.get_input("social security number", ["ssn"])
                 elif counter == 4:
