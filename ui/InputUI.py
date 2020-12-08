@@ -46,15 +46,12 @@ class InputUI:
                             passed = False
                         else:
                             user_input = self.is_date_valid(user_input)
-<<<<<<< HEAD
                     if validation == "hours":
                         if not self.is_hours_valid(user_input):
                             self.printer.print_warning("{} is not valid".format(title.capitalize()))
                             passed = False
                         else:
                             user_input = self.is_hours_valid(user_input)
-=======
->>>>>>> 0067cac58836c84cc9cf4fb1e4869d0c825f5bb9
                 if passed:
                     break
         return user_input
@@ -108,7 +105,6 @@ class InputUI:
             else:
                 if len(options) >= int(user_input) and int(user_input) > 0:
                     user_input = options[int(user_input)-1]
-<<<<<<< HEAD
                     warning_msg = ""
                 else:
                     warning_msg = "Please select available option"
@@ -118,12 +114,6 @@ class InputUI:
             return (True, user_input[0])
         else:
             return (True, user_input)
-=======
-                    break
-                except:
-                    pass
-        return user_input
->>>>>>> 0067cac58836c84cc9cf4fb1e4869d0c825f5bb9
 
     def is_email_valid(self, email):
         email_list = email.split("@")
@@ -201,4 +191,7 @@ class InputUI:
             return False
 
     def is_date_valid(self, date):
-            return True
+        return True
+
+    def is_hours_valid(self, hours):
+        return True

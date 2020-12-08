@@ -129,6 +129,7 @@ class ContractUI:
         self.printer.new_line()
         try:
             name = self.input.get_input("name")
+            ssn = self.input.get_input("ssn")
             phone = self.input.get_input("phone", ["phone"])
             email = self.input.get_input("email", ["email"])
             address = self.input.get_input("address")
@@ -137,7 +138,7 @@ class ContractUI:
             date_to = self.input.get_input("date to", ["date"])
 
             vehicle_id = self.input.get_input("vehicle id")
-            location = self.input.get_input("location")
+            location_id = self.input.get_input("location")
             vehicle_status = self.input.get_input("vehicle status")
 
             loan_date = self.input.get_input("loan date", ["date"])
@@ -146,7 +147,7 @@ class ContractUI:
             total = self.input.get_input("total")
             loan_status = self.input.get_input("loan status")
 
-            new_contract = Contract(name, phone, email, address, vehicle_id, vehicle_status, self.employee_id, location, date_from, date_to, loan_date, loan_status) #return_date) #total)
+            new_contract = Contract(name, ssn, phone, email, address, vehicle_id, vehicle_status, self.employee_id, location_id, date_from, date_to, loan_date, loan_status, return_date, total)
             self.logic.create_contract(new_contract)
             return True
         except ValueError:

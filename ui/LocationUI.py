@@ -39,11 +39,7 @@ class LocationUI:
                 self.warning_msg = "Please select available option"
 
     # Prints out all location
-<<<<<<< HEAD
     def view(self, created = False, return_id = False, current_page = 1):
-=======
-    def view(self, created = False):
->>>>>>> 0067cac58836c84cc9cf4fb1e4869d0c825f5bb9
         current_page = 1
         while True:   
             locations = self.logic.get_all_locations()
@@ -56,13 +52,8 @@ class LocationUI:
                 created = False
             start = (current_page - 1) * self.items_per_page
             end = start + 10 if not current_page == last_page else locations_count
-<<<<<<< HEAD
             if not return_id:
                 self.printer.header("View locations")
-=======
-
-            self.printer.header("View locations")
->>>>>>> 0067cac58836c84cc9cf4fb1e4869d0c825f5bb9
             self.print_locations(locations, start, end, current_page, last_page)
             self.printer.new_line()
             if not return_id:

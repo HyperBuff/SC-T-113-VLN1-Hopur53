@@ -181,19 +181,11 @@ class EmployeeUI:
     # Prints out table of employee
     def print_employees(self, employees, start, end, current_page, last_page):
         if len(employees) > 0:
-<<<<<<< HEAD
             print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "Location ID"))
             print('-' * 212)
             for i in range(start, end):
                 print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|{:<15}|{:<15}|".format(employees[i].id, employees[i].role, employees[i].name, employees[i].email, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].address, employees[i].postal, employees[i].location_id))
             print("{:^212}".format("Page {} of {}".format(current_page, last_page)))
-=======
-            print("|{:^6}|{:^15}|{:^30}|{:^40}|{:^30}|{:^20}|{:^20}|{:^30}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "Location"))
-            print('-' * 216)
-            for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<30}|{:<40}|{:<30}|{:<20}|{:<20}|{:<30}|{:<15}|{:<15}|".format(employees[i].id, employees[i].role, employees[i].name, employees[i].email, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].address, employees[i].postal, employees[i].location))
-            print("{:^216}".format("Page {} of {}".format(current_page, last_page)))
->>>>>>> 0067cac58836c84cc9cf4fb1e4869d0c825f5bb9
             self.printer.new_line()
         else:
             self.warning_msg = "No employees found"
