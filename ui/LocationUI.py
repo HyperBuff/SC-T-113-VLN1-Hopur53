@@ -54,6 +54,8 @@ class LocationUI:
             end = start + 10 if not current_page == last_page else locations_count
             if not return_id:
                 self.printer.header("View locations")
+            else:
+                self.printer.header("Select location")
             self.print_locations(locations, start, end, current_page, last_page)
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")

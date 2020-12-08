@@ -4,6 +4,8 @@ from models.Employee import Employee
 from ui.PrinterUI import PrinterUI
 from ui.InputUI import InputUI
 
+from ui.LocationUI import LocationUI
+
 class EmployeeUI:
 
     def __init__(self, employee_id):
@@ -12,6 +14,7 @@ class EmployeeUI:
         self.logic = MainLogic()
         self.printer = PrinterUI()
         self.input = InputUI()
+        self.location = LocationUI()
 
         self.employee_id = employee_id
         self.success_msg = ""
@@ -137,7 +140,7 @@ class EmployeeUI:
             homephone = self.input.get_input("home phone", ["phone"])
             address = self.input.get_input("address")
             postal = self.input.get_input("postal code")
-            location = self.input.get_input("location")
+            location = self.location.view(return_id=True)
             new_employee = Employee(role, name, address, postal, ssn, phone, homephone, email, location)
             self.logic.create_employee(new_employee)
             return True

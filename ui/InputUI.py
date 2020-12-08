@@ -71,6 +71,9 @@ class InputUI:
                     pass
         return user_input
 
+    def select_id(self, ):
+        pass
+
     def is_email_valid(self, email):
         email_list = email.split("@")
         if len(email_list) == 2:
