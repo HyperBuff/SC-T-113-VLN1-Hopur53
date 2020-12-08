@@ -9,8 +9,6 @@ class InputUI:
         self.items_per_page = 10
 
     def get_input(self, title, validations = [], warning_msg = ""):
-        self.printer.print_warning(warning_msg)
-        warning_msg = ""
         user_input = input("Enter {}: ".format(title.lower()))
         if user_input == 'q':
             raise ValueError

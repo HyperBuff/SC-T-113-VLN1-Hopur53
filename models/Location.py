@@ -6,5 +6,5 @@ class Location:
         self.hours = hours
         self.id = id
 
-    def __str__(self):
+    def __repr__(self):
         return "{}, {}".format(self.country, self.airport)
