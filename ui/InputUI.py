@@ -4,50 +4,51 @@ class InputUI:
 
     def __init__(self):
         self.printer = PrinterUI()
+        self.items_per_page = 10
 
     def get_input(self, title, validations = []):
         while True:
-            user_input = input("\tEnter {}: ".format(title.lower()))
+            user_input = input("Enter {}: ".format(title.lower()))
             if user_input == 'q':
                 raise ValueError
             elif len(user_input.replace(" ", "")) < 1:
-                self.printer.print_warning("\t{} must been at least 1 character".format(title.capitalize()))
+                self.printer.print_warning("{} must been at least 1 character".format(title.capitalize()))
             else:
                 passed = True
                 for validation in validations:
                     if validation == "phone":
                         if not self.is_phone_valid(user_input):
-                            self.printer.print_warning("\t{} is not valid".format(title.capitalize()))
+                            self.printer.print_warning("{} is not valid".format(title.capitalize()))
                             passed = False
                         else:
                             user_input = self.is_phone_valid(user_input)
                     if validation == "ssn":
                         if not self.is_ssn_valid(user_input):
-                            self.printer.print_warning("\t{} is not valid".format(title.capitalize()))
+                            self.printer.print_warning("{} is not valid".format(title.capitalize()))
                             passed = False
                         else:
                             user_input = self.is_ssn_valid(user_input)
                     if validation == "email":
                         if not self.is_email_valid(user_input):
-                            self.printer.print_warning("\t{} is not valid".format(title.capitalize()))
+                            self.printer.print_warning("{} is not valid".format(title.capitalize()))
                             passed = False
                         else:
                             user_input = self.is_email_valid(user_input)
                     if validation == "year":
                         if not self.is_year_valid(user_input):
-                            self.printer.print_warning("\t{} is not valid".format(title.capitalize()))
+                            self.printer.print_warning("{} is not valid".format(title.capitalize()))
                             passed = False
                         else:
                             user_input = self.is_year_valid(user_input)
                     if validation == "date":
                         if not self.is_date_valid(user_input):
-                            self.printer.print_warning("\t{} is not valid".format(title.capitalize()))
+                            self.printer.print_warning("{} is not valid".format(title.capitalize()))
                             passed = False
                         else:
                             user_input = self.is_date_valid(user_input)
                     if validation == "hours":
                         if not self.is_hours_valid(user_input):
-                            self.printer.print_warning("\t{} is not valid".format(title.capitalize()))
+                            self.printer.print_warning("{} is not valid".format(title.capitalize()))
                             passed = False
                         else:
                             user_input = self.is_hours_valid(user_input)
@@ -55,24 +56,64 @@ class InputUI:
                     break
         return user_input
 
-    def get_option(self, title, options):
-        while True:
+    def get_option(self, title, options, current_page = 1, warning_msg = ""):
+        options_count = len(options)
+        last_page = int(options_count / self.items_per_page) + (options_count % self.items_per_page > 0)
+        if current_page > last_page:
+            current_page = last_page
+        start = (current_page - 1) * self.items_per_page
+        end = start + self.items_per_page if not current_page == last_page else options_count
+
+        page = False
+        
+        if options_count > 0:
             print("Select {}:".format(title))
-            for i in range(len(options)):
-                print("\t{}. {}".format(i+1, options[i].capitalize()))
-            user_input = input("\nChoose an option: ")
+            for i in range(start, end):
+                if isinstance(options[i], list):
+                    print("\t{}. {}".format(i+1, options[i][1]))
+                else:
+                    print("\t{}. {}".format(i+1, options[i].capitalize()))
+            if last_page > 1:
+                self.printer.new_line()
+                print("{}".format("\tPage {} of {}".format(current_page, last_page)))
+                print("\t(N)ext page / (P)revious page")
+
+            if not warning_msg == "":
+                self.printer.print_warning(warning_msg)
+            else:
+                self.printer.new_line()
+
+            user_input = input("Choose an option: ")
             if user_input == 'q':
                 raise ValueError
+            elif user_input == 'n' or user_input == "next":
+                page = True
+                if current_page >= last_page:
+                    current_page = last_page
+                    warning_msg = "You are currenly on the last page"
+                else:
+                    current_page += 1
+            elif user_input == 'p' or user_input == "previous":
+                page = True
+                if current_page > 1:
+                    current_page -= 1
+                else:
+                    current_page = 1
+                    warning_msg = "You are currenly on the first page"
+            elif not user_input.isnumeric():
+                warning_msg = "Please select available option"
             else:
-                try:
+                if len(options) >= int(user_input) and int(user_input) > 0:
                     user_input = options[int(user_input)-1]
-                    break
-                except:
-                    pass
-        return user_input
-
-    def select_id(self, ):
-        pass
+                    warning_msg = ""
+                else:
+                    warning_msg = "Please select available option"
+        if not warning_msg == "" or page:
+            return (False, warning_msg, current_page)
+        if isinstance(user_input, list):
+            return (True, user_input[0])
+        else:
+            return (True, user_input)
 
     def is_email_valid(self, email):
         email_list = email.split("@")

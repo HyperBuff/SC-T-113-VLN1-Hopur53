@@ -113,14 +113,82 @@ class EmployeeUI:
             else:
                 self.warning_msg = "Please select available option"
             
+    # Prints out single employee
+    def create_employee(self):
+        counter = 0
+        role = ""
+        name = ""
+        email = ""
+        ssn = ""
+        phone = ""
+        homephone = ""
+        address = ""
+        postal = ""
+        location_id = ""
+
+        warning_msg = ""
+        location_id_page = 1
+        role_page = 1
+        while True:
+            self.printer.header("Create employee")
+            print("Role:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\nLocation:\t\t\t{}\n".format(role, name, email, ssn, phone, homephone, address, postal, location_id))
+            self.printer.new_line()
+            self.printer.print_fail("Press q to go back")
+            self.print_msg()
+            next_input = True
+            try:
+                if counter == 0:
+                    role_input = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial","Admin","Admin", "Delivery", "Booking", "Mechanic", "Financial","Admin","Admin", "Delivery", "Booking", "Mechanic", "Financial","Admin"], current_page=role_page, warning_msg=warning_msg)                       
+                    warning_msg = ""
+                    if role_input[0] == True:
+                        role = role_input[1]
+                    else:
+                        next_input = False
+                        warning_msg = role_input[1]
+                        role_page = role_input[2]
+                elif counter == 1:
+                    name = self.input.get_input("name")
+                elif counter == 2:
+                    email = self.input.get_input("email", ["email"])
+                elif counter == 3:
+                    ssn = self.input.get_input("social security number", ["ssn"])
+                elif counter == 4:
+                    phone = self.input.get_input("mobile phone", ["phone"])
+                elif counter == 5:
+                    homephone = self.input.get_input("home phone", ["phone"])
+                elif counter == 6:
+                    address = self.input.get_input("address")
+                elif counter == 7:
+                    postal = self.input.get_input("postal code")
+                elif counter == 8:
+
+                    locations = self.logic.get_all_locations()
+                    available_locations = [[location.id, "{}, {}".format(location.country, location.airport)] for location in locations]
+                    location_input = self.input.get_option("location", available_locations, current_page=location_id_page, warning_msg=warning_msg)
+                    warning_msg = ""
+                    if location_input[0] == True:
+                        location_id = location_input[1]
+                    else:
+                        next_input = False
+                        warning_msg = location_input[1]
+                        location_id_page = location_input[2]
+                elif counter > 8:
+                    self.logic.create_employee(Employee(role, name, address, postal, ssn, phone, homephone, email, location_id))
+                    return True
+                if next_input:
+                    counter += 1
+            except ValueError:
+                break
+
+    
     # Prints out table of employee
     def print_employees(self, employees, start, end, current_page, last_page):
         if len(employees) > 0:
-            print("|{:^6}|{:^15}|{:^30}|{:^40}|{:^30}|{:^20}|{:^20}|{:^30}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "Location ID"))
-            print('-' * 216)
+            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "Location ID"))
+            print('-' * 212)
             for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<30}|{:<40}|{:<30}|{:<20}|{:<20}|{:<30}|{:<15}|{:<15}|".format(employees[i].id, employees[i].role, employees[i].name, employees[i].email, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].address, employees[i].postal, employees[i].location_id))
-            print("{:^216}".format("Page {} of {}".format(current_page, last_page)))
+                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|{:<15}|{:<15}|".format(employees[i].id, employees[i].role, employees[i].name, employees[i].email, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].address, employees[i].postal, employees[i].location_id))
+            print("{:^212}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
             self.warning_msg = "No employees found"
