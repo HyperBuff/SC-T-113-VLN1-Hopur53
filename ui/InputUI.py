@@ -1,3 +1,5 @@
+import datetime
+
 from ui.PrinterUI import PrinterUI
 
 class InputUI:
@@ -121,18 +123,21 @@ class InputUI:
             return (True, user_input)
 
     def is_email_valid(self, email):
-        email_list = email.split("@")
-        if len(email_list) == 2:
-            new_list = email_list[1].split(".")
-            final_list = []
-            final_list.append(email_list[0])
-            final_list.append(new_list[0])
-            final_list.append(new_list[1])
-            if len(final_list[0]) >= 1 and len(final_list[1]) >= 1 and len(final_list[2]) >= 2:
-                return email
+        try:
+            email_list = email.split("@")
+            if len(email_list) == 2:
+                new_list = email_list[1].split(".")
+                final_list = []
+                final_list.append(email_list[0])
+                final_list.append(new_list[0])
+                final_list.append(new_list[1])
+                if len(final_list[0]) >= 1 and len(final_list[1]) >= 1 and len(final_list[2]) >= 2:
+                    return email
+                else:
+                    return False 
             else:
-                return False 
-        else:
+                return False
+        except ValueError:
             return False
     
     def is_phone_valid(self, phone):
@@ -195,8 +200,18 @@ class InputUI:
         else: 
             return False
 
+    def get_date(self):
+        date_now = datetime.datetime.now() 
+        create_date = "{}/{}/{}".format(date_now.strftime("%d"), date_now.strftime("%m"), date_now.strftime("%Y"))
+        return create_date
+    
     def is_date_valid(self, date):
-        return True
+        try:
+            date_object = datetime.datetime.strptime(date, "%d/%m/%Y")
+            create_date = "{}/{}/{}".format(date_object.strftime("%d"), date_object.strftime("%m"), date_object.strftime("%Y"))
+            return create_date
+        except ValueError:
+            return False
 
     def is_hours_valid(self, hours):
         return True
