@@ -1,4 +1,3 @@
-from models.VehicleType import VehicleType
 from logic.MainLogic import MainLogic
 from models.Vehicle import Vehicle
 
@@ -8,23 +7,139 @@ from ui.InputUI import InputUI
 class VehicleUI:
 
     def __init__(self):
+        
         self.items_per_page = 10
 
         self.logic = MainLogic()
+
         self.printer = PrinterUI()
         self.input = InputUI()
 
         self.success_msg = ""
         self.warning_msg = ""
 
+        self.menu()
+
+
+    def create(self):
+        counter = 0
+
+        role = ""
+        name = ""
+        email = ""
+        ssn = ""
+        phone = ""
+        homephone = ""
+        address = ""
+        postal = ""
+        vehicle_id = ""
+        
+        vehicle_id_page = 1
+        role_page = 1
+        while True:
+
+            vehicle = self.logic.get_vehicle_by_id(vehicle_id)
+            if vehicle is None:
+                vehicle = ""
+
+            self.printer.header("Create vehicle")
+            print(f"Role:\t\t\t\t{role}\nName:\t\t\t\t{name}\nEmail:\t\t\t\t{email}\nSocial security number:\t\t{ssn}\nMobile phone:\t\t\t{phone}\nHome phone:\t\t\t{homephone}\nAddress:\t\t\t{address}\nPostal code:\t\t\t{postal}\nvehicle:\t\t\t{vehicle}\n")
+            self.printer.new_line()
+            self.printer.print_fail("Press q to go back")
+            self.printer.new_line()
+            self.notification()
+            next_input = True
+            data = None
+            try:
+                if counter == 0:
+                    data = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial"], current_page = role_page, warning_msg = self.warning_msg)
+                    response = data[0]               
+                    if response:
+                        role = data[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = data[1]
+                        role_page = data[2]
+                elif counter == 1:
+                    data = self.input.get_input("name", ["required"], warning_msg = self.warning_msg)
+                    response = data[0]    
+                    if data[0]:
+                        name = data[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = data[1]
+                elif counter == 2:
+                    data = self.input.get_input("email", ["required", "email"], warning_msg = self.warning_msg)
+                    if data[0]:
+                        email = data[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = data[1]
+                elif counter == 3:
+                    data = self.input.get_input("social security number", ["required", "ssn"], warning_msg = self.warning_msg)
+                    if data[0]:
+                        ssn = data[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = data[1]
+                elif counter == 4:
+                    data = self.input.get_input("mobile phone", ["required", "phone"], warning_msg = self.warning_msg)
+                    if data[0]:
+                        phone = data[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = data[1]
+                elif counter == 5:
+                    data = self.input.get_input("home phone", ["required", "phone"], warning_msg = self.warning_msg)
+                    if data[0]:
+                        homephone = data[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = data[1]
+                elif counter == 6:
+                    data = self.input.get_input("address", ["required"], warning_msg = self.warning_msg)
+                    if data[0]:
+                        address = data[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = data[1]
+                elif counter == 7:
+                    data = self.input.get_input("postal code", ["required"], warning_msg = self.warning_msg)
+                    if data[0]:
+                        postal = data[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = data[1]
+                elif counter == 8:
+                    vehicles = self.logic.get_all_vehicles()
+                    available_vehicles = [[vehicle.id, vehicle] for vehicle in vehicles]
+                    vehicle_input = self.input.get_option("vehicle", available_vehicles, current_page = vehicle_id_page, warning_msg = self.warning_msg)
+                    if vehicle_input[0] == True:
+                        vehicle_id = vehicle_input[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = vehicle_input[1]
+                        vehicle_id_page = vehicle_input[2]
+                elif counter > 8:
+                    new_vehicle = vehicle(role, name, address, postal, ssn, phone, homephone, email, vehicle_id)
+                    confirmation = input("Are you sure you want to create this vehicle? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
+                    if confirmation == 'y':
+                        self.logic.create_vehicle(new_vehicle)
+                        return True
+                    return False
+                if next_input:
+                    counter += 1
+            except ValueError:
+                break
+
     # Prints out vehicle's menu
     def menu(self):
         while True:
-            self.printer.header("Vehicles Menu")
-            self.printer.print_options(['Create a vehicle', 'View vehicles', 'Create a vehicle type', 'View vehicle types'])
+            self.printer.header("vehicles Menu")
+            self.printer.print_options(['Create an vehicle', 'View vehicles'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
-            self.print_msg()
+            self.notification()
 
             action = input("Choose an option: ").lower()
             
@@ -34,12 +149,6 @@ class VehicleUI:
                     self.view(True)
             elif action == '2':
                 self.view()
-            elif action == '3':
-                if self.create_type():
-                    self.success_msg = "New vehicle type has been created"
-                    self.view_by_type(True)
-            elif action == '4':
-                self.view_by_type()
             elif action == 'q':
                 break
             else:
@@ -61,10 +170,10 @@ class VehicleUI:
             end = start + 10 if not current_page == last_page else vehicles_count
 
             self.printer.header("View vehicles")
-            self.print_vehicles(vehicles, start, end, current_page, last_page)
+            self.print(vehicles, start, end, current_page, last_page)
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
-            self.print_msg()
+            self.notification()
 
             action = input("(N)ext page / (P)revious page / (S)elect vehicle: ").lower()
 
@@ -86,70 +195,21 @@ class VehicleUI:
                 vehicle_id = input("Select vehicle by ID: ")
                 vehicle = self.logic.get_vehicle_by_id(vehicle_id)
                 if vehicle is None:
-                    self.warning_msg = "Vehicle not found"
+                    self.warning_msg = "vehicle not found"
                 else:
-                    self.select_vehicle(vehicle_id)
-            else:
-                self.warning_msg = "Please select available option"
-
-    def view_by_type(self, created = False, return_id = False):
-        current_page = 1
-        while True:   
-            vehicle_types = self.logic.get_all_vehicletypes()
-            vehicles_count = len(vehicle_types)
-            last_page = int(vehicles_count / self.items_per_page) + (vehicles_count % self.items_per_page > 0)
-            if current_page > last_page:
-                current_page = last_page
-            if created == True:
-                current_page = last_page
-                created = False
-            start = (current_page - 1) * self.items_per_page
-            end = start + 10 if not current_page == last_page else vehicles_count
-            if not return_id:
-                self.printer.header("View vehicle types")
-            self.print_vehicle_types(vehicle_types, start, end, current_page, last_page)
-            self.printer.new_line()
-            self.printer.print_fail("Press q to go back")
-            self.print_msg()
-
-            action = input("(N)ext page / (P)revious page / (S)elect vehicle: ").lower()
-
-            if action == 'q':
-                break
-            elif action == 'n' or action == "next":
-                if current_page >= last_page:
-                    current_page = last_page
-                    self.warning_msg = "You are currenly on the last page"
-                else:
-                    current_page += 1
-            elif action == 'p' or action == "previous":
-                if current_page > 1:
-                    current_page -= 1
-                else:
-                    current_page = 1
-                    self.warning_msg = "You are currenly on the first page"
-            elif action == 's' or action == "select":
-                vehicletype_id = input("Select vehicle by ID: ")
-                vehicle = self.logic.get_vehicletype_by_id(vehicletype_id)
-                if vehicle is None:
-                    self.warning_msg = "Vehicle not found"
-                else:
-                    if return_id:
-                        return vehicletype_id
-                    else:
-                        self.select_vehicle_by_type(vehicletype_id)
+                    self.vehicle(vehicle_id)
             else:
                 self.warning_msg = "Please select available option"
 
     # Prints out single vehicle
-    def select_vehicle(self, vehicle_id):
+    def vehicle(self, vehicle_id):
         while True:
             vehicle = self.logic.get_vehicle_by_id(vehicle_id)
             self.printer.header("View vehicle")
-            print("ID:\t\t\t\t{}\nManufacturer:\t\t\t{}\nModel:\t\t\t\t{}\nVehicle type:\t\t\t{}\nManufacturing year:\t\t{}\nColor:\t\t\t\t{}\nLicence type:\t\t\t{}\nLocation ID:\t\t\t{}\n".format(vehicle_id, vehicle.manufacturer, vehicle.model, vehicle.vehicle_type_id, vehicle.man_year, vehicle.color, vehicle.licence_type, vehicle.location_id))
+            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\nvehicle:\t\t\t{}\n".format(vehicle_id, vehicle.role, vehicle.name, vehicle.email, vehicle.ssn, vehicle.phone, vehicle.homephone, vehicle.address, vehicle.postal, self.logic.get_vehicle_by_id(vehicle.vehicle_id)))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
-            self.print_msg()
+            self.notification()
             action = input("(E)dit / (D)elete: ").lower()
             if action == 'q':
                 break
@@ -157,193 +217,111 @@ class VehicleUI:
                 self.edit(vehicle_id)
             elif action == 'd' or action == 'delete':
                 if self.delete(vehicle_id):
-                        self.success_msg = "Vehicle has been deleted"
-                        break
+                    self.success_msg = "vehicle has been deleted"
+                    break
             else:
                 self.warning_msg = "Please select available option"
     
-    def select_vehicle_by_type(self, vehicletype_id):
-        while True:
-            vehicle_type = self.logic.get_vehicletype_by_id(vehicletype_id)
-            self.printer.header("View vehicle type")
-            print("ID:\t\t\t{}\nName:\t\t\t{}\nLocation ID:\t\t{}\nRate:\t\t\t{}\n".format(vehicle_type.id, vehicle_type.name, vehicle_type.location_id, vehicle_type.rate))
-            self.printer.new_line()
-            self.printer.print_fail("Press q to go back")
-            self.print_msg()
-            action = input("(E)dit / (D)elete: ").lower()
-            if action == 'q':
-                break
-            elif action == 'e' or action == 'edit':
-                self.edit_type(vehicletype_id)
-            elif action == 'd' or action == 'delete':
-                if self.delete_type(vehicletype_id):
-                        self.success_msg = "Vehicle has been deleted"
-                        break
-            else:
-                self.warning_msg = "Please select available option"
-
-            
     # Prints out table of vehicle
-    def print_vehicles(self, vehicles, start, end, current_page, last_page):
+    def print(self, vehicles, start, end, current_page, last_page):
         if len(vehicles) > 0:
-            print("|{:^6}|{:^20}|{:^15}|{:^25}|{:^10}|{:^25}|{:^20}|{:<20}|{:<20}|".format("ID", "Manufacturer", "Model", "Vehicle type ID", "Status", "Manufacturing year", "Color", "Licence type", "Location ID"))
-            print('-' * 171)
+            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "vehicle"))
+            print('-' * 212)
             for i in range(start, end):
-                print("|{:^6}|{:<20}|{:<15}|{:<25}|{:<10}|{:<25}|{:<20}|{:<20}|{:<20}|".format(vehicles[i].id, vehicles[i].manufacturer, vehicles[i].model, vehicles[i].vehicle_type_id, vehicles[i].status, vehicles[i].man_year, vehicles[i].color, vehicles[i].licence_type, vehicles[i].location_id))
-            print("{:^171}".format("Page {} of {}".format(current_page, last_page)))
+                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|{:<15}|{:<15}|".format(vehicles[i].id, vehicles[i].role, vehicles[i].name, vehicles[i].email, vehicles[i].ssn, vehicles[i].phone, vehicles[i].homephone, vehicles[i].address, vehicles[i].postal, self.logic.get_vehicle_by_id(vehicles[i].vehicle_id).__str__()))
+            print("{:^212}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
             self.warning_msg = "No vehicles found"
+  
 
-    def print_vehicle_types(self, vehicle_type, start, end, current_page, last_page):
-        if len(vehicle_type) > 0:
-            print("|{:^6}|{:^20}|{:^15}|{:^25}|".format("ID", "Name", "Location ID", "Rate"))
-            print('-' * 71)
-            for i in range(start, end):
-                print("|{:^6}|{:<20}|{:<15}|{:<25}|".format(vehicle_type[i].id, vehicle_type[i].name, vehicle_type[i].location_id, vehicle_type[i].rate))
-            print("{:^71}".format("Page {} of {}".format(current_page, last_page)))
-            self.printer.new_line()
-        else:
-            self.warning_msg = "No vehicle types found"
-
-    # Create vehicle
-    def create(self):
-        self.printer.header("Add vehicle")
-        self.printer.new_line()
-        self.printer.print_fail("Press q to go back")
-        self.printer.new_line()
-        try:
-            manufacturer = self.input.get_input("manufacturer")
-            model = self.input.get_input("model")
-            vehicle_type = self.view_by_type(return_id=True)
-            status = self.input.get_input("status")
-            man_year = self.input.get_input("manufacturing year", ["year"])
-            color = self.input.get_input("color")
-            licence_type = self.input.get_input("licence type")
-            location = self.input.get_input("location")
-            new_vehicle = Vehicle(manufacturer, model, vehicle_type, status, man_year, color, licence_type, location)
-            self.logic.create_vehicle(new_vehicle)
-            return True
-        except ValueError:
-            return False
-    
-    def create_type(self):
-        self.printer.header("Add vehicle type")
-        self.printer.new_line()
-        self.printer.print_fail("Press q to go back")
-        self.printer.new_line()
-        try:
-            name = self.input.get_input("name")
-            regions = self.input.get_input("regions")
-            rate = self.input.get_input("rate")
-            vehicle = VehicleType(name, regions, rate)
-            self.logic.create_vehicletype(vehicle)
-            return True
-        except ValueError:
-            return False
-
-    # Edit vehicle
-    def edit(self, id):
+    def edit(self, vehicle_id):
+        vehicle_id_page = 1
+        role_page = 1
         while True:
-            updates = {}
+            vehicle = self.logic.get_vehicle_by_id(vehicle_id)
+            update = {}
             self.printer.header("Edit vehicle")
-            self.printer.print_options(['Change manufacturer', 'Change model', 'Change vehicle type', 'Change status','Change manufacturing year', 'Change color', 'Change licence type','Change location'])
-            self.printer.new_line(2)
+            print(f"ID:\t\t\t\t{vehicle_id}\nRole:\t\t\t\t{vehicle.role}\nName:\t\t\t\t{vehicle.name}\nEmail:\t\t\t\t{vehicle.email}\nSocial security number:\t\t{vehicle.ssn}\nMobile phone:\t\t\t{vehicle.phone}\nHome phone:\t\t\t{vehicle.homephone}\nAddress:\t\t\t{vehicle.address}\nPostal code:\t\t\t{vehicle.postal}\nvehicle:\t\t\t{self.logic.get_vehicle_by_id(vehicle.vehicle_id)}\n")
+            self.printer.new_line()
             self.printer.print_fail("Press q to go back")
-            self.print_msg()
-            action = input("Choose an option: ").lower()
-            if action == 'q':
-                break
-            elif action == '1':
+            self.printer.new_line()
+            self.printer.print_options(['Edit role', 'Edit email', 'Edit mobile phone', 'Edit home phone', 'Edit address', 'Edit postal code', 'Edit vehicle'])
+            self.printer.new_line()
+            self.notification()
+            while True:
+                action = input("Choose an option: ").lower()
+                data = None
                 try:
-                    manufacturer = self.input.get_input("manufacturer")
-                    updates["manufacturer"] = manufacturer
+                    if action == "q":
+                        break
+                    elif action == "1":
+                        while True:
+                            data = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial"], current_page = role_page, warning_msg = self.warning_msg)
+                            if data[0]:
+                                update["role"] = data[1]
+                                break
+                            else:
+                                self.printer.print_warning(data[1])
+                                role_page = data[2]
+                                
+                    elif action == "2":
+                        while True:
+                            data = self.input.get_input("email", ["required", "email"], warning_msg = self.warning_msg)
+                            if data[0]:
+                                update["email"] = data[1]
+                                break
+                            else:
+                                self.printer.print_warning(data[1])
+                    elif action == "3":
+                        while True:
+                            data = self.input.get_input("mobile phone", ["required", "phone"], warning_msg = self.warning_msg)
+                            if data[0]:
+                                update["phone"] = data[1]
+                                break
+                            else:
+                                self.printer.print_warning(data[1])
+                    elif action == "4":
+                        while True:
+                            data = self.input.get_input("home phone", ["required", "phone"], warning_msg = self.warning_msg)
+                            if data[0]:
+                                update["homephone"] = data[1]
+                                break
+                            else:
+                                self.printer.print_warning(data[1])
+                    elif action == "5":
+                        while True:
+                            data = self.input.get_input("address", ["required"], warning_msg = self.warning_msg)
+                            if data[0]:
+                                update["address"] = data[1]
+                                break
+                            else:
+                                self.printer.print_warning(data[1])
+                    elif action == "6":
+                        while True:
+                            data = self.input.get_input("postal code", ["required"], warning_msg = self.warning_msg)
+                            if data[0]:
+                                update["postal"] = data[1]
+                                break
+                            else:
+                                self.printer.print_warning(data[1])
+                    elif action == "7":
+                        while True:
+                            vehicles = self.logic.get_all_vehicles()
+                            available_vehicles = [[vehicle.id, vehicle] for vehicle in vehicles]
+                            data = self.input.get_option("vehicle", available_vehicles, current_page = vehicle_id_page, warning_msg = self.warning_msg)
+                            if data[0] == True:
+                                update["vehicle_id"] = data[1]
+                                break
+                            else:
+                                self.printer.print_warning(data[1])
+                                vehicle_id_page = data[2]
+                    if(len(update) > 0):
+                        self.logic.update_vehicle(vehicle_id, update)
+                        self.success_msg = "vehicle has been modified"
+                    break
                 except ValueError:
                     break
-            elif action == '2':
-                try:
-                    model = self.input.get_input("model")
-                    updates["model"] = model
-                except ValueError:
-                    break
-            elif action == '3':
-                try:
-                    vehicle_type = self.input.get_input("vehicle type")
-                    updates["vehicle_type"] = vehicle_type
-                except ValueError:
-                    break
-            elif action == '5':
-                try:
-                    status = self.input.get_input("status")
-                    updates["status"] = status
-                except ValueError:
-                    break
-            elif action == '5':
-                try:
-                    man_year = self.input.get_input("manufacturing year", ["year"])
-                    updates["man_year"] = man_year
-                except ValueError:
-                    break
-            elif action == '6':
-                try:
-                    color = self.input.get_input("color")
-                    updates["color"] = color
-                except ValueError:
-                    break
-            elif action == '7':
-                try:
-                    licence_type = self.input.get_input("licence type")
-                    updates["licence_type"] = licence_type
-                except ValueError:
-                    break
-            elif action == '8':
-                try:
-                    location = self.input.get_input("location")
-                    updates["location"] = location
-                except ValueError:
-                    break
-            else:
-                self.warning_msg = "Please select available option"
-
-            if(len(updates) > 0):
-                self.logic.update_vehicle(id, updates)
-                self.success_msg = "{} has been modified".format(list(updates.keys())[0].capitalize())
-
-    def edit_type(self, id):
-        while True:
-            updates = {}
-            self.printer.header("Edit vehicle type")
-            self.printer.print_options(['Change name', 'Change regions', 'Change vehicle rate'])
-            self.printer.new_line(2)
-            self.printer.print_fail("Press q to go back")
-            self.print_msg()
-            action = input("Choose an option: ").lower()
-            if action == 'q':
-                break
-            elif action == '1':
-                try:
-                    name = self.input.get_input("name")
-                    updates["name"] = name
-                except ValueError:
-                    break
-            elif action == '2':
-                try:
-                    regions = self.input.get_input("regions")
-                    updates["regions"] = regions
-                except ValueError:
-                    break
-            elif action == '3':
-                try:
-                    rate = self.input.get_input("rate")
-                    updates["rate"] = rate
-                except ValueError:
-                    break
-            else:
-                self.warning_msg = "Please select available option"
-
-            if(len(updates) > 0):
-                self.logic.update_vehicletype(id, updates)
-                self.success_msg = "{} has been modified".format(list(updates.keys())[0].capitalize())
 
     # Delete vehicle
     def delete(self, id):  
@@ -353,15 +331,8 @@ class VehicleUI:
             return True
         return False
 
-    def delete_type(self, id):  
-        confirmation = input("Are you sure you want to delete this vehicle? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
-        if confirmation == 'y':
-            self.logic.delete_vehicletype(id)
-            return True
-        return False
-
     # Outputs warnings and success messages
-    def print_msg(self):
+    def notification(self):
         if not self.warning_msg == "":
             self.printer.print_warning(self.warning_msg)
             self.warning_msg = ""

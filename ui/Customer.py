@@ -1,10 +1,10 @@
 from logic.MainLogic import MainLogic
-from models.Contract import Contract
+from models.Customer import Customer
 
 from ui.PrinterUI import PrinterUI
 from ui.InputUI import InputUI
 
-class ContractUI:
+class CustomerUI:
 
     def __init__(self):
         
@@ -32,18 +32,18 @@ class ContractUI:
         homephone = ""
         address = ""
         postal = ""
-        contract_id = ""
+        customer_id = ""
         
-        contract_id_page = 1
+        customer_id_page = 1
         role_page = 1
         while True:
 
-            contract = self.logic.get_contract_by_id(contract_id)
-            if contract is None:
-                contract = ""
+            customer = self.logic.get_customer_by_id(customer_id)
+            if customer is None:
+                customer = ""
 
-            self.printer.header("Create contract")
-            print(f"Role:\t\t\t\t{role}\nName:\t\t\t\t{name}\nEmail:\t\t\t\t{email}\nSocial security number:\t\t{ssn}\nMobile phone:\t\t\t{phone}\nHome phone:\t\t\t{homephone}\nAddress:\t\t\t{address}\nPostal code:\t\t\t{postal}\ncontract:\t\t\t{contract}\n")
+            self.printer.header("Create customer")
+            print(f"Role:\t\t\t\t{role}\nName:\t\t\t\t{name}\nEmail:\t\t\t\t{email}\nSocial security number:\t\t{ssn}\nMobile phone:\t\t\t{phone}\nHome phone:\t\t\t{homephone}\nAddress:\t\t\t{address}\nPostal code:\t\t\t{postal}\ncustomer:\t\t\t{customer}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
@@ -111,20 +111,20 @@ class ContractUI:
                         next_input = False
                         self.warning_msg = data[1]
                 elif counter == 8:
-                    contracts = self.logic.get_all_contracts()
-                    available_contracts = [[contract.id, contract] for contract in contracts]
-                    contract_input = self.input.get_option("contract", available_contracts, current_page = contract_id_page, warning_msg = self.warning_msg)
-                    if contract_input[0] == True:
-                        contract_id = contract_input[1]
+                    customers = self.logic.get_all_customers()
+                    available_customers = [[customer.id, customer] for customer in customers]
+                    customer_input = self.input.get_option("customer", available_customers, current_page = customer_id_page, warning_msg = self.warning_msg)
+                    if customer_input[0] == True:
+                        customer_id = customer_input[1]
                     else:
                         next_input = False
-                        self.warning_msg = contract_input[1]
-                        contract_id_page = contract_input[2]
+                        self.warning_msg = customer_input[1]
+                        customer_id_page = customer_input[2]
                 elif counter > 8:
-                    new_contract = contract(role, name, address, postal, ssn, phone, homephone, email, contract_id)
-                    confirmation = input("Are you sure you want to create this contract? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
+                    new_customer = customer(role, name, address, postal, ssn, phone, homephone, email, customer_id)
+                    confirmation = input("Are you sure you want to create this customer? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
                     if confirmation == 'y':
-                        self.logic.create_contract(new_contract)
+                        self.logic.create_customer(new_customer)
                         return True
                     return False
                 if next_input:
@@ -132,11 +132,11 @@ class ContractUI:
             except ValueError:
                 break
 
-    # Prints out contract's menu
+    # Prints out customer's menu
     def menu(self):
         while True:
-            self.printer.header("contracts Menu")
-            self.printer.print_options(['Create an contract', 'View contracts'])
+            self.printer.header("customers Menu")
+            self.printer.print_options(['Create an customer', 'View customers'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -145,7 +145,7 @@ class ContractUI:
             
             if action == '1':
                 if self.create():
-                    self.success_msg = "New contract has been created"
+                    self.success_msg = "New customer has been created"
                     self.view(True)
             elif action == '2':
                 self.view()
@@ -154,28 +154,28 @@ class ContractUI:
             else:
                 self.warning_msg = "Please select available option"
 
-    # Prints out all contract
+    # Prints out all customer
     def view(self, created = False):
         current_page = 1
         while True:   
-            contracts = self.logic.get_all_contracts()
-            contracts_count = len(contracts)
-            last_page = int(contracts_count / self.items_per_page) + (contracts_count % self.items_per_page > 0)
+            customers = self.logic.get_all_customers()
+            customers_count = len(customers)
+            last_page = int(customers_count / self.items_per_page) + (customers_count % self.items_per_page > 0)
             if current_page > last_page:
                 current_page = last_page
             if created == True:
                 current_page = last_page
                 created = False
             start = (current_page - 1) * self.items_per_page
-            end = start + 10 if not current_page == last_page else contracts_count
+            end = start + 10 if not current_page == last_page else customers_count
 
-            self.printer.header("View contracts")
-            self.print(contracts, start, end, current_page, last_page)
+            self.printer.header("View customers")
+            self.print(customers, start, end, current_page, last_page)
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
 
-            action = input("(N)ext page / (P)revious page / (S)elect contract: ").lower()
+            action = input("(N)ext page / (P)revious page / (S)elect customer: ").lower()
 
             if action == 'q':
                 break
@@ -192,21 +192,21 @@ class ContractUI:
                     current_page = 1
                     self.warning_msg = "You are currenly on the first page"
             elif action == 's' or action == "select":
-                contract_id = input("Select contract by ID: ")
-                contract = self.logic.get_contract_by_id(contract_id)
-                if contract is None:
-                    self.warning_msg = "contract not found"
+                customer_id = input("Select customer by ID: ")
+                customer = self.logic.get_customer_by_id(customer_id)
+                if customer is None:
+                    self.warning_msg = "customer not found"
                 else:
-                    self.contract(contract_id)
+                    self.customer(customer_id)
             else:
                 self.warning_msg = "Please select available option"
 
-    # Prints out single contract
-    def contract(self, contract_id):
+    # Prints out single customer
+    def customer(self, customer_id):
         while True:
-            contract = self.logic.get_contract_by_id(contract_id)
-            self.printer.header("View contract")
-            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\ncontract:\t\t\t{}\n".format(contract_id, contract.role, contract.name, contract.email, contract.ssn, contract.phone, contract.homephone, contract.address, contract.postal, self.logic.get_contract_by_id(contract.contract_id)))
+            customer = self.logic.get_customer_by_id(customer_id)
+            self.printer.header("View customer")
+            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\ncustomer:\t\t\t{}\n".format(customer_id, customer.role, customer.name, customer.email, customer.ssn, customer.phone, customer.homephone, customer.address, customer.postal, self.logic.get_customer_by_id(customer.customer_id)))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -214,39 +214,39 @@ class ContractUI:
             if action == 'q':
                 break
             elif action == 'e' or action == 'edit':
-                self.edit(contract_id)
+                self.edit(customer_id)
             elif action == 'd' or action == 'delete':
-                if self.delete(contract_id):
-                    self.success_msg = "contract has been deleted"
+                if self.delete(customer_id):
+                    self.success_msg = "customer has been deleted"
                     break
             else:
                 self.warning_msg = "Please select available option"
     
-    # Prints out table of contract
-    def print(self, contracts, start, end, current_page, last_page):
-        if len(contracts) > 0:
-            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "contract"))
+    # Prints out table of customer
+    def print(self, customers, start, end, current_page, last_page):
+        if len(customers) > 0:
+            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "customer"))
             print('-' * 212)
             for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|{:<15}|{:<15}|".format(contracts[i].id, contracts[i].role, contracts[i].name, contracts[i].email, contracts[i].ssn, contracts[i].phone, contracts[i].homephone, contracts[i].address, contracts[i].postal, self.logic.get_contract_by_id(contracts[i].contract_id).__str__()))
+                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|{:<15}|{:<15}|".format(customers[i].id, customers[i].role, customers[i].name, customers[i].email, customers[i].ssn, customers[i].phone, customers[i].homephone, customers[i].address, customers[i].postal, self.logic.get_customer_by_id(customers[i].customer_id).__str__()))
             print("{:^212}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
-            self.warning_msg = "No contracts found"
+            self.warning_msg = "No customers found"
   
 
-    def edit(self, contract_id):
-        contract_id_page = 1
+    def edit(self, customer_id):
+        customer_id_page = 1
         role_page = 1
         while True:
-            contract = self.logic.get_contract_by_id(contract_id)
+            customer = self.logic.get_customer_by_id(customer_id)
             update = {}
-            self.printer.header("Edit contract")
-            print(f"ID:\t\t\t\t{contract_id}\nRole:\t\t\t\t{contract.role}\nName:\t\t\t\t{contract.name}\nEmail:\t\t\t\t{contract.email}\nSocial security number:\t\t{contract.ssn}\nMobile phone:\t\t\t{contract.phone}\nHome phone:\t\t\t{contract.homephone}\nAddress:\t\t\t{contract.address}\nPostal code:\t\t\t{contract.postal}\ncontract:\t\t\t{self.logic.get_contract_by_id(contract.contract_id)}\n")
+            self.printer.header("Edit customer")
+            print(f"ID:\t\t\t\t{customer_id}\nRole:\t\t\t\t{customer.role}\nName:\t\t\t\t{customer.name}\nEmail:\t\t\t\t{customer.email}\nSocial security number:\t\t{customer.ssn}\nMobile phone:\t\t\t{customer.phone}\nHome phone:\t\t\t{customer.homephone}\nAddress:\t\t\t{customer.address}\nPostal code:\t\t\t{customer.postal}\ncustomer:\t\t\t{self.logic.get_customer_by_id(customer.customer_id)}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
-            self.printer.print_options(['Edit role', 'Edit email', 'Edit mobile phone', 'Edit home phone', 'Edit address', 'Edit postal code', 'Edit contract'])
+            self.printer.print_options(['Edit role', 'Edit email', 'Edit mobile phone', 'Edit home phone', 'Edit address', 'Edit postal code', 'Edit customer'])
             self.printer.new_line()
             self.notification()
             while True:
@@ -307,27 +307,27 @@ class ContractUI:
                                 self.printer.print_warning(data[1])
                     elif action == "7":
                         while True:
-                            contracts = self.logic.get_all_contracts()
-                            available_contracts = [[contract.id, contract] for contract in contracts]
-                            data = self.input.get_option("contract", available_contracts, current_page = contract_id_page, warning_msg = self.warning_msg)
+                            customers = self.logic.get_all_customers()
+                            available_customers = [[customer.id, customer] for customer in customers]
+                            data = self.input.get_option("customer", available_customers, current_page = customer_id_page, warning_msg = self.warning_msg)
                             if data[0] == True:
-                                update["contract_id"] = data[1]
+                                update["customer_id"] = data[1]
                                 break
                             else:
                                 self.printer.print_warning(data[1])
-                                contract_id_page = data[2]
+                                customer_id_page = data[2]
                     if(len(update) > 0):
-                        self.logic.update_contract(contract_id, update)
-                        self.success_msg = "contract has been modified"
+                        self.logic.update_customer(customer_id, update)
+                        self.success_msg = "customer has been modified"
                     break
                 except ValueError:
                     break
 
-    # Delete contract
+    # Delete customer
     def delete(self, id):  
-        confirmation = input("Are you sure you want to delete this contract? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
+        confirmation = input("Are you sure you want to delete this customer? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
         if confirmation == 'y':
-            self.logic.delete_contract(id)
+            self.logic.delete_customer(id)
             return True
         return False
 
