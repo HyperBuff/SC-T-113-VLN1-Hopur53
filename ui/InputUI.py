@@ -6,55 +6,58 @@ class InputUI:
         self.printer = PrinterUI()
         self.items_per_page = 10
 
-    def get_input(self, title, validations = []):
-        while True:
-            user_input = input("Enter {}: ".format(title.lower()))
-            if user_input == 'q':
-                raise ValueError
-            elif len(user_input.replace(" ", "")) < 1:
-                self.printer.print_warning("{} must been at least 1 character".format(title.capitalize()))
-            else:
-                passed = True
-                for validation in validations:
-                    if validation == "phone":
-                        if not self.is_phone_valid(user_input):
-                            self.printer.print_warning("{} is not valid".format(title.capitalize()))
-                            passed = False
-                        else:
-                            user_input = self.is_phone_valid(user_input)
-                    if validation == "ssn":
-                        if not self.is_ssn_valid(user_input):
-                            self.printer.print_warning("{} is not valid".format(title.capitalize()))
-                            passed = False
-                        else:
-                            user_input = self.is_ssn_valid(user_input)
-                    if validation == "email":
-                        if not self.is_email_valid(user_input):
-                            self.printer.print_warning("{} is not valid".format(title.capitalize()))
-                            passed = False
-                        else:
-                            user_input = self.is_email_valid(user_input)
-                    if validation == "year":
-                        if not self.is_year_valid(user_input):
-                            self.printer.print_warning("{} is not valid".format(title.capitalize()))
-                            passed = False
-                        else:
-                            user_input = self.is_year_valid(user_input)
-                    if validation == "date":
-                        if not self.is_date_valid(user_input):
-                            self.printer.print_warning("{} is not valid".format(title.capitalize()))
-                            passed = False
-                        else:
-                            user_input = self.is_date_valid(user_input)
-                    if validation == "hours":
-                        if not self.is_hours_valid(user_input):
-                            self.printer.print_warning("{} is not valid".format(title.capitalize()))
-                            passed = False
-                        else:
-                            user_input = self.is_hours_valid(user_input)
-                if passed:
-                    break
-        return user_input
+    def get_input(self, title, validations = [], warning_msg = ""):
+        self.printer.print_warning(warning_msg)
+        warning_msg = ""
+        user_input = input("Enter {}: ".format(title.lower()))
+        if user_input == 'q':
+            raise ValueError
+        else:
+            for validation in validations:
+                if validation == "required":
+                    if len(user_input.replace(" ", "")) < 1:
+                        warning_msg = "{} is required".format(title.capitalize())
+                        break
+                if validation == "phone":
+                    if not self.is_phone_valid(user_input):
+                        warning_msg = "{} is not valid".format(title.capitalize())
+                        break
+                    else:
+                        user_input = self.is_phone_valid(user_input)
+                if validation == "ssn":
+                    if not self.is_ssn_valid(user_input):
+                        warning_msg = "{} is not valid".format(title.capitalize())
+                        break
+                    else:
+                        user_input = self.is_ssn_valid(user_input)
+                if validation == "email":
+                    if not self.is_email_valid(user_input):
+                        warning_msg = "{} is not valid".format(title.capitalize())
+                        break
+                    else:
+                        user_input = self.is_email_valid(user_input)
+                if validation == "year":
+                    if not self.is_year_valid(user_input):
+                        warning_msg = "{} is not valid".format(title.capitalize())
+                        break
+                    else:
+                        user_input = self.is_year_valid(user_input)
+                if validation == "date":
+                    if not self.is_date_valid(user_input):
+                        warning_msg = "{} is not valid".format(title.capitalize())
+                        break
+                    else:
+                        user_input = self.is_date_valid(user_input)
+                if validation == "hours":
+                    if not self.is_hours_valid(user_input):
+                        warning_msg = "{} is not valid".format(title.capitalize())
+                        break
+                    else:
+                        user_input = self.is_hours_valid(user_input)
+        if warning_msg == "":
+            return (True, user_input)
+        else:
+            return (False, warning_msg)
 
     def get_option(self, title, options, current_page = 1, warning_msg = ""):
         options_count = len(options)
@@ -78,10 +81,7 @@ class InputUI:
                 print("{}".format("\tPage {} of {}".format(current_page, last_page)))
                 print("\t(N)ext page / (P)revious page")
 
-            if not warning_msg == "":
-                self.printer.print_warning(warning_msg)
-            else:
-                self.printer.new_line()
+            self.printer.print_warning(warning_msg)
 
             user_input = input("Choose an option: ")
             if user_input == 'q':
@@ -92,22 +92,27 @@ class InputUI:
                     current_page = last_page
                     warning_msg = "You are currenly on the last page"
                 else:
+                    warning_msg = ""
                     current_page += 1
             elif user_input == 'p' or user_input == "previous":
                 page = True
                 if current_page > 1:
                     current_page -= 1
+                    warning_msg = ""
                 else:
                     current_page = 1
                     warning_msg = "You are currenly on the first page"
-            elif not user_input.isnumeric():
-                warning_msg = "Please select available option"
             else:
-                if len(options) >= int(user_input) and int(user_input) > 0:
-                    user_input = options[int(user_input)-1]
-                    warning_msg = ""
-                else:
+                try:
+                    user_input = int(user_input)
+                    if len(options) >= user_input and user_input > 0:
+                        user_input = options[int(user_input)-1]
+                        warning_msg = ""
+                    else:
+                        warning_msg = "Please select available option"
+                except ValueError:
                     warning_msg = "Please select available option"
+
         if not warning_msg == "" or page:
             return (False, warning_msg, current_page)
         if isinstance(user_input, list):
