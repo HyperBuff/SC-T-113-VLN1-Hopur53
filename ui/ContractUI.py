@@ -1,13 +1,19 @@
-from logic.MainLogic import MainLogic
-from models.Contract import Contract
-from models.Location import Location
 
+#Logic
+from logic.MainLogic import MainLogic
+#Models
+from models.Contract import Contract
+from models.Customer import Customer
+from models.Vehicle import Vehicle
+from models.Employee import Employee
+from models.Location import Location
+#UI Functions
 from ui.PrinterUI import PrinterUI
 from ui.InputUI import InputUI
 
 class ContractUI:
 
-    def __init__(self):
+    def __init__(self, employee_id):
         
         self.items_per_page = 10
 
@@ -15,6 +21,8 @@ class ContractUI:
 
         self.printer = PrinterUI()
         self.input = InputUI()
+
+        self.employee_id = employee_id
 
         self.success_msg = ""
         self.warning_msg = ""
@@ -25,26 +33,40 @@ class ContractUI:
     def create(self):
         counter = 0
 
-        role = ""
-        name = ""
-        email = ""
-        ssn = ""
-        phone = ""
-        homephone = ""
-        address = ""
-        postal = ""
-        location_id = ""
+        customer_id = ""
+        vehicle_id = ""
         
+        employee_id = self.employee_id
+        location_id = ""
+        date_from = ""
+        date_to = ""
+
+        contract_date = self.input.get_date()
+        contract_status = "Open"
+        pickup_date = ""
+        dropoff_date = ""
+
+        total = ""
+        
+        customer_id_page = 1
+        vehicle_id_page = 1
         location_id_page = 1
         role_page = 1
         while True:
 
+            customer = self.logic.get_customer_by_id(customer_id)
+            vehicle = self.logic.get_vehicle_by_id(vehicle_id)
             location = self.logic.get_location_by_id(location_id)
+
+            if customer is None:
+                customer = ""
+            if vehicle is None:
+                vehicle = ""
             if location is None:
                 location = ""
 
             self.printer.header("Create contract")
-            print(f"Role:\t\t\t\t{role}\nName:\t\t\t\t{name}\nEmail:\t\t\t\t{email}\nSocial security number:\t\t{ssn}\nMobile phone:\t\t\t{phone}\nHome phone:\t\t\t{homephone}\nAddress:\t\t\t{address}\nPostal code:\t\t\t{postal}\nLocation:\t\t\t{location}\n")
+            print(f"Customer:\t\t\t\t{customer}\nVehicle:\t\t\t\t{vehicle}\nLocation ID:\t\t\t\t{location}\nDate from:\t\t\t\t{date_from}\nDate to:\t\t\t\t{date_to}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
@@ -53,65 +75,28 @@ class ContractUI:
             data = None
             try:
                 if counter == 0:
-                    data = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial"], current_page = role_page, warning_msg = self.warning_msg)
-                    response = data[0]               
-                    if response:
-                        role = data[1]
+                    customers = self.logic.get_all_customers()
+                    available_customers = [[customer.id, customer] for customer in customers]
+                    customer_input = self.input.get_option("customer", available_customers, current_page = customer_id_page, warning_msg = self.warning_msg)
+                    if customer_input[0] == True:
+                        customer_id = customer_input[1]
                     else:
                         next_input = False
-                        self.warning_msg = data[1]
-                        role_page = data[2]
+                        self.warning_msg = customer_input[1]
+                        customer_id_page = customer_input[2]
                 elif counter == 1:
-                    data = self.input.get_input("name", ["required"], warning_msg = self.warning_msg)
-                    response = data[0]    
-                    if data[0]:
-                        name = data[1]
+                    vehicles = self.logic.get_all_vehicles()
+                    available_vehicles = [[vehicle.id, vehicle] for vehicle in vehicles]
+                    vehicle_input = self.input.get_option("vehicle", available_vehicles, current_page = vehicle_id_page, warning_msg = self.warning_msg)
+                    if vehicle_input[0] == True:
+                        vehicle_id = vehicle_input[1]
+                        self.logic.update_vehicle(vehicle_id, {"status": "Unavailable"})
+                        vehicle_status = self.logic.get_vehicle_by_id(vehicle_id).status
                     else:
                         next_input = False
-                        self.warning_msg = data[1]
+                        self.warning_msg = vehicle_input[1]
+                        vehicle_id_page = vehicle_input[2]
                 elif counter == 2:
-                    data = self.input.get_input("email", ["required", "email"], warning_msg = self.warning_msg)
-                    if data[0]:
-                        email = data[1]
-                    else:
-                        next_input = False
-                        self.warning_msg = data[1]
-                elif counter == 3:
-                    data = self.input.get_input("social security number", ["required", "ssn"], warning_msg = self.warning_msg)
-                    if data[0]:
-                        ssn = data[1]
-                    else:
-                        next_input = False
-                        self.warning_msg = data[1]
-                elif counter == 4:
-                    data = self.input.get_input("mobile phone", ["required", "phone"], warning_msg = self.warning_msg)
-                    if data[0]:
-                        phone = data[1]
-                    else:
-                        next_input = False
-                        self.warning_msg = data[1]
-                elif counter == 5:
-                    data = self.input.get_input("home phone", ["required", "phone"], warning_msg = self.warning_msg)
-                    if data[0]:
-                        homephone = data[1]
-                    else:
-                        next_input = False
-                        self.warning_msg = data[1]
-                elif counter == 6:
-                    data = self.input.get_input("address", ["required"], warning_msg = self.warning_msg)
-                    if data[0]:
-                        address = data[1]
-                    else:
-                        next_input = False
-                        self.warning_msg = data[1]
-                elif counter == 7:
-                    data = self.input.get_input("postal code", ["required"], warning_msg = self.warning_msg)
-                    if data[0]:
-                        postal = data[1]
-                    else:
-                        next_input = False
-                        self.warning_msg = data[1]
-                elif counter == 8:
                     locations = self.logic.get_all_locations()
                     available_locations = [[location.id, location] for location in locations]
                     location_input = self.input.get_option("location", available_locations, current_page = location_id_page, warning_msg = self.warning_msg)
@@ -121,8 +106,22 @@ class ContractUI:
                         next_input = False
                         self.warning_msg = location_input[1]
                         location_id_page = location_input[2]
-                elif counter > 8:
-                    new_contract = Contract(role, name, address, postal, ssn, phone, homephone, email, location_id)
+                elif counter == 3:
+                    data = self.input.get_input("date_from", ["required", "date"], warning_msg = self.warning_msg)
+                    if data[0]:
+                        date_from = data[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = data[1]
+                elif counter == 4:
+                    data = self.input.get_input("date_to", ["required", "date"], warning_msg = self.warning_msg)
+                    if data[0]:
+                        date_to = data[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = data[1]
+                elif counter > 4:
+                    new_contract = Contract(customer_id,vehicle_id,vehicle_status,employee_id,location_id,date_from,date_to,contract_date,contract_status,pickup_date,dropoff_date,total)
                     confirmation = input("Are you sure you want to create this contract? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
                     if confirmation == 'y':
                         self.logic.create_contract(new_contract)
@@ -136,7 +135,7 @@ class ContractUI:
     # Prints out contract's menu
     def menu(self):
         while True:
-            self.printer.header("contracts Menu")
+            self.printer.header("Contracts Menu")
             self.printer.print_options(['Create an contract', 'View contracts'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
@@ -209,7 +208,7 @@ class ContractUI:
         while True:
             contract = self.logic.get_contract_by_id(contract_id)
             self.printer.header("View contract")
-            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\nLocation:\t\t\t{}\n".format(contract_id, contract.role, contract.name, contract.email, contract.ssn, contract.phone, contract.homephone, contract.address, contract.postal, self.logic.get_location_by_id(contract.location_id)))
+            print("ID:\t\t\t\t{}\nCustomer ID:\t\t\t\t{}\nVehicle ID:\t\t\t\t{}\nVehicle Status:\t\t{}\nEmployee ID:\t\t\t{}\nLocation ID:\t\t\t{}\nDate from:\t\t\t{}\nDate to:\t\t\t{}\nContract Date:\t\t\t{}\nContract Status:\t\t\t{}\nPickup Date:\t\t\t{}\nDropoff Date:\t\t\t{}\nTotal:\t\t\t{}\n".format(contract_id, self.logic.get_customer_by_id(contract.customer_id), self.logic.get_vehicle_by_id(contract.vehicle_id), contract.vehicle_status, self.logic.get_employee_by_id(contract.employee_id), self.logic.get_location_by_id(contract.location_id), contract.date_from, contract.date_to, contract.contract_date, contract.contract_status, contract.pickup_date, contract.dropoff_date, contract.total))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -228,10 +227,10 @@ class ContractUI:
     # Prints out table of contract
     def print(self, contracts, start, end, current_page, last_page):
         if len(contracts) > 0:
-            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "Location"))
-            print('-' * 212)
+            print("|{:^4}|{:^15}|{:^15}|{:^20}|{:^15}|{:^30}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|".format("ID", "Customer", "Vehicle", "Vehicle Status", "Employee ID", "Location", "Date from", "Date to", "Contract Date", "Contract Status", "Pickup Date", "Dropoff Date", "Total"))
+            print('-' * 218)
             for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|{:<15}|{:<15}|".format(contracts[i].id, contracts[i].role, contracts[i].name, contracts[i].email, contracts[i].ssn, contracts[i].phone, contracts[i].homephone, contracts[i].address, contracts[i].postal, self.logic.get_location_by_id(contracts[i].location_id).__str__()))
+                print("|{:^4}|{:^15}|{:^15}|{:^20}|{:^15}|{:^30}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|".format(contracts[i].id, self.logic.get_customer_by_id(contracts[i].customer_id).__str__(), self.logic.get_vehicle_by_id(contracts[i].vehicle_id).__str__(), contracts[i].vehicle_status, contracts[i].employee_id, self.logic.get_location_by_id(contracts[i].location_id).__str__(), contracts[i].date_from, contracts[i].date_to, contracts[i].contract_date, contracts[i].contract_status, contracts[i].pickup_date, contracts[i].dropoff_date, contracts[i].total))
             print("{:^212}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
@@ -239,17 +238,20 @@ class ContractUI:
   
 
     def edit(self, contract_id):
+        customer_id_page = 1
+        vehicle_id_page = 1
         location_id_page = 1
         role_page = 1
         while True:
             contract = self.logic.get_contract_by_id(contract_id)
             update = {}
             self.printer.header("Edit contract")
-            print(f"ID:\t\t\t\t{contract_id}\nRole:\t\t\t\t{contract.role}\nName:\t\t\t\t{contract.name}\nEmail:\t\t\t\t{contract.email}\nSocial security number:\t\t{contract.ssn}\nMobile phone:\t\t\t{contract.phone}\nHome phone:\t\t\t{contract.homephone}\nAddress:\t\t\t{contract.address}\nPostal code:\t\t\t{contract.postal}\nLocation:\t\t\t{self.logic.get_location_by_id(contract.location_id)}\n")
+            print(f"ID:\t\t\t\t{contract_id}\nCustomer:\t\t\t\t{self.logic.get_customer_by_id(contract.customer_id)}\nVehicle:\t\t\t\t{self.logic.get_vehicle_by_id(contract.vehicle_id)}\nLocation:\t\t\t{self.logic.get_location_by_id(contract.location_id)}\nDate from:\t\t\t{contract.date_from}\nDate to:\t\t\t{contract.date_to}\nContract status:\t\t\t{contract.contract_status}\nPickup date:\t\t\t{contract.pickup_date}\nDropoff date:\t\t\t{contract.dropoff_date}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
+            
             self.printer.new_line()
-            self.printer.print_options(['Edit role', 'Edit email', 'Edit mobile phone', 'Edit home phone', 'Edit address', 'Edit postal code', 'Edit location'])
+            self.printer.print_options(['Edit customer', 'Edit vehicle', 'Edit location', 'Edit date from', 'Edit date to', 'Edit contract status', 'Edit pick up date', 'Edit drop off date'])
             self.printer.new_line()
             self.notification()
             while True:
@@ -260,55 +262,26 @@ class ContractUI:
                         return
                     elif action == "1":
                         while True:
-                            data = self.input.get_option("role", ["Admin", "Delivery", "Booking", "Mechanic", "Financial"], current_page = role_page, warning_msg = self.warning_msg)
-                            if data[0]:
-                                update["role"] = data[1]
+                            customers = self.logic.get_all_customers()
+                            available_customers = [[customer.id, customer] for customer in customers]
+                            data = self.input.get_option("customer", available_customers, current_page = customer_id_page, warning_msg = self.warning_msg)
+                            if data[0] == True:
+                                update["customer_id"] = data[1]
                                 break
                             else:
                                 self.printer.print_warning(data[1])
-                                role_page = data[2]
-                                
+                                customer_id_page = data[2]                                
                     elif action == "2":
                         while True:
-                            data = self.input.get_input("email", ["required", "email"], warning_msg = self.warning_msg)
+                            vehicles = self.logic.get_all_vehicles()
+                            available_vehicles = [[vehicle.id, vehicle] for vehicle in vehicles]
+                            data = self.input.get_option("vehicle", available_vehicles, current_page = vehicle_id_page, warning_msg = self.warning_msg)
                             if data[0]:
-                                update["email"] = data[1]
+                                update["vehicle_id"] = data[1]
                                 break
                             else:
                                 self.printer.print_warning(data[1])
                     elif action == "3":
-                        while True:
-                            data = self.input.get_input("mobile phone", ["required", "phone"], warning_msg = self.warning_msg)
-                            if data[0]:
-                                update["phone"] = data[1]
-                                break
-                            else:
-                                self.printer.print_warning(data[1])
-                    elif action == "4":
-                        while True:
-                            data = self.input.get_input("home phone", ["required", "phone"], warning_msg = self.warning_msg)
-                            if data[0]:
-                                update["homephone"] = data[1]
-                                break
-                            else:
-                                self.printer.print_warning(data[1])
-                    elif action == "5":
-                        while True:
-                            data = self.input.get_input("address", ["required"], warning_msg = self.warning_msg)
-                            if data[0]:
-                                update["address"] = data[1]
-                                break
-                            else:
-                                self.printer.print_warning(data[1])
-                    elif action == "6":
-                        while True:
-                            data = self.input.get_input("postal code", ["required"], warning_msg = self.warning_msg)
-                            if data[0]:
-                                update["postal"] = data[1]
-                                break
-                            else:
-                                self.printer.print_warning(data[1])
-                    elif action == "7":
                         while True:
                             locations = self.logic.get_all_locations()
                             available_locations = [[location.id, location] for location in locations]
@@ -319,6 +292,48 @@ class ContractUI:
                             else:
                                 self.printer.print_warning(data[1])
                                 location_id_page = data[2]
+                    elif action == "4":
+                        while True:
+                            data = self.input.get_input("Date from", ["required", "date"], warning_msg = self.warning_msg)
+                            if data[0]:
+                                update["date_from"] = data[1]
+                                break
+                            else:
+                                self.printer.print_warning(data[1])
+                    elif action == "5":
+                        while True:
+                            data = self.input.get_input("Date to", ["required", "date"], warning_msg = self.warning_msg)
+                            if data[0]:
+                                update["date_to"] = data[1]
+                                break
+                            else:
+                                self.printer.print_warning(data[1])
+                    elif action == "6":
+                        while True:
+                            data = self.input.get_option("Contract status:", ["Open", "Closed", "Invalid"], current_page = role_page, warning_msg = self.warning_msg)
+                            if data[0]:
+                                update["contract_status"] = data[1]
+                                break
+                            else:
+                                self.printer.print_warning(data[1])
+                    elif action == "7":
+                        while True:
+                            data = self.input.get_input("Pick up date", ["required", "date"], warning_msg = self.warning_msg)
+                            if data[0]:
+                                update["pickup_date"] = data[1]
+                                break
+                            else:
+                                self.printer.print_warning(data[1])
+                    elif action == "8":
+                        while True:
+                            data = self.input.get_input("Drop off date", ["required", "date"], warning_msg = self.warning_msg)
+                            if data[0]:
+                                update["dropoff_date"] = data[1]
+                                break
+                            else:
+                                self.printer.print_warning(data[1])
+                    else:
+                        self.warning_msg = "Please select available option"
                     if(len(update) > 0):
                         self.logic.update_contract(contract_id, update)
                         self.success_msg = "contract has been modified"

@@ -1,7 +1,7 @@
 file,count
 data/employee.csv,20
-data/location.csv,8
-data/vehicle.csv,29
-data/vehicletype.csv,8
-data/customer.csv,5
-data/contract.csv,1
+data/location.csv,6
+data/vehicle.csv,3
+data/vehicletype.csv,6
+data/customer.csv,1
+data/contract.csv,2

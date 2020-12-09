@@ -14,4 +14,5 @@ class Vehicle:
     def __str__(self):
         return "{}, {}".format(self.model, self.manufacturer)
 
-        
+    def __repr__(self):
+        return "{}, {}".format(self.model, self.manufacturer)

@@ -82,7 +82,7 @@ class MainUI:
                 self.warning_msg = "Please select available option"
 
     def contracts(self):
-        ContractUI()
+        contract = ContractUI(self.employee_id)
 
     def vehicles(self):
         VehicleUI()

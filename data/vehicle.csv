@@ -1,1 +1,4 @@
 manufacturer,model,vehicle_type_id,status,man_year,color,licence_type,location_id,id
+Volvo,1990,2,Unavailable,1990,red,ol,Iceland,1
+Range Rover,1990,2,Unavailable,1990,red,ol,Iceland,2
+Airbus 220,1990,2,Available,1990,red,ol,Iceland,3
