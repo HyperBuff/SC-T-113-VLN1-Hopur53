@@ -88,7 +88,7 @@ class MainUI:
         pass
 
     def employees(self):
-        employee = EmployeeUI(self.employee_id)
+        EmployeeUI(self.employee_id)
 
     def locations(self):
         pass
