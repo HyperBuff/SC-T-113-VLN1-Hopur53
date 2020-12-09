@@ -149,9 +149,9 @@ class VehicleUI:
             if location is None:
                 location = ""
 
-            self.printer.header("Create vehicle")
+            self.printer.header("Create vehicle type")
             
-            print(f"Name:\t\t\t{name}\nLocation:\t\t\t{location}\nRate:\t\t\t\t{rate}\n")
+            print(f"Name:\t\t\t{name}\nLocation:\t\t{location}\nRate:\t\t\t{rate}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
@@ -220,8 +220,8 @@ class VehicleUI:
                 self.view_type()
             elif action == 'q':
                 break
-            else:
-                self.warning_msg = "Please select available option"
+            """else:
+                self.warning_msg = "Please select available option"""
 
     # Prints out all vehicle
     def view(self, created = False):
@@ -269,8 +269,8 @@ class VehicleUI:
                     self.warning_msg = "Vehicle not found"
                 else:
                     self.vehicle(vehicle_id)
-            else:
-                self.warning_msg = "Please select available option"
+            """else:
+                self.warning_msg = "Please select available option"""
 
     # Prints out all vehicle
     def view_type(self, created = False):
@@ -287,7 +287,7 @@ class VehicleUI:
             start = (current_page - 1) * self.items_per_page
             end = start + 10 if not current_page == last_page else vehicletypes_count
 
-            self.printer.header("View vehicles")
+            self.printer.header("View vehicle types")
             self.print_type(vehicletypes, start, end, current_page, last_page)
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
@@ -346,8 +346,8 @@ class VehicleUI:
     def vehicle_type(self, vehicle_type_id):
         while True:
             vehicletype = self.logic.get_vehicletype_by_id(vehicle_type_id)
-            self.printer.header("View vehicle")
-            print(f"ID:\t\t\t\t{vehicle_type_id}\nName:\t\t\t{vehicletype.name}\nLocation:\t\t\t{self.logic.get_location_by_id(vehicletype.location_id)}\nRate:\t\t\t\t{vehicletype.rate}\n")
+            self.printer.header("View vehicle type")
+            print(f"ID:\t\t\t\t{vehicle_type_id}\nName:\t\t\t\t{vehicletype.name}\nLocation:\t\t\t{self.logic.get_location_by_id(vehicletype.location_id)}\nRate:\t\t\t\t{vehicletype.rate}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -366,11 +366,11 @@ class VehicleUI:
     # Prints out table of vehicle
     def print(self, vehicles, start, end, current_page, last_page):
         if len(vehicles) > 0:
-            print("|{:^6}|{:^15}|{:^19}|{:^20}|{:^20}|{:^20}|{:^20}|{:^25}|{:^15}|".format("ID", "Manufacturer", "Model", "Vehicle type", "Status", "Manufacturing year", "Color", "Licence type", "Location"))
-            print('-' * 186)
+            print("|{:^6}|{:^15}|{:^19}|{:^20}|{:^20}|{:^20}|{:^15}|{:^25}|{:^28}|".format("ID", "Manufacturer", "Model", "Vehicle type", "Status", "Manufacturing year", "Color", "Licence type", "Location"))
+            print('-' * 183)
             for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<19}|{:<20}|{:<20}|{:<20}|{:<20}|{:<25}|{:<15}|".format(vehicles[i].id, vehicles[i].manufacturer, vehicles[i].model, self.logic.get_vehicletype_by_id(vehicles[i].vehicle_type_id).__str__(), vehicles[i].status, vehicles[i].man_year, vehicles[i].color, vehicles[i].licence_type, self.logic.get_location_by_id(vehicles[i].location_id).__str__()))
-            print("{:^186}".format("Page {} of {}".format(current_page, last_page)))
+                print("|{:^6}|{:<15}|{:<19}|{:<20}|{:<20}|{:<20}|{:<15}|{:<25}|{:<28}|".format(vehicles[i].id, vehicles[i].manufacturer, vehicles[i].model, self.logic.get_vehicletype_by_id(vehicles[i].vehicle_type_id).__str__(), vehicles[i].status, vehicles[i].man_year, vehicles[i].color, vehicles[i].licence_type, self.logic.get_location_by_id(vehicles[i].location_id).__str__()))
+            print("{:^183}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
             self.warning_msg = "No vehicles found"
@@ -378,11 +378,11 @@ class VehicleUI:
     # Prints out table of vehicle
     def print_type(self, vehicletypes, start, end, current_page, last_page):
         if len(vehicletypes) > 0:
-            print("|{:^6}|{:^15}|{:^19}|{:^20}|".format("ID", "Name", "Location", "Rate"))
-            print('-' * 186)
+            print("|{:^6}|{:^18}|{:^24}|{:^20}|".format("ID", "Name", "Location", "Rate"))
+            print('-' * 73)
             for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<19}|{:<20}|".format(vehicletypes[i].id, vehicletypes[i].name, self.logic.get_location_by_id(vehicletypes[i].location_id).__str__(), vehicletypes[i].rate))
-            print("{:^186}".format("Page {} of {}".format(current_page, last_page)))
+                print("|{:^6}|{:<18}|{:<24}|{:<20}|".format(vehicletypes[i].id, vehicletypes[i].name, self.logic.get_location_by_id(vehicletypes[i].location_id).__str__(), vehicletypes[i].rate))
+            print("{:^73}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
             self.warning_msg = "No vehicles found"

@@ -156,6 +156,11 @@ class InputUI:
             list_to_str = ''.join(str(e) for e in str_list)
             new_phone = areacode + list_to_str
             return new_phone
+        elif len(str_list) == 8:
+            extra = '+'
+            list_to_str = ''.join(str(e) for e in str_list)
+            new_phone = extra + list_to_str
+            return new_phone
         elif len(str_list) == 9:
             extra = '+'
             list_to_str = ''.join(str(e) for e in str_list)

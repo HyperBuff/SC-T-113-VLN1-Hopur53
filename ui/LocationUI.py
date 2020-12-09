@@ -32,7 +32,7 @@ class LocationUI:
         while True:
 
             self.printer.header("Create location")
-            print(f"Country:\t\t\t\t{country}\nAirport:\t\t\t\t{airport}\nPhone:\t\t\t\t\t{phone}\nHours:\t\t\t\t{hours}\n")
+            print(f"Country:\t\t\t{country}\nAirport:\t\t\t{airport}\nPhone:\t\t\t\t{phone}\nHours:\t\t\t\t{hours}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
@@ -174,11 +174,11 @@ class LocationUI:
     # Prints out table of location
     def print(self, locations, start, end, current_page, last_page):
         if len(locations) > 0:
-            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|".format("ID", "Country", "Airport", "Phone", "Opening hours"))
-            print('-' * 212)
+            print("|{:^6}|{:^18}|{:^18}|{:^20}|{:^20}|".format("ID", "Country", "Airport", "Phone", "Opening hours"))
+            print('-' * 88)
             for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|".format(locations[i].id, locations[i].country, locations[i].airport, locations[i].phone, locations[i].hours))
-            print("{:^212}".format("Page {} of {}".format(current_page, last_page)))
+                print("|{:^6}|{:<18}|{:<18}|{:<20}|{:<20}|".format(locations[i].id, locations[i].country, locations[i].airport, locations[i].phone, locations[i].hours))
+            print("{:^88}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
             self.warning_msg = "No locations found"

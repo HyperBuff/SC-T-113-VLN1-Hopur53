@@ -1,4 +1,23 @@
 manufacturer,model,vehicle_type_id,status,man_year,color,licence_type,location_id,id
-Volvo,1990,2,Unavailable,1990,red,ol,Iceland,1
-Range Rover,1990,2,Unavailable,1990,red,ol,Iceland,2
-Airbus 220,1990,2,Available,1990,red,ol,Iceland,3
+TAILG,Free Fly II,10,Available,2018,White,Drivers licence,8,1
+TAILG,Free Fly II,10,Available,2018,Orange,Drivers licence,8,2
+Kayman Kayaks,Crazy,9,Available,2020,Yellow,None,11,3
+Kayman Kayaks,Crazy,9,Available,2020,Yellow,None,9,4
+Kayman Kayaks,Crazy HV,9,Available,2020,Yellow,None,7,5
+Cani-Fit,Fat Max,8,Available,2019,Black,None,7,6
+Cani-Fit,Fat Max,8,Available,2017,Black,None,9,7
+Cani-Fit,Fat Max,8,Available,2017,Black,None,9,8
+Cani-Fit,Fat Max,8,Available,2020,Black,None,10,9
+Yedoo,Trexx,7,Available,2020,Orange,None,8,10
+Yedoo,Trexx,7,Available,2020,Orange,None,9,11
+Yedoo,Trexx,7,Available,2020,Orange,None,10,12
+Yedoo,Trexx,7,Available,2020,Orange,None,11,13
+Yedoo,Trexx,7,Available,2020,Orange,None,7,14
+Yedoo,Trexx,7,Available,2020,Orange,None,7,15
+WildChild,Fatboy Mini BMX,7,Available,2020,Red,None,10,16
+WildChild,Fatboy Mini BMX,7,Available,2020,Red,None,11,17
+WildChild,Fatboy Mini BMX,7,Available,2020,Red,None,8,18
+Forward,FWD-ZK125H,10,Available,2019,Blue,Drivers licence,11,19
+Colorado,Pontoon Boat,9,Available,2019,Green,None,9,20
+A2extreem,Powerboard,8,Available,2018,Black,None,7,21
+Torpedo,3500,9,Available,2019,White,Diving licence,9,22

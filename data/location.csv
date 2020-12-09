@@ -1,2 +1,7 @@
 country,airport,phone,hours,id
-kef,ref,390300,1200,1
+Iceland,Reykjavik,+3545555555,09:00 - 17:00,1
+Greenland,Nuuk,+299999000,10:00 - 16:00,2
+Greenland,Kulusuk,+299999200,10:30 - 15:30,3
+Faroe Islands,Tórshafn,+29748497,09:30 - 16:00,4
+Shetland Islands,Tingwall,+4415950100,10:00 - 15:00,5
+Svalbard,Longyearbyen,+477902500,12:00 - 14:00,6
