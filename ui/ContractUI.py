@@ -177,10 +177,12 @@ class ContractUI:
             data = self.input.get_option("vehicle", available_vehicles, current_page = veihcle_page, warning_msg = self.warning_msg)
             if data[0] == True:
                 contract_id = data[1]
+                break
             else:
                 self.warning_msg = data[1]
                 veihcle_page = data[2]
                 
+        
         
 
     # Prints out all contract

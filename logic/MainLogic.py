@@ -64,9 +64,18 @@ class MainLogic:
     def delete_contract(self, id):
         return self.contract.delete(id)
 
-    def get_contract_from_location(self, employee_id):
-        return self.contract.get_contract_from_location(employee_id)
-        
+    def get_contract_from_location(self, location_id):
+        return self.contract.get_contract_from_location(location_id)
+
+    def get_contracts_from_vehicle(self, vehicle_id):
+        return self.get_contracts_from_vehicle(vehicle_id)
+
+    def get_closed_contracts(self):
+        return self.contract.get_closed_contracts()
+    
+    def get_open_contracts(self):
+        return self.contract.get_open_contracts()
+
     #Vehicle Logic
     def get_all_vehicles(self):
         return self.vehicle.get_all_vehicles()

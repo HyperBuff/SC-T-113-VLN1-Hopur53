@@ -27,11 +27,34 @@ class ContractLogic:
                 return contract
         return None
 
-    def get_contract_from_location(self, employee_id):
-        location_id = self.employee.get_employee_by_id(employee_id).location_id
+    def get_contract_from_location(self, location_id):
         results = []
         contracts = self.get_all_contracts()
         for contract in contracts:
             if contract.location_id == location_id:
+                results.append(contract)
+        return results
+
+    def get_contracts_from_vehicle(self, vehicle_id):
+        results = []
+        contracts = self.get_all_contracts()
+        for contract in contracts:
+            if contract.vehicle_id == vehicle_id:
+                results.append(contract)
+        return results
+
+    def get_closed_contracts(self):
+        results = []
+        contracts = self.get_all_contracts()
+        for contract in contracts:
+            if contract.status.lower() == "closed":
+                results.append(contract)
+        return results
+    
+    def get_open_contracts(self):
+        results = []
+        contracts = self.get_all_contracts()
+        for contract in contracts:
+            if contract.status.lower() == "open":
                 results.append(contract)
         return results
