@@ -133,11 +133,12 @@ class ContractUI:
             except ValueError:
                 break
 
+    
     # Prints out contract's menu
     def menu(self):
         while True:
             self.printer.header("Contracts Menu")
-            self.printer.print_options(['Create a contract', 'View contracts', 'Customers'])
+            self.printer.print_options(['Create a contract', 'View contracts', 'Customers', 'Vehicle pick up', 'Vehicle drop off', 'Close contract', 'Pay to contract'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -152,10 +153,35 @@ class ContractUI:
                 self.view()
             elif action == '3':
                 CustomerUI()
+            elif action == '4':
+                self.pick_up()
+            elif action == '5':
+                pass
+                #self.drop_off()
+            elif action == '6':
+                pass
+                #self.close_contract()
+            elif action == '7':
+                pass
+                #self.pay()
             elif action == 'q':
                 break
             else:
                 self.warning_msg = "Please select available option"
+
+    def pick_up(self):
+        veihcle_page = 1
+        while True:
+            vehicles = self.logic.get_contract_from_location(self.employee_id)
+            available_vehicles = [[vehicle.id, vehicle] for vehicle in vehicles]
+            data = self.input.get_option("vehicle", available_vehicles, current_page = veihcle_page, warning_msg = self.warning_msg)
+            if data[0] == True:
+                contract_id = data[1]
+            else:
+                self.warning_msg = data[1]
+                veihcle_page = data[2]
+                
+        
 
     # Prints out all contract
     def view(self, created = False):

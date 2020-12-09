@@ -112,6 +112,8 @@ class InputUI:
                         warning_msg = "Please select available option"
                 except ValueError:
                     warning_msg = "Please select available option"
+        else:
+            warning_msg = "No options found"
 
         if not warning_msg == "" or page:
             return (False, warning_msg, current_page)
