@@ -66,7 +66,7 @@ class MainUI:
             self.print_msg()
             action = input("Choose an option: ").lower()
             if action == '1':
-                self.contracts(self.employee_id)
+                self.contracts()
             elif action == '2':
                 self.vehicles()
             elif action == '3':
@@ -81,17 +81,17 @@ class MainUI:
             else:
                 self.warning_msg = "Please select available option"
 
-    def contracts(self, employee_id):
-        pass
+    def contracts(self):
+        ContractUI()
 
     def vehicles(self):
-        pass
+        VehicleUI()
 
     def employees(self):
         EmployeeUI(self.employee_id)
 
     def locations(self):
-        pass
+        LocationUI()
 
     def financials(self):
         pass
