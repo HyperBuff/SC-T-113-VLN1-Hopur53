@@ -322,6 +322,8 @@ class EmployeeUI:
                             else:
                                 self.printer.print_warning(data[1])
                                 location_id_page = data[2]
+                    else:
+                        self.warning_msg = "Please select available option"
                     if(len(update) > 0):
                         self.logic.update_employee(employee_id, update)
                         self.success_msg = "Employee has been modified"

@@ -212,4 +212,4 @@ class InputUI:
             return False
 
     def is_hours_valid(self, hours):
-        return True
+        return hours

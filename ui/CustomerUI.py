@@ -26,15 +26,16 @@ class CustomerUI:
         counter = 0
 
         name = ""
-        email = ""
-        ssn = ""
-        phone = ""
         address = ""
         postal = ""
+        ssn = ""
+        phone = ""
+        email = ""
+        country = ""
         
         while True:
             self.printer.header("Create customer")
-            print(f"Name:\t\t\t\t{name}\nEmail:\t\t\t\t{email}\nSocial security number:\t\t{ssn}\nMobile phone:\t\t\t{phone}\nAddress:\t\t\t{address}\nPostal code:\t\t\t{postal}\n")
+            print(f"Name:\t\t\t\t{name}\nAddress:\t\t\t{address}\nPostal code:\t\t\t{postal}\nPhone:\t\t\t\t{phone}\nSocial security number:\t\t{ssn}\nEmail:\t\t\t\t{email}\nCountry:\t\t\t{country}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
@@ -64,16 +65,16 @@ class CustomerUI:
                         next_input = False
                         self.warning_msg = data[1]
                 elif counter == 3:
-                    data = self.input.get_input("mobile phone", ["required", "ssn"], warning_msg = self.warning_msg)
+                    data = self.input.get_input("phone", ["required", "phone"], warning_msg = self.warning_msg)
                     if data[0]:
-                        ssn = data[1]
+                        phone = data[1]
                     else:
                         next_input = False
                         self.warning_msg = data[1]
                 elif counter == 4:
-                    data = self.input.get_input("phone", ["required", "phone"], warning_msg = self.warning_msg)
+                    data = self.input.get_input("social security number", ["required", "ssn"], warning_msg = self.warning_msg)
                     if data[0]:
-                        phone = data[1]
+                        ssn = data[1]
                     else:
                         next_input = False
                         self.warning_msg = data[1]
@@ -179,7 +180,7 @@ class CustomerUI:
         while True:
             customer = self.logic.get_customer_by_id(customer_id)
             self.printer.header("View customer")
-            print("ID:\t\t\t\t{}\nRole:\t\t\t\t{}\nName:\t\t\t\t{}\nEmail:\t\t\t\t{}\nSocial security number:\t\t{}\nMobile phone:\t\t\t{}\nHome phone:\t\t\t{}\nAddress:\t\t\t{}\nPostal code:\t\t\t{}\nLocation:\t\t\t{}\n".format(customer_id, customer.role, customer.name, customer.email, customer.ssn, customer.phone, customer.homephone, customer.address, customer.postal, self.logic.get_location_by_id(customer.location_id)))
+            print("ID:\t\t\t\t{}\nName:\t\t\t\t{}\nAddress:\t\t\t{}\nPostal:\t\t\t\t{}\nSocial security number:\t\t{}\nPhone:\t\t\t\t{}\nEmail:\t\t\t\t{}\nCountry:\t\t\t{}\n".format(customer_id, customer.name, customer.address, customer.postal, customer.ssn, customer.phone, customer.email, customer.country))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -190,7 +191,7 @@ class CustomerUI:
                 self.edit(customer_id)
             elif action == 'd' or action == 'delete':
                 if self.delete(customer_id):
-                    self.success_msg = "customer has been deleted"
+                    self.success_msg = "Customer has been deleted"
                     break
             else:
                 self.warning_msg = "Please select available option"
@@ -198,10 +199,10 @@ class CustomerUI:
     # Prints out table of customer
     def print(self, customers, start, end, current_page, last_page):
         if len(customers) > 0:
-            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|".format("ID", "Name", "Email", "Social security number", "Phone", "Address", "Postal code", "Country"))
+            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|".format("ID", "Name", "Address", "Postal", "Social security number", "Phone", "Email", "Country"))
             print('-' * 170)
             for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|".format(customers[i].id, customers[i].name, customers[i].email, customers[i].ssn, customers[i].phone, customers[i].address, customers[i].postal, customers[i].country))
+                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|".format(customers[i].id, customers[i].name, customers[i].address, customers[i].postal, customers[i].ssn, customers[i].phone, customers[i].email, customers[i].country))
             print("{:^170}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
@@ -209,17 +210,15 @@ class CustomerUI:
   
 
     def edit(self, customer_id):
-        location_id_page = 1
-        role_page = 1
         while True:
             customer = self.logic.get_customer_by_id(customer_id)
             update = {}
             self.printer.header("Edit customer")
-            print(f"ID:\t\t\t\t{customer_id}\nName:\t\t\t\t{customer.name}\nEmail:\t\t\t\t{customer.email}\nSocial security number:\t\t{customer.ssn}\nPhone:\t\t\t{customer.phone}\nAddress:\t\t\t{customer.address}\nPostal code:\t\t\t{customer.postal}\nCountry:\t\t\t{customer.country}\n")
+            print(f"ID:\t\t\t\t{customer_id}\nName:\t\t\t\t{customer.name}\nAddress:\t\t\t{customer.address}\nPostal code:\t\t\t{customer.postal}\nSocial security number:\t\t{customer.ssn}\nPhone:\t\t\t\t{customer.phone}\nEmail:\t\t\t\t{customer.email}\nCountry:\t\t\t{customer.country}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
-            self.printer.print_options(['Edit email', 'Edit phone', 'Edit address', 'Edit postal code', 'Edit country'])
+            self.printer.print_options(['Edit address', 'Edit postal code', 'Edit phone', 'Edit email', 'Edit country'])
             self.printer.new_line()
             self.notification()
             while True:
@@ -230,13 +229,21 @@ class CustomerUI:
                         return
                     elif action == "1":
                         while True:
-                            data = self.input.get_input("email", ["required", "email"], warning_msg = self.warning_msg)
+                            data = self.input.get_input("address", ["required"], warning_msg = self.warning_msg)
                             if data[0]:
-                                update["email"] = data[1]
+                                update["address"] = data[1]
                                 break
                             else:
                                 self.printer.print_warning(data[1])
                     elif action == "2":
+                        while True:
+                            data = self.input.get_input("postal code", ["required"], warning_msg = self.warning_msg)
+                            if data[0]:
+                                update["postal"] = data[1]
+                                break
+                            else:
+                                self.printer.print_warning(data[1])
+                    elif action == "3":
                         while True:
                             data = self.input.get_input("phone", ["required", "phone"], warning_msg = self.warning_msg)
                             if data[0]:
@@ -244,19 +251,11 @@ class CustomerUI:
                                 break
                             else:
                                 self.printer.print_warning(data[1])
-                    elif action == "3":
-                        while True:
-                            data = self.input.get_input("address", ["required"], warning_msg = self.warning_msg)
-                            if data[0]:
-                                update["homephone"] = data[1]
-                                break
-                            else:
-                                self.printer.print_warning(data[1])
                     elif action == "4":
                         while True:
-                            data = self.input.get_input("postal code", ["required"], warning_msg = self.warning_msg)
+                            data = self.input.get_input("email", ["required", "email"], warning_msg = self.warning_msg)
                             if data[0]:
-                                update["postal"] = data[1]
+                                update["email"] = data[1]
                                 break
                             else:
                                 self.printer.print_warning(data[1])
@@ -268,9 +267,11 @@ class CustomerUI:
                                 break
                             else:
                                 self.printer.print_warning(data[1])
+                    else:
+                        self.warning_msg = "Please select available option"
                     if(len(update) > 0):
                         self.logic.update_customer(customer_id, update)
-                        self.success_msg = "customer has been modified"
+                        self.success_msg = "Customer has been modified"
                     break
                 except ValueError:
                     break
