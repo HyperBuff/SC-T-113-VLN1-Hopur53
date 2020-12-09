@@ -1,5 +1,7 @@
 name,location_id,rate,id
-thing,iceland,10,2
-RAte,ef,100,4
-Ada,asd,ad,5
-Boats,1,1000,7
+Light road,8,700,7
+Light off-road,9,900,8
+Light water,9,850,9
+Medium road,7,1800,10
+Medium off-road,11,1400,11
+Medium water,9,2200,12

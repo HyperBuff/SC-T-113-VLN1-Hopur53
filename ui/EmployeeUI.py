@@ -231,10 +231,10 @@ class EmployeeUI:
     # Prints out table of employee
     def print(self, employees, start, end, current_page, last_page):
         if len(employees) > 0:
-            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|{:^15}|{:^15}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "Location"))
+            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^20}|{:^15}|{:^20}|".format("ID", "Role", "Name", "Email", "Social security number", "Mobile phone", "Home phone", "Address", "Postal code", "Location"))
             print('-' * 212)
             for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|{:<15}|{:<15}|".format(employees[i].id, employees[i].role, employees[i].name, employees[i].email, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].address, employees[i].postal, self.logic.get_location_by_id(employees[i].location_id).__str__()))
+                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<20}|{:<15}|{:<20}|".format(employees[i].id, employees[i].role, employees[i].name, employees[i].email, employees[i].ssn, employees[i].phone, employees[i].homephone, employees[i].address, employees[i].postal, self.logic.get_location_by_id(employees[i].location_id).__str__()))
             print("{:^212}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
