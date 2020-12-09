@@ -7,7 +7,7 @@ class ContractRepository:
 
     def __init__(self):
         self.filename = 'data/contract.csv'
-        self.fieldnames = ['customer_id', 'vehicle_id', 'vehicle_status', 'employee_id', 'location_id', 'date_from', 'date_to', 'contract_date', 'contract_status', 'pickup_date', 'dropoff_date', 'total', 'id']
+        self.fieldnames = ['customer_id', 'vehicle_id', 'employee_id', 'location_id', 'date_from', 'date_to', 'contract_date', 'contract_status', 'pickup_date', 'dropoff_date', 'total', 'paid', 'id']
 
     def create(self, contract: Contract):
         row = dict((key, getattr(contract, key)) for key in self.fieldnames)
@@ -16,7 +16,7 @@ class ContractRepository:
 
     def read(self):
         rows = Repository()._read(self.filename)
-        contracts = [Contract(row['customer_id'], row['vehicle_id'], row['vehicle_status'], row['employee_id'], row['location_id'], row['date_from'], row['date_to'], row['contract_date'], row['contract_status'], row['pickup_date'], row['dropoff_date'], row['total'], row['id']) for row in rows]
+        contracts = [Contract(row['customer_id'], row['vehicle_id'], row['employee_id'], row['location_id'], row['date_from'], row['date_to'], row['contract_date'], row['contract_status'], row['pickup_date'], row['dropoff_date'], row['total'], row['paid'], row['id']) for row in rows]
         return contracts
     
     def update(self, id, updates: dict):

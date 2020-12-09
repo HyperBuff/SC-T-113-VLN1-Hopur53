@@ -52,6 +52,7 @@ class ContractUI:
         dropoff_date = ""
 
         total = ""
+        paid = 0
         
         customer_id_page = 1
         vehicle_id_page = 1
@@ -111,7 +112,6 @@ class ContractUI:
                 elif counter > 3:
 
                     self.logic.update_vehicle(vehicle_id, {"status": "Unavailable"})
-                    vehicle_status = self.logic.get_vehicle_by_id(vehicle_id).status
                     vehicle = self.logic.get_vehicle_by_id(vehicle_id)
                     location_id = vehicle.location_id
 
@@ -120,7 +120,7 @@ class ContractUI:
                     days = datetime.strptime(date_to, date_format) - datetime.strptime(date_from, date_format)
                     total = int(days.days) * int(self.logic.get_vehicletype_by_id(vehicle.vehicle_type_id).rate)
 
-                    new_contract = Contract(customer_id,vehicle_id,vehicle_status,employee_id,location_id,date_from,date_to,contract_date,contract_status,pickup_date,dropoff_date,total)
+                    new_contract = Contract(customer_id,vehicle_id,employee_id,location_id,date_from,date_to,contract_date,contract_status,pickup_date,dropoff_date,total,paid)
                     confirmation = input("Are you sure you want to create this contract? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
                     if confirmation == 'y':
                         self.logic.create_contract(new_contract)
@@ -207,7 +207,7 @@ class ContractUI:
         while True:
             contract = self.logic.get_contract_by_id(contract_id)
             self.printer.header("View contract")
-            print("ID:\t\t\t\t{}\nCustomer:\t\t\t\t{}\nVehicle:\t\t\t\t{}\nVehicle status:\t\t{}\nEmployee:\t\t\t{}\nLocation:\t\t\t{}\nDate from:\t\t\t{}\nDate to:\t\t\t{}\nContract date:\t\t\t{}\nContract status:\t\t\t{}\nPickup Date:\t\t\t{}\nDropoff date:\t\t\t{}\nTotal:\t\t\t{}\n".format(contract_id, self.logic.get_customer_by_id(contract.customer_id), self.logic.get_vehicle_by_id(contract.vehicle_id), contract.vehicle_status, self.logic.get_employee_by_id(contract.employee_id), self.logic.get_location_by_id(contract.location_id), contract.date_from, contract.date_to, contract.contract_date, contract.contract_status, contract.pickup_date, contract.dropoff_date, contract.total))
+            print("ID:\t\t\t\t{}\nCustomer:\t\t\t\t{}\nVehicle:\t\t\t\t{}\nEmployee:\t\t\t{}\nLocation:\t\t\t{}\nDate from:\t\t\t{}\nDate to:\t\t\t{}\nContract date:\t\t\t{}\nContract status:\t\t\t{}\nPickup Date:\t\t\t{}\nDropoff date:\t\t\t{}\nTotal:\t\t\t{}\nPaid:\t\t\t{}\n".format(contract_id, self.logic.get_customer_by_id(contract.customer_id), self.logic.get_vehicle_by_id(contract.vehicle_id), self.logic.get_employee_by_id(contract.employee_id), self.logic.get_location_by_id(contract.location_id), contract.date_from, contract.date_to, contract.contract_date, contract.contract_status, contract.pickup_date, contract.dropoff_date, contract.total, contract.paid))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -226,10 +226,10 @@ class ContractUI:
     # Prints out table of contract
     def print(self, contracts, start, end, current_page, last_page):
         if len(contracts) > 0:
-            print("|{:^4}|{:^15}|{:^20}|{:^20}|{:^15}|{:^20}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|".format("ID", "Customer", "Vehicle", "Vehicle Status", "Employee", "Location", "Date from", "Date to", "Contract Date", "Contract Status", "Pickup Date", "Dropoff Date", "Total"))
+            print("|{:^4}|{:^15}|{:^20}|{:^15}|{:^20}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|{:^10}|".format("ID", "Customer", "Vehicle", "Employee", "Location", "Date from", "Date to", "Contract Date", "Contract status", "Pickup date", "Dropoff date", "Total", "Paid"))
             print('-' * 213)
             for i in range(start, end):
-                print("|{:^4}|{:^15}|{:^20}|{:^20}|{:^15}|{:^20}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|".format(contracts[i].id, self.logic.get_customer_by_id(contracts[i].customer_id).__str__(), self.logic.get_vehicle_by_id(contracts[i].vehicle_id).__str__(), contracts[i].vehicle_status, self.logic.get_employee_by_id( contracts[i].employee_id).__str__(), self.logic.get_location_by_id(contracts[i].location_id).__str__(), contracts[i].date_from, contracts[i].date_to, contracts[i].contract_date, contracts[i].contract_status, contracts[i].pickup_date, contracts[i].dropoff_date, contracts[i].total))
+                print("|{:^4}|{:^15}|{:^20}|{:^15}|{:^20}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|{:^10}|".format(contracts[i].id, self.logic.get_customer_by_id(contracts[i].customer_id).__str__(), self.logic.get_vehicle_by_id(contracts[i].vehicle_id).__str__(), self.logic.get_employee_by_id( contracts[i].employee_id).__str__(), self.logic.get_location_by_id(contracts[i].location_id).__str__(), contracts[i].date_from, contracts[i].date_to, contracts[i].contract_date, contracts[i].contract_status, contracts[i].pickup_date, contracts[i].dropoff_date, contracts[i].total, contracts[i].paid))
             print("{:^213}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
@@ -265,7 +265,7 @@ class ContractUI:
                             available_customers = [[customer.id, customer] for customer in customers]
                             data = self.input.get_option("customer", available_customers, current_page = customer_id_page, warning_msg = self.warning_msg)
                             if data[0] == True:
-                                update["customer_id"] = data[1]
+                                update["customer_id"] = data[1]                    
                                 break
                             else:
                                 self.printer.print_warning(data[1])
@@ -277,6 +277,10 @@ class ContractUI:
                             data = self.input.get_option("vehicle", available_vehicles, current_page = vehicle_id_page, warning_msg = self.warning_msg)
                             if data[0]:
                                 update["vehicle_id"] = data[1]
+                                date_format = "%d/%m/%Y"
+                                days = datetime.strptime(contract.date_to, date_format) - datetime.strptime(contract.date_to, date_format)
+                                total = int(days.days) * int(self.logic.get_vehicletype_by_id(data[1]).rate)
+                                update["total"] = total
                                 break
                             else:
                                 self.printer.print_warning(data[1])
@@ -335,7 +339,7 @@ class ContractUI:
                         self.warning_msg = "Please select available option"
                     if(len(update) > 0):
                         self.logic.update_contract(contract_id, update)
-                        self.success_msg = "contract has been modified"
+                        self.success_msg = "Contract has been modified"
                     break
                 except ValueError:
                     break

@@ -1,10 +1,9 @@
 
 
 class Contract:
-    def __init__(self, customer_id, vehicle_id, vehicle_status, employee_id, location_id, date_from, date_to, contract_date, contract_status, pickup_date, dropoff_date, total, id=None) -> None:
+    def __init__(self, customer_id, vehicle_id, employee_id, location_id, date_from, date_to, contract_date, contract_status, pickup_date, dropoff_date, total, paid, id=None) -> None:
         self.customer_id = customer_id
         self.vehicle_id = vehicle_id
-        self.vehicle_status = vehicle_status
         self.employee_id = employee_id
         self.location_id = location_id
 
@@ -16,6 +15,7 @@ class Contract:
         self.pickup_date = pickup_date
         self.dropoff_date = dropoff_date
         self.total = total
+        self.paid = paid
 
         self.id = id
 

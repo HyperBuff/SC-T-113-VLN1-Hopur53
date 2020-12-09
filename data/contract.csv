@@ -1,6 +1,2 @@
-customer_id,vehicle_id,vehicle_status,employee_id,location_id,date_from,date_to,contract_date,contract_status,pickup_date,dropoff_date,total,id
-4,1,Unavailable,1,1,30/12/2020,29/12/2020,09/12/2020,Invalid,,,,1
-4,2,Unavailable,1,1,30/12/2020,29/12/2020,09/12/2020,Open,,,,2
-4,1,Unavailable,1,Iceland,10/10/2000,10/10/2001,09/12/2020,Open,,,,3
-4,1,Unavailable,1,Iceland,10/10/2001,10/10/2002,09/12/2020,Open,,,-912500,4
-4,1,Unavailable,1,Iceland,10/10/2000,10/10/2001,09/12/2020,Open,,,-3650,5
+customer_id,vehicle_id,employee_id,location_id,date_from,date_to,contract_date,contract_status,pickup_date,dropoff_date,total,paid,id
+6,4,1,9,10/10/2000,10/10/2001,09/12/2020,Open,,,310250,0,7
