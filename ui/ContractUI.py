@@ -12,6 +12,8 @@ from models.Location import Location
 from ui.PrinterUI import PrinterUI
 from ui.InputUI import InputUI
 
+from ui.CustomerUI import CustomerUI
+
 
 
 class ContractUI:
@@ -135,7 +137,7 @@ class ContractUI:
     def menu(self):
         while True:
             self.printer.header("Contracts Menu")
-            self.printer.print_options(['Create a contract', 'View contracts'])
+            self.printer.print_options(['Create a contract', 'View contracts', 'Customers'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -148,6 +150,8 @@ class ContractUI:
                     self.view(True)
             elif action == '2':
                 self.view()
+            elif action == '3':
+                CustomerUI()
             elif action == 'q':
                 break
             else:
