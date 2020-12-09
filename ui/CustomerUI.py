@@ -108,7 +108,7 @@ class CustomerUI:
     def menu(self):
         while True:
             self.printer.header("Customers Menu")
-            self.printer.print_options(['Create an customer', 'View customers'])
+            self.printer.print_options(['Create a customer', 'View customers'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.notification()

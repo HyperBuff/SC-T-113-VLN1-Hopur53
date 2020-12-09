@@ -135,7 +135,7 @@ class ContractUI:
     def menu(self):
         while True:
             self.printer.header("Contracts Menu")
-            self.printer.print_options(['Create an contract', 'View contracts'])
+            self.printer.print_options(['Create a contract', 'View contracts'])
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -226,10 +226,10 @@ class ContractUI:
     # Prints out table of contract
     def print(self, contracts, start, end, current_page, last_page):
         if len(contracts) > 0:
-            print("|{:^4}|{:^15}|{:^20}|{:^20}|{:^15}|{:^20}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|".format("ID", "Customer", "Vehicle", "Vehicle Status", "Employee ID", "Location", "Date from", "Date to", "Contract Date", "Contract Status", "Pickup Date", "Dropoff Date", "Total"))
+            print("|{:^4}|{:^15}|{:^20}|{:^20}|{:^15}|{:^20}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|".format("ID", "Customer", "Vehicle", "Vehicle Status", "Employee", "Location", "Date from", "Date to", "Contract Date", "Contract Status", "Pickup Date", "Dropoff Date", "Total"))
             print('-' * 213)
             for i in range(start, end):
-                print("|{:^4}|{:^15}|{:^20}|{:^20}|{:^15}|{:^20}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|".format(contracts[i].id, self.logic.get_customer_by_id(contracts[i].customer_id).__str__(), self.logic.get_vehicle_by_id(contracts[i].vehicle_id).__str__(), contracts[i].vehicle_status, contracts[i].employee_id, self.logic.get_location_by_id(contracts[i].location_id).__str__(), contracts[i].date_from, contracts[i].date_to, contracts[i].contract_date, contracts[i].contract_status, contracts[i].pickup_date, contracts[i].dropoff_date, contracts[i].total))
+                print("|{:^4}|{:^15}|{:^20}|{:^20}|{:^15}|{:^20}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|".format(contracts[i].id, self.logic.get_customer_by_id(contracts[i].customer_id).__str__(), self.logic.get_vehicle_by_id(contracts[i].vehicle_id).__str__(), contracts[i].vehicle_status, self.logic.get_employee_by_id( contracts[i].employee_id).__str__(), self.logic.get_location_by_id(contracts[i].location_id).__str__(), contracts[i].date_from, contracts[i].date_to, contracts[i].contract_date, contracts[i].contract_status, contracts[i].pickup_date, contracts[i].dropoff_date, contracts[i].total))
             print("{:^213}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
