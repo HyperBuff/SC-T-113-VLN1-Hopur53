@@ -2,6 +2,7 @@ from ui.EmployeeUI import EmployeeUI
 from ui.VehicleUI import VehicleUI
 from ui.LocationUI import LocationUI
 from ui.ContractUI import ContractUI
+from ui.FinanceUI import  FinanceUI
 
 from ui.PrinterUI import PrinterUI
 
@@ -99,7 +100,7 @@ class MainUI:
         LocationUI(self.employee_id, self.role)
 
     def financials(self):
-        pass
+        FinanceUI(self.employee_id, self.role)
 
     def logout(self):
         self.employee_id = None
