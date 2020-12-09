@@ -6,9 +6,12 @@ from ui.InputUI import InputUI
 
 class LocationUI:
 
-    def __init__(self):
+    def __init__(self, employee_id, employee_role):
         
         self.items_per_page = 10
+
+        self.employee_id = employee_id
+        self.employee_role = employee_role
 
         self.logic = MainLogic()
 

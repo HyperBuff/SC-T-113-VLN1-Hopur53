@@ -19,6 +19,10 @@ class PrinterUI:
         for i in range(len(msgs)):
             print("{}. {}".format(i+1, msgs[i]))
 
+    def print_menu_options(self, menu):
+        for i in range(len(menu.keys())):
+            print("{}. {}".format(i+1, list(menu.keys())[i]))
+
     def new_line(self, count = 1):
         print('\n' * (count - 1))
 
