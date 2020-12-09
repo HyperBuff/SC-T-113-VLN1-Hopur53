@@ -8,9 +8,11 @@ from ui.InputUI import InputUI
 
 class VehicleUI:
 
-    def __init__(self):
+    def __init__(self, employee_id, employee_role):
         
         self.items_per_page = 10
+        self.employee_id = employee_id
+        self.employee_role = employee_role
 
         self.logic = MainLogic()
 
@@ -195,33 +197,38 @@ class VehicleUI:
             except ValueError:
                 break         
 
+    def menu_options(self):
+        if self.employee_role.lower() == "admin":
+            return {
+                "Create a vehicle": self.create,
+                "View vehicles": self.view,
+                "Create a vehicle type": self.create_type,
+                "View vehicles types": self.view_type
+            }
+        elif self.employee_role.lower() == "mechanic":
+            return {
+                "Change vehicle status": self.view
+            }
+
     # Prints out vehicle's menu
     def menu(self):
         while True:
+            menu_options = self.menu_options()
             self.printer.header("Vehicles Menu")
-            self.printer.print_options(['Create a vehicle', 'View vehicles', 'Create a vehicle type', 'View vehicles types'])
+            self.printer.print_menu_options(menu_options)
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.notification()
 
             action = input("Choose an option: ").lower()
             
-            if action == '1':
-                if self.create():
-                    self.success_msg = "New vehicle has been created"
-                    self.view(True)
-            elif action == '2':
-                self.view()
-            if action == '3':
-                if self.create_type():
-                    self.success_msg = "New vehicle type has been created"
-                    self.view_type(True)
-            elif action == '4':
-                self.view_type()
-            elif action == 'q':
+            if action == 'q':
                 break
-            """else:
-                self.warning_msg = "Please select available option"""
+            try:
+                list(menu_options.values())[int(action)-1]()
+            except:
+                self.warning_msg = "Please select available option"
+
 
     # Prints out all vehicle
     def view(self, created = False):

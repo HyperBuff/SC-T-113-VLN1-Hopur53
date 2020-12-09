@@ -49,49 +49,54 @@ class MainUI:
 
 
     def menu(self):
-        if self.role.lower() == "admin":
-            self.admin()
+        if not self.role == "":
+            while True:
+                menu_options = self.menu_options()
+                self.printer.header("NaN Air - Rentals")
+                print(f"Logged in as: {self.name} ({self.role})")
+                self.printer.new_line()
+                self.printer.print_menu_options(menu_options)
+                self.printer.new_line(2)
+                self.printer.print_fail('Press q to logout')
+                self.print_msg()
+                action = input("Choose an option: ").lower()
+                if action == 'q':
+                    self.logout()
+                    break
+                try:
+                    list(menu_options.values())[int(action)-1]()
+                except:
+                    self.warning_msg = "Please select available option"
         else:
             self.logout()
             self.warning_msg = "No role assigned to user"
 
-    def admin(self):
-        while True:
-            self.printer.header("NaN Air - Rentals")
-            print(f"Logged in as: {self.name} ({self.role})")
-            self.printer.new_line()
-            self.printer.print_options(['Contracts', 'Vehicles', 'Employees', 'Locations', 'Financials'])
-            self.printer.new_line(2)
-            self.printer.print_fail('Press q to logout')
-            self.print_msg()
-            action = input("Choose an option: ").lower()
-            if action == '1':
-                self.contracts()
-            elif action == '2':
-                self.vehicles()
-            elif action == '3':
-                self.employees()
-            elif action == '4':
-                self.locations()
-            elif action == '5':
-                self.financials()
-            elif action == 'q':
-                self.logout()
-                break
-            else:
-                self.warning_msg = "Please select available option"
+    def menu_options(self):
+        if self.role.lower() == "admin":
+            return {
+                "Contracts": self.contracts,
+                "Vehicles": self.vehicles,
+                "Employee": self.employees,
+                "Locations": self.locations,
+                "Financials": self.financials
+            }
+        elif self.role.lower() == "mechanic":
+            return {
+                "Vehicles": self.vehicles
+            }
+
 
     def contracts(self):
-        contract = ContractUI(self.employee_id)
+        ContractUI(self.employee_id, self.role)
 
     def vehicles(self):
-        VehicleUI()
+        VehicleUI(self.employee_id, self.role)
 
     def employees(self):
         EmployeeUI(self.employee_id)
 
     def locations(self):
-        LocationUI()
+        LocationUI(self.employee_id, self.role)
 
     def financials(self):
         pass
