@@ -1,4 +1,5 @@
-
+#Datetime
+from datetime import datetime
 #Logic
 from logic.MainLogic import MainLogic
 #Models
@@ -10,6 +11,8 @@ from models.Location import Location
 #UI Functions
 from ui.PrinterUI import PrinterUI
 from ui.InputUI import InputUI
+
+
 
 class ContractUI:
 
@@ -50,23 +53,18 @@ class ContractUI:
         
         customer_id_page = 1
         vehicle_id_page = 1
-        location_id_page = 1
-        role_page = 1
         while True:
 
             customer = self.logic.get_customer_by_id(customer_id)
             vehicle = self.logic.get_vehicle_by_id(vehicle_id)
-            location = self.logic.get_location_by_id(location_id)
 
             if customer is None:
                 customer = ""
             if vehicle is None:
                 vehicle = ""
-            if location is None:
-                location = ""
 
             self.printer.header("Create contract")
-            print(f"Customer:\t\t\t\t{customer}\nVehicle:\t\t\t\t{vehicle}\nLocation ID:\t\t\t\t{location}\nDate from:\t\t\t\t{date_from}\nDate to:\t\t\t\t{date_to}\n")
+            print(f"Customer:\t\t\t\t{customer}\nVehicle:\t\t\t\t{vehicle}\nDate from:\t\t\t\t{date_from}\nDate to:\t\t\t\t{date_to}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
@@ -90,37 +88,36 @@ class ContractUI:
                     vehicle_input = self.input.get_option("vehicle", available_vehicles, current_page = vehicle_id_page, warning_msg = self.warning_msg)
                     if vehicle_input[0] == True:
                         vehicle_id = vehicle_input[1]
-                        self.logic.update_vehicle(vehicle_id, {"status": "Unavailable"})
-                        vehicle_status = self.logic.get_vehicle_by_id(vehicle_id).status
                     else:
                         next_input = False
                         self.warning_msg = vehicle_input[1]
                         vehicle_id_page = vehicle_input[2]
                 elif counter == 2:
-                    locations = self.logic.get_all_locations()
-                    available_locations = [[location.id, location] for location in locations]
-                    location_input = self.input.get_option("location", available_locations, current_page = location_id_page, warning_msg = self.warning_msg)
-                    if location_input[0] == True:
-                        location_id = location_input[1]
-                    else:
-                        next_input = False
-                        self.warning_msg = location_input[1]
-                        location_id_page = location_input[2]
-                elif counter == 3:
-                    data = self.input.get_input("date_from", ["required", "date"], warning_msg = self.warning_msg)
+                    data = self.input.get_input("date from", ["required", "date"], warning_msg = self.warning_msg)
                     if data[0]:
                         date_from = data[1]
                     else:
                         next_input = False
                         self.warning_msg = data[1]
-                elif counter == 4:
-                    data = self.input.get_input("date_to", ["required", "date"], warning_msg = self.warning_msg)
+                elif counter == 3:
+                    data = self.input.get_input("date to", ["required", "date"], warning_msg = self.warning_msg)
                     if data[0]:
                         date_to = data[1]
                     else:
                         next_input = False
                         self.warning_msg = data[1]
-                elif counter > 4:
+                elif counter > 3:
+
+                    self.logic.update_vehicle(vehicle_id, {"status": "Unavailable"})
+                    vehicle_status = self.logic.get_vehicle_by_id(vehicle_id).status
+                    vehicle = self.logic.get_vehicle_by_id(vehicle_id)
+                    location_id = vehicle.location_id
+
+                    date_format = "%d/%m/%Y"
+
+                    days = datetime.strptime(date_to, date_format) - datetime.strptime(date_from, date_format)
+                    total = int(days.days) * int(self.logic.get_vehicletype_by_id(vehicle.vehicle_type_id).rate)
+
                     new_contract = Contract(customer_id,vehicle_id,vehicle_status,employee_id,location_id,date_from,date_to,contract_date,contract_status,pickup_date,dropoff_date,total)
                     confirmation = input("Are you sure you want to create this contract? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
                     if confirmation == 'y':
@@ -208,7 +205,7 @@ class ContractUI:
         while True:
             contract = self.logic.get_contract_by_id(contract_id)
             self.printer.header("View contract")
-            print("ID:\t\t\t\t{}\nCustomer ID:\t\t\t\t{}\nVehicle ID:\t\t\t\t{}\nVehicle Status:\t\t{}\nEmployee ID:\t\t\t{}\nLocation ID:\t\t\t{}\nDate from:\t\t\t{}\nDate to:\t\t\t{}\nContract Date:\t\t\t{}\nContract Status:\t\t\t{}\nPickup Date:\t\t\t{}\nDropoff Date:\t\t\t{}\nTotal:\t\t\t{}\n".format(contract_id, self.logic.get_customer_by_id(contract.customer_id), self.logic.get_vehicle_by_id(contract.vehicle_id), contract.vehicle_status, self.logic.get_employee_by_id(contract.employee_id), self.logic.get_location_by_id(contract.location_id), contract.date_from, contract.date_to, contract.contract_date, contract.contract_status, contract.pickup_date, contract.dropoff_date, contract.total))
+            print("ID:\t\t\t\t{}\nCustomer:\t\t\t\t{}\nVehicle:\t\t\t\t{}\nVehicle status:\t\t{}\nEmployee:\t\t\t{}\nLocation:\t\t\t{}\nDate from:\t\t\t{}\nDate to:\t\t\t{}\nContract date:\t\t\t{}\nContract status:\t\t\t{}\nPickup Date:\t\t\t{}\nDropoff date:\t\t\t{}\nTotal:\t\t\t{}\n".format(contract_id, self.logic.get_customer_by_id(contract.customer_id), self.logic.get_vehicle_by_id(contract.vehicle_id), contract.vehicle_status, self.logic.get_employee_by_id(contract.employee_id), self.logic.get_location_by_id(contract.location_id), contract.date_from, contract.date_to, contract.contract_date, contract.contract_status, contract.pickup_date, contract.dropoff_date, contract.total))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -219,7 +216,7 @@ class ContractUI:
                 self.edit(contract_id)
             elif action == 'd' or action == 'delete':
                 if self.delete(contract_id):
-                    self.success_msg = "contract has been deleted"
+                    self.success_msg = "Contract has been deleted"
                     break
             else:
                 self.warning_msg = "Please select available option"
@@ -227,7 +224,7 @@ class ContractUI:
     # Prints out table of contract
     def print(self, contracts, start, end, current_page, last_page):
         if len(contracts) > 0:
-            print("|{:^4}|{:^15}|{:^15}|{:^20}|{:^15}|{:^30}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|".format("ID", "Customer", "Vehicle", "Vehicle Status", "Employee ID", "Location", "Date from", "Date to", "Contract Date", "Contract Status", "Pickup Date", "Dropoff Date", "Total"))
+            print("|{:^4}|{:^15}|{:^15}|{:^20}|{:^15}|{:^30}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|".format("ID", "Customer", "Vehicle", "Vehicle status", "Employee", "Location", "Date from", "Date to", "Contract date", "Contract status", "Pickup date", "Dropoff date", "Total"))
             print('-' * 218)
             for i in range(start, end):
                 print("|{:^4}|{:^15}|{:^15}|{:^20}|{:^15}|{:^30}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|".format(contracts[i].id, self.logic.get_customer_by_id(contracts[i].customer_id).__str__(), self.logic.get_vehicle_by_id(contracts[i].vehicle_id).__str__(), contracts[i].vehicle_status, contracts[i].employee_id, self.logic.get_location_by_id(contracts[i].location_id).__str__(), contracts[i].date_from, contracts[i].date_to, contracts[i].contract_date, contracts[i].contract_status, contracts[i].pickup_date, contracts[i].dropoff_date, contracts[i].total))
