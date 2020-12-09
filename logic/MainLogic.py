@@ -80,6 +80,9 @@ class MainLogic:
     def delete_vehicle(self, id):
         return self.vehicle.delete(id)
 
+    def get_all_available_vehicles(self):
+        return self.vehicle.get_all_available_vehicles()
+
     #Vehicle type Logic
     def get_all_vehicletypes(self):
         return self.vehicletype.get_all_vehicletypes()
