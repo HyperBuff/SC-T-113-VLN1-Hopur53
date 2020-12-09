@@ -108,7 +108,7 @@ class MainUI:
         VehicleUI(self.employee_id, self.role)
 
     def employees(self):
-        EmployeeUI(self.employee_id)
+        EmployeeUI(self.employee_id, self.role)
 
     def locations(self):
         LocationUI(self.employee_id, self.role)
