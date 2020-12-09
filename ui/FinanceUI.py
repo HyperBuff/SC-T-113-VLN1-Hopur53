@@ -25,24 +25,33 @@ class FinanceUI:
 
         self.menu()
 
+    def menu_options(self):
+        if self.employee_role.lower() == "admin":
+            return {
+                "View overview": self.Overview,
+                "View invoices": self.Invoice
+            }
+        elif self.employee_role.lower() == "financial":
+            return {
+                "View overview": self.Overview,
+                "View invoices": self.Invoice
+            }
 
     def menu(self):
         while True:
+            menu_options = self.menu_options()
             self.printer.header("Finance Menu")
-            self.printer.print_options(['View overview', 'View invoices'])
+            self.printer.print_menu_options(menu_options)
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.notification()
 
             action = input("Choose an option: ").lower()
-            
-            if action == '1':
-                self.Overview()
-            elif action == '2':
-                pass
-            elif action == 'q':
+            if action == 'q':
                 break
-            else:
+            try:
+                list(menu_options.values())[int(action)-1]()
+            except:
                 self.warning_msg = "Please select available option"
 
     def Overview(self):

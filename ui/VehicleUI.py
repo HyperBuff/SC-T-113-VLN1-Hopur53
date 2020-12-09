@@ -209,6 +209,12 @@ class VehicleUI:
             return {
                 "Change vehicle status": self.view
             }
+        elif self.employee_role.lower() == "delivery":
+            return {
+                "Create a vehicle": self.create,
+                "Create a vehicle type": self.create_type
+                
+            }
 
     # Prints out vehicle's menu
     def menu(self):

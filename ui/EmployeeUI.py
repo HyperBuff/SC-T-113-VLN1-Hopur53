@@ -7,16 +7,17 @@ from ui.InputUI import InputUI
 
 class EmployeeUI:
 
-    def __init__(self, employee_id):
+    def __init__(self, employee_id, employee_role):
         
         self.items_per_page = 10
+        self.employee_role = employee_role
+        self.employee_id = employee_id
 
         self.logic = MainLogic()
 
         self.printer = PrinterUI()
         self.input = InputUI()
 
-        self.employee_id = employee_id
 
         self.success_msg = ""
         self.warning_msg = ""
@@ -133,26 +134,29 @@ class EmployeeUI:
             except ValueError:
                 break
 
+    def menu_options(self):
+        if self.employee_role.lower() == "admin":
+            return {
+                "View employees": self.view
+            }
+
     # Prints out employee's menu
     def menu(self):
         while True:
+            menu_options = self.menu_options()
             self.printer.header("Employees Menu")
-            self.printer.print_options(['Create an employee', 'View employees'])
+            self.printer.print_menu_options(menu_options)
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.notification()
 
             action = input("Choose an option: ").lower()
             
-            if action == '1':
-                if self.create():
-                    self.success_msg = "New employee has been created"
-                    self.view(True)
-            elif action == '2':
-                self.view()
-            elif action == 'q':
+            if action == 'q':
                 break
-            else:
+            try:
+                list(menu_options.values())[int(action)-1]()
+            except:
                 self.warning_msg = "Please select available option"
 
     # Prints out all employee

@@ -83,25 +83,32 @@ class LocationUI:
             except ValueError:
                 break
 
+    def menu_options(self):
+        if self.employee_role.lower() == "admin":
+            return {
+                "Create a location": self.create,
+                "View locations":self.view
+            }
+        elif self.employee_role.lower() == "booking":
+            return {
+                "View locations":self.view
+            }
+
     def menu(self):
         while True:
+            menu_options = self.menu_options()
             self.printer.header("Locations Menu")
-            self.printer.print_options(['Create a location', 'View locations'])
+            self.printer.print_menu_options(menu_options)
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.notification()
 
             action = input("Choose an option: ").lower()
-            
-            if action == '1':
-                if self.create():
-                    self.success_msg = "New location has been created"
-                    self.view(True)
-            elif action == '2':
-                self.view()
-            elif action == 'q':
+            if action == 'q':
                 break
-            else:
+            try:
+                list(menu_options.values())[int(action)-1]()
+            except:
                 self.warning_msg = "Please select available option"
 
     # Prints out all location

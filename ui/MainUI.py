@@ -85,6 +85,20 @@ class MainUI:
             return {
                 "Vehicles": self.vehicles
             }
+        elif self.role.lower() == "delivery":
+            return {
+                "Vehicles": self.vehicles,
+                "Contracts": self.contracts
+            }
+        elif self.role.lower() == "booking":
+            return {
+                "Contracts": self.contracts,
+                "Locations": self.locations
+            }
+        elif self.role.lower() == "financial":
+            return {
+                "Financials": self.financials
+            }
 
 
     def contracts(self):

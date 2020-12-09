@@ -132,41 +132,42 @@ class ContractUI:
                     counter += 1
             except ValueError:
                 break
+    
+    def menu_options(self):
+        if self.employee_role.lower() == "admin":
+            return {
+                "Create a contract": self.create,
+                "View contracts": self.view,
+                "Vehicle pick up": self.pick_up 
+            }
+        elif self.employee_role.lower() == "delivery":
+            return {
+                "View contracts": self.view,
+                "Vehicle pick up": self.pick_up
+            }
+        elif self.employee_role.lower() == "booking":
+            return {
+                "Create a contract": self.create,
+                "View contracts": self.view
+            }
 
     
     # Prints out contract's menu
     def menu(self):
         while True:
+            menu_options = self.menu_options()
             self.printer.header("Contracts Menu")
-            self.printer.print_options(['Create a contract', 'View contracts', 'Customers', 'Vehicle pick up', 'Vehicle drop off', 'Close contract', 'Pay to contract'])
+            self.printer.print_menu_options(menu_options)
             self.printer.new_line(2)
             self.printer.print_fail("Press q to go back")
             self.notification()
 
             action = input("Choose an option: ").lower()
-            
-            if action == '1':
-                if self.create():
-                    self.success_msg = "New contract has been created"
-                    self.view(True)
-            elif action == '2':
-                self.view()
-            elif action == '3':
-                CustomerUI()
-            elif action == '4':
-                self.pick_up()
-            elif action == '5':
-                pass
-                #self.drop_off()
-            elif action == '6':
-                pass
-                #self.close_contract()
-            elif action == '7':
-                pass
-                #self.pay()
-            elif action == 'q':
+            if action == 'q':
                 break
-            else:
+            try:
+                list(menu_options.values())[int(action)-1]()
+            except:
                 self.warning_msg = "Please select available option"
 
     def pick_up(self):
