@@ -137,7 +137,8 @@ class EmployeeUI:
     def menu_options(self):
         if self.employee_role.lower() == "admin":
             return {
-                "View employees": self.view
+                "View employees": self.view,
+                "Create an employee": self.create
             }
 
     # Prints out employee's menu
