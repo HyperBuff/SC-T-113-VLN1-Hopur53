@@ -73,6 +73,9 @@ class MainLogic:
     def contract_set_dropoff(self, contract_id, date):
         return self.contract.contract_set_dropoff(contract_id, date)
 
+    def pay_to_contract(self, contract_id, amount):
+        return self.contract.pay_to_contract(contract_id, amount)
+
     #Vehicle Logic
     def get_all_vehicles(self):
         return self.vehicle.get_all_vehicles()
@@ -91,6 +94,9 @@ class MainLogic:
 
     def get_all_available_vehicles(self):
         return self.vehicle.get_all_available_vehicles()
+
+    def filter_vehicles(self, filters):
+        return self.vehicle.filter_vehicles(filters)
 
     #Vehicle type Logic
     def get_all_vehicletypes(self):

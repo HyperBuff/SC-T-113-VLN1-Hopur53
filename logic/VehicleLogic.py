@@ -31,3 +31,19 @@ class VehicleLogic:
             if vehicle.id == id:
                 return vehicle
         return None
+
+    def filter_vehicles(self, filters):
+        results = []
+        vehicles = self.get_all_vehicles()
+        for vehicle in vehicles:
+            valid_vehicle = True
+            for key in filters.keys():
+                if key == "status": # {"vehicle": vehicle_id}
+                    if vehicle.status != filters[key]:
+                        valid_vehicle = False
+                if key == "location": # {"location": location_id}
+                    if vehicle.location_id != filters[key]:
+                        valid_vehicle = False
+            if valid_vehicle:
+                results.append(vehicle)
+        return results

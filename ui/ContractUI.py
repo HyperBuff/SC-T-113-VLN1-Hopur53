@@ -120,7 +120,10 @@ class ContractUI:
                     date_format = "%d/%m/%Y"
 
                     days = datetime.strptime(date_to, date_format) - datetime.strptime(date_from, date_format)
-                    total = int(days.days) * int(self.logic.get_vehicletype_by_id(vehicle.vehicle_type_id).rate)
+                    total = (int(days.days) + 1) * int(self.logic.get_vehicletype_by_id(vehicle.vehicle_type_id).rate)
+
+                    print(total)
+                    r = input("amount")
 
                     new_contract = Contract(customer_id,vehicle_id,employee_id,location_id,date_from,date_to,contract_date,contract_status,pickup_date,dropoff_date,total,paid)
                     confirmation = input("Are you sure you want to create this contract? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
@@ -139,7 +142,8 @@ class ContractUI:
                 "Create a contract": self.create,
                 "View contracts": self.view,
                 "Vehicle pick up": self.pick_up,
-                "Return vehicle": self.drop_off
+                "Return vehicle": self.drop_off,
+                "Pay contract": self.pay_contract
             }
         elif self.employee_role.lower() == "delivery":
             return {
@@ -291,7 +295,72 @@ class ContractUI:
     
 
     def pay_contract(self):
-        pass
+        contracts_page = 1
+        while True:
+            location = self.logic.get_employee_by_id(self.employee_id).location_id
+            contracts = self.logic.filter_contracts({"location": location, "status": "open"})
+            self.printer.header("Pay vechicle")
+            self.printer.print_fail("Press q to go back")
+            self.printer.new_line()
+            available_contracts = [[contract.id, self.logic.get_customer_by_id(contract.customer_id)] for contract in contracts]
+            if len(available_contracts) > 0:
+                while True:
+                    data = self.input.get_option("contract", available_contracts, current_page = contracts_page, warning_msg = self.warning_msg)
+                    if data[0] == True:
+                        contract_id = data[1]
+                        break
+                    else:
+                        self.warning_msg = data[1]
+                        contracts_page = data[2]
+                
+                while True:
+
+                    self.printer.header("Pay contract")
+
+                    contract = self.logic.get_contract_by_id(contract_id)
+                    customer = self.logic.get_customer_by_id(contract.customer_id)
+                    vehicle = self.logic.get_vehicle_by_id(contract.vehicle_id)
+                    vehicletype = self.logic.get_vehicletype_by_id(vehicle.vehicle_type_id)
+
+                    print(f"Name:\t\t\t\t{customer.name}\nSocial security number:\t\t{customer.ssn}\nPhone:\t\t\t\t{customer.phone}\nEmail:\t\t\t\t{customer.email}\n")
+                    print(f"Manufacturer:\t\t\t{vehicle.manufacturer}\nModel:\t\t\t\t{vehicle.model}\nVehicle type:\t\t\t{vehicletype.name}\nRate:\t\t\t\t{vehicletype.rate}\nManufacture year:\t\t{vehicle.man_year}\nColor:\t\t\t\t{vehicle.color}\nLicence needed:\t\t\t{vehicle.licence_type}\n")
+                    print(f"Delivery date:\t\t\t{contract.date_from}\nReturn date:\t\t\t{contract.date_to}\n")
+                    print(f"Actual delivery date:\t\t\t{contract.pickup_date}\nActual return date:\t\t\t{contract.dropoff_date}\n")
+                    print(f"Amount paid:\t\t\t{contract.paid}\nTotal amount:\t\t\t{contract.total}\nAmount due:\t\t\t{contract.amount_due()}\n")
+
+                    self.printer.print_fail("Press q to go back")
+                    self.notification()
+
+                    action = input("(C)lose contract / (P)ay partial: ").lower()
+
+                    if action == 'q':
+                        break
+                    elif action == 'c' or action == "close":
+                        amount = contract.amount_due()
+                        confirmation = input("Are you sure you want to add {} to this contract? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ".format(amount)).lower()
+                        if confirmation == 'y':
+                            self.logic.pay_to_contract(contract_id, amount)
+                            break
+                    elif action == 'p' or action == "pay":
+                        amount = input("Enter amount between (1 - {}): ".format(contract.amount_due()))
+                        confirmation = input("Are you sure you want to add {} to this contract? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ".format(amount)).lower()
+                        if confirmation == 'y':
+                            self.logic.pay_to_contract(contract_id, amount)
+                            break
+                    else:
+                        self.warning_msg = "Please select available option"
+
+                    
+
+            else:
+                print("No open contracts for your location")
+                self.printer.new_line()
+                self.notification()
+                action = input("Choose an option: ").lower()
+                if action == 'q':
+                    return
+                else:
+                    self.warning_msg = "Please select available option"
 
     # Prints out all contract
     def view(self, created = False):
@@ -351,7 +420,7 @@ class ContractUI:
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
-            action = input("(E)dit / (D)elete: ").lower()
+            action = input("(E)dit / (I)nvalidate / (D)elete: ").lower()
             if action == 'q':
                 break
             elif action == 'e' or action == 'edit':
@@ -359,6 +428,10 @@ class ContractUI:
             elif action == 'd' or action == 'delete':
                 if self.delete(contract_id):
                     self.success_msg = "Contract has been deleted"
+                    break
+            elif action == 'i' or action == 'invalidate':
+                if self.invalidate(contract_id):
+                    self.success_msg = "Contract has been invalidated"
                     break
             else:
                 self.warning_msg = "Please select available option"
@@ -489,6 +562,13 @@ class ContractUI:
         confirmation = input("Are you sure you want to delete this contract? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
         if confirmation == 'y':
             self.logic.delete_contract(id)
+            return True
+        return False
+
+    def invalidate(self, contract_id):
+        confirmation = input("Are you sure you want to invalidate this contract? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
+        if confirmation == 'y':
+            self.logic.update_contract(contract_id, {"contract_status": "Invalid"})
             return True
         return False
 

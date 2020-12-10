@@ -1,7 +1,7 @@
 manufacturer,model,vehicle_type_id,status,man_year,color,licence_type,location_id,id
-TAILG,Free Fly II,10,Unavailable,2018,White,Drivers licence,8,1
+TAILG,Free Fly II,10,Available,2018,White,Drivers licence,8,1
 TAILG,Free Fly II,10,Available,2018,Orange,Drivers licence,8,2
-Kayman Kayaks,Crazy,9,Available,2020,Yellow,None,11,3
+Kayman Kayaks,Crazy,9,Unavailable,2020,Yellow,None,11,3
 Kayman Kayaks,Crazy,9,Unavailable,2020,Yellow,None,9,4
 Kayman Kayaks,Crazy HV,9,Available,2020,Yellow,None,7,5
 Cani-Fit,Fat Max,8,Available,2019,Black,None,7,6

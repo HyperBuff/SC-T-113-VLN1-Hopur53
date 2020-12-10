@@ -203,7 +203,9 @@ class VehicleUI:
                 "Create a vehicle": self.create,
                 "View vehicles": self.view,
                 "Create a vehicle type": self.create_type,
-                "View vehicles types": self.view_type
+                "View vehicles types": self.view_type,
+                "Mechanic Menu": self.change_status,
+                "View available vehicles": self.view_available
             }
         elif self.employee_role.lower() == "mechanic":
             return {
@@ -233,6 +235,121 @@ class VehicleUI:
             try:
                 list(menu_options.values())[int(action)-1]()
             except:
+                self.warning_msg = "Please select available option"
+
+    def change_status(self):
+        vehicles_page = 1
+        while True:
+            location = self.logic.get_employee_by_id(self.employee_id).location_id
+            vehicles = self.logic.filter_vehicles({"location": location})
+            self.printer.header("Mechanic Menu")
+            self.printer.print_fail("Press q to go back")
+            self.notification()
+            self.printer.new_line()
+            available_vehicles = [[vehicle.id, "{} ({})".format(vehicle.__str__(), vehicle.status)] for vehicle in vehicles]
+            if len(available_vehicles) > 0:
+                while True:
+                    data = self.input.get_option("vehicle", available_vehicles, current_page = vehicles_page, warning_msg = self.warning_msg)
+                    self.notification()
+                    if data[0] == True:
+                        vehicle_id = data[1]
+                        break
+                    else:
+                        self.warning_msg = data[1]
+                        vehicles_page = data[2]
+                    
+                while True:
+
+                    self.printer.header("Change vehicle status")
+
+                    vehicle = self.logic.get_vehicle_by_id(vehicle_id)
+
+                    print("ID:\t\t\t\t{}\nManufacturer:\t\t\t{}\nModel:\t\t\t\t{}\nVehicle type:\t\t\t{}\nStatus:\t\t\t\t{}\nManufacturing year:\t\t{}\nColor:\t\t\t\t{}\nLicence type:\t\t\t{}\nLocation:\t\t\t{}\n".format(vehicle.id, vehicle.manufacturer, vehicle.model, self.logic.get_vehicletype_by_id(vehicle.vehicle_type_id), vehicle.status, vehicle.man_year, vehicle.color, vehicle.licence_type, self.logic.get_location_by_id(vehicle.location_id)))
+            
+                    is_available = True if vehicle.status == "Available" else False
+
+                    self.printer.print_fail("Press q to go back")
+                    self.notification()
+
+                    action = input("(A)vailable / (U)vailable: ").lower()
+                    if action == 'q':
+                        break
+                    elif action == 'a' or action == "available":
+                        if is_available:
+                            self.warning_msg = "Vehicle status is already available"
+                        else:
+                            confirmation = input("Are you sure you want to make this vehicle available? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
+                            if confirmation == 'y':
+                                self.logic.update_vehicle(vehicle_id, {"status": "Available"})
+                                self.success_msg = "Vehicle status has been changed to available"
+                                break
+                    elif action == 'u' or action == "unavailable":
+                        if not is_available:
+                            self.warning_msg = "Vehicle status is already available"
+                        else:
+                            confirmation = input("Are you sure you want to make this vehicle available? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
+                            if confirmation == 'y':
+                                self.logic.update_vehicle(vehicle_id, {"status": "Unavailable"})
+                                self.success_msg = "Vehicle status has been changed to unavailable"
+                                break
+                    else:
+                        self.warning_msg = "Please select available option"
+            else:
+                print("No vehicles found for your location")
+                self.printer.new_line()
+                self.notification()
+                action = input("Choose an option: ").lower()
+                if action == 'q':
+                    return
+                else:
+                    self.warning_msg = "Please select available option"
+
+        # Prints out all vehicle
+    
+    def view_available(self):
+        current_page = 1
+        while True:   
+            location_id = self.logic.get_employee_by_id(self.employee_id).location_id
+            vehicles = self.logic.filter_vehicles({"location": location_id, "status": "Available"})
+            vehicles_count = len(vehicles)
+            last_page = int(vehicles_count / self.items_per_page) + (vehicles_count % self.items_per_page > 0)
+            if current_page > last_page:
+                current_page = last_page
+            start = (current_page - 1) * self.items_per_page
+            end = start + 10 if not current_page == last_page else vehicles_count
+
+            self.printer.header("View vehicles")
+            self.print(vehicles, start, end, current_page, last_page)
+            self.printer.new_line()
+            self.printer.print_fail("Press q to go back")
+            self.notification()
+
+            action = input("(N)ext page / (P)revious page / (S)elect vehicle: ").lower()
+
+            if action == 'q':
+                break
+            elif action == 'n' or action == "next":
+                if current_page >= last_page:
+                    current_page = last_page
+                    self.warning_msg = "You are currenly on the last page"
+                else:
+                    current_page += 1
+            elif action == 'p' or action == "previous":
+                if current_page > 1:
+                    current_page -= 1
+                else:
+                    current_page = 1
+                    self.warning_msg = "You are currenly on the first page"
+            elif action == 's' or action == "select":
+                vehicle_id = input("Select vehicle by ID: ").lower()
+                if vehicle_id == 'q':
+                    break
+                vehicle = self.logic.get_vehicle_by_id(vehicle_id)
+                if vehicle is None:
+                    self.warning_msg = "Vehicle not found"
+                else:
+                    self.vehicle(vehicle_id)
+            else:
                 self.warning_msg = "Please select available option"
 
 
@@ -282,8 +399,8 @@ class VehicleUI:
                     self.warning_msg = "Vehicle not found"
                 else:
                     self.vehicle(vehicle_id)
-            """else:
-                self.warning_msg = "Please select available option"""
+            else:
+                self.warning_msg = "Please select available option"
 
     # Prints out all vehicle
     def view_type(self, created = False):

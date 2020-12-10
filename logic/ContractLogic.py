@@ -67,9 +67,6 @@ class ContractLogic:
                     else:
                         if contract.dropoff_date != "":
                             valid_contract = False
-                if key == "contract_status": # {"status": "Open"}
-                    if contract.contract_status.lower() != filters[key]:
-                        valid_contract = False
                 if key == "date": # {"date": ["15/12/2020", "22/12/2020"]}
                     date_from = datetime.strptime(contract.date_from, self.date_format)
                     date_to = datetime.strptime(contract.date_to, self.date_format)
@@ -81,8 +78,7 @@ class ContractLogic:
             if valid_contract:
                 results.append(contract)
         return results
-
-
+        
     def contract_set_pickup(self, contract_id, date):
 
         updates = {"pickup_date": date}
@@ -92,7 +88,7 @@ class ContractLogic:
 
         if days_to_early > 0:
             try:
-                new_total = str(round(int(contract.total) + 1.20 * int(self.vehicletype.get_vehicletype_by_id(self.vehicle.get_vehicle_by_id(contract.vehicle_id)))))
+                new_total = str(round(int(contract.total) + 1.20 * days_to_early * int(self.vehicletype.get_vehicletype_by_id(self.vehicle.get_vehicle_by_id(contract.vehicle_id).vehicle_type_id).rate)))
                 updates["total"] = new_total
             except ValueError:
                 pass
@@ -108,7 +104,7 @@ class ContractLogic:
 
         if days_to_late > 0:
             try:
-                new_total = str(round(int(contract.total) + 1.20 * int(self.vehicletype.get_vehicletype_by_id(self.vehicle.get_vehicle_by_id(contract.vehicle_id)))))
+                new_total = str(round(int(contract.total) + 1.20 * days_to_late * int(self.vehicletype.get_vehicletype_by_id(self.vehicle.get_vehicle_by_id(contract.vehicle_id).vehicle_type_id).rate)))
                 updates["total"] = new_total
                 if int(contract.paid) >= int(new_total):
                     updates["contract_status"] = "Closed"
@@ -123,6 +119,11 @@ class ContractLogic:
 
         self.update(contract_id, updates)
 
+        if "contract_status" in updates:
+            return True
+        else:
+            return False
+
     def pay_to_contract(self, contract_id, amount):
         contract = self.get_contract_by_id(contract_id)
         updates = {}
@@ -134,5 +135,11 @@ class ContractLogic:
                 updates["contract_status"] = "Closed"
         except ValueError:
             pass
+
         self.update(contract_id, updates)
+
+        if "contract_status" in updates:
+            return True
+        else:
+            return False
 
