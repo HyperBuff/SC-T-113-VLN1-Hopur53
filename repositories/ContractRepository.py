@@ -11,16 +11,16 @@ class ContractRepository:
 
     def create(self, contract: Contract):
         row = dict((key, getattr(contract, key)) for key in self.fieldnames)
-        Repository()._create(self.filename, self.fieldnames, row)
+        Repository().create(self.filename, self.fieldnames, row)
         return contract
 
     def read(self):
-        rows = Repository()._read(self.filename)
+        rows = Repository().read(self.filename)
         contracts = [Contract(row['customer_id'], row['vehicle_id'], row['employee_id'], row['location_id'], row['date_from'], row['date_to'], row['contract_date'], row['contract_status'], row['pickup_date'], row['dropoff_date'], row['total'], row['paid'], row['id']) for row in rows]
         return contracts
     
     def update(self, id, updates: dict):
-        return Repository()._update(self.filename, self.fieldnames, id, updates)
+        return Repository().update(self.filename, self.fieldnames, id, updates)
 
     def delete(self, id) -> None:
-        return Repository()._delete(self.filename, self.fieldnames, id)
+        return Repository().delete(self.filename, self.fieldnames, id)

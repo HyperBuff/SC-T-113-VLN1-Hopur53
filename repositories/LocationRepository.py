@@ -10,16 +10,16 @@ class LocationRepository:
 
     def create(self, location: Location):
         row = dict((key, getattr(location, key)) for key in self.fieldnames)
-        Repository()._create(self.filename, self.fieldnames, row)
+        Repository().create(self.filename, self.fieldnames, row)
         return location
 
     def read(self):
-        rows = Repository()._read(self.filename)
+        rows = Repository().read(self.filename)
         locations = [Location(row['country'], row['airport'], row['phone'], row['hours'], row['id']) for row in rows]
         return locations
     
     def update(self, id, updates: dict):
-        return Repository()._update(self.filename, self.fieldnames, id, updates)
+        return Repository().update(self.filename, self.fieldnames, id, updates)
 
     def delete(self, id) -> None:
-        return Repository()._delete(self.filename, self.fieldnames, id)
+        return Repository().delete(self.filename, self.fieldnames, id)

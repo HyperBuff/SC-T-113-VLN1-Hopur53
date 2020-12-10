@@ -48,12 +48,6 @@ class InputUI:
                         break
                     else:
                         user_input = self.is_date_valid(user_input)
-                if validation == "hours":
-                    if not self.is_hours_valid(user_input):
-                        warning_msg = "{} is not valid".format(title.capitalize())
-                        break
-                    else:
-                        user_input = self.is_hours_valid(user_input)
         if warning_msg == "":
             return (True, user_input)
         else:
@@ -217,6 +211,3 @@ class InputUI:
             return create_date
         except ValueError:
             return False
-
-    def is_hours_valid(self, hours):
-        return hours
