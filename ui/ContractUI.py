@@ -141,7 +141,7 @@ class ContractUI:
             return {
                 "Create a contract": self.create,
                 "View contracts": self.view,
-                "Vehicle pick up": self.pick_up,
+                "Deliver vehicle": self.pick_up,
                 "Return vehicle": self.drop_off,
                 "Pay contract": self.pay_contract
             }
@@ -416,7 +416,7 @@ class ContractUI:
         while True:
             contract = self.logic.get_contract_by_id(contract_id)
             self.printer.header("View contract")
-            print("ID:\t\t\t\t{}\nCustomer:\t\t\t\t{}\nVehicle:\t\t\t\t{}\nEmployee:\t\t\t{}\nLocation:\t\t\t{}\nDate from:\t\t\t{}\nDate to:\t\t\t{}\nContract date:\t\t\t{}\nContract status:\t\t\t{}\nPickup Date:\t\t\t{}\nDropoff date:\t\t\t{}\nTotal:\t\t\t{}\nPaid:\t\t\t{}\n".format(contract_id, self.logic.get_customer_by_id(contract.customer_id), self.logic.get_vehicle_by_id(contract.vehicle_id), self.logic.get_employee_by_id(contract.employee_id), self.logic.get_location_by_id(contract.location_id), contract.date_from, contract.date_to, contract.contract_date, contract.contract_status, contract.pickup_date, contract.dropoff_date, contract.total, contract.paid))
+            print("ID:{}\nCustomer:\t\t\t{}\nVehicle:\t\t\t{}\nEmployee:\t\t\t{}\nLocation:\t\t\t{}\nDate from:\t\t\t{}\nDate to:\t\t\t{}\nContract date:\t\t\t{}\nContract status:\t\t{}\nPickup Date:\t\t\t{}\nDropoff date:\t\t\t{}\nTotal:\t\t\t\t{}\nPaid:\t\t\t\t{}\n".format(contract_id, self.logic.get_customer_by_id(contract.customer_id), self.logic.get_vehicle_by_id(contract.vehicle_id), self.logic.get_employee_by_id(contract.employee_id), self.logic.get_location_by_id(contract.location_id), contract.date_from, contract.date_to, contract.contract_date, contract.contract_status, contract.pickup_date, contract.dropoff_date, contract.total, contract.paid))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -439,11 +439,11 @@ class ContractUI:
     # Prints out table of contract
     def print(self, contracts, start, end, current_page, last_page):
         if len(contracts) > 0:
-            print("|{:^4}|{:^15}|{:^20}|{:^15}|{:^20}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|{:^10}|".format("ID", "Customer", "Vehicle", "Employee", "Location", "Date from", "Date to", "Contract Date", "Contract status", "Pickup date", "Dropoff date", "Total", "Paid"))
-            print('-' * 213)
+            print("|{:^4}|{:^40}|{:^25}|{:^15}|{:^27}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|{:^10}|".format("ID", "Customer", "Vehicle", "Employee", "Location", "Date from", "Date to", "Contract Date", "Contract status", "Pickup date", "Dropoff date", "Total", "Paid"))
+            print('-' * 240)
             for i in range(start, end):
-                print("|{:^4}|{:^15}|{:^20}|{:^15}|{:^20}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|{:^10}|".format(contracts[i].id, self.logic.get_customer_by_id(contracts[i].customer_id).__str__(), self.logic.get_vehicle_by_id(contracts[i].vehicle_id).__str__(), self.logic.get_employee_by_id( contracts[i].employee_id).__str__(), self.logic.get_location_by_id(contracts[i].location_id).__str__(), contracts[i].date_from, contracts[i].date_to, contracts[i].contract_date, contracts[i].contract_status, contracts[i].pickup_date, contracts[i].dropoff_date, contracts[i].total, contracts[i].paid))
-            print("{:^213}".format("Page {} of {}".format(current_page, last_page)))
+                print("|{:^4}|{:^40}|{:^25}|{:^15}|{:^27}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|{:^10}|".format(contracts[i].id, self.logic.get_customer_by_id(contracts[i].customer_id).__str__(), self.logic.get_vehicle_by_id(contracts[i].vehicle_id).__str__(), self.logic.get_employee_by_id( contracts[i].employee_id).__str__(), self.logic.get_location_by_id(contracts[i].location_id).__str__(), contracts[i].date_from, contracts[i].date_to, contracts[i].contract_date, contracts[i].contract_status, contracts[i].pickup_date, contracts[i].dropoff_date, contracts[i].total, contracts[i].paid))
+            print("{:^240}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
             self.warning_msg = "No contracts found"

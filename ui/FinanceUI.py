@@ -216,7 +216,7 @@ class FinanceUI:
                     else:
                         self.printer.print_warning(date_1[1])
                 while True:
-                    date_2 = self.input.get_input("date from", ["required", "date"], warning_msg = self.warning_msg)
+                    date_2 = self.input.get_input("date to", ["required", "date"], warning_msg = self.warning_msg)
                     if date_2[0]:
                         date_2 = date_2[1]
                         break
@@ -316,7 +316,7 @@ class FinanceUI:
         while True:
             contract = self.logic.get_contract_by_id(contract_id)
             self.printer.header("Invoice")
-            print("ID:\t\t\t\t{}\nCustomer:\t\t\t{}\nContract date:\t\t\t{}\nContract status:\t\t{}\nTotal:\t\t\t\t{}\nPaid:\t\t\t\t{}\n".format(contract_id, self.logic.get_customer_by_id(contract.customer_id), contract.contract_date, contract.contract_status, contract.total, contract.paid))
+            print("ID:{}\nCustomer:\t{}\nContract date:\t\t{}\nContract status:\t{}\nTotal:\t\t\t{}\nPaid:\t\t\t{}\n".format(contract_id, self.logic.get_customer_by_id(contract.customer_id), contract.contract_date, contract.contract_status, contract.total, contract.paid))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
@@ -339,7 +339,7 @@ class FinanceUI:
                     else:
                         self.printer.print_warning(date_1[1])
                 while True:
-                    date_2 = self.input.get_input("date from", ["required", "date"], warning_msg = self.warning_msg)
+                    date_2 = self.input.get_input("date to", ["required", "date"], warning_msg = self.warning_msg)
                     if date_2[0]:
                         date_2 = date_2[1]
                         break
@@ -397,11 +397,11 @@ class FinanceUI:
     # Prints out table of contract
     def print(self, contracts, start, end, current_page, last_page):
         if len(contracts) > 0:
-            print("|{:^4}|{:^15}|{:^20}|{:^15}|{:^20}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|{:^10}|".format("ID", "Customer", "Vehicle", "Employee", "Location", "Date from", "Date to", "Contract Date", "Contract status", "Pickup date", "Dropoff date", "Total", "Paid"))
-            print('-' * 213)
+            print("|{:^4}|{:^40}|{:^25}|{:^15}|{:^27}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|{:^10}|".format("ID", "Customer", "Vehicle", "Employee", "Location", "Date from", "Date to", "Contract Date", "Contract status", "Pickup date", "Dropoff date", "Total", "Paid"))
+            print('-' * 240)
             for i in range(start, end):
-                print("|{:^4}|{:^15}|{:^20}|{:^15}|{:^20}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|{:^10}|".format(contracts[i].id, self.logic.get_customer_by_id(contracts[i].customer_id).__str__(), self.logic.get_vehicle_by_id(contracts[i].vehicle_id).__str__(), self.logic.get_employee_by_id( contracts[i].employee_id).__str__(), self.logic.get_location_by_id(contracts[i].location_id).__str__(), contracts[i].date_from, contracts[i].date_to, contracts[i].contract_date, contracts[i].contract_status, contracts[i].pickup_date, contracts[i].dropoff_date, contracts[i].total, contracts[i].paid))
-            print("{:^213}".format("Page {} of {}".format(current_page, last_page)))
+                print("|{:^4}|{:^40}|{:^25}|{:^15}|{:^27}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|{:^10}|".format(contracts[i].id, self.logic.get_customer_by_id(contracts[i].customer_id).__str__(), self.logic.get_vehicle_by_id(contracts[i].vehicle_id).__str__(), self.logic.get_employee_by_id( contracts[i].employee_id).__str__(), self.logic.get_location_by_id(contracts[i].location_id).__str__(), contracts[i].date_from, contracts[i].date_to, contracts[i].contract_date, contracts[i].contract_status, contracts[i].pickup_date, contracts[i].dropoff_date, contracts[i].total, contracts[i].paid))
+            print("{:^240}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
             self.warning_msg = "No contracts found"
