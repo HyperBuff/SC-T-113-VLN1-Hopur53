@@ -67,6 +67,9 @@ class ContractLogic:
                     else:
                         if contract.dropoff_date != "":
                             valid_contract = False
+                if key == "contract_status": # {"status": "Open"}
+                    if contract.contract_status.lower() != filters[key]:
+                        valid_contract = False
                 if key == "date": # {"date": ["15/12/2020", "22/12/2020"]}
                     date_from = datetime.strptime(contract.date_from, self.date_format)
                     date_to = datetime.strptime(contract.date_to, self.date_format)
