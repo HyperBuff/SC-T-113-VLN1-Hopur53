@@ -22,4 +22,12 @@ class Contract:
     def __str__(self):
         return "Contract for {}".format(self.customer_id)
 
+    def amount_due(self):
+        try:
+            total = int(self.total)
+            paid = int(self.paid)
+            return str(total - paid)
+        except ValueError:
+            return "0"
+
     #'Edit customer', 'Edit vehicle', 'Edit vehicle status', 'Edit employee id', 'Edit location', 'Edit date from', 'Edit contract status', 'Edit pick up date', 'Edit drop off date'

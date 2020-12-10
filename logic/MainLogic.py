@@ -67,6 +67,12 @@ class MainLogic:
     def filter_contracts(self, filters):
         return self.contract.filter_contracts(filters)
 
+    def contract_set_pickup(self, contract_id, date):
+        return self.contract.contract_set_pickup(contract_id, date)
+
+    def contract_set_dropoff(self, contract_id, date):
+        return self.contract.contract_set_dropoff(contract_id, date)
+
     #Vehicle Logic
     def get_all_vehicles(self):
         return self.vehicle.get_all_vehicles()

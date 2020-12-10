@@ -138,12 +138,14 @@ class ContractUI:
             return {
                 "Create a contract": self.create,
                 "View contracts": self.view,
-                "Vehicle pick up": self.pick_up 
+                "Vehicle pick up": self.pick_up,
+                "Return vehicle": self.drop_off
             }
         elif self.employee_role.lower() == "delivery":
             return {
                 "View contracts": self.view,
-                "Vehicle pick up": self.pick_up
+                "Deliver vehicle": self.pick_up,
+                "Return vehicle": self.drop_off
             }
         elif self.employee_role.lower() == "booking":
             return {
@@ -171,15 +173,124 @@ class ContractUI:
                 self.warning_msg = "Please select available option"
 
     def pick_up(self):
-        pass
-                
+        contracts_page = 1
+        while True:
+            location = self.logic.get_employee_by_id(self.employee_id).location_id
+            contracts = self.logic.filter_contracts({"location": location, "status": "open", "pickup" : False})
+            self.printer.header("Deliver vehicle")
+            self.printer.print_fail("Press q to go back")
+            self.notification()
+            self.printer.new_line()
+            available_contracts = [[contract.id, self.logic.get_customer_by_id(contract.customer_id)] for contract in contracts]
+            if len(available_contracts) > 0:
+                while True:
+                    data = self.input.get_option("customer", available_contracts, current_page = contracts_page, warning_msg = self.warning_msg)
+                    self.notification()
+                    if data[0] == True:
+                        contract_id = data[1]
+                        break
+                    else:
+                        self.warning_msg = data[1]
+                        contracts_page = data[2]
+                    
+                while True:
+
+                    self.printer.header("Deliver vehicle")
+
+                    contract = self.logic.get_contract_by_id(contract_id)
+                    customer = self.logic.get_customer_by_id(contract.customer_id)
+                    vehicle = self.logic.get_vehicle_by_id(contract.vehicle_id)
+                    vehicletype = self.logic.get_vehicletype_by_id(vehicle.vehicle_type_id)
+
+                    print(f"Name:\t\t\t\t{customer.name}\nSocial security number:\t\t{customer.ssn}\nPhone:\t\t\t\t{customer.phone}\nEmail:\t\t\t\t{customer.email}\n")
+                    print(f"Manufacturer:\t\t\t{vehicle.manufacturer}\nModel:\t\t\t\t{vehicle.model}\nVehicle type:\t\t\t{vehicletype.name}\nRate:\t\t\t\t{vehicletype.rate}\nManufacture year:\t\t{vehicle.man_year}\nColor:\t\t\t\t{vehicle.color}\nLicence needed:\t\t\t{vehicle.licence_type}\n")
+                    print(f"Delivery date:\t\t\t{contract.date_from}\nReturn date:\t\t\t{contract.date_to}\n")
+
+                    self.printer.print_fail("Press q to go back")
+                    self.notification()
+
+                    action = input("(D)eliver vehicle: ").lower()
+                    if action == 'q':
+                        break
+                    elif action == 'd' or action == "deliviery":
+                        confirmation = input("Are you sure you want to deliver this vehicle? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
+                        if confirmation == 'y':
+                            self.logic.contract_set_pickup(contract_id, self.input.get_date())
+                            self.success_msg = "Vehicle has been delivered successfully"
+                            break
+                    else:
+                        self.warning_msg = "Please select available option"
+            else:
+                print("No delivery scheduled for your location")
+                self.printer.new_line()
+                self.notification()
+                action = input("Choose an option: ").lower()
+                if action == 'q':
+                    return
+                else:
+                    self.warning_msg = "Please select available option"
+
     def drop_off(self):
-        pass
+        contracts_page = 1
+        while True:
+            location = self.logic.get_employee_by_id(self.employee_id).location_id
+            contracts = self.logic.filter_contracts({"location": location, "status": "open", "pickup" : True, "dropoff" : False})
+            self.printer.header("Return vechicle")
+            self.printer.print_fail("Press q to go back")
+            self.printer.new_line()
+            available_contracts = [[contract.id, self.logic.get_customer_by_id(contract.customer_id)] for contract in contracts]
+            if len(available_contracts) > 0:
+                while True:
+                    data = self.input.get_option("customer", available_contracts, current_page = contracts_page, warning_msg = self.warning_msg)
+                    if data[0] == True:
+                        contract_id = data[1]
+                        break
+                    else:
+                        self.warning_msg = data[1]
+                        contracts_page = data[2]
+                
+                while True:
+
+                    self.printer.header("Return vechicle")
+
+                    contract = self.logic.get_contract_by_id(contract_id)
+                    customer = self.logic.get_customer_by_id(contract.customer_id)
+                    vehicle = self.logic.get_vehicle_by_id(contract.vehicle_id)
+                    vehicletype = self.logic.get_vehicletype_by_id(vehicle.vehicle_type_id)
+
+                    print(f"Name:\t\t\t\t{customer.name}\nSocial security number:\t\t{customer.ssn}\nPhone:\t\t\t\t{customer.phone}\nEmail:\t\t\t\t{customer.email}\n")
+                    print(f"Manufacturer:\t\t\t{vehicle.manufacturer}\nModel:\t\t\t\t{vehicle.model}\nVehicle type:\t\t\t{vehicletype.name}\nRate:\t\t\t\t{vehicletype.rate}\nManufacture year:\t\t{vehicle.man_year}\nColor:\t\t\t\t{vehicle.color}\nLicence needed:\t\t\t{vehicle.licence_type}\n")
+                    print(f"Delivery date:\t\t\t{contract.date_from}\nReturn date:\t\t\t{contract.date_to}\n")
+                    print(f"Amount paid:\t\t\t{contract.paid}\nTotal amount:\t\t\t{contract.total}\nAmount due:\t\t\t{contract.amount_due()}\n")
+
+                    self.printer.print_fail("Press q to go back")
+                    self.notification()
+
+                    action = input("(R)eturn vechicle: ").lower()
+                    if action == 'q':
+                        break
+                    elif action == 'r' or action == "return":
+                        confirmation = input("Are you sure you want to return this vehicle? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
+                        if confirmation == 'y':
+                            self.logic.contract_set_dropoff(contract_id, self.input.get_date())
+                            self.success_msg = "Vehicle has been returned successfully"
+                            break
+                    else:
+                        self.warning_msg = "Please select available option"
+
+            else:
+                print("No return scheduled for your location")
+                self.printer.new_line()
+                self.notification()
+                action = input("Choose an option: ").lower()
+                if action == 'q':
+                    return
+                else:
+                    self.warning_msg = "Please select available option"
+
+    
 
     def pay_contract(self):
-        pass
-
-    def close_contract(self):
         pass
 
     # Prints out all contract
