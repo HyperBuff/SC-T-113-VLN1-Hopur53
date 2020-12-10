@@ -171,20 +171,16 @@ class ContractUI:
                 self.warning_msg = "Please select available option"
 
     def pick_up(self):
-        veihcle_page = 1
-        while True:
-            vehicles = self.logic.get_contract_from_location(self.employee_id)
-            available_vehicles = [[vehicle.id, vehicle] for vehicle in vehicles]
-            data = self.input.get_option("vehicle", available_vehicles, current_page = veihcle_page, warning_msg = self.warning_msg)
-            if data[0] == True:
-                contract_id = data[1]
-                break
-            else:
-                self.warning_msg = data[1]
-                veihcle_page = data[2]
+        pass
                 
-        
-        
+    def drop_off(self):
+        pass
+
+    def pay_contract(self):
+        pass
+
+    def close_contract(self):
+        pass
 
     # Prints out all contract
     def view(self, created = False):

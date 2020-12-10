@@ -1,6 +1,8 @@
 from repositories.MainRepository import MainRepository
 from logic.EmployeeLogic import EmployeeLogic
 
+from datetime import datetime
+
 class ContractLogic:
 
     def __init__(self):
@@ -27,34 +29,33 @@ class ContractLogic:
                 return contract
         return None
 
-    def get_contract_from_location(self, location_id):
+    def filter_contracts(self, filters):
         results = []
         contracts = self.get_all_contracts()
         for contract in contracts:
-            if contract.location_id == location_id:
-                results.append(contract)
-        return results
+            valid_contract = True
+            for key in filters.keys():
+                if key == "vehicle": # {"vehicle": vehicle_id}
+                    if contract.vehicle_id != filters[key]:
+                        valid_contract = False
+                if key == "location": # {"location": location_id}
+                    if contract.location_id != filters[key]:
+                        valid_contract = False
+                if key == "employee": # {"employee": employee_id}
+                    if contract.employee_id != filters[key]:
+                        valid_contract = False
+                if key == "status": # {"status": "available"}
+                    if contract.contract_status.lower() != filters[key]:
+                        valid_contract = False
+                if key == "date": # {"date": ["15/12/2020", "22/12/2020"]}
+                    date_format = "%d/%m/%Y"
+                    date_from = datetime.strptime(contract.date_from, date_format)
+                    date_to = datetime.strptime(contract.date_to, date_format)
+                    check_date_from = datetime.strptime(filters[key][0], date_format)
+                    check_date_to = datetime.strptime(filters[key][1], date_format)
 
-    def get_contracts_from_vehicle(self, vehicle_id):
-        results = []
-        contracts = self.get_all_contracts()
-        for contract in contracts:
-            if contract.vehicle_id == vehicle_id:
-                results.append(contract)
-        return results
-
-    def get_closed_contracts(self):
-        results = []
-        contracts = self.get_all_contracts()
-        for contract in contracts:
-            if contract.status.lower() == "closed":
-                results.append(contract)
-        return results
-    
-    def get_open_contracts(self):
-        results = []
-        contracts = self.get_all_contracts()
-        for contract in contracts:
-            if contract.status.lower() == "open":
+                    if date_from < check_date_from or date_to > check_date_to:
+                        valid_contract = False
+            if valid_contract:
                 results.append(contract)
         return results
