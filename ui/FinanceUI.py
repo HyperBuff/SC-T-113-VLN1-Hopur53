@@ -138,17 +138,17 @@ class FinanceUI:
                 self.warning_msg = "Please select available option"
 
     def branch_report(self):
-        try:
-            while True:
+        while True:
+            try:
                 while True:
-                    date_1 = self.input.get_input("date from", ["required", "date"], warning_msg = self.warning_msg)
+                    date_1 = self.input.get_input("date from(DD/MM/YYYY)", ["required", "date"], warning_msg = self.warning_msg)
                     if date_1[0]:
                         date_1 = date_1[1]
                         break
                     else:
                         self.printer.print_warning(date_1[1])
                 while True:
-                    date_2 = self.input.get_input("date from", ["required", "date"], warning_msg = self.warning_msg)
+                    date_2 = self.input.get_input("date from(DD/MM/YYYY)", ["required", "date"], warning_msg = self.warning_msg)
                     if date_2[0]:
                         date_2 = date_2[1]
                         break
@@ -160,15 +160,16 @@ class FinanceUI:
                 self.printer.header("Branch Report")
                 print("\n".join("\t{:^20} {:^20}".format(self.logic.get_location_by_id(k).country, v) for k, v in contract_dict.items()))
                 self.printer.new_line()
-                self.printer.print_fail("Press q to go back")
+                self.printer.print_fail("Press any key to go back: ")
                 self.notification()
-                action = input("Input: ").lower()
+                action = input("Select option: ").lower()
                 if action == 'q':
                     break
                 else:
                     self.warning_msg = "Please select available option"
-        except ValueError:
-            return
+                break
+            except ValueError:
+                break
 
 
     def vehicle_type_report(self):
