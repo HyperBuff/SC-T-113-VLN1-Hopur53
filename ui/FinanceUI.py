@@ -81,6 +81,8 @@ class FinanceUI:
                 break
             else:
                 self.warning_msg = "Please select available option"
+            
+            
 
 
     def invoice(self):
@@ -101,6 +103,9 @@ class FinanceUI:
                 break
             else:
                 self.warning_msg = "Please select available option"
+            
+            
+            
 
     #Overview Functions
     def income_overview(self):
@@ -129,13 +134,14 @@ class FinanceUI:
             self.printer.header("Utilization Overview")
             self.print_utilazation_report(vehicles_dict)
             self.printer.new_line()
-            self.printer.print_fail("Press q to go back")
+            self.printer.print_fail("Press any key to go back")
             self.notification()
-            action = input("Input: ").lower()
+            action = input("Choose an option: ").lower()
             if action == 'q':
                 break
             else:
-                self.warning_msg = "Please select available option"
+                break
+            break
 
     def branch_report(self):
         while True:
@@ -160,30 +166,30 @@ class FinanceUI:
                 self.printer.header("Branch Report")
                 print("\n".join("\t{:^20} {:^20}".format(self.logic.get_location_by_id(k).country, v) for k, v in contract_dict.items()))
                 self.printer.new_line()
-                self.printer.print_fail("Press any key to go back: ")
+                self.printer.print_fail("Press any key to go back")
                 self.notification()
-                action = input("Select option: ").lower()
+                action = input("Choose an option: ").lower()
                 if action == 'q':
                     break
                 else:
-                    self.warning_msg = "Please select available option"
+                    break
                 break
             except ValueError:
                 break
 
 
     def vehicle_type_report(self):
-        try:
-            while True:
+        while True:
+            try:
                 while True:
-                    date_1 = self.input.get_input("date from", ["required", "date"], warning_msg = self.warning_msg)
+                    date_1 = self.input.get_input("date from(DD/MM/YYYY)", ["required", "date"], warning_msg = self.warning_msg)
                     if date_1[0]:
                         date_1 = date_1[1]
                         break
                     else:
                         self.printer.print_warning(date_1[1])
                 while True:
-                    date_2 = self.input.get_input("date from", ["required", "date"], warning_msg = self.warning_msg)
+                    date_2 = self.input.get_input("date from(DD/MM/YYYY)", ["required", "date"], warning_msg = self.warning_msg)
                     if date_2[0]:
                         date_2 = date_2[1]
                         break
@@ -195,37 +201,38 @@ class FinanceUI:
                 self.printer.header("Vehicle Type Report")
                 print("\n".join("\t{:^20} {:^20}".format(k, v) for k, v in contract_dict.items()))
                 self.printer.new_line()
-                self.printer.print_fail("Press q to go back")
+                self.printer.print_fail("Press any key to go back")
                 self.notification()
-                action = input("Input: ").lower()
+                action = input("Choose an option: ").lower()
                 if action == 'q':
                     break
                 else:
-                    self.warning_msg = "Please select available option"
-        except ValueError:
-            return
+                    break
+                break
+            except ValueError:
+                break
 
     def invoice_overview(self, created = False):
         current_page = 1
-        while True:
-            try:
-                while True:
-                    date_1 = self.input.get_input("date from", ["required", "date"], warning_msg = self.warning_msg)
-                    if date_1[0]:
-                        date_1 = date_1[1]
-                        break
-                    else:
-                        self.printer.print_warning(date_1[1])
-                while True:
-                    date_2 = self.input.get_input("date to", ["required", "date"], warning_msg = self.warning_msg)
-                    if date_2[0]:
-                        date_2 = date_2[1]
-                        break
-                    else:
-                        self.printer.print_warning(date_2[1])
-            except ValueError:
-                return
+        try:
+            while True:
+                date_1 = self.input.get_input("date from(DD/MM/YYYY)", ["required", "date"], warning_msg = self.warning_msg)
+                if date_1[0]:
+                    date_1 = date_1[1]
+                    break
+                else:
+                    self.printer.print_warning(date_1[1])
+            while True:
+                date_2 = self.input.get_input("date to(DD/MM/YYYY)", ["required", "date"], warning_msg = self.warning_msg)
+                if date_2[0]:
+                    date_2 = date_2[1]
+                    break
+                else:
+                    self.printer.print_warning(date_2[1])
+        except ValueError:
+            return
 
+        while True:
             contracts = self.logic.filter_contracts({"date": [date_1, date_2]})
             contracts_count = len(contracts)
             last_page = int(contracts_count / self.items_per_page) + (contracts_count % self.items_per_page > 0)
@@ -262,6 +269,7 @@ class FinanceUI:
             else:
                 self.warning_msg = "Please select available option"
   
+
 
     #Invoice Functions
     def view_invoices(self, created = False):
@@ -327,72 +335,73 @@ class FinanceUI:
             else:
                 self.warning_msg = "Please select available option"
 
-    # Prints out all Unpaid Contracts
+    # Prints out all Unpaid invoices
     def unpaid_invoice(self, created = False):
         current_page = 1
         try:
             while True:
-                while True:
-                    date_1 = self.input.get_input("date from", ["required", "date"], warning_msg = self.warning_msg)
-                    if date_1[0]:
-                        date_1 = date_1[1]
-                        break
-                    else:
-                        self.printer.print_warning(date_1[1])
-                while True:
-                    date_2 = self.input.get_input("date to", ["required", "date"], warning_msg = self.warning_msg)
-                    if date_2[0]:
-                        date_2 = date_2[1]
-                        break
-                    else:
-                        self.printer.print_warning(date_2[1])
-
-                contracts = self.logic.filter_contracts({"date": [date_1, date_2], "contract_status": "open"})
-                contracts_count = len(contracts)
-                last_page = int(contracts_count / self.items_per_page) + (contracts_count % self.items_per_page > 0)
-                if current_page > last_page:
-                    current_page = last_page
-                if created == True:
-                    current_page = last_page
-                    created = False
-                start = (current_page - 1) * self.items_per_page
-                end = start + 10 if not current_page == last_page else contracts_count
-
-                self.printer.header("Unpaid Contract")
-                self.print(contracts, start, end, current_page, last_page)
-                self.printer.new_line()
-                self.printer.print_fail("Press q to go back")
-                self.notification()
-
-                action = input("(N)ext page / (P)revious page / (S)elect Invoice: ").lower()
-
-                if action == 'q':
+                date_1 = self.input.get_input("date from(DD/MM/YYYY)", ["required", "date"], warning_msg = self.warning_msg)
+                if date_1[0]:
+                    date_1 = date_1[1]
                     break
-                elif action == 'n' or action == "next":
-                    if current_page >= last_page:
-                        current_page = last_page
-                        self.warning_msg = "You are currenly on the last page"
-                    else:
-                        current_page += 1
-                elif action == 'p' or action == "previous":
-                    if current_page > 1:
-                        current_page -= 1
-                    else:
-                        current_page = 1
-                        self.warning_msg = "You are currenly on the first page"
-                elif action == 's' or action == "select":
-                    contract_id = input("Select contract by ID: ").lower()
-                    if contract_id == 'q':
-                        break
-                    contract = self.logic.get_contract_by_id(contract_id)
-                    if contract is None:
-                        self.warning_msg = "contract not found"
-                    else:
-                        self.print_invoice(contract_id)
                 else:
-                    self.warning_msg = "Please select available option"
+                    self.printer.print_warning(date_1[1])
+            while True:
+                date_2 = self.input.get_input("date to(DD/MM/YYYY)", ["required", "date"], warning_msg = self.warning_msg)
+                if date_2[0]:
+                    date_2 = date_2[1]
+                    break
+                else:
+                    self.printer.print_warning(date_2[1])
+                break
         except ValueError:
             return
+
+        while True:
+            contracts = self.logic.filter_contracts({"date": [date_1, date_2], "status": "open"})
+            contracts_count = len(contracts)
+            last_page = int(contracts_count / self.items_per_page) + (contracts_count % self.items_per_page > 0)
+            if current_page > last_page:
+                current_page = last_page
+            if created == True:
+                current_page = last_page
+                created = False
+            start = (current_page - 1) * self.items_per_page
+            end = start + 10 if not current_page == last_page else contracts_count
+
+            self.printer.header("Unpaid Invoices")
+            self.print(contracts, start, end, current_page, last_page)
+            self.printer.new_line()
+            self.printer.print_fail("Press q to go back")
+            self.notification()
+
+            action = input("(N)ext page / (P)revious page / (S)elect Invoice: ").lower()
+
+            if action == 'q':
+                break
+            elif action == 'n' or action == "next":
+                if current_page >= last_page:
+                    current_page = last_page
+                    self.warning_msg = "You are currenly on the last page"
+                else:
+                    current_page += 1
+            elif action == 'p' or action == "previous":
+                if current_page > 1:
+                    current_page -= 1
+                else:
+                    current_page = 1
+                    self.warning_msg = "You are currenly on the first page"
+            elif action == 's' or action == "select":
+                contract_id = input("Select contract by ID: ").lower()
+                if contract_id == 'q':
+                    break
+                contract = self.logic.get_contract_by_id(contract_id)
+                if contract is None:
+                    self.warning_msg = "contract not found"
+                else:
+                    self.print_invoice(contract_id)
+            else:
+                self.warning_msg = "Please select available option"
 
 
     # Prints out table of contract
