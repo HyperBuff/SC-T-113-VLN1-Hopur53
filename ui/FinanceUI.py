@@ -150,7 +150,7 @@ class FinanceUI:
                     else:
                         self.printer.print_warning(date_1[1])
                 while True:
-                    date_2 = self.input.get_input("date from(DD/MM/YYYY)", ["required", "date"], warning_msg = self.warning_msg)
+                    date_2 = self.input.get_input("date to(DD/MM/YYYY)", ["required", "date"], warning_msg = self.warning_msg)
                     if date_2[0]:
                         date_2 = date_2[1]
                         break
@@ -185,7 +185,7 @@ class FinanceUI:
                     else:
                         self.printer.print_warning(date_1[1])
                 while True:
-                    date_2 = self.input.get_input("date from(DD/MM/YYYY)", ["required", "date"], warning_msg = self.warning_msg)
+                    date_2 = self.input.get_input("date to(DD/MM/YYYY)", ["required", "date"], warning_msg = self.warning_msg)
                     if date_2[0]:
                         date_2 = date_2[1]
                         break
