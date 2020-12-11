@@ -85,9 +85,10 @@ class ContractUI:
             try:
                 if counter == 0:
                     while True:
+                        print("Select customer:")
                         self.printer.print_options(["Create new customer", "Select existing customer"])
                         self.printer.new_line()
-                        action = input("Choose an option:").lower()
+                        action = input("Choose an option: ").lower()
                         if action == 'q':
                             return
                         if action == '1':

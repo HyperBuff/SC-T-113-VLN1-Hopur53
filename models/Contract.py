@@ -29,5 +29,3 @@ class Contract:
             return str(total - paid)
         except ValueError:
             return "0"
-
-    #'Edit customer', 'Edit vehicle', 'Edit vehicle status', 'Edit employee id', 'Edit location', 'Edit date from', 'Edit contract status', 'Edit pick up date', 'Edit drop off date'
