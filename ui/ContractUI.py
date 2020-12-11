@@ -6,6 +6,7 @@ from logic.MainLogic import MainLogic
 from models.Contract import Contract
 from models.Customer import Customer
 from models.Vehicle import Vehicle
+from models.VehicleType import VehicleType
 from models.Employee import Employee
 from models.Location import Location
 #UI Functions
@@ -461,12 +462,18 @@ class ContractUI:
     def contract(self, contract_id):
         while True:
             contract = self.logic.get_contract_by_id(contract_id)
+            customer = self.logic.get_customer_by_id(contract.customer_id)
+            vehicle = self.logic.get_vehicle_by_id(contract.vehicle_id)
+            vehicletype = self.logic.get_vehicletype_by_id(vehicle.vehicle_type_id)
             self.printer.header("View contract")
-            print("ID:{}\nCustomer:\t{}\nVehicle:\t{}\nEmployee:\t{}\nLocation:\t{}\nDate from:\t{}\nDate to:\t{}\nContract date:\t{}\nContract status:{}\nPickup Date:\t\t{}\nDropoff date:\t\t{}\nTotal:\t\t{}\nPaid:\t\t{}\n".format(contract_id, self.logic.get_customer_by_id(contract.customer_id), self.logic.get_vehicle_by_id(contract.vehicle_id), self.logic.get_employee_by_id(contract.employee_id), self.logic.get_location_by_id(contract.location_id), contract.date_from, contract.date_to, contract.contract_date, contract.contract_status, contract.pickup_date, contract.dropoff_date, contract.total, contract.paid))
+
+            print(f"Name:\t\t\t\t{customer.name}\nSocial security number:\t\t{customer.ssn}\nPhone:\t\t\t\t{customer.phone}\nEmail:\t\t\t\t{customer.email}\n")
+            print(f"Manufacturer:\t\t\t{vehicle.manufacturer}\nModel:\t\t\t\t{vehicle.model}\nVehicle type:\t\t\t{vehicletype.name}\nRate:\t\t\t\t{vehicletype.rate}\nManufacture year:\t\t{vehicle.man_year}\nColor:\t\t\t\t{vehicle.color}\nLicence needed:\t\t\t{vehicle.licence_type}\n")
+            print(f"Delivery date:\t\t\t{contract.date_from}\nReturn date:\t\t\t{contract.date_to}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
-            action = input("(E)dit / (I)nvalidate / (D)elete: ").lower()
+            action = input("(E)dit / (I)nvalidate / (P)rint / (D)elete: ").lower()
             if action == 'q':
                 break
             elif action == 'e' or action == 'edit':
@@ -479,6 +486,8 @@ class ContractUI:
                 if self.invalidate(contract_id):
                     self.success_msg = "Contract has been invalidated"
                     break
+            elif action == 'p' or action == 'print':
+                self.success_msg = "Contract has been printed"
             else:
                 self.warning_msg = "Please select available option"
     
@@ -504,7 +513,7 @@ class ContractUI:
             contract = self.logic.get_contract_by_id(contract_id)
             update = {}
             self.printer.header("Edit contract")
-            print(f"ID:\t\t\t\t{contract_id}\nCustomer:\t\t\t\t{self.logic.get_customer_by_id(contract.customer_id)}\nVehicle:\t\t\t\t{self.logic.get_vehicle_by_id(contract.vehicle_id)}\nLocation:\t\t\t{self.logic.get_location_by_id(contract.location_id)}\nDate from:\t\t\t{contract.date_from}\nDate to:\t\t\t{contract.date_to}\nContract status:\t\t\t{contract.contract_status}\nPickup date:\t\t\t{contract.pickup_date}\nDropoff date:\t\t\t{contract.dropoff_date}\n")
+            print(f"ID:\t\t\t\t{contract_id}\nCustomer:\t\t\t{self.logic.get_customer_by_id(contract.customer_id)}\nVehicle:\t\t\t{self.logic.get_vehicle_by_id(contract.vehicle_id)}\nLocation:\t\t\t{self.logic.get_location_by_id(contract.location_id)}\nDate from:\t\t\t{contract.date_from}\nDate to:\t\t\t{contract.date_to}\nContract status:\t\t{contract.contract_status}\nPickup date:\t\t\t{contract.pickup_date}\nDropoff date:\t\t\t{contract.dropoff_date}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             
