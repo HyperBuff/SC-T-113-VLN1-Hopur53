@@ -137,7 +137,17 @@ class ContractUI:
                     available_vehicles = [[vehicle.id, vehicle] for vehicle in vehicles]
                     vehicle_input = self.input.get_option("vehicle", available_vehicles, current_page = vehicle_id_page, warning_msg = self.warning_msg)
                     if vehicle_input[0] == True:
-                        vehicle_id = vehicle_input[1]
+                        license_conformation = input("Does customer have license for this vehicle(\33[;32mY\33[;0m/\33[;31mN\33[;0m): ")
+                        if license_conformation == "y": 
+                            vehicle_id = vehicle_input[1]
+                        elif license_conformation == "n":
+                            self.printer.print_warning("Driver cannot register this vehicle, press any key to exit")
+                            exit_input = input("Choose option: ")
+                            if exit_input:
+                                break
+                        else:
+                            next_input = False
+                            self.warning_msg = vehicle_input[1]
                     else:
                         next_input = False
                         self.warning_msg = vehicle_input[1]
@@ -245,11 +255,18 @@ class ContractUI:
                     if action == 'q':
                         break
                     elif action == 'd' or action == "deliviery":
-                        confirmation = input("Are you sure you want to deliver this vehicle? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
-                        if confirmation == 'y':
-                            self.logic.contract_set_pickup(contract_id, self.input.get_date())
-                            self.success_msg = "Vehicle has been delivered successfully"
-                            break
+                        license_confirmation = input("Does customer have license for this vehicle(\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
+                        if license_confirmation == "y": 
+                            confirmation = input("Are you sure you want to deliver this vehicle? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
+                            if confirmation == 'y':
+                                self.logic.contract_set_pickup(contract_id, self.input.get_date())
+                                self.success_msg = "Vehicle has been delivered successfully"
+                                break
+                        elif license_confirmation == "n":
+                            self.printer.print_warning("Driver cannot register this vehicle, press any key to exit")
+                            exit_input = input("Choose option: ")
+                            if exit_input:
+                                break
                     else:
                         self.warning_msg = "Please select available option"
             else:
