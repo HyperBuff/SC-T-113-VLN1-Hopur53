@@ -8,7 +8,7 @@ class CustomerLogic:
 
     
     def create(self, customer):
-        self.rep.create_customer(customer)
+        return self.rep.create_customer(customer)
 
     def get_all_customers(self):
         return self.rep.get_all_customers()

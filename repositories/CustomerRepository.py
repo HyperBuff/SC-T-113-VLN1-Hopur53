@@ -10,7 +10,8 @@ class CustomerRepository:
 
     def create(self, customer: Customer):
         row = dict((key, getattr(customer, key)) for key in self.fieldnames)
-        Repository().create(self.filename, self.fieldnames, row)
+        new_row = Repository().create(self.filename, self.fieldnames, row)
+        customer.set_id(new_row['id'])
         return customer
 
     def read(self):

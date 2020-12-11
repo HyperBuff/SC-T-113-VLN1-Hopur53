@@ -143,3 +143,17 @@ class ContractLogic:
         else:
             return False
 
+    def check_if_vehicle_is_rented(self, vehicle, date_from, date_to):
+        contracts = self.filter_contracts({"vehicle": str(vehicle)})
+        if len(contracts) > 0:
+            for contract in contracts:
+                date_from = datetime.strptime(contract.date_from, self.date_format)
+                date_to = datetime.strptime(contract.date_to, self.date_format)
+                check_date_from = datetime.strptime(date_from, self.date_format)
+                check_date_to = datetime.strptime(date_to, self.date_format)
+                if check_date_from > date_to or check_date_to < date_from:
+                    return True
+                else:
+                    return False
+        else:
+            return True

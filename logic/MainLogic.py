@@ -76,6 +76,9 @@ class MainLogic:
     def pay_to_contract(self, contract_id, amount):
         return self.contract.pay_to_contract(contract_id, amount)
 
+    def check_if_vehicle_is_rented(self, vehicle, date_from, date_to):
+        return self.contract.check_if_vehicle_is_rented(vehicle, date_from, date_to)
+
     #Vehicle Logic
     def get_all_vehicles(self):
         return self.vehicle.get_all_vehicles()

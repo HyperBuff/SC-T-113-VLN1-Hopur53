@@ -45,6 +45,7 @@ class ContractUI:
         
         employee_id = self.employee_id
         location_id = ""
+        location = ""
         date_from = ""
         date_to = ""
 
@@ -58,18 +59,23 @@ class ContractUI:
         
         customer_id_page = 1
         vehicle_id_page = 1
+        location_id_page = 1
         while True:
 
             customer = self.logic.get_customer_by_id(customer_id)
             vehicle = self.logic.get_vehicle_by_id(vehicle_id)
+            location = self.logic.get_location_by_id(location_id)
 
+
+            if location is None:
+                location = ""
             if customer is None:
                 customer = ""
             if vehicle is None:
                 vehicle = ""
 
             self.printer.header("Create contract")
-            print(f"Customer:\t\t\t\t{customer}\nVehicle:\t\t\t\t{vehicle}\nDate from:\t\t\t\t{date_from}\nDate to:\t\t\t\t{date_to}\n")
+            print(f"Customer:\t\t\t\t{customer}\nLocation:\t\t\t\t{location}\nDate from:\t\t\t\t{date_from}\nDate to:\t\t\t\t{date_to}\nVehicle:\t\t\t\t{vehicle}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
@@ -78,25 +84,39 @@ class ContractUI:
             data = None
             try:
                 if counter == 0:
-                    customers = self.logic.get_all_customers()
-                    available_customers = [[customer.id, customer] for customer in customers]
-                    customer_input = self.input.get_option("customer", available_customers, current_page = customer_id_page, warning_msg = self.warning_msg)
-                    if customer_input[0] == True:
-                        customer_id = customer_input[1]
-                    else:
-                        next_input = False
-                        self.warning_msg = customer_input[1]
-                        customer_id_page = customer_input[2]
+                    while True:
+                        self.printer.print_options(["Create new customer", "Select existing customer"])
+                        self.printer.new_line()
+                        action = input("Choose an option:").lower()
+                        if action == 'q':
+                            return
+                        if action == '1':
+                            customer_id = str(CustomerUI(show_menu=False).create().id)
+                            break
+                        if action == '2':
+                            while True:
+                                customers = self.logic.get_all_customers()
+                                available_customers = [[customer.id, customer] for customer in customers]
+                                customer_input = self.input.get_option("customer", available_customers, current_page = customer_id_page, warning_msg = self.warning_msg)
+                                if customer_input[0] == True:
+                                    customer_id = customer_input[1]
+                                    next_input = True
+                                    break
+                                else:
+                                    next_input = False
+                                    self.warning_msg = customer_input[1]
+                                    customer_id_page = customer_input[2]
+                            break
                 elif counter == 1:
-                    vehicles = self.logic.get_all_vehicles()
-                    available_vehicles = [[vehicle.id, vehicle] for vehicle in vehicles]
-                    vehicle_input = self.input.get_option("vehicle", available_vehicles, current_page = vehicle_id_page, warning_msg = self.warning_msg)
-                    if vehicle_input[0] == True:
-                        vehicle_id = vehicle_input[1]
+                    locations = self.logic.get_all_locations()
+                    available_locations = [[location.id, location] for location in locations]
+                    location_input = self.input.get_option("location", available_locations, current_page = location_id_page, warning_msg = self.warning_msg)
+                    if location_input[0] == True:
+                        location_id = location_input[1]
                     else:
                         next_input = False
-                        self.warning_msg = vehicle_input[1]
-                        vehicle_id_page = vehicle_input[2]
+                        self.warning_msg = location_input[1]
+                        location_id_page = location_input[2]
                 elif counter == 2:
                     data = self.input.get_input("date from", ["required", "date"], warning_msg = self.warning_msg)
                     if data[0]:
@@ -111,19 +131,26 @@ class ContractUI:
                     else:
                         next_input = False
                         self.warning_msg = data[1]
-                elif counter > 3:
+                elif counter == 4:
+                    all_vehicles = self.logic.filter_vehicles({"location": location_id, "status": "Available"})
+                    vehicles = [v for v in all_vehicles if self.logic.check_if_vehicle_is_rented(v, date_from, date_to)]
+                    available_vehicles = [[vehicle.id, vehicle] for vehicle in vehicles]
+                    vehicle_input = self.input.get_option("vehicle", available_vehicles, current_page = vehicle_id_page, warning_msg = self.warning_msg)
+                    if vehicle_input[0] == True:
+                        vehicle_id = vehicle_input[1]
+                    else:
+                        next_input = False
+                        self.warning_msg = vehicle_input[1]
+                        vehicle_id_page = vehicle_input[2]
+                elif counter > 4:
 
                     self.logic.update_vehicle(vehicle_id, {"status": "Unavailable"})
                     vehicle = self.logic.get_vehicle_by_id(vehicle_id)
-                    location_id = vehicle.location_id
 
                     date_format = "%d/%m/%Y"
 
                     days = datetime.strptime(date_to, date_format) - datetime.strptime(date_from, date_format)
                     total = (int(days.days) + 1) * int(self.logic.get_vehicletype_by_id(vehicle.vehicle_type_id).rate)
-
-                    print(total)
-                    r = input("amount")
 
                     new_contract = Contract(customer_id,vehicle_id,employee_id,location_id,date_from,date_to,contract_date,contract_status,pickup_date,dropoff_date,total,paid)
                     confirmation = input("Are you sure you want to create this contract? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
@@ -141,6 +168,7 @@ class ContractUI:
             return {
                 "Create a contract": self.create,
                 "View contracts": self.view,
+                "Customers": CustomerUI,
                 "Deliver vehicle": self.pick_up,
                 "Return vehicle": self.drop_off,
                 "Pay contract": self.pay_contract

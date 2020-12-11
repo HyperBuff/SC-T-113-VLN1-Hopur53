@@ -7,7 +7,7 @@ from ui.InputUI import InputUI
 
 class CustomerUI:
 
-    def __init__(self):
+    def __init__(self, show_menu = True):
         
         self.items_per_page = 10
 
@@ -19,7 +19,8 @@ class CustomerUI:
         self.success_msg = ""
         self.warning_msg = ""
 
-        self.menu()
+        if show_menu:
+            self.menu()
 
 
     def create(self):
@@ -96,8 +97,7 @@ class CustomerUI:
                     new_customer = Customer(name, address, postal, ssn, phone, email, country)
                     confirmation = input("Are you sure you want to create this customer? (\33[;32mY\33[;0m/\33[;31mN\33[;0m): ").lower()
                     if confirmation == 'y':
-                        self.logic.create_customer(new_customer)
-                        return True
+                        return self.logic.create_customer(new_customer)
                     return False
                 if next_input:
                     counter += 1

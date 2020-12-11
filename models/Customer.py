@@ -12,3 +12,6 @@ class Customer:
 
     def __str__(self):
         return "{} ({})".format(self.name, self.ssn)
+
+    def set_id(self, id):
+        self.id = id

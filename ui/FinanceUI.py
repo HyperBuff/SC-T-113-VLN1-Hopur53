@@ -49,13 +49,9 @@ class FinanceUI:
             self.notification()
 
             action = input("Choose an option: ").lower()
-            
-            if action == '1':
-                self.overview()
-            elif action == '2':
-                self.invoice()
-            elif action == 'q':
-                break
+
+            if action == 'q':
+                return
             try:
                 list(menu_options.values())[int(action)-1]()
             except:
