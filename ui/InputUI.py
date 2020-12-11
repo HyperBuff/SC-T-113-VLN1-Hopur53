@@ -199,7 +199,7 @@ class InputUI:
                 return False
         if len(int_list) == 10:
             list_to_str = ''.join(str(e) for e in int_list)
-            return list_to_str[:6] + "-" + list_to_str[4:]
+            return list_to_str[:6] + "-" + list_to_str[6:]
         else: 
             return False
 
