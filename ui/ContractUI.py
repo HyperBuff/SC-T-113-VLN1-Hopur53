@@ -75,7 +75,7 @@ class ContractUI:
                 vehicle = ""
 
             self.printer.header("Create contract")
-            print(f"Customer:\t\t\t\t{customer}\nLocation:\t\t\t\t{location}\nDate from:\t\t\t\t{date_from}\nDate to:\t\t\t\t{date_to}\nVehicle:\t\t\t\t{vehicle}\n")
+            print(f"Customer:\t\t{customer}\nLocation:\t\t{location}\nDate from:\t\t{date_from}\nDate to:\t\t{date_to}\nVehicle:\t\t{vehicle}\n")
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.printer.new_line()
