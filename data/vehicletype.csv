@@ -1,7 +1,7 @@
 name,location_id,rate,id
-Light road,8,700,7
-Light off-road,9,900,8
-Light water,9,850,9
+Light road,1,700,7
+Light off-road,4,900,8
+Light water,2,850,9
 Medium road,7,1800,10
-Medium off-road,11,1400,11
-Medium water,9,2200,12
+Medium off-road,5,1400,11
+Medium water,3,2200,12
