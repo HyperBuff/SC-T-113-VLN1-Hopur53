@@ -199,11 +199,11 @@ class CustomerUI:
     # Prints out table of customer
     def print(self, customers, start, end, current_page, last_page):
         if len(customers) > 0:
-            print("|{:^6}|{:^15}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|".format("ID", "Name", "Address", "Postal", "Social security number", "Phone", "Email", "Country"))
-            print('-' * 170)
+            print("|{:^6}|{:^25}|{:^25}|{:^30}|{:^30}|{:^20}|{:^20}|{:^25}|".format("ID", "Name", "Address", "Postal", "Social security number", "Phone", "Email", "Country"))
+            print('-' * 190)
             for i in range(start, end):
-                print("|{:^6}|{:<15}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|".format(customers[i].id, customers[i].name, customers[i].address, customers[i].postal, customers[i].ssn, customers[i].phone, customers[i].email, customers[i].country))
-            print("{:^170}".format("Page {} of {}".format(current_page, last_page)))
+                print("|{:^6}|{:<25}|{:<25}|{:<30}|{:<30}|{:<20}|{:<20}|{:<25}|".format(customers[i].id, customers[i].name, customers[i].address, customers[i].postal, customers[i].ssn, customers[i].phone, customers[i].email, customers[i].country))
+            print("{:^190}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
             self.warning_msg = "No customers found"

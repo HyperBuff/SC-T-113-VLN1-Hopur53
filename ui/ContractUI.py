@@ -462,7 +462,7 @@ class ContractUI:
         while True:
             contract = self.logic.get_contract_by_id(contract_id)
             self.printer.header("View contract")
-            print("ID:{}\nCustomer:\t\t\t{}\nVehicle:\t\t\t{}\nEmployee:\t\t\t{}\nLocation:\t\t\t{}\nDate from:\t\t\t{}\nDate to:\t\t\t{}\nContract date:\t\t\t{}\nContract status:\t\t{}\nPickup Date:\t\t\t{}\nDropoff date:\t\t\t{}\nTotal:\t\t\t\t{}\nPaid:\t\t\t\t{}\n".format(contract_id, self.logic.get_customer_by_id(contract.customer_id), self.logic.get_vehicle_by_id(contract.vehicle_id), self.logic.get_employee_by_id(contract.employee_id), self.logic.get_location_by_id(contract.location_id), contract.date_from, contract.date_to, contract.contract_date, contract.contract_status, contract.pickup_date, contract.dropoff_date, contract.total, contract.paid))
+            print("ID:{}\nCustomer:\t{}\nVehicle:\t{}\nEmployee:\t{}\nLocation:\t{}\nDate from:\t{}\nDate to:\t{}\nContract date:\t{}\nContract status:{}\nPickup Date:\t\t{}\nDropoff date:\t\t{}\nTotal:\t\t{}\nPaid:\t\t{}\n".format(contract_id, self.logic.get_customer_by_id(contract.customer_id), self.logic.get_vehicle_by_id(contract.vehicle_id), self.logic.get_employee_by_id(contract.employee_id), self.logic.get_location_by_id(contract.location_id), contract.date_from, contract.date_to, contract.contract_date, contract.contract_status, contract.pickup_date, contract.dropoff_date, contract.total, contract.paid))
             self.printer.new_line()
             self.printer.print_fail("Press q to go back")
             self.notification()
