@@ -1,14 +1,10 @@
 role,name,address,postal,ssn,phone,homephone,email,location_id,id
-Admin,Chuck Norris,svar,post,250645-9999,+354 5555555,+3545005000,a@a.is,8,1
-Mechanic,Jón Jónsson,Melagerð 99,200,300279-1289,+356 5815432,+354 6890012,m@m.is,2,2
-Admin,Guðrún Aradóttir,Bröttubrekku 2a,104,310484-3348,+354 5421212,+354 6890015,gurra@nan.is,1,3
-Admin,Adalsteinn,ad,400,1901901110,+3541902900,+3541902902,al@gma.com,7,10
-Financial,johann,flydrugrandi 1,107,2812892218,+3548627718,+3545812345,jgs@ruv.is,1,13
-Booking,Steini,Duggufjara 2,ada,0909982929,+3548571581,+3549003000,adalsteinn@gmail.com,1,14
-Admin,a,ada,600,ad,+3545812345,+3545812345,a,2,16
-Booking,ada,33,13,1902903939,+3549404444,+3549404444,ada@gfl.com,1,17
-Admin,A,a,2,1001001001,+3549007688,+3547907999,adal@g.com,2,18
-Admin,Adalsteinn,re,600,0907982949,+3544151234,+3545812345,ad@gmail.com,2,19
-Delivery,Jónas,Austurstekkur 2,150,0209862399,+3549481885,+3545812345,test@test.is,1,21
-Delivery,Gunnar,Beníamúli6,388,3008081660,+3545406241,+3545812345,gunnarj20@ru.is,4,22
-Admin,Elmar,esraskógar 99,696,1602809729,+3549837196,+3545812345,elmari20@ru.is,4,23
+Admin,Chuck Norris,svar,post,250645-9999,+354 5555555,+3545005000,admin@nanair.is,8,1
+Mechanic,Jón Jónsson,Melagerð 99,200,300279-1289,+356 5815432,+354 6890012,mechanic@nanair.is,2,2
+Financial,johann,flydrugrandi 1,107,2812892218,+3548627718,+3545812345,finance@nanair.is,1,13
+Booking,Steini,Duggufjara 2,ada,0909982929,+3548571581,+3549003000,booking@nanair.is,1,14
+Delivery,Jónas,Austurstekkur 2,150,0209862399,+3549481885,+3545812345,delivery@nanair.is,1,21
+Delivery,Gunnar,Beníamúli6,388,3008081660,+3545406241,+3545812345,delivery2@nanair.is,4,22
+Delivery,Matthildur,dvergabakki 10,109,0109761389,+3546705215,+3545812345,delivery3@nanair.is,2,24
+Delivery,Gylfi,hjaltabakki 20,109,0910793729,+3546622819,+3545812345,delivery4@nanair.is,3,25
+Delivery,Hrefna,háseyla 29,260,1205943026,+3547530298,+3545812345,delivery5@nanair.is,5,26
