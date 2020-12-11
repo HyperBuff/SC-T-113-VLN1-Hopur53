@@ -485,11 +485,11 @@ class ContractUI:
     # Prints out table of contract
     def print(self, contracts, start, end, current_page, last_page):
         if len(contracts) > 0:
-            print("|{:^4}|{:^40}|{:^25}|{:^15}|{:^27}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|{:^10}|".format("ID", "Customer", "Vehicle", "Employee", "Location", "Date from", "Date to", "Contract Date", "Contract status", "Pickup date", "Dropoff date", "Total", "Paid"))
-            print('-' * 240)
+            print("|{:^4}|{:^40}|{:^25}|{:^27}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|".format("ID", "Customer", "Vehicle", "Location", "Date from", "Date to", "Contract Date", "Contract status", "Pickup date", "Dropoff date"))
+            print('-' * 202)
             for i in range(start, end):
-                print("|{:^4}|{:^40}|{:^25}|{:^15}|{:^27}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|{:^10}|{:^10}|".format(contracts[i].id, self.logic.get_customer_by_id(contracts[i].customer_id).__str__(), self.logic.get_vehicle_by_id(contracts[i].vehicle_id).__str__(), self.logic.get_employee_by_id( contracts[i].employee_id).__str__(), self.logic.get_location_by_id(contracts[i].location_id).__str__(), contracts[i].date_from, contracts[i].date_to, contracts[i].contract_date, contracts[i].contract_status, contracts[i].pickup_date, contracts[i].dropoff_date, contracts[i].total, contracts[i].paid))
-            print("{:^240}".format("Page {} of {}".format(current_page, last_page)))
+                print("|{:^4}|{:^40}|{:^25}|{:^27}|{:^15}|{:^15}|{:^15}|{:^20}|{:^15}|{:^15}|".format(contracts[i].id, self.logic.get_customer_by_id(contracts[i].customer_id).__str__(), self.logic.get_vehicle_by_id(contracts[i].vehicle_id).__str__(), self.logic.get_location_by_id(contracts[i].location_id).__str__(), contracts[i].date_from, contracts[i].date_to, contracts[i].contract_date, contracts[i].contract_status, contracts[i].pickup_date, contracts[i].dropoff_date))
+            print("{:^202}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
             self.warning_msg = "No contracts found"

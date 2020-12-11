@@ -497,10 +497,10 @@ class VehicleUI:
     def print(self, vehicles, start, end, current_page, last_page):
         if len(vehicles) > 0:
             print("|{:^6}|{:^15}|{:^19}|{:^20}|{:^20}|{:^20}|{:^15}|{:^25}|{:^28}|".format("ID", "Manufacturer", "Model", "Vehicle type", "Status", "Manufacturing year", "Color", "Licence type", "Location"))
-            print('-' * 183)
+            print('-' * 178)
             for i in range(start, end):
                 print("|{:^6}|{:<15}|{:<19}|{:<20}|{:<20}|{:<20}|{:<15}|{:<25}|{:<28}|".format(vehicles[i].id, vehicles[i].manufacturer, vehicles[i].model, self.logic.get_vehicletype_by_id(vehicles[i].vehicle_type_id).__str__(), vehicles[i].status, vehicles[i].man_year, vehicles[i].color, vehicles[i].licence_type, self.logic.get_location_by_id(vehicles[i].location_id).__str__()))
-            print("{:^183}".format("Page {} of {}".format(current_page, last_page)))
+            print("{:^178}".format("Page {} of {}".format(current_page, last_page)))
             self.printer.new_line()
         else:
             self.warning_msg = "No vehicles found"
