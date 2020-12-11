@@ -8,6 +8,7 @@ class InputUI:
         self.printer = PrinterUI()
         self.items_per_page = 10
 
+    # Gets users input 
     def get_input(self, title, validations = [], warning_msg = ""):
         user_input = input("Enter {}: ".format(title.lower()))
         if user_input == 'q':
@@ -53,6 +54,7 @@ class InputUI:
         else:
             return (False, warning_msg)
 
+    # Gets users input for options
     def get_option(self, title, options, current_page = 1, warning_msg = ""):
         options_count = len(options)
         last_page = int(options_count / self.items_per_page) + (options_count % self.items_per_page > 0)
@@ -133,6 +135,8 @@ class InputUI:
                 return False
         except ValueError:
             return False
+        except IndexError:
+            return False
     
     def is_phone_valid(self, phone):
         str_list = []
@@ -195,7 +199,7 @@ class InputUI:
                 return False
         if len(int_list) == 10:
             list_to_str = ''.join(str(e) for e in int_list)
-            return list_to_str
+            return list_to_str[:6] + "-" + list_to_str[4:]
         else: 
             return False
 

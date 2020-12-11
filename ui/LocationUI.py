@@ -65,7 +65,7 @@ class LocationUI:
                         next_input = False
                         self.warning_msg = data[1]
                 elif counter == 3:
-                    data = self.input.get_input("hours", ["required", "hours"], warning_msg = self.warning_msg)
+                    data = self.input.get_input("hours", ["required"], warning_msg = self.warning_msg)
                     if data[0]:
                         hours = data[1]
                     else:

@@ -1,25 +1,23 @@
 
-#Import Employees
 from repositories.EmployeeRepository import EmployeeRepository
 from models.Employee import Employee
-#Import Contracts
+
 from repositories.ContractRepository import ContractRepository
 from models.Contract import Contract
-#Import Destinations
+
 from repositories.LocationRepository import LocationRepository
 from models.Location import Location
-#Import Vehicles
+
 from repositories.VehicleRepository import VehicleRepository
 from models.Vehicle import Vehicle
-#Import VehicleTypes
+
 from repositories.VehicleTypeRepository import VehicleTypeRepository
 from models.VehicleType import VehicleType
-#Import Customer
+
 from repositories.CustomerRepository import CustomerRepository
 from models.Customer import Customer
 
 class MainRepository:
-    #initalize
     def __init__(self):
         self.employee = EmployeeRepository()
         self.contract = ContractRepository()
@@ -28,7 +26,7 @@ class MainRepository:
         self.vehicletype = VehicleTypeRepository()
         self.customer = CustomerRepository()
 
-    #Employees 
+    # Basic CRUD for employees 
     def get_all_employees(self):
         return self.employee.read()
 
@@ -41,7 +39,7 @@ class MainRepository:
     def delete_employee(self, id):
         return self.employee.delete(id)
 
-    #Contracts
+    # Basic CRUD for contracts
     def get_all_contracts(self):
         return self.contract.read()
 
@@ -54,7 +52,7 @@ class MainRepository:
     def delete_contract(self, id):
         return self.contract.delete(id)
 
-    #Destinations
+    # Basic CRUD for destinations
     def get_all_locations(self):
         return self.location.read()
 
@@ -67,7 +65,7 @@ class MainRepository:
     def delete_location(self, id):
         return self.location.delete(id)
 
-    #Vehicles
+    #  Basic CRUD for vehicles
     def get_all_vehicles(self):
         return self.vehicle.read()
 
@@ -80,7 +78,7 @@ class MainRepository:
     def delete_vehicle(self, id):
         return self.vehicle.delete(id)
 
-    #VehicleTypes
+    # Basic CRUD for vehicle types
     def get_all_vehicletypes(self):
         return self.vehicletype.read()
 
@@ -93,7 +91,7 @@ class MainRepository:
     def delete_vehicletype(self, id):
         return self.vehicletype.delete(id)
     
-    #Customers
+    # Basic CRUD for customers
     def get_all_customers(self):
         return self.customer.read()
 
